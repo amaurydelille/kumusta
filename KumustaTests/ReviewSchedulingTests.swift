@@ -12,20 +12,6 @@ struct ReviewSchedulingTests {
         }
     }
 
-    @Test("Accent maps to approved female voices")
-    func voiceAllowlist() {
-        #expect(VietnameseAccent.southern.elevenLabsVoiceID == "6Xq32rHt6oAu98TBDKfr")
-        #expect(VietnameseAccent.northern.elevenLabsVoiceID == "LD1UihCXvSlUL4h8DOmk")
-    }
-
-    @Test("Onboarding uses the authored accent samples")
-    func accentSamples() {
-        #expect(VietnameseAccent.southern.sample == "Hãy nói giọng miền Nam nhe!")
-        #expect(VietnameseAccent.northern.sample == "Hãy nói giọng miền Bắc nhé!")
-        #expect(VietnameseAccent.southern.sampleAudioResourceName == "southern")
-        #expect(VietnameseAccent.northern.sampleAudioResourceName == "northern")
-    }
-
     @Test("Review intervals match the learner-facing promise")
     func deterministicIntervals() {
         var calendar = Calendar(identifier: .gregorian)

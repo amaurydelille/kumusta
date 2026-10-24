@@ -52,7 +52,7 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
     /// Pass a speech service to stream the take while it is recorded, so its
     /// transcript is ready when the learner stops.
     func toggleRecording(
-        streamingTo speechService: (any VietnameseSpeechRecognizing)? = nil,
+        streamingTo speechService: (any TagalogSpeechRecognizing)? = nil,
         onboarding: Bool = false
     ) {
         if isRecording {

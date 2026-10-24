@@ -5,32 +5,29 @@ import Foundation
 /// path uses the refreshed Supabase user JWT through FunctionsClient and cannot
 /// mistake a publishable API key for an authenticated bearer token.
 actor AuthenticatedElevenLabsAudioService: AudioService {
-    private let gateway: any VietnameseTTSProviding
+    private let gateway: any TagalogTTSProviding
     private var player: AVAudioPlayer?
     private var glowToken: UUID?
     private var playbackRequestID: UUID?
 
-    init(gateway: any VietnameseTTSProviding) {
+    init(gateway: any TagalogTTSProviding) {
         self.gateway = gateway
     }
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
-        await gateway.prefetch(texts: texts, accent: accent, speed: speed.sourceSpeed)
+        await gateway.prefetch(texts: texts, speed: speed.sourceSpeed)
     }
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
         await gateway.prefetch(
             texts: texts,
-            accent: accent,
             speed: speed.sourceSpeed,
             purpose: purpose
         )
@@ -38,7 +35,6 @@ actor AuthenticatedElevenLabsAudioService: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
@@ -49,7 +45,6 @@ actor AuthenticatedElevenLabsAudioService: AudioService {
         do {
             let audio = try await gateway.audio(
                 for: text,
-                accent: accent,
                 speed: speed.sourceSpeed,
                 purpose: purpose
             )
@@ -72,7 +67,6 @@ actor AuthenticatedElevenLabsAudioService: AudioService {
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
@@ -83,7 +77,6 @@ actor AuthenticatedElevenLabsAudioService: AudioService {
         do {
             guard let audio = try await gateway.cachedAudio(
                 for: text,
-                accent: accent,
                 speed: speed.sourceSpeed,
                 purpose: purpose
             ) else {

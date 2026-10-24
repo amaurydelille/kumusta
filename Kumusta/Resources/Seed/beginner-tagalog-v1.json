@@ -1,0 +1,3511 @@
+{
+  "version": 1,
+  "roadmap": "beginner-v1",
+  "lessons": [
+    {
+      "id": "43010000-0000-4000-8100-000000000001",
+      "slug": "beginner-01-greet-your-neighbour-politely",
+      "summary": "Say hello to the neighbours and learn when to add po.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 1,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "say-hello",
+      "unitTitle": "Say hello",
+      "unitOrder": 1,
+      "lessonOrder": 1,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1,
+      "goalTags": [
+        "lifeInThePhilippines",
+        "family",
+        "travel"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Greet your neighbour politely",
+        "scenarioKey": "roadmap_beginner_01_say_hello",
+        "scenario": "Say hello to the neighbours and learn when to add po.",
+        "minutes": 5,
+        "difficulty": 1,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_01_say_hello",
+            "situation": "Your new neighbour, a woman your age, waves at you.",
+            "tagalog": "Uy! Kumusta ka?",
+            "translation": "Hi! How are you?",
+            "chunks": [
+              {
+                "tagalog": "Uy!",
+                "english": "hey!",
+                "note": "A warm, casual way to get someone's attention."
+              },
+              {
+                "tagalog": "Kumusta ka?",
+                "english": "how are you?",
+                "note": "Ka is the casual 'you' for people your age."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Uy!",
+                "english": "hey"
+              },
+              {
+                "token": "Kumusta",
+                "english": "how are"
+              },
+              {
+                "token": "ka?",
+                "english": "you (casual)"
+              }
+            ],
+            "speakingPrompt": "Greet her the easy, friendly way."
+          },
+          {
+            "topicKey": "roadmap_beginner_01_say_hello",
+            "situation": "An older neighbour, Aling Nena, steps out of her gate.",
+            "tagalog": "Magandang umaga po.",
+            "translation": "Good morning, ma'am.",
+            "chunks": [
+              {
+                "tagalog": "Magandang umaga",
+                "english": "good morning",
+                "note": "Literally 'beautiful morning'."
+              },
+              {
+                "tagalog": "po.",
+                "english": "(respect)",
+                "note": "Po shows respect to an older person."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Magandang",
+                "english": "beautiful / good"
+              },
+              {
+                "token": "umaga",
+                "english": "morning"
+              },
+              {
+                "token": "po.",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "Greet her respectfully."
+          },
+          {
+            "topicKey": "roadmap_beginner_01_say_hello",
+            "situation": "Ask Aling Nena how she is.",
+            "tagalog": "Kumusta po kayo?",
+            "translation": "How are you, ma'am?",
+            "chunks": [
+              {
+                "tagalog": "Kumusta",
+                "english": "how are",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "po kayo?",
+                "english": "you (respectful)?",
+                "note": "Kayo is the respectful 'you'; po adds courtesy."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kumusta",
+                "english": "how are"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "kayo?",
+                "english": "you (respectful)"
+              }
+            ],
+            "speakingPrompt": "Ask how she is, keeping it respectful.",
+            "responseExercise": {
+              "promptTagalog": "Kumusta po kayo?",
+              "promptTranslation": "How are you, ma'am?",
+              "options": [
+                {
+                  "englishTranslation": "I'm fine, thank you."
+                },
+                {
+                  "englishTranslation": "How are you, ma'am?"
+                },
+                {
+                  "englishTranslation": "Take care!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_01_say_hello",
+            "situation": "She asks how you are. Tell her you're fine.",
+            "tagalog": "Mabuti naman po, salamat po.",
+            "translation": "I'm fine, thank you.",
+            "chunks": [
+              {
+                "tagalog": "Mabuti naman",
+                "english": "I'm fine",
+                "note": "Naman softens it: 'fine, thankfully'."
+              },
+              {
+                "tagalog": "po,",
+                "english": "(respect)",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "salamat po.",
+                "english": "thank you (respectful)",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Mabuti",
+                "english": "good / well"
+              },
+              {
+                "token": "naman",
+                "english": "(softener) thankfully"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "salamat",
+                "english": "thank you"
+              },
+              {
+                "token": "po.",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "Answer and thank her politely."
+          },
+          {
+            "topicKey": "roadmap_beginner_01_say_hello",
+            "situation": "Your friendly neighbour heads off to work.",
+            "tagalog": "Ingat ka!",
+            "translation": "Take care!",
+            "chunks": [
+              {
+                "tagalog": "Ingat",
+                "english": "take care",
+                "note": "A very common way to say goodbye."
+              },
+              {
+                "tagalog": "ka!",
+                "english": "you!",
+                "note": "Casual 'you' again for a friend."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ingat",
+                "english": "take care"
+              },
+              {
+                "token": "ka!",
+                "english": "you (casual)"
+              }
+            ],
+            "speakingPrompt": "Wish her well as she leaves.",
+            "responseExercise": {
+              "promptTagalog": "Ingat ka!",
+              "promptTranslation": "Take care!",
+              "options": [
+                {
+                  "englishTranslation": "Hi! How are you?"
+                },
+                {
+                  "englishTranslation": "Take care!"
+                },
+                {
+                  "englishTranslation": "Good morning, ma'am."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Uy",
+            "english": "hey!",
+            "example": "Uy! Kumusta ka?",
+            "exampleTranslation": "Hi! How are you?"
+          },
+          {
+            "tagalog": "Kumusta ka",
+            "english": "how are you?",
+            "example": "Uy! Kumusta ka?",
+            "exampleTranslation": "Hi! How are you?"
+          },
+          {
+            "tagalog": "Magandang umaga",
+            "english": "good morning",
+            "example": "Magandang umaga po.",
+            "exampleTranslation": "Good morning, ma'am."
+          },
+          {
+            "tagalog": "po",
+            "english": "(respect)",
+            "example": "Magandang umaga po.",
+            "exampleTranslation": "Good morning, ma'am."
+          },
+          {
+            "tagalog": "Kumusta",
+            "english": "how are",
+            "example": "Kumusta po kayo?",
+            "exampleTranslation": "How are you, ma'am?"
+          },
+          {
+            "tagalog": "po kayo",
+            "english": "you (respectful)?",
+            "example": "Kumusta po kayo?",
+            "exampleTranslation": "How are you, ma'am?"
+          },
+          {
+            "tagalog": "Mabuti naman",
+            "english": "I'm fine",
+            "example": "Mabuti naman po, salamat po.",
+            "exampleTranslation": "I'm fine, thank you."
+          },
+          {
+            "tagalog": "salamat po",
+            "english": "thank you (respectful)",
+            "example": "Mabuti naman po, salamat po.",
+            "exampleTranslation": "I'm fine, thank you."
+          },
+          {
+            "tagalog": "Ingat",
+            "english": "take care",
+            "example": "Ingat ka!",
+            "exampleTranslation": "Take care!"
+          },
+          {
+            "tagalog": "ka",
+            "english": "you!",
+            "example": "Ingat ka!",
+            "exampleTranslation": "Take care!"
+          }
+        ]
+      },
+      "contentHash": "63cd69f213819773095066f86871b41ef1a1f8588169ffc8d6c0352b04a9d2c2",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000002",
+      "slug": "beginner-02-introduce-yourself-at-a-barkada-party",
+      "summary": "Meet your friend's barkada: share your name and where you're from.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 2,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "say-hello",
+      "unitTitle": "Say hello",
+      "unitOrder": 1,
+      "lessonOrder": 2,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.1,
+      "goalTags": [
+        "partner",
+        "culture",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Introduce yourself at a barkada party",
+        "scenarioKey": "roadmap_beginner_02_say_hello",
+        "scenario": "Meet your friend's barkada: share your name and where you're from.",
+        "minutes": 5,
+        "difficulty": 1.1,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_02_say_hello",
+            "situation": "At a friend's birthday, someone from their barkada smiles and comes over.",
+            "tagalog": "Hi! Ako si Sam.",
+            "translation": "Hi! I'm Sam.",
+            "chunks": [
+              {
+                "tagalog": "Hi!",
+                "english": "hi!",
+                "note": "Friends in Manila greet each other with an English 'hi' all the time."
+              },
+              {
+                "tagalog": "Ako si",
+                "english": "I am",
+                "note": "Si comes right before a person's name."
+              },
+              {
+                "tagalog": "Sam.",
+                "english": "Sam.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Hi!",
+                "english": "hi"
+              },
+              {
+                "token": "Ako",
+                "english": "I / me"
+              },
+              {
+                "token": "si",
+                "english": "(marks a name)"
+              },
+              {
+                "token": "Sam.",
+                "english": "Sam (a name)"
+              }
+            ],
+            "speakingPrompt": "Say hi and tell her your name."
+          },
+          {
+            "topicKey": "roadmap_beginner_02_say_hello",
+            "situation": "She laughs and says she forgot to introduce herself.",
+            "tagalog": "Ikaw, anong pangalan mo?",
+            "translation": "And you, what's your name?",
+            "chunks": [
+              {
+                "tagalog": "Ikaw,",
+                "english": "and you,",
+                "note": "Starting with ikaw turns the question back: 'how about you?'"
+              },
+              {
+                "tagalog": "anong pangalan",
+                "english": "what name",
+                "note": "Anong is ano plus the linker -ng."
+              },
+              {
+                "tagalog": "mo?",
+                "english": "your?",
+                "note": "Mo means 'your' and comes after the noun."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ikaw,",
+                "english": "you"
+              },
+              {
+                "token": "anong",
+                "english": "what (+ linker)"
+              },
+              {
+                "token": "pangalan",
+                "english": "name"
+              },
+              {
+                "token": "mo?",
+                "english": "your"
+              }
+            ],
+            "speakingPrompt": "Turn the question back to her."
+          },
+          {
+            "topicKey": "roadmap_beginner_02_say_hello",
+            "situation": "Her name is Joy. You hear an accent and get curious about her home province.",
+            "tagalog": "Taga-saan ka?",
+            "translation": "Where are you from?",
+            "chunks": [
+              {
+                "tagalog": "Taga-saan",
+                "english": "from where",
+                "note": "Taga- means 'from' a place, so taga-saan is 'from where?'"
+              },
+              {
+                "tagalog": "ka?",
+                "english": "are you?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Taga-saan",
+                "english": "from where"
+              },
+              {
+                "token": "ka?",
+                "english": "you (casual)"
+              }
+            ],
+            "speakingPrompt": "Ask where she's from.",
+            "responseExercise": {
+              "promptTagalog": "Taga-saan ka?",
+              "promptTranslation": "Where are you from?",
+              "options": [
+                {
+                  "englishTranslation": "I'm from Canada, but I live in Makati."
+                },
+                {
+                  "englishTranslation": "Where are you from?"
+                },
+                {
+                  "englishTranslation": "Okay, see you around!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_02_say_hello",
+            "situation": "Joy is from Cebu. She asks about you.",
+            "tagalog": "Taga-Canada ako, pero sa Makati ako nakatira.",
+            "translation": "I'm from Canada, but I live in Makati.",
+            "chunks": [
+              {
+                "tagalog": "Taga-Canada ako,",
+                "english": "I'm from Canada,",
+                "note": "Put taga- in front of any place name."
+              },
+              {
+                "tagalog": "pero sa Makati",
+                "english": "but in Makati",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "ako nakatira.",
+                "english": "I live.",
+                "note": "Nakatira means 'living, residing'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Taga-Canada",
+                "english": "from Canada"
+              },
+              {
+                "token": "ako,",
+                "english": "I / me"
+              },
+              {
+                "token": "pero",
+                "english": "but"
+              },
+              {
+                "token": "sa",
+                "english": "at / to / in"
+              },
+              {
+                "token": "Makati",
+                "english": "Makati (a Manila city)"
+              },
+              {
+                "token": "ako",
+                "english": "I / me"
+              },
+              {
+                "token": "nakatira.",
+                "english": "living / residing"
+              }
+            ],
+            "speakingPrompt": "Say where you're from and where you live now."
+          },
+          {
+            "topicKey": "roadmap_beginner_02_say_hello",
+            "situation": "Your friend calls Joy over to cut the cake.",
+            "tagalog": "Sige, kita-kits!",
+            "translation": "Okay, see you around!",
+            "chunks": [
+              {
+                "tagalog": "Sige,",
+                "english": "okay,",
+                "note": "Sige is the all-purpose 'okay, go ahead'."
+              },
+              {
+                "tagalog": "kita-kits!",
+                "english": "see you!",
+                "note": "Playful slang among friends, from 'kita tayo'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Sige,",
+                "english": "okay"
+              },
+              {
+                "token": "kita-kits!",
+                "english": "see you! (slang)"
+              }
+            ],
+            "speakingPrompt": "Say a casual goodbye for now.",
+            "responseExercise": {
+              "promptTagalog": "Sige, kita-kits!",
+              "promptTranslation": "Okay, see you around!",
+              "options": [
+                {
+                  "englishTranslation": "Hi! I'm Sam."
+                },
+                {
+                  "englishTranslation": "Okay, see you around!"
+                },
+                {
+                  "englishTranslation": "And you, what's your name?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Hi",
+            "english": "hi!",
+            "example": "Hi! Ako si Sam.",
+            "exampleTranslation": "Hi! I'm Sam."
+          },
+          {
+            "tagalog": "Ako si",
+            "english": "I am",
+            "example": "Hi! Ako si Sam.",
+            "exampleTranslation": "Hi! I'm Sam."
+          },
+          {
+            "tagalog": "Sam",
+            "english": "Sam.",
+            "example": "Hi! Ako si Sam.",
+            "exampleTranslation": "Hi! I'm Sam."
+          },
+          {
+            "tagalog": "Ikaw",
+            "english": "and you,",
+            "example": "Ikaw, anong pangalan mo?",
+            "exampleTranslation": "And you, what's your name?"
+          },
+          {
+            "tagalog": "anong pangalan",
+            "english": "what name",
+            "example": "Ikaw, anong pangalan mo?",
+            "exampleTranslation": "And you, what's your name?"
+          },
+          {
+            "tagalog": "mo",
+            "english": "your?",
+            "example": "Ikaw, anong pangalan mo?",
+            "exampleTranslation": "And you, what's your name?"
+          },
+          {
+            "tagalog": "Taga-saan",
+            "english": "from where",
+            "example": "Taga-saan ka?",
+            "exampleTranslation": "Where are you from?"
+          },
+          {
+            "tagalog": "ka",
+            "english": "are you?",
+            "example": "Taga-saan ka?",
+            "exampleTranslation": "Where are you from?"
+          },
+          {
+            "tagalog": "Taga-Canada ako",
+            "english": "I'm from Canada,",
+            "example": "Taga-Canada ako, pero sa Makati ako nakatira.",
+            "exampleTranslation": "I'm from Canada, but I live in Makati."
+          },
+          {
+            "tagalog": "pero sa Makati",
+            "english": "but in Makati",
+            "example": "Taga-Canada ako, pero sa Makati ako nakatira.",
+            "exampleTranslation": "I'm from Canada, but I live in Makati."
+          }
+        ]
+      },
+      "contentHash": "2a2657151ec4450fe5f8330d8bc4f5329562f0096b742bceb95d6686b7577d99",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000003",
+      "slug": "beginner-03-meet-lola-with-a-mano",
+      "summary": "Greet your grandmother the respectful way and introduce your partner.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 3,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "say-hello",
+      "unitTitle": "Say hello",
+      "unitOrder": 1,
+      "lessonOrder": 3,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.2,
+      "goalTags": [
+        "family",
+        "partner",
+        "culture"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Meet Lola with a mano",
+        "scenarioKey": "roadmap_beginner_03_say_hello",
+        "scenario": "Greet your grandmother the respectful way and introduce your partner.",
+        "minutes": 5,
+        "difficulty": 1.2,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_03_say_hello",
+            "situation": "You arrive at your family's house with your partner. Lola is sitting in the living room.",
+            "tagalog": "Mano po, Lola.",
+            "translation": "Your blessing, Lola.",
+            "chunks": [
+              {
+                "tagalog": "Mano po,",
+                "english": "your hand (blessing)",
+                "note": "Say this as you press her hand to your forehead."
+              },
+              {
+                "tagalog": "Lola.",
+                "english": "Grandma.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Mano po,",
+                "english": "your blessing, please"
+              },
+              {
+                "token": "Lola.",
+                "english": "Grandma"
+              }
+            ],
+            "speakingPrompt": "Ask for her blessing as you take her hand to your forehead."
+          },
+          {
+            "topicKey": "roadmap_beginner_03_say_hello",
+            "situation": "Lola squeezes your hand and smiles.",
+            "tagalog": "Magandang hapon po, Lola. Kumusta po kayo?",
+            "translation": "Good afternoon, Lola. How are you?",
+            "chunks": [
+              {
+                "tagalog": "Magandang hapon po,",
+                "english": "good afternoon,",
+                "note": "Hapon is the afternoon."
+              },
+              {
+                "tagalog": "Lola.",
+                "english": "Grandma.",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "Kumusta po kayo?",
+                "english": "how are you?",
+                "note": "Use kayo and po with elders, never ka."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Magandang",
+                "english": "beautiful / good"
+              },
+              {
+                "token": "hapon",
+                "english": "afternoon"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "Lola.",
+                "english": "Grandma"
+              },
+              {
+                "token": "Kumusta",
+                "english": "how are"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "kayo?",
+                "english": "you (respectful)"
+              }
+            ],
+            "speakingPrompt": "Greet her and ask how she is."
+          },
+          {
+            "topicKey": "roadmap_beginner_03_say_hello",
+            "situation": "Lola looks curiously at the person beside you.",
+            "tagalog": "Lola, si Alex po, ang boyfriend ko.",
+            "translation": "Lola, this is Alex, my boyfriend.",
+            "chunks": [
+              {
+                "tagalog": "Lola,",
+                "english": "Grandma,",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "si Alex po,",
+                "english": "this is Alex,",
+                "note": "Si plus a name is enough to introduce someone."
+              },
+              {
+                "tagalog": "ang boyfriend ko.",
+                "english": "my boyfriend.",
+                "note": "Ko means 'my' and comes after the noun."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Lola,",
+                "english": "Grandma"
+              },
+              {
+                "token": "si",
+                "english": "(marks a name)"
+              },
+              {
+                "token": "Alex",
+                "english": "Alex (a name)"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ang",
+                "english": "the (topic marker)"
+              },
+              {
+                "token": "boyfriend",
+                "english": "boyfriend"
+              },
+              {
+                "token": "ko.",
+                "english": "my / I"
+              }
+            ],
+            "speakingPrompt": "Introduce your partner to her.",
+            "responseExercise": {
+              "promptTagalog": "Lola, si Alex po, ang boyfriend ko.",
+              "promptTranslation": "Lola, this is Alex, my boyfriend.",
+              "options": [
+                {
+                  "englishTranslation": "He's learning Tagalog."
+                },
+                {
+                  "englishTranslation": "Lola, this is Alex, my boyfriend."
+                },
+                {
+                  "englishTranslation": "Thank you, Lola. We'll eat now."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_03_say_hello",
+            "situation": "Alex tries out a shy hello. Lola is delighted.",
+            "tagalog": "Nag-aaral po siya ng Tagalog.",
+            "translation": "He's learning Tagalog.",
+            "chunks": [
+              {
+                "tagalog": "Nag-aaral po siya",
+                "english": "he's studying",
+                "note": "Nag-aaral is 'studying' right now."
+              },
+              {
+                "tagalog": "ng Tagalog.",
+                "english": "Tagalog.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Nag-aaral",
+                "english": "is studying"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "siya",
+                "english": "he / she"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "Tagalog.",
+                "english": "Tagalog"
+              }
+            ],
+            "speakingPrompt": "Tell her he's learning the language."
+          },
+          {
+            "topicKey": "roadmap_beginner_03_say_hello",
+            "situation": "Lola waves you both toward the table full of food.",
+            "tagalog": "Salamat po, Lola. Kakain na po kami.",
+            "translation": "Thank you, Lola. We'll eat now.",
+            "chunks": [
+              {
+                "tagalog": "Salamat po, Lola.",
+                "english": "thank you, Grandma.",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "Kakain na po",
+                "english": "we'll eat now",
+                "note": "Kakain is 'will eat'; na means 'now'."
+              },
+              {
+                "tagalog": "kami.",
+                "english": "we (not including her).",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Salamat",
+                "english": "thank you"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "Lola.",
+                "english": "Grandma"
+              },
+              {
+                "token": "Kakain",
+                "english": "will eat"
+              },
+              {
+                "token": "na",
+                "english": "already / now"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "kami.",
+                "english": "we (not including you)"
+              }
+            ],
+            "speakingPrompt": "Thank her and say you'll both eat.",
+            "responseExercise": {
+              "promptTagalog": "Salamat po, Lola. Kakain na po kami.",
+              "promptTranslation": "Thank you, Lola. We'll eat now.",
+              "options": [
+                {
+                  "englishTranslation": "Your blessing, Lola."
+                },
+                {
+                  "englishTranslation": "Thank you, Lola. We'll eat now."
+                },
+                {
+                  "englishTranslation": "Good afternoon, Lola. How are you?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Mano po",
+            "english": "your hand (blessing)",
+            "example": "Mano po, Lola.",
+            "exampleTranslation": "Your blessing, Lola."
+          },
+          {
+            "tagalog": "Lola",
+            "english": "Grandma.",
+            "example": "Mano po, Lola.",
+            "exampleTranslation": "Your blessing, Lola."
+          },
+          {
+            "tagalog": "Magandang hapon po",
+            "english": "good afternoon,",
+            "example": "Magandang hapon po, Lola. Kumusta po kayo?",
+            "exampleTranslation": "Good afternoon, Lola. How are you?"
+          },
+          {
+            "tagalog": "Kumusta po kayo",
+            "english": "how are you?",
+            "example": "Magandang hapon po, Lola. Kumusta po kayo?",
+            "exampleTranslation": "Good afternoon, Lola. How are you?"
+          },
+          {
+            "tagalog": "si Alex po",
+            "english": "this is Alex,",
+            "example": "Lola, si Alex po, ang boyfriend ko.",
+            "exampleTranslation": "Lola, this is Alex, my boyfriend."
+          },
+          {
+            "tagalog": "ang boyfriend ko",
+            "english": "my boyfriend.",
+            "example": "Lola, si Alex po, ang boyfriend ko.",
+            "exampleTranslation": "Lola, this is Alex, my boyfriend."
+          },
+          {
+            "tagalog": "Nag-aaral po siya",
+            "english": "he's studying",
+            "example": "Nag-aaral po siya ng Tagalog.",
+            "exampleTranslation": "He's learning Tagalog."
+          },
+          {
+            "tagalog": "ng Tagalog",
+            "english": "Tagalog.",
+            "example": "Nag-aaral po siya ng Tagalog.",
+            "exampleTranslation": "He's learning Tagalog."
+          },
+          {
+            "tagalog": "Salamat po, Lola",
+            "english": "thank you, Grandma.",
+            "example": "Salamat po, Lola. Kakain na po kami.",
+            "exampleTranslation": "Thank you, Lola. We'll eat now."
+          },
+          {
+            "tagalog": "Kakain na po",
+            "english": "we'll eat now",
+            "example": "Salamat po, Lola. Kakain na po kami.",
+            "exampleTranslation": "Thank you, Lola. We'll eat now."
+          }
+        ]
+      },
+      "contentHash": "8330a62e75509c7d754e004b7d8c7a11e14f46304f55005e3bfb6e7d365a747f",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000004",
+      "slug": "beginner-04-order-at-the-carinderia",
+      "summary": "Point at the dishes, order a meal with rice and pay for it.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 4,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "eat-and-pay",
+      "unitTitle": "Eat and pay",
+      "unitOrder": 2,
+      "lessonOrder": 4,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.3,
+      "goalTags": [
+        "lifeInThePhilippines",
+        "travel"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Order at the carinderia",
+        "scenarioKey": "roadmap_beginner_04_eat_and_pay",
+        "scenario": "Point at the dishes, order a meal with rice and pay for it.",
+        "minutes": 5,
+        "difficulty": 1.3,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_04_eat_and_pay",
+            "situation": "You're at a busy roadside eatery with trays of food behind the glass. Point at one.",
+            "tagalog": "Ate, ano po ito?",
+            "translation": "Miss, what's this?",
+            "chunks": [
+              {
+                "tagalog": "Ate,",
+                "english": "miss,",
+                "note": "Ate ('big sister') is a polite way to address a woman serving you."
+              },
+              {
+                "tagalog": "ano po",
+                "english": "what",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "ito?",
+                "english": "is this?",
+                "note": "Ito is 'this', for something near you."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ate,",
+                "english": "miss (lit. big sister)"
+              },
+              {
+                "token": "ano",
+                "english": "what"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ito?",
+                "english": "this"
+              }
+            ],
+            "speakingPrompt": "Ask the server what the dish is."
+          },
+          {
+            "topicKey": "roadmap_beginner_04_eat_and_pay",
+            "situation": "She says it's sinigang, a sour soup. It looks great.",
+            "tagalog": "Isa nga pong sinigang.",
+            "translation": "One sinigang, please.",
+            "chunks": [
+              {
+                "tagalog": "Isa nga pong",
+                "english": "one, please,",
+                "note": "Nga po makes a request polite; po becomes pong before a noun."
+              },
+              {
+                "tagalog": "sinigang.",
+                "english": "sinigang (sour soup).",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Isa",
+                "english": "one"
+              },
+              {
+                "token": "nga",
+                "english": "please (softener)"
+              },
+              {
+                "token": "pong",
+                "english": "(respect marker + linker)"
+              },
+              {
+                "token": "sinigang.",
+                "english": "sinigang (sour soup)"
+              }
+            ],
+            "speakingPrompt": "Order one serving of it."
+          },
+          {
+            "topicKey": "roadmap_beginner_04_eat_and_pay",
+            "situation": "She asks if you want anything with it.",
+            "tagalog": "Saka isang kanin po.",
+            "translation": "And one rice, please.",
+            "chunks": [
+              {
+                "tagalog": "Saka",
+                "english": "and also",
+                "note": "Saka adds one more thing; many people say tsaka."
+              },
+              {
+                "tagalog": "isang kanin",
+                "english": "one rice",
+                "note": "Isa becomes isang before a noun."
+              },
+              {
+                "tagalog": "po.",
+                "english": "(respect)",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Saka",
+                "english": "and also"
+              },
+              {
+                "token": "isang",
+                "english": "one (+ linker)"
+              },
+              {
+                "token": "kanin",
+                "english": "rice (cooked)"
+              },
+              {
+                "token": "po.",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "Add a cup of rice to your order.",
+            "responseExercise": {
+              "promptTagalog": "Saka isang kanin po.",
+              "promptTranslation": "And one rice, please.",
+              "options": [
+                {
+                  "englishTranslation": "How much is it all?"
+                },
+                {
+                  "englishTranslation": "And one rice, please."
+                },
+                {
+                  "englishTranslation": "Here's my payment."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_04_eat_and_pay",
+            "situation": "You finish eating and walk to the counter.",
+            "tagalog": "Magkano po lahat?",
+            "translation": "How much is it all?",
+            "chunks": [
+              {
+                "tagalog": "Magkano po",
+                "english": "how much",
+                "note": "Magkano is the question for prices."
+              },
+              {
+                "tagalog": "lahat?",
+                "english": "for everything?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Magkano",
+                "english": "how much"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "lahat?",
+                "english": "everything / all"
+              }
+            ],
+            "speakingPrompt": "Ask for the total."
+          },
+          {
+            "topicKey": "roadmap_beginner_04_eat_and_pay",
+            "situation": "She tells you the total. Hand her the money.",
+            "tagalog": "Heto po ang bayad ko.",
+            "translation": "Here's my payment.",
+            "chunks": [
+              {
+                "tagalog": "Heto po",
+                "english": "here",
+                "note": "Heto is 'here it is' as you hand something over."
+              },
+              {
+                "tagalog": "ang bayad ko.",
+                "english": "my payment.",
+                "note": "Bayad is a payment or fare."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Heto",
+                "english": "here it is"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ang",
+                "english": "the (topic marker)"
+              },
+              {
+                "token": "bayad",
+                "english": "payment / fare"
+              },
+              {
+                "token": "ko.",
+                "english": "my / I"
+              }
+            ],
+            "speakingPrompt": "Say this as you hand over the money.",
+            "responseExercise": {
+              "promptTagalog": "Heto po ang bayad ko.",
+              "promptTranslation": "Here's my payment.",
+              "options": [
+                {
+                  "englishTranslation": "Miss, what's this?"
+                },
+                {
+                  "englishTranslation": "Here's my payment."
+                },
+                {
+                  "englishTranslation": "One sinigang, please."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Ate",
+            "english": "miss,",
+            "example": "Ate, ano po ito?",
+            "exampleTranslation": "Miss, what's this?"
+          },
+          {
+            "tagalog": "ano po",
+            "english": "what",
+            "example": "Ate, ano po ito?",
+            "exampleTranslation": "Miss, what's this?"
+          },
+          {
+            "tagalog": "ito",
+            "english": "is this?",
+            "example": "Ate, ano po ito?",
+            "exampleTranslation": "Miss, what's this?"
+          },
+          {
+            "tagalog": "Isa nga pong",
+            "english": "one, please,",
+            "example": "Isa nga pong sinigang.",
+            "exampleTranslation": "One sinigang, please."
+          },
+          {
+            "tagalog": "sinigang",
+            "english": "sinigang (sour soup).",
+            "example": "Isa nga pong sinigang.",
+            "exampleTranslation": "One sinigang, please."
+          },
+          {
+            "tagalog": "Saka",
+            "english": "and also",
+            "example": "Saka isang kanin po.",
+            "exampleTranslation": "And one rice, please."
+          },
+          {
+            "tagalog": "isang kanin",
+            "english": "one rice",
+            "example": "Saka isang kanin po.",
+            "exampleTranslation": "And one rice, please."
+          },
+          {
+            "tagalog": "po",
+            "english": "(respect)",
+            "example": "Saka isang kanin po.",
+            "exampleTranslation": "And one rice, please."
+          },
+          {
+            "tagalog": "Magkano po",
+            "english": "how much",
+            "example": "Magkano po lahat?",
+            "exampleTranslation": "How much is it all?"
+          },
+          {
+            "tagalog": "lahat",
+            "english": "for everything?",
+            "example": "Magkano po lahat?",
+            "exampleTranslation": "How much is it all?"
+          }
+        ]
+      },
+      "contentHash": "b84ccaf64ba4c9f9d44ba3fa1d393fdfd02a08661a8f3bf1c9702b992ba271f5",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000005",
+      "slug": "beginner-05-sari-sari-store-run",
+      "summary": "Buy a snack and a drink at the corner store and check your change.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 5,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "eat-and-pay",
+      "unitTitle": "Eat and pay",
+      "unitOrder": 2,
+      "lessonOrder": 5,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.4,
+      "goalTags": [
+        "lifeInThePhilippines",
+        "travel"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Sari-sari store run",
+        "scenarioKey": "roadmap_beginner_05_eat_and_pay",
+        "scenario": "Buy a snack and a drink at the corner store and check your change.",
+        "minutes": 5,
+        "difficulty": 1.4,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_05_eat_and_pay",
+            "situation": "You walk up to the little corner store window. The owner is inside watching TV.",
+            "tagalog": "Pabili po!",
+            "translation": "Excuse me, I'd like to buy something!",
+            "chunks": [
+              {
+                "tagalog": "Pabili",
+                "english": "may I buy",
+                "note": "The classic call at a store window, roughly 'selling, please!'"
+              },
+              {
+                "tagalog": "po!",
+                "english": "(respect)!",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Pabili",
+                "english": "may I buy"
+              },
+              {
+                "token": "po!",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "Call out to get the owner's attention."
+          },
+          {
+            "topicKey": "roadmap_beginner_05_eat_and_pay",
+            "situation": "She comes to the window. Point at the snacks hanging up.",
+            "tagalog": "Isang chicharon nga po.",
+            "translation": "One chicharon, please.",
+            "chunks": [
+              {
+                "tagalog": "Isang chicharon",
+                "english": "one chicharon",
+                "note": "Pork cracklings, a classic store snack."
+              },
+              {
+                "tagalog": "nga po.",
+                "english": "please.",
+                "note": "Nga po softens a request."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Isang",
+                "english": "one (+ linker)"
+              },
+              {
+                "token": "chicharon",
+                "english": "pork cracklings"
+              },
+              {
+                "token": "nga po.",
+                "english": "please (polite)"
+              }
+            ],
+            "speakingPrompt": "Ask for one bag of pork cracklings."
+          },
+          {
+            "topicKey": "roadmap_beginner_05_eat_and_pay",
+            "situation": "It's hot out and you're thirsty.",
+            "tagalog": "May malamig po ba kayong tubig?",
+            "translation": "Do you have cold water?",
+            "chunks": [
+              {
+                "tagalog": "May malamig",
+                "english": "is there cold",
+                "note": "May means 'there is' or 'have'."
+              },
+              {
+                "tagalog": "po ba",
+                "english": "(question)",
+                "note": "Ba turns the sentence into a yes-or-no question."
+              },
+              {
+                "tagalog": "kayong tubig?",
+                "english": "water, do you?",
+                "note": "Kayo plus the linker -ng joins it to tubig."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "May",
+                "english": "there is / have"
+              },
+              {
+                "token": "malamig",
+                "english": "cold"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ba",
+                "english": "(question marker)"
+              },
+              {
+                "token": "kayong",
+                "english": "you (respectful, + linker)"
+              },
+              {
+                "token": "tubig?",
+                "english": "water"
+              }
+            ],
+            "speakingPrompt": "Ask whether she has cold water.",
+            "responseExercise": {
+              "promptTagalog": "May malamig po ba kayong tubig?",
+              "promptTranslation": "Do you have cold water?",
+              "options": [
+                {
+                  "englishTranslation": "Eighty? Here's a hundred."
+                },
+                {
+                  "englishTranslation": "Do you have cold water?"
+                },
+                {
+                  "englishTranslation": "My change is twenty, right?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_05_eat_and_pay",
+            "situation": "She says it all comes to eighty pesos. You only have a big bill.",
+            "tagalog": "Otsenta po? Heto pong isang daan.",
+            "translation": "Eighty? Here's a hundred.",
+            "chunks": [
+              {
+                "tagalog": "Otsenta po?",
+                "english": "eighty?",
+                "note": "Prices are often said with Spanish numbers: otsenta is 80."
+              },
+              {
+                "tagalog": "Heto pong",
+                "english": "here's",
+                "note": "Heto po becomes heto pong before the amount."
+              },
+              {
+                "tagalog": "isang daan.",
+                "english": "one hundred.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Otsenta",
+                "english": "eighty"
+              },
+              {
+                "token": "po?",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "Heto",
+                "english": "here it is"
+              },
+              {
+                "token": "pong",
+                "english": "(respect marker + linker)"
+              },
+              {
+                "token": "isang daan.",
+                "english": "one hundred"
+              }
+            ],
+            "speakingPrompt": "Check the price and hand her the bill."
+          },
+          {
+            "topicKey": "roadmap_beginner_05_eat_and_pay",
+            "situation": "She counts out some coins and hands them to you.",
+            "tagalog": "Bente po ang sukli, di ba?",
+            "translation": "My change is twenty, right?",
+            "chunks": [
+              {
+                "tagalog": "Bente po",
+                "english": "twenty",
+                "note": "Bente is 20, from Spanish veinte."
+              },
+              {
+                "tagalog": "ang sukli,",
+                "english": "is the change,",
+                "note": "Sukli is the change you get back."
+              },
+              {
+                "tagalog": "di ba?",
+                "english": "right?",
+                "note": "Di ba is short for hindi ba, 'isn't it?'"
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Bente",
+                "english": "twenty"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ang",
+                "english": "the (topic marker)"
+              },
+              {
+                "token": "sukli,",
+                "english": "change (money back)"
+              },
+              {
+                "token": "di ba?",
+                "english": "right?"
+              }
+            ],
+            "speakingPrompt": "Check that your change is right.",
+            "responseExercise": {
+              "promptTagalog": "Bente po ang sukli, di ba?",
+              "promptTranslation": "My change is twenty, right?",
+              "options": [
+                {
+                  "englishTranslation": "Excuse me, I'd like to buy something!"
+                },
+                {
+                  "englishTranslation": "My change is twenty, right?"
+                },
+                {
+                  "englishTranslation": "One chicharon, please."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Pabili",
+            "english": "may I buy",
+            "example": "Pabili po!",
+            "exampleTranslation": "Excuse me, I'd like to buy something!"
+          },
+          {
+            "tagalog": "po",
+            "english": "(respect)!",
+            "example": "Pabili po!",
+            "exampleTranslation": "Excuse me, I'd like to buy something!"
+          },
+          {
+            "tagalog": "Isang chicharon",
+            "english": "one chicharon",
+            "example": "Isang chicharon nga po.",
+            "exampleTranslation": "One chicharon, please."
+          },
+          {
+            "tagalog": "nga po",
+            "english": "please.",
+            "example": "Isang chicharon nga po.",
+            "exampleTranslation": "One chicharon, please."
+          },
+          {
+            "tagalog": "May malamig",
+            "english": "is there cold",
+            "example": "May malamig po ba kayong tubig?",
+            "exampleTranslation": "Do you have cold water?"
+          },
+          {
+            "tagalog": "po ba",
+            "english": "(question)",
+            "example": "May malamig po ba kayong tubig?",
+            "exampleTranslation": "Do you have cold water?"
+          },
+          {
+            "tagalog": "kayong tubig",
+            "english": "water, do you?",
+            "example": "May malamig po ba kayong tubig?",
+            "exampleTranslation": "Do you have cold water?"
+          },
+          {
+            "tagalog": "Otsenta po",
+            "english": "eighty?",
+            "example": "Otsenta po? Heto pong isang daan.",
+            "exampleTranslation": "Eighty? Here's a hundred."
+          },
+          {
+            "tagalog": "Heto pong",
+            "english": "here's",
+            "example": "Otsenta po? Heto pong isang daan.",
+            "exampleTranslation": "Eighty? Here's a hundred."
+          },
+          {
+            "tagalog": "isang daan",
+            "english": "one hundred.",
+            "example": "Otsenta po? Heto pong isang daan.",
+            "exampleTranslation": "Eighty? Here's a hundred."
+          }
+        ]
+      },
+      "contentHash": "addbbb73242014d47c6191a0f15661ff1d6ad13c9b1ce7748361038d614a935f",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000006",
+      "slug": "beginner-06-let-s-eat-lunch-with-a-friend",
+      "summary": "Check if your friend has eaten, then pick a dish and a place.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 6,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "eat-and-pay",
+      "unitTitle": "Eat and pay",
+      "unitOrder": 2,
+      "lessonOrder": 6,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.5,
+      "goalTags": [
+        "partner",
+        "culture",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Let's eat: lunch with a friend",
+        "scenarioKey": "roadmap_beginner_06_eat_and_pay",
+        "scenario": "Check if your friend has eaten, then pick a dish and a place.",
+        "minutes": 5,
+        "difficulty": 1.5,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_06_eat_and_pay",
+            "situation": "It's noon and your friend Carlo drops by your desk.",
+            "tagalog": "Kumain ka na?",
+            "translation": "Have you eaten yet?",
+            "chunks": [
+              {
+                "tagalog": "Kumain",
+                "english": "eaten",
+                "note": "Kumain is the completed form of 'eat'."
+              },
+              {
+                "tagalog": "ka na?",
+                "english": "have you yet?",
+                "note": "Asking this is a way of saying 'I care about you'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kumain",
+                "english": "ate / have eaten"
+              },
+              {
+                "token": "ka",
+                "english": "you (casual)"
+              },
+              {
+                "token": "na?",
+                "english": "already / now"
+              }
+            ],
+            "speakingPrompt": "Ask him the classic Filipino check-in question."
+          },
+          {
+            "topicKey": "roadmap_beginner_06_eat_and_pay",
+            "situation": "He says not yet, and he's starving.",
+            "tagalog": "Tara, kain tayo!",
+            "translation": "Come on, let's eat!",
+            "chunks": [
+              {
+                "tagalog": "Tara,",
+                "english": "come on,",
+                "note": "Tara is 'let's go'."
+              },
+              {
+                "tagalog": "kain tayo!",
+                "english": "let's eat!",
+                "note": "Tayo is the 'we' that includes the listener."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Tara,",
+                "english": "come on / let's go"
+              },
+              {
+                "token": "kain",
+                "english": "eat"
+              },
+              {
+                "token": "tayo!",
+                "english": "we / let's (including you)"
+              }
+            ],
+            "speakingPrompt": "Invite him to go eat with you."
+          },
+          {
+            "topicKey": "roadmap_beginner_06_eat_and_pay",
+            "situation": "On the way out, he asks what you're in the mood for. You turn it back to him.",
+            "tagalog": "Anong gusto mong kainin?",
+            "translation": "What do you want to eat?",
+            "chunks": [
+              {
+                "tagalog": "Anong gusto",
+                "english": "what (do you) want",
+                "note": "Gusto means 'want' or 'like'."
+              },
+              {
+                "tagalog": "mong kainin?",
+                "english": "you to eat?",
+                "note": "Mo plus -ng links it to kainin, 'to eat'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Anong",
+                "english": "what (+ linker)"
+              },
+              {
+                "token": "gusto",
+                "english": "want / like"
+              },
+              {
+                "token": "mong",
+                "english": "you (+ linker)"
+              },
+              {
+                "token": "kainin?",
+                "english": "to eat (it)"
+              }
+            ],
+            "speakingPrompt": "Ask what he feels like eating.",
+            "responseExercise": {
+              "promptTagalog": "Anong gusto mong kainin?",
+              "promptTranslation": "What do you want to eat?",
+              "options": [
+                {
+                  "englishTranslation": "Me, I'd like sisig."
+                },
+                {
+                  "englishTranslation": "What do you want to eat?"
+                },
+                {
+                  "englishTranslation": "Let's just go to the corner place. It's cheap there."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_06_eat_and_pay",
+            "situation": "He can't decide and says you choose.",
+            "tagalog": "Ako, gusto ko ng sisig.",
+            "translation": "Me, I'd like sisig.",
+            "chunks": [
+              {
+                "tagalog": "Ako,",
+                "english": "me,",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "gusto ko",
+                "english": "I want",
+                "note": "Ko is 'I' here, the one who wants."
+              },
+              {
+                "tagalog": "ng sisig.",
+                "english": "sisig (sizzling pork).",
+                "note": "Ng marks the thing you want."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ako,",
+                "english": "I / me"
+              },
+              {
+                "token": "gusto ko",
+                "english": "I want"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "sisig.",
+                "english": "sisig (sizzling pork)"
+              }
+            ],
+            "speakingPrompt": "Say what you'd like to eat."
+          },
+          {
+            "topicKey": "roadmap_beginner_06_eat_and_pay",
+            "situation": "You know a cheap place at the end of the street.",
+            "tagalog": "Sa kanto na lang tayo, mura doon.",
+            "translation": "Let's just go to the corner place. It's cheap there.",
+            "chunks": [
+              {
+                "tagalog": "Sa kanto",
+                "english": "at the corner",
+                "note": "Kanto is a street corner."
+              },
+              {
+                "tagalog": "na lang tayo,",
+                "english": "let's just go,",
+                "note": "Na lang means 'just, instead'."
+              },
+              {
+                "tagalog": "mura doon.",
+                "english": "it's cheap there.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Sa",
+                "english": "at / to / in"
+              },
+              {
+                "token": "kanto",
+                "english": "corner"
+              },
+              {
+                "token": "na lang",
+                "english": "just / instead"
+              },
+              {
+                "token": "tayo,",
+                "english": "we / let's (including you)"
+              },
+              {
+                "token": "mura",
+                "english": "cheap"
+              },
+              {
+                "token": "doon.",
+                "english": "there"
+              }
+            ],
+            "speakingPrompt": "Suggest the place on the corner and say why.",
+            "responseExercise": {
+              "promptTagalog": "Sa kanto na lang tayo, mura doon.",
+              "promptTranslation": "Let's just go to the corner place. It's cheap there.",
+              "options": [
+                {
+                  "englishTranslation": "Have you eaten yet?"
+                },
+                {
+                  "englishTranslation": "Let's just go to the corner place. It's cheap there."
+                },
+                {
+                  "englishTranslation": "Come on, let's eat!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Kumain",
+            "english": "eaten",
+            "example": "Kumain ka na?",
+            "exampleTranslation": "Have you eaten yet?"
+          },
+          {
+            "tagalog": "ka na",
+            "english": "have you yet?",
+            "example": "Kumain ka na?",
+            "exampleTranslation": "Have you eaten yet?"
+          },
+          {
+            "tagalog": "Tara",
+            "english": "come on,",
+            "example": "Tara, kain tayo!",
+            "exampleTranslation": "Come on, let's eat!"
+          },
+          {
+            "tagalog": "kain tayo",
+            "english": "let's eat!",
+            "example": "Tara, kain tayo!",
+            "exampleTranslation": "Come on, let's eat!"
+          },
+          {
+            "tagalog": "Anong gusto",
+            "english": "what (do you) want",
+            "example": "Anong gusto mong kainin?",
+            "exampleTranslation": "What do you want to eat?"
+          },
+          {
+            "tagalog": "mong kainin",
+            "english": "you to eat?",
+            "example": "Anong gusto mong kainin?",
+            "exampleTranslation": "What do you want to eat?"
+          },
+          {
+            "tagalog": "Ako",
+            "english": "me,",
+            "example": "Ako, gusto ko ng sisig.",
+            "exampleTranslation": "Me, I'd like sisig."
+          },
+          {
+            "tagalog": "gusto ko",
+            "english": "I want",
+            "example": "Ako, gusto ko ng sisig.",
+            "exampleTranslation": "Me, I'd like sisig."
+          },
+          {
+            "tagalog": "ng sisig",
+            "english": "sisig (sizzling pork).",
+            "example": "Ako, gusto ko ng sisig.",
+            "exampleTranslation": "Me, I'd like sisig."
+          },
+          {
+            "tagalog": "Sa kanto",
+            "english": "at the corner",
+            "example": "Sa kanto na lang tayo, mura doon.",
+            "exampleTranslation": "Let's just go to the corner place. It's cheap there."
+          }
+        ]
+      },
+      "contentHash": "557092e8ca146e96a962f37bc45bf605a4ef55687e0e385be114bdb771205d61",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000007",
+      "slug": "beginner-07-ride-a-jeepney",
+      "summary": "Check the route, pass the fare and get off at your stop.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 7,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "out-and-about",
+      "unitTitle": "Out and about",
+      "unitOrder": 3,
+      "lessonOrder": 7,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.6,
+      "goalTags": [
+        "travel",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Ride a jeepney",
+        "scenarioKey": "roadmap_beginner_07_out_and_about",
+        "scenario": "Check the route, pass the fare and get off at your stop.",
+        "minutes": 5,
+        "difficulty": 1.6,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_07_out_and_about",
+            "situation": "A jeepney pulls up. Before climbing in, check the route with the driver.",
+            "tagalog": "Kuya, Cubao po ba ito?",
+            "translation": "Driver, is this going to Cubao?",
+            "chunks": [
+              {
+                "tagalog": "Kuya,",
+                "english": "driver,",
+                "note": "Kuya ('big brother') is how you address a male driver."
+              },
+              {
+                "tagalog": "Cubao po",
+                "english": "to Cubao",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "ba ito?",
+                "english": "is this?",
+                "note": "Ba makes it a yes-or-no question."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kuya,",
+                "english": "sir / driver (lit. big brother)"
+              },
+              {
+                "token": "Cubao",
+                "english": "Cubao (a Quezon City district)"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ba",
+                "english": "(question marker)"
+              },
+              {
+                "token": "ito?",
+                "english": "this"
+              }
+            ],
+            "speakingPrompt": "Ask the driver if it goes to Cubao."
+          },
+          {
+            "topicKey": "roadmap_beginner_07_out_and_about",
+            "situation": "You sit at the back, far from the driver. Hand your coins to the passenger next to you.",
+            "tagalog": "Bayad po, isa lang.",
+            "translation": "Here's my fare, just one.",
+            "chunks": [
+              {
+                "tagalog": "Bayad po,",
+                "english": "fare,",
+                "note": "Bayad is what everyone says when passing money forward."
+              },
+              {
+                "tagalog": "isa lang.",
+                "english": "just one.",
+                "note": "Lang means 'just, only'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Bayad",
+                "english": "payment / fare"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "isa",
+                "english": "one"
+              },
+              {
+                "token": "lang.",
+                "english": "just / only"
+              }
+            ],
+            "speakingPrompt": "Pass your fare and say it's for one person."
+          },
+          {
+            "topicKey": "roadmap_beginner_07_out_and_about",
+            "situation": "A new passenger hands you coins to pass forward to the driver.",
+            "tagalog": "Kuya, bayad daw po.",
+            "translation": "Driver, here's a fare from them.",
+            "chunks": [
+              {
+                "tagalog": "Kuya,",
+                "english": "driver,",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "bayad daw",
+                "english": "a fare, they say",
+                "note": "Daw means someone else said it; use raw after a vowel."
+              },
+              {
+                "tagalog": "po.",
+                "english": "(respect).",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kuya,",
+                "english": "sir / driver (lit. big brother)"
+              },
+              {
+                "token": "bayad",
+                "english": "payment / fare"
+              },
+              {
+                "token": "daw",
+                "english": "(someone) says"
+              },
+              {
+                "token": "po.",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "Pass it on and tell the driver it's someone else's.",
+            "responseExercise": {
+              "promptTagalog": "Kuya, bayad daw po.",
+              "promptTranslation": "Driver, here's a fare from them.",
+              "options": [
+                {
+                  "englishTranslation": "Please tell me when we reach Cubao."
+                },
+                {
+                  "englishTranslation": "Driver, here's a fare from them."
+                },
+                {
+                  "englishTranslation": "Stop please, just by the side!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_07_out_and_about",
+            "situation": "You don't know the stops well. Ask the driver to warn you.",
+            "tagalog": "Pakisabi po kapag Cubao na.",
+            "translation": "Please tell me when we reach Cubao.",
+            "chunks": [
+              {
+                "tagalog": "Pakisabi po",
+                "english": "please tell me",
+                "note": "Paki- turns a verb into a polite request."
+              },
+              {
+                "tagalog": "kapag Cubao na.",
+                "english": "when it's Cubao already.",
+                "note": "Kapag means 'when'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Pakisabi",
+                "english": "please tell"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "kapag",
+                "english": "when / if"
+              },
+              {
+                "token": "Cubao",
+                "english": "Cubao (a Quezon City district)"
+              },
+              {
+                "token": "na.",
+                "english": "already / now"
+              }
+            ],
+            "speakingPrompt": "Ask him to let you know when you get there."
+          },
+          {
+            "topicKey": "roadmap_beginner_07_out_and_about",
+            "situation": "You see your stop coming up.",
+            "tagalog": "Para po, sa tabi lang!",
+            "translation": "Stop please, just by the side!",
+            "chunks": [
+              {
+                "tagalog": "Para po,",
+                "english": "stop,",
+                "note": "Para is how you ask any jeepney to stop."
+              },
+              {
+                "tagalog": "sa tabi lang!",
+                "english": "just at the side!",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Para",
+                "english": "stop (for a ride)"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "sa",
+                "english": "at / to / in"
+              },
+              {
+                "token": "tabi",
+                "english": "side (of the road)"
+              },
+              {
+                "token": "lang!",
+                "english": "just / only"
+              }
+            ],
+            "speakingPrompt": "Tell the driver to stop so you can get off.",
+            "responseExercise": {
+              "promptTagalog": "Para po, sa tabi lang!",
+              "promptTranslation": "Stop please, just by the side!",
+              "options": [
+                {
+                  "englishTranslation": "Driver, is this going to Cubao?"
+                },
+                {
+                  "englishTranslation": "Stop please, just by the side!"
+                },
+                {
+                  "englishTranslation": "Here's my fare, just one."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Kuya",
+            "english": "driver,",
+            "example": "Kuya, Cubao po ba ito?",
+            "exampleTranslation": "Driver, is this going to Cubao?"
+          },
+          {
+            "tagalog": "Cubao po",
+            "english": "to Cubao",
+            "example": "Kuya, Cubao po ba ito?",
+            "exampleTranslation": "Driver, is this going to Cubao?"
+          },
+          {
+            "tagalog": "ba ito",
+            "english": "is this?",
+            "example": "Kuya, Cubao po ba ito?",
+            "exampleTranslation": "Driver, is this going to Cubao?"
+          },
+          {
+            "tagalog": "Bayad po",
+            "english": "fare,",
+            "example": "Bayad po, isa lang.",
+            "exampleTranslation": "Here's my fare, just one."
+          },
+          {
+            "tagalog": "isa lang",
+            "english": "just one.",
+            "example": "Bayad po, isa lang.",
+            "exampleTranslation": "Here's my fare, just one."
+          },
+          {
+            "tagalog": "bayad daw",
+            "english": "a fare, they say",
+            "example": "Kuya, bayad daw po.",
+            "exampleTranslation": "Driver, here's a fare from them."
+          },
+          {
+            "tagalog": "po",
+            "english": "(respect).",
+            "example": "Kuya, bayad daw po.",
+            "exampleTranslation": "Driver, here's a fare from them."
+          },
+          {
+            "tagalog": "Pakisabi po",
+            "english": "please tell me",
+            "example": "Pakisabi po kapag Cubao na.",
+            "exampleTranslation": "Please tell me when we reach Cubao."
+          },
+          {
+            "tagalog": "kapag Cubao na",
+            "english": "when it's Cubao already.",
+            "example": "Pakisabi po kapag Cubao na.",
+            "exampleTranslation": "Please tell me when we reach Cubao."
+          },
+          {
+            "tagalog": "Para po",
+            "english": "stop,",
+            "example": "Para po, sa tabi lang!",
+            "exampleTranslation": "Stop please, just by the side!"
+          }
+        ]
+      },
+      "contentHash": "80882ab13dd620c99989aa0da7b71c4e171a53dec3fac10539c1128d2f5f9d56",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000008",
+      "slug": "beginner-08-ask-for-directions",
+      "summary": "Find an ATM, the pharmacy and the mall by asking a guard.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 8,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "out-and-about",
+      "unitTitle": "Out and about",
+      "unitOrder": 3,
+      "lessonOrder": 8,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.7,
+      "goalTags": [
+        "travel",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Ask for directions",
+        "scenarioKey": "roadmap_beginner_08_out_and_about",
+        "scenario": "Find an ATM, the pharmacy and the mall by asking a guard.",
+        "minutes": 5,
+        "difficulty": 1.7,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_08_out_and_about",
+            "situation": "You need cash. A security guard is standing outside a bank on a busy street.",
+            "tagalog": "Kuya, may ATM po ba malapit dito?",
+            "translation": "Excuse me, is there an ATM near here?",
+            "chunks": [
+              {
+                "tagalog": "Kuya,",
+                "english": "excuse me (sir),",
+                "note": "Use kuya for a man a bit older than you."
+              },
+              {
+                "tagalog": "may ATM po ba",
+                "english": "is there an ATM",
+                "note": "May means 'there is'."
+              },
+              {
+                "tagalog": "malapit dito?",
+                "english": "near here?",
+                "note": "Malapit is 'near'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kuya,",
+                "english": "sir / driver (lit. big brother)"
+              },
+              {
+                "token": "may",
+                "english": "there is / have"
+              },
+              {
+                "token": "ATM",
+                "english": "ATM"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ba",
+                "english": "(question marker)"
+              },
+              {
+                "token": "malapit",
+                "english": "near"
+              },
+              {
+                "token": "dito?",
+                "english": "here"
+              }
+            ],
+            "speakingPrompt": "Ask him if there's a cash machine nearby."
+          },
+          {
+            "topicKey": "roadmap_beginner_08_out_and_about",
+            "situation": "He points and gives directions quickly. Repeat them back to be sure.",
+            "tagalog": "Diretso lang po, tapos kanan?",
+            "translation": "Straight ahead, then right?",
+            "chunks": [
+              {
+                "tagalog": "Diretso lang po,",
+                "english": "just straight,",
+                "note": "From Spanish derecho."
+              },
+              {
+                "tagalog": "tapos kanan?",
+                "english": "then right?",
+                "note": "Kanan is right; kaliwa is left."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Diretso",
+                "english": "straight ahead"
+              },
+              {
+                "token": "lang",
+                "english": "just / only"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "tapos",
+                "english": "then"
+              },
+              {
+                "token": "kanan?",
+                "english": "right"
+              }
+            ],
+            "speakingPrompt": "Check that you understood the way."
+          },
+          {
+            "topicKey": "roadmap_beginner_08_out_and_about",
+            "situation": "You also need medicine for a headache.",
+            "tagalog": "Saan po ang pinakamalapit na botika?",
+            "translation": "Where's the nearest pharmacy?",
+            "chunks": [
+              {
+                "tagalog": "Saan po ang",
+                "english": "where is the",
+                "note": "Saan asks for a place."
+              },
+              {
+                "tagalog": "pinakamalapit na",
+                "english": "nearest",
+                "note": "Pinaka- means 'most'; na links it to the noun."
+              },
+              {
+                "tagalog": "botika?",
+                "english": "pharmacy?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Saan",
+                "english": "where"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ang",
+                "english": "the (topic marker)"
+              },
+              {
+                "token": "pinakamalapit",
+                "english": "nearest"
+              },
+              {
+                "token": "na",
+                "english": "already / now"
+              },
+              {
+                "token": "botika?",
+                "english": "pharmacy"
+              }
+            ],
+            "speakingPrompt": "Ask him where the closest pharmacy is.",
+            "responseExercise": {
+              "promptTagalog": "Saan po ang pinakamalapit na botika?",
+              "promptTranslation": "Where's the nearest pharmacy?",
+              "options": [
+                {
+                  "englishTranslation": "Is it far? Can I walk there?"
+                },
+                {
+                  "englishTranslation": "Where's the nearest pharmacy?"
+                },
+                {
+                  "englishTranslation": "How do I get to the mall?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_08_out_and_about",
+            "situation": "He says it's past the church.",
+            "tagalog": "Malayo po ba? Kaya bang lakarin?",
+            "translation": "Is it far? Can I walk there?",
+            "chunks": [
+              {
+                "tagalog": "Malayo po ba?",
+                "english": "is it far?",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "Kaya bang",
+                "english": "is it possible",
+                "note": "Kaya means 'can manage'."
+              },
+              {
+                "tagalog": "lakarin?",
+                "english": "to walk?",
+                "note": "Lakarin is 'to walk (a distance)'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Malayo",
+                "english": "far"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ba?",
+                "english": "(question marker)"
+              },
+              {
+                "token": "Kaya",
+                "english": "can manage / possible"
+              },
+              {
+                "token": "bang",
+                "english": "(question marker + linker)"
+              },
+              {
+                "token": "lakarin?",
+                "english": "to walk (it)"
+              }
+            ],
+            "speakingPrompt": "Ask if it's far and whether you can walk."
+          },
+          {
+            "topicKey": "roadmap_beginner_08_out_and_about",
+            "situation": "Last stop of the day is the mall, but you have no idea which way it is.",
+            "tagalog": "Paano po pumunta sa mall?",
+            "translation": "How do I get to the mall?",
+            "chunks": [
+              {
+                "tagalog": "Paano po",
+                "english": "how",
+                "note": "Paano asks 'how'."
+              },
+              {
+                "tagalog": "pumunta",
+                "english": "to go",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "sa mall?",
+                "english": "to the mall?",
+                "note": "Sa marks where you're going."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Paano",
+                "english": "how"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "pumunta",
+                "english": "to go"
+              },
+              {
+                "token": "sa",
+                "english": "at / to / in"
+              },
+              {
+                "token": "mall?",
+                "english": "mall"
+              }
+            ],
+            "speakingPrompt": "Ask him how to get to the mall.",
+            "responseExercise": {
+              "promptTagalog": "Paano po pumunta sa mall?",
+              "promptTranslation": "How do I get to the mall?",
+              "options": [
+                {
+                  "englishTranslation": "Excuse me, is there an ATM near here?"
+                },
+                {
+                  "englishTranslation": "How do I get to the mall?"
+                },
+                {
+                  "englishTranslation": "Straight ahead, then right?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Kuya",
+            "english": "excuse me (sir),",
+            "example": "Kuya, may ATM po ba malapit dito?",
+            "exampleTranslation": "Excuse me, is there an ATM near here?"
+          },
+          {
+            "tagalog": "may ATM po ba",
+            "english": "is there an ATM",
+            "example": "Kuya, may ATM po ba malapit dito?",
+            "exampleTranslation": "Excuse me, is there an ATM near here?"
+          },
+          {
+            "tagalog": "malapit dito",
+            "english": "near here?",
+            "example": "Kuya, may ATM po ba malapit dito?",
+            "exampleTranslation": "Excuse me, is there an ATM near here?"
+          },
+          {
+            "tagalog": "Diretso lang po",
+            "english": "just straight,",
+            "example": "Diretso lang po, tapos kanan?",
+            "exampleTranslation": "Straight ahead, then right?"
+          },
+          {
+            "tagalog": "tapos kanan",
+            "english": "then right?",
+            "example": "Diretso lang po, tapos kanan?",
+            "exampleTranslation": "Straight ahead, then right?"
+          },
+          {
+            "tagalog": "Saan po ang",
+            "english": "where is the",
+            "example": "Saan po ang pinakamalapit na botika?",
+            "exampleTranslation": "Where's the nearest pharmacy?"
+          },
+          {
+            "tagalog": "pinakamalapit na",
+            "english": "nearest",
+            "example": "Saan po ang pinakamalapit na botika?",
+            "exampleTranslation": "Where's the nearest pharmacy?"
+          },
+          {
+            "tagalog": "botika",
+            "english": "pharmacy?",
+            "example": "Saan po ang pinakamalapit na botika?",
+            "exampleTranslation": "Where's the nearest pharmacy?"
+          },
+          {
+            "tagalog": "Malayo po ba",
+            "english": "is it far?",
+            "example": "Malayo po ba? Kaya bang lakarin?",
+            "exampleTranslation": "Is it far? Can I walk there?"
+          },
+          {
+            "tagalog": "Kaya bang",
+            "english": "is it possible",
+            "example": "Malayo po ba? Kaya bang lakarin?",
+            "exampleTranslation": "Is it far? Can I walk there?"
+          }
+        ]
+      },
+      "contentHash": "0b715eabec3ebbeebb7d910abdbb3fde907ed4fd90235179fdedc90fb9ff6cdf",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000009",
+      "slug": "beginner-09-halo-halo-and-fruit-at-the-market",
+      "summary": "Order a dessert at the market, then haggle a little over mangoes.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 9,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "out-and-about",
+      "unitTitle": "Out and about",
+      "unitOrder": 3,
+      "lessonOrder": 9,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.8,
+      "goalTags": [
+        "travel",
+        "culture",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Halo-halo and fruit at the market",
+        "scenarioKey": "roadmap_beginner_09_out_and_about",
+        "scenario": "Order a dessert at the market, then haggle a little over mangoes.",
+        "minutes": 5,
+        "difficulty": 1.8,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_09_out_and_about",
+            "situation": "It's a hot afternoon at the market. A woman is shaving ice at a dessert stall.",
+            "tagalog": "Ate, isang halo-halo nga po.",
+            "translation": "Miss, one halo-halo, please.",
+            "chunks": [
+              {
+                "tagalog": "Ate,",
+                "english": "miss,",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "isang halo-halo",
+                "english": "one halo-halo",
+                "note": "Halo-halo means 'mix-mix': you stir it all together."
+              },
+              {
+                "tagalog": "nga po.",
+                "english": "please.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ate,",
+                "english": "miss (lit. big sister)"
+              },
+              {
+                "token": "isang",
+                "english": "one (+ linker)"
+              },
+              {
+                "token": "halo-halo",
+                "english": "halo-halo (shaved-ice dessert)"
+              },
+              {
+                "token": "nga po.",
+                "english": "please (polite)"
+              }
+            ],
+            "speakingPrompt": "Order one of the famous shaved-ice desserts."
+          },
+          {
+            "topicKey": "roadmap_beginner_09_out_and_about",
+            "situation": "You see slices of leche flan next to the ice. You want extra.",
+            "tagalog": "Puwede pong dagdagan ng leche flan?",
+            "translation": "Can you add more leche flan?",
+            "chunks": [
+              {
+                "tagalog": "Puwede pong",
+                "english": "can you",
+                "note": "Puwede is 'can, may'; often written pwede."
+              },
+              {
+                "tagalog": "dagdagan",
+                "english": "add more",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "ng leche flan?",
+                "english": "leche flan?",
+                "note": "A caramel custard from the Spanish era."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Puwede",
+                "english": "can / may"
+              },
+              {
+                "token": "pong",
+                "english": "(respect marker + linker)"
+              },
+              {
+                "token": "dagdagan",
+                "english": "add more (to it)"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "leche flan?",
+                "english": "leche flan (caramel custard)"
+              }
+            ],
+            "speakingPrompt": "Ask her to add extra caramel custard."
+          },
+          {
+            "topicKey": "roadmap_beginner_09_out_and_about",
+            "situation": "After your dessert, you stop at a fruit stand piled with ripe mangoes.",
+            "tagalog": "Magkano po ang isang kilo ng mangga?",
+            "translation": "How much for a kilo of mangoes?",
+            "chunks": [
+              {
+                "tagalog": "Magkano po",
+                "english": "how much",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "ang isang kilo",
+                "english": "is one kilo",
+                "note": "Fruit is sold by the kilo."
+              },
+              {
+                "tagalog": "ng mangga?",
+                "english": "of mangoes?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Magkano",
+                "english": "how much"
+              },
+              {
+                "token": "po",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "ang",
+                "english": "the (topic marker)"
+              },
+              {
+                "token": "isang",
+                "english": "one (+ linker)"
+              },
+              {
+                "token": "kilo",
+                "english": "kilo"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "mangga?",
+                "english": "mango(es)"
+              }
+            ],
+            "speakingPrompt": "Ask the price of one kilo.",
+            "responseExercise": {
+              "promptTagalog": "Magkano po ang isang kilo ng mangga?",
+              "promptTranslation": "How much for a kilo of mangoes?",
+              "options": [
+                {
+                  "englishTranslation": "That's pricey. Any discount?"
+                },
+                {
+                  "englishTranslation": "How much for a kilo of mangoes?"
+                },
+                {
+                  "englishTranslation": "Make it a hundred and I'll take it."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_09_out_and_about",
+            "situation": "The vendor names a price that seems a bit high.",
+            "tagalog": "Ang mahal naman. May tawad pa po?",
+            "translation": "That's pricey. Any discount?",
+            "chunks": [
+              {
+                "tagalog": "Ang mahal naman.",
+                "english": "that's so pricey.",
+                "note": "Ang plus an adjective is an exclamation: 'how expensive!'"
+              },
+              {
+                "tagalog": "May tawad",
+                "english": "is there a discount",
+                "note": "Tawad is a haggled discount."
+              },
+              {
+                "tagalog": "pa po?",
+                "english": "still?",
+                "note": "Pa means 'still, more'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Ang mahal",
+                "english": "how expensive"
+              },
+              {
+                "token": "naman.",
+                "english": "(softener) thankfully"
+              },
+              {
+                "token": "May",
+                "english": "there is / have"
+              },
+              {
+                "token": "tawad",
+                "english": "discount (haggled)"
+              },
+              {
+                "token": "pa",
+                "english": "still / more"
+              },
+              {
+                "token": "po?",
+                "english": "(respect marker)"
+              }
+            ],
+            "speakingPrompt": "React to the price and ask for a discount."
+          },
+          {
+            "topicKey": "roadmap_beginner_09_out_and_about",
+            "situation": "The vendor laughs and waits for your offer.",
+            "tagalog": "Isang daan na lang po, kukunin ko na.",
+            "translation": "Make it a hundred and I'll take it.",
+            "chunks": [
+              {
+                "tagalog": "Isang daan",
+                "english": "one hundred",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "na lang po,",
+                "english": "just, please,",
+                "note": "Na lang lowers an offer: 'just this instead'."
+              },
+              {
+                "tagalog": "kukunin ko na.",
+                "english": "I'll take it now.",
+                "note": "Kukunin is 'will take'."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Isang daan",
+                "english": "one hundred"
+              },
+              {
+                "token": "na lang",
+                "english": "just / instead"
+              },
+              {
+                "token": "po,",
+                "english": "(respect marker)"
+              },
+              {
+                "token": "kukunin",
+                "english": "will take"
+              },
+              {
+                "token": "ko",
+                "english": "my / I"
+              },
+              {
+                "token": "na.",
+                "english": "already / now"
+              }
+            ],
+            "speakingPrompt": "Offer one hundred pesos and promise to buy.",
+            "responseExercise": {
+              "promptTagalog": "Isang daan na lang po, kukunin ko na.",
+              "promptTranslation": "Make it a hundred and I'll take it.",
+              "options": [
+                {
+                  "englishTranslation": "Miss, one halo-halo, please."
+                },
+                {
+                  "englishTranslation": "Make it a hundred and I'll take it."
+                },
+                {
+                  "englishTranslation": "Can you add more leche flan?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Ate",
+            "english": "miss,",
+            "example": "Ate, isang halo-halo nga po.",
+            "exampleTranslation": "Miss, one halo-halo, please."
+          },
+          {
+            "tagalog": "isang halo-halo",
+            "english": "one halo-halo",
+            "example": "Ate, isang halo-halo nga po.",
+            "exampleTranslation": "Miss, one halo-halo, please."
+          },
+          {
+            "tagalog": "nga po",
+            "english": "please.",
+            "example": "Ate, isang halo-halo nga po.",
+            "exampleTranslation": "Miss, one halo-halo, please."
+          },
+          {
+            "tagalog": "Puwede pong",
+            "english": "can you",
+            "example": "Puwede pong dagdagan ng leche flan?",
+            "exampleTranslation": "Can you add more leche flan?"
+          },
+          {
+            "tagalog": "dagdagan",
+            "english": "add more",
+            "example": "Puwede pong dagdagan ng leche flan?",
+            "exampleTranslation": "Can you add more leche flan?"
+          },
+          {
+            "tagalog": "ng leche flan",
+            "english": "leche flan?",
+            "example": "Puwede pong dagdagan ng leche flan?",
+            "exampleTranslation": "Can you add more leche flan?"
+          },
+          {
+            "tagalog": "Magkano po",
+            "english": "how much",
+            "example": "Magkano po ang isang kilo ng mangga?",
+            "exampleTranslation": "How much for a kilo of mangoes?"
+          },
+          {
+            "tagalog": "ang isang kilo",
+            "english": "is one kilo",
+            "example": "Magkano po ang isang kilo ng mangga?",
+            "exampleTranslation": "How much for a kilo of mangoes?"
+          },
+          {
+            "tagalog": "ng mangga",
+            "english": "of mangoes?",
+            "example": "Magkano po ang isang kilo ng mangga?",
+            "exampleTranslation": "How much for a kilo of mangoes?"
+          },
+          {
+            "tagalog": "Ang mahal naman",
+            "english": "that's so pricey.",
+            "example": "Ang mahal naman. May tawad pa po?",
+            "exampleTranslation": "That's pricey. Any discount?"
+          }
+        ]
+      },
+      "contentHash": "0132f0025877f3f00e66179b751615d844e3fd1568974501e95c1d1a4498cd1b",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    },
+    {
+      "id": "43010000-0000-4000-8100-000000000010",
+      "slug": "beginner-10-set-a-time-to-meet-up",
+      "summary": "Plan a weekend meetup with a friend: the time and the place.",
+      "level": "beginner",
+      "estimatedMinutes": 5,
+      "sortOrder": 10,
+      "contentVersion": 1,
+      "roadmapVersion": "beginner-v1",
+      "unitSlug": "out-and-about",
+      "unitTitle": "Out and about",
+      "unitOrder": 3,
+      "lessonOrder": 10,
+      "schemaVersion": 3,
+      "promptVersion": 14,
+      "difficulty": 1.9,
+      "goalTags": [
+        "partner",
+        "lifeInThePhilippines"
+      ],
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "content": {
+        "title": "Set a time to meet up",
+        "scenarioKey": "roadmap_beginner_10_out_and_about",
+        "scenario": "Plan a weekend meetup with a friend: the time and the place.",
+        "minutes": 5,
+        "difficulty": 1.9,
+        "rounds": [
+          {
+            "topicKey": "roadmap_beginner_10_out_and_about",
+            "situation": "You're chatting with your friend Bea on the phone about the weekend.",
+            "tagalog": "Libre ka ba bukas?",
+            "translation": "Are you free tomorrow?",
+            "chunks": [
+              {
+                "tagalog": "Libre ka ba",
+                "english": "are you free",
+                "note": "Libre means both 'free time' and 'free of charge'."
+              },
+              {
+                "tagalog": "bukas?",
+                "english": "tomorrow?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Libre",
+                "english": "free"
+              },
+              {
+                "token": "ka",
+                "english": "you (casual)"
+              },
+              {
+                "token": "ba",
+                "english": "(question marker)"
+              },
+              {
+                "token": "bukas?",
+                "english": "tomorrow"
+              }
+            ],
+            "speakingPrompt": "Ask if she's free tomorrow."
+          },
+          {
+            "topicKey": "roadmap_beginner_10_out_and_about",
+            "situation": "She says yes, after lunch.",
+            "tagalog": "Anong oras ka puwede?",
+            "translation": "What time works for you?",
+            "chunks": [
+              {
+                "tagalog": "Anong oras",
+                "english": "what time",
+                "note": "Oras is time, the hour."
+              },
+              {
+                "tagalog": "ka puwede?",
+                "english": "can you?",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Anong",
+                "english": "what (+ linker)"
+              },
+              {
+                "token": "oras",
+                "english": "time / hour"
+              },
+              {
+                "token": "ka",
+                "english": "you (casual)"
+              },
+              {
+                "token": "puwede?",
+                "english": "can / may"
+              }
+            ],
+            "speakingPrompt": "Ask her what time she can make it."
+          },
+          {
+            "topicKey": "roadmap_beginner_10_out_and_about",
+            "situation": "She suggests mid-afternoon. You agree on a time.",
+            "tagalog": "Sige, alas-tres ng hapon.",
+            "translation": "Okay, three in the afternoon.",
+            "chunks": [
+              {
+                "tagalog": "Sige,",
+                "english": "okay,",
+                "note": "Start the thought with this reusable chunk."
+              },
+              {
+                "tagalog": "alas-tres",
+                "english": "three o'clock",
+                "note": "Clock times use Spanish numbers: alas-dos, alas-tres."
+              },
+              {
+                "tagalog": "ng hapon.",
+                "english": "in the afternoon.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Sige,",
+                "english": "okay"
+              },
+              {
+                "token": "alas-tres",
+                "english": "three o'clock"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "hapon.",
+                "english": "afternoon"
+              }
+            ],
+            "speakingPrompt": "Confirm three o'clock in the afternoon.",
+            "responseExercise": {
+              "promptTagalog": "Sige, alas-tres ng hapon.",
+              "promptTranslation": "Okay, three in the afternoon.",
+              "options": [
+                {
+                  "englishTranslation": "Let's meet in front of the church."
+                },
+                {
+                  "englishTranslation": "Okay, three in the afternoon."
+                },
+                {
+                  "englishTranslation": "Don't be late, okay!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_beginner_10_out_and_about",
+            "situation": "Now pick an easy place to find each other in town.",
+            "tagalog": "Kita tayo sa harap ng simbahan.",
+            "translation": "Let's meet in front of the church.",
+            "chunks": [
+              {
+                "tagalog": "Kita tayo",
+                "english": "let's meet",
+                "note": "Kita tayo is 'let's see each other'."
+              },
+              {
+                "tagalog": "sa harap",
+                "english": "in front",
+                "note": "Keep this chunk together in the middle of the sentence."
+              },
+              {
+                "tagalog": "ng simbahan.",
+                "english": "of the church.",
+                "note": "Use this ending to complete the spoken thought naturally."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Kita tayo",
+                "english": "let's meet"
+              },
+              {
+                "token": "sa",
+                "english": "at / to / in"
+              },
+              {
+                "token": "harap",
+                "english": "front"
+              },
+              {
+                "token": "ng",
+                "english": "of / (object marker)"
+              },
+              {
+                "token": "simbahan.",
+                "english": "church"
+              }
+            ],
+            "speakingPrompt": "Suggest meeting in front of the church."
+          },
+          {
+            "topicKey": "roadmap_beginner_10_out_and_about",
+            "situation": "Bea is famous for running late. Tease her before you hang up.",
+            "tagalog": "Huwag kang male-late, ha!",
+            "translation": "Don't be late, okay!",
+            "chunks": [
+              {
+                "tagalog": "Huwag kang",
+                "english": "don't you",
+                "note": "Huwag plus ka plus the linker -ng: 'don't you...'"
+              },
+              {
+                "tagalog": "male-late,",
+                "english": "be late,",
+                "note": "Manila speakers happily put Tagalog prefixes on English verbs."
+              },
+              {
+                "tagalog": "ha!",
+                "english": "okay!",
+                "note": "Ha at the end adds 'okay?' with a friendly push."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "Huwag",
+                "english": "don't"
+              },
+              {
+                "token": "kang",
+                "english": "you (+ linker)"
+              },
+              {
+                "token": "male-late,",
+                "english": "be late"
+              },
+              {
+                "token": "ha!",
+                "english": "okay? (friendly tag)"
+              }
+            ],
+            "speakingPrompt": "Tell her not to be late, in a playful way.",
+            "responseExercise": {
+              "promptTagalog": "Huwag kang male-late, ha!",
+              "promptTranslation": "Don't be late, okay!",
+              "options": [
+                {
+                  "englishTranslation": "Are you free tomorrow?"
+                },
+                {
+                  "englishTranslation": "Don't be late, okay!"
+                },
+                {
+                  "englishTranslation": "What time works for you?"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "tagalog": "Libre ka ba",
+            "english": "are you free",
+            "example": "Libre ka ba bukas?",
+            "exampleTranslation": "Are you free tomorrow?"
+          },
+          {
+            "tagalog": "bukas",
+            "english": "tomorrow?",
+            "example": "Libre ka ba bukas?",
+            "exampleTranslation": "Are you free tomorrow?"
+          },
+          {
+            "tagalog": "Anong oras",
+            "english": "what time",
+            "example": "Anong oras ka puwede?",
+            "exampleTranslation": "What time works for you?"
+          },
+          {
+            "tagalog": "ka puwede",
+            "english": "can you?",
+            "example": "Anong oras ka puwede?",
+            "exampleTranslation": "What time works for you?"
+          },
+          {
+            "tagalog": "Sige",
+            "english": "okay,",
+            "example": "Sige, alas-tres ng hapon.",
+            "exampleTranslation": "Okay, three in the afternoon."
+          },
+          {
+            "tagalog": "alas-tres",
+            "english": "three o'clock",
+            "example": "Sige, alas-tres ng hapon.",
+            "exampleTranslation": "Okay, three in the afternoon."
+          },
+          {
+            "tagalog": "ng hapon",
+            "english": "in the afternoon.",
+            "example": "Sige, alas-tres ng hapon.",
+            "exampleTranslation": "Okay, three in the afternoon."
+          },
+          {
+            "tagalog": "Kita tayo",
+            "english": "let's meet",
+            "example": "Kita tayo sa harap ng simbahan.",
+            "exampleTranslation": "Let's meet in front of the church."
+          },
+          {
+            "tagalog": "sa harap",
+            "english": "in front",
+            "example": "Kita tayo sa harap ng simbahan.",
+            "exampleTranslation": "Let's meet in front of the church."
+          },
+          {
+            "tagalog": "ng simbahan",
+            "english": "of the church.",
+            "example": "Kita tayo sa harap ng simbahan.",
+            "exampleTranslation": "Let's meet in front of the church."
+          }
+        ]
+      },
+      "contentHash": "1af4a719038439e5f400ffa868bd77e26e153ea5b2f9ca08bccda80c688ac8e8",
+      "validation": {
+        "contract": "kumusta_lesson_v3",
+        "structured_output": true,
+        "local_validation": true,
+        "ordered_chunks": true,
+        "vocabulary_grounded": true,
+        "vocabulary_examples_grounded": true,
+        "hear_respond_rounds": [
+          2,
+          4
+        ],
+        "authored_curriculum": true,
+        "native_speaker_review": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "id": "onboarding-advanced-v1",
+  "version": 1,
+  "level": "advanced",
+  "mode": "onboarding",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0113",
+  "replayTitle": "Make plans like a local",
+  "estimatedMinutes": 2,
+  "intro": {
+    "hook": "Uy, may lakad ka ba this weekend?",
+    "hookTranslation": "Hey, got any plans this weekend?",
+    "title": "Sound natural, not textbook",
+    "subtitle": "In about 2 minutes, you’ll learn to:",
+    "goals": [
+      { "tagalog": "pa · naman · lang", "meaning": "Use the little words locals add" },
+      { "tagalog": "Wala pa naman. Bakit, may lakad ka?", "meaning": "Answer like a friend, not a textbook" },
+      { "tagalog": "Tara! Anong oras?", "meaning": "Make plans on the fly" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-particles",
+      "symbol": "text.bubble.fill",
+      "eyebrow": "THE LITTLE WORDS",
+      "title": "Tiny words, big difference",
+      "body": "Locals soften sentences with tiny words that textbooks skip. That’s why textbook Tagalog sounds stiff.",
+      "samples": [
+        { "text": "Wala pa naman", "meaning": "Nothing yet, really", "contour": "level" },
+        { "text": "Wala lang", "meaning": "Nothing much, just because", "contour": "level" }
+      ],
+      "footnote": "Pa means “yet”, naman softens the answer, and lang means “just”."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-lakad",
+      "prompt": "What does your friend mean?",
+      "audio": "Uy, may lakad ka ba this weekend?",
+      "answer": "Got any plans this weekend?",
+      "options": ["Got any plans this weekend?", "Are you walking home?", "Where were you last weekend?"],
+      "note": "Lakad means “walk”, but between friends it means plans or an outing. Switching to English mid-sentence is totally normal in Manila."
+    },
+    {
+      "kind": "naturalPick",
+      "id": "natural-sabado",
+      "prompt": "Which reply sounds most natural?",
+      "context": "Anong plano mo sa Sabado?",
+      "contextTranslation": "What are your plans for Saturday?",
+      "options": [
+        {
+          "text": "Ako ay walang plano sa Sabado.",
+          "translation": "I have no plans on Saturday.",
+          "verdict": "Textbook",
+          "explanation": "Correct, but the ay order sounds like a speech. Friends never talk like this."
+        },
+        {
+          "text": "Wala pa naman. Bakit, may lakad ka?",
+          "translation": "Nothing yet. Why, got something in mind?",
+          "verdict": "Natural",
+          "explanation": "Pa and naman keep it relaxed, and you toss the question back. This is how friends answer.",
+          "isBest": true
+        },
+        {
+          "text": "Wala.",
+          "translation": "Nothing.",
+          "verdict": "Too short",
+          "explanation": "Fine grammar, but it sounds like you don’t want to talk."
+        }
+      ]
+    },
+    {
+      "kind": "speak",
+      "id": "speak-natural",
+      "title": "Say it like a local",
+      "display": "Wala pa naman. Bakit, may lakad ka?",
+      "translation": "Nothing yet. Why, got something in mind?",
+      "target": "Wala pa naman bakit may lakad ka",
+      "tip": "Let it flow as one breath: wa-la-pa-na-MAN."
+    },
+    {
+      "kind": "build",
+      "id": "build-tara",
+      "english": "Let’s go! What time?",
+      "answer": [
+        { "text": "Tara", "gloss": "let’s go" },
+        { "text": "Anong", "gloss": "what" },
+        { "text": "oras", "gloss": "time" }
+      ],
+      "distractors": [
+        { "text": "saan", "gloss": "where" },
+        { "text": "hindi", "gloss": "no" }
+      ]
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "MAKING PLANS",
+      "title": "Answer your friend, out loud",
+      "turns": [
+        {
+          "buddy": "Uy, may lakad ka ba this weekend?",
+          "buddyTranslation": "Hey, got any plans this weekend?",
+          "reply": "Wala pa naman. Bakit, may lakad ka?",
+          "replyTranslation": "Nothing yet. Why, got something in mind?",
+          "target": "Wala pa naman bakit may lakad ka",
+          "accepted": ["Wala pa bakit may lakad ka", "Wala pa naman bakit"]
+        },
+        {
+          "buddy": "Tara, kain tayo ng samgyup sa Sabado!",
+          "buddyTranslation": "Let’s eat Korean barbecue on Saturday!",
+          "reply": "Tara! Anong oras?",
+          "replyTranslation": "Let’s go! What time?",
+          "target": "Tara anong oras",
+          "accepted": ["Sige anong oras", "Game anong oras"]
+        }
+      ],
+      "closing": {
+        "text": "Alas siyete, sa Maginhawa. Kita-kits!",
+        "translation": "Seven o’clock, on Maginhawa Street. See you!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "That’s how friends talk!",
+    "subtitle": "You picked the natural reply and settled a time and place.",
+    "phrases": [
+      { "tagalog": "Wala pa naman. Bakit, may lakad ka?", "meaning": "Nothing yet. Why, got something in mind?" },
+      { "tagalog": "Tara! Anong oras?", "meaning": "Let’s go! What time?" },
+      { "tagalog": "Alas siyete. Kita-kits!", "meaning": "Seven o’clock. See you!" }
+    ],
+    "words": [
+      { "tagalog": "lakad", "meaning": "plans, an outing" },
+      { "tagalog": "naman", "meaning": "(softens what you say)" },
+      { "tagalog": "tara", "meaning": "let’s go" },
+      { "tagalog": "anong oras", "meaning": "what time" },
+      { "tagalog": "alas siyete", "meaning": "seven o’clock" },
+      { "tagalog": "kita-kits", "meaning": "see you (slang)" }
+    ]
+  }
+}

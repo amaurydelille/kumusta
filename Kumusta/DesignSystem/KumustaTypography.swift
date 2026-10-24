@@ -11,7 +11,7 @@ enum KumustaTypography {
     static let supporting = Font.system(.callout, design: .rounded, weight: .regular)
     static let supportingStrong = Font.system(.callout, design: .rounded, weight: .semibold)
     static let caption = Font.system(.callout, design: .rounded, weight: .medium)
-    static let vietnameseHero = Font.system(.largeTitle, design: .rounded, weight: .bold)
+    static let tagalogHero = Font.system(.largeTitle, design: .rounded, weight: .bold)
 
     /// Maps a hand-tuned point size to the text style it visually matches,
     /// so Dynamic Type scaling stays proportional across the app.

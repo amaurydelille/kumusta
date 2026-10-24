@@ -59,9 +59,7 @@ struct CompletedLessonRow: View {
                 Text(record.lesson.scenario)
                     .font(KumustaTypography.bodyStrong)
                     .foregroundStyle(KumustaColors.ink)
-                Text(record.lesson.accent == .northern
-                    ? L("%@ · %lld min · Northern", completedDate, record.lesson.minutes)
-                    : L("%@ · %lld min · Southern", completedDate, record.lesson.minutes))
+                Text(L("%@ · %lld min", completedDate, record.lesson.minutes))
                     .font(KumustaTypography.caption)
                     .foregroundStyle(KumustaColors.accentDeep)
             }
@@ -123,7 +121,7 @@ struct CompletedLessonDetailView: View {
 
                     if isUsingOfflineAudio {
                         Label(
-                            L("Using your device’s Vietnamese voice for this replay."),
+                            L("Using your device’s Tagalog voice for this replay."),
                             systemImage: "iphone"
                         )
                         .font(KumustaTypography.caption)
@@ -153,7 +151,7 @@ struct CompletedLessonDetailView: View {
                                 .accessibilityLabel(L("Play round %lld", index + 1))
                             }
 
-                            Text(step.vietnamese)
+                            Text(step.tagalog)
                                 .scaledFont(24, weight: .bold, design: .rounded)
                                 .foregroundStyle(KumustaColors.ink)
                                 .textSelection(.enabled)
@@ -167,7 +165,7 @@ struct CompletedLessonDetailView: View {
                                 Divider().overlay(KumustaColors.line)
                                 ForEach(step.chunks) { chunk in
                                     HStack(alignment: .firstTextBaseline, spacing: 10) {
-                                        Text(chunk.vietnamese)
+                                        Text(chunk.tagalog)
                                             .font(KumustaTypography.bodyStrong)
                                             .foregroundStyle(KumustaColors.ink)
                                         Spacer(minLength: 10)
@@ -222,8 +220,7 @@ struct CompletedLessonDetailView: View {
         Task { @MainActor in
             do {
                 try await dependencies.audioService.play(
-                    text: step.vietnamese,
-                    accent: record.lesson.accent,
+                    text: step.tagalog,
                     speed: AudioPreferences().defaultSpeed,
                     purpose: .lesson
                 )
@@ -240,8 +237,7 @@ struct CompletedLessonDetailView: View {
                     // should not make its replay button unusable. The label
                     // above makes the voice substitution explicit.
                     try await dependencies.offlineAudioService.play(
-                        text: step.vietnamese,
-                        accent: record.lesson.accent,
+                        text: step.tagalog,
                         speed: AudioPreferences().defaultSpeed,
                         purpose: .lesson
                     )

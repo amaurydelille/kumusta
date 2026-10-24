@@ -91,7 +91,7 @@ struct BuddyMark: View {
             .offset(y: animatedOffset)
         .frame(width: size, height: size)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L("Bé Trâu, the Kumusta mascot"))
+        .accessibilityLabel(L("Kalabaw, the Kumusta mascot"))
         .onAppear {
             guard !reduceMotion else { return }
             withAnimation(KumustaMotion.breathe.repeatForever(autoreverses: true)) {
@@ -282,15 +282,15 @@ private struct SpriteSheetFrame: View {
 private extension BuddyMotion {
     var accessibilityLabel: String {
         switch self {
-        case .launch: L("Bé Trâu welcomes you to Kumusta")
-        case .welcomeWave: L("Bé Trâu waves hello")
-        case .listening: L("Bé Trâu is listening")
-        case .curious: L("Bé Trâu is curious")
-        case .reviewing: L("Bé Trâu is reviewing your recording")
-        case .correct: L("Bé Trâu celebrates the correct answer")
-        case .mistake: L("Bé Trâu encourages another try")
-        case .generation: L("Bé Trâu is building the next lesson")
-        case .streak: L("Bé Trâu celebrates your learning streak")
+        case .launch: L("Kalabaw welcomes you to Kumusta")
+        case .welcomeWave: L("Kalabaw waves hello")
+        case .listening: L("Kalabaw is listening")
+        case .curious: L("Kalabaw is curious")
+        case .reviewing: L("Kalabaw is reviewing your recording")
+        case .correct: L("Kalabaw celebrates the correct answer")
+        case .mistake: L("Kalabaw encourages another try")
+        case .generation: L("Kalabaw is building the next lesson")
+        case .streak: L("Kalabaw celebrates your learning streak")
         }
     }
 }

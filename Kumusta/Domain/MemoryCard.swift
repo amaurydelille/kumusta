@@ -8,15 +8,14 @@ enum MemoryCardSource: String, Codable, Sendable {
 /// One phrase or word the learner has met and should keep. Lessons enroll
 /// their phrases automatically; saving a word enrolls it too.
 struct MemoryCard: Identifiable, Codable, Equatable, Sendable {
-    /// Accent plus the normalized Vietnamese, so the same phrase met in two
-    /// lessons is one memory. Tones are kept: "ma" and "má" are different.
+    /// The normalized Tagalog, so the same phrase met in two lessons is one
+    /// memory.
     let id: String
-    let vietnamese: String
+    let tagalog: String
     var translation: String
     /// A cue that disambiguates the translation, such as "Greet a woman
     /// slightly older than you" for "Hello.".
     var hint: String?
-    let accent: VietnameseAccent
     /// Language of `translation` and `hint`; nil for English.
     var translationLanguage: AppLanguage?
     let source: MemoryCardSource
@@ -38,22 +37,21 @@ struct MemoryCard: Identifiable, Codable, Equatable, Sendable {
         guard meaningLanguage != language, let meaning = meanings?[language.rawValue] else { return self }
         var copy = self
         copy.translation = meaning.translation
-        // A saved word's hint is its Vietnamese example sentence.
+        // A saved word's hint is its Tagalog example sentence.
         if source == .lesson { copy.hint = meaning.hint }
         copy.translationLanguage = language == .english ? nil : language
         return copy
     }
 
-    static func key(for vietnamese: String, accent: VietnameseAccent) -> String {
-        "\(accent.rawValue):\(normalized(vietnamese))"
+    static func key(for tagalog: String) -> String {
+        normalized(tagalog)
     }
 
-    /// Lowercased, NFC, punctuation trimmed and spaces collapsed; diacritics
-    /// stay because every tone mark changes the word.
-    static func normalized(_ vietnamese: String) -> String {
-        vietnamese
-            .precomposedStringWithCanonicalMapping
-            .lowercased(with: Locale(identifier: "vi"))
+    /// Lowercased, punctuation trimmed and spaces collapsed. Stress marks
+    /// are folded away: Tagalog writing usually leaves them out.
+    static func normalized(_ tagalog: String) -> String {
+        tagalog
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "fil"))
             .split(whereSeparator: \.isWhitespace)
             .map { $0.trimmingCharacters(in: .punctuationCharacters.union(.symbols)) }
             .filter { !$0.isEmpty }
@@ -75,29 +73,28 @@ struct MemoryCard: Identifiable, Codable, Equatable, Sendable {
     }
 
     var syllableCount: Int {
-        ListenTileBank.tileTexts(in: vietnamese).count
+        ListenTileBank.tileTexts(in: tagalog).count
     }
 }
 
 /// What a lesson or a saved word contributes to the learner's memory.
 struct MemoryCandidate: Equatable, Sendable {
-    let vietnamese: String
+    let tagalog: String
     let translation: String
     let hint: String?
-    let accent: VietnameseAccent
     let translationLanguage: AppLanguage?
     let source: MemoryCardSource
     let sourceID: UUID
 
-    var key: String { MemoryCard.key(for: vietnamese, accent: accent) }
+    var key: String { MemoryCard.key(for: tagalog) }
 
     /// Longer sentences are fine in a lesson but too much for a quick review.
     static let maximumSyllables = 12
 
     /// The distinct phrases a lesson taught, in lesson order. The speaking
     /// prompt becomes the hint because sentence translations repeat ("Hello."
-    /// for both "Chào anh ạ." and "Chào chị ạ.").
-    static func phrases(in lesson: Lesson, accent: VietnameseAccent) -> [MemoryCandidate] {
+    /// for both "Kumusta po." and "Kumusta ka?").
+    static func phrases(in lesson: Lesson) -> [MemoryCandidate] {
         // Read the language off the lesson's own text: the app's language
         // setting can differ from the content (a deck rebuilt at launch, a
         // lesson finished before switching languages).
@@ -107,8 +104,8 @@ struct MemoryCandidate: Equatable, Sendable {
         var seen: Set<String> = []
         var candidates: [MemoryCandidate] = []
         for step in lesson.steps {
-            let normalized = MemoryCard.normalized(step.vietnamese)
-            let syllables = ListenTileBank.tileTexts(in: step.vietnamese).count
+            let normalized = MemoryCard.normalized(step.tagalog)
+            let syllables = ListenTileBank.tileTexts(in: step.tagalog).count
             let translation = step.translation.trimmingCharacters(in: .whitespacesAndNewlines)
             guard
                 !normalized.isEmpty,
@@ -118,7 +115,7 @@ struct MemoryCandidate: Equatable, Sendable {
             else { continue }
 
             let speakPrompt = lesson.steps
-                .first { $0.kind == .speak && MemoryCard.normalized($0.vietnamese) == normalized }?
+                .first { $0.kind == .speak && MemoryCard.normalized($0.tagalog) == normalized }?
                 .prompt
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             let hint = speakPrompt.flatMap { prompt in
@@ -128,10 +125,9 @@ struct MemoryCandidate: Equatable, Sendable {
             }
             candidates.append(
                 MemoryCandidate(
-                    vietnamese: step.vietnamese.trimmingCharacters(in: .whitespacesAndNewlines),
+                    tagalog: step.tagalog.trimmingCharacters(in: .whitespacesAndNewlines),
                     translation: translation,
                     hint: hint,
-                    accent: accent,
                     translationLanguage: translationLanguage,
                     source: .lesson,
                     sourceID: lesson.id
@@ -149,12 +145,11 @@ struct MemoryCandidate: Equatable, Sendable {
         else { return nil }
         let sentence = saved.sentence.trimmingCharacters(in: .whitespacesAndNewlines)
         return MemoryCandidate(
-            vietnamese: saved.word,
+            tagalog: saved.word,
             translation: translation,
             hint: sentence.isEmpty || MemoryCard.normalized(sentence) == MemoryCard.normalized(saved.word)
                 ? nil
                 : sentence,
-            accent: saved.accent,
             translationLanguage: saved.translationLanguage,
             source: .savedWord,
             sourceID: saved.id
@@ -172,13 +167,13 @@ enum MeaningLanguageDetector {
 
 /// The review exercises, from recognising a phrase to producing it.
 enum ReviewExerciseKind: String, Codable, CaseIterable, Sendable {
-    /// Hear the Vietnamese, pick its meaning.
+    /// Hear the Tagalog, pick its meaning.
     case listenMeaning
-    /// See the meaning, pick the Vietnamese among tone look-alikes.
-    case pickVietnamese
-    /// See the meaning, build the Vietnamese from syllable tiles.
+    /// See the meaning, pick the Tagalog among look-alikes.
+    case pickTagalog
+    /// See the meaning, build the Tagalog from syllable tiles.
     case build
-    /// See the meaning, say the Vietnamese out loud.
+    /// See the meaning, say the Tagalog out loud.
     case speak
 
     /// Harder exercises earn a little more when answered on the first try.
@@ -213,8 +208,8 @@ enum ReviewExercisePlanner {
 
         if stability < productionStability {
             // A small deck may hold no other meanings in this card's language;
-            // a one-option question tests nothing, so ask for the Vietnamese.
-            return meaningDistractors(for: card, in: pool).count >= 2 ? .listenMeaning : .pickVietnamese
+            // a one-option question tests nothing, so ask for the Tagalog.
+            return meaningDistractors(for: card, in: pool).count >= 2 ? .listenMeaning : .pickTagalog
         }
         if stability >= speakingStability, canSpeak {
             // Mostly speak, sometimes build, so strong items stay varied.
@@ -223,7 +218,7 @@ enum ReviewExercisePlanner {
         if canBuild, Double.random(in: 0..<1, using: &generator) < 0.6 {
             return .build
         }
-        return .pickVietnamese
+        return .pickTagalog
     }
 
     /// The correct meaning plus up to three others. Meanings that read the
@@ -256,19 +251,19 @@ enum ReviewExercisePlanner {
         return distractors
     }
 
-    /// The correct Vietnamese plus look-alikes: the same phrase with one
-    /// tone changed, then other phrases. Tone traps are what Vietnamese
-    /// learners actually confuse.
-    static func vietnameseChoices<Generator: RandomNumberGenerator>(
+    /// The correct Tagalog plus look-alikes: the same phrase with one word
+    /// swapped for one learners confuse it with (ang/ng, mag-/nag-), then
+    /// other phrases.
+    static func tagalogChoices<Generator: RandomNumberGenerator>(
         for card: MemoryCard,
         pool: [MemoryCard],
         using generator: inout Generator
     ) -> [ReviewExerciseChoice] {
-        let answer = card.vietnamese
+        let answer = card.tagalog
         var seen: Set<String> = [MemoryCard.normalized(answer)]
         var distractors: [String] = []
 
-        for variant in toneVariants(of: answer, using: &generator) {
+        for variant in lookAlikeVariants(of: answer, using: &generator) {
             guard seen.insert(MemoryCard.normalized(variant)).inserted else { continue }
             distractors.append(variant)
             if distractors.count == 2 { break }
@@ -278,17 +273,18 @@ enum ReviewExercisePlanner {
             guard distractors.count < 3 else { break }
             // Skip phrases that would also be a correct answer.
             guard !overlaps(comparable(other.translation), answerMeaning),
-                  !overlaps(MemoryCard.normalized(other.vietnamese), MemoryCard.normalized(answer)),
-                  seen.insert(MemoryCard.normalized(other.vietnamese)).inserted
+                  !overlaps(MemoryCard.normalized(other.tagalog), MemoryCard.normalized(answer)),
+                  seen.insert(MemoryCard.normalized(other.tagalog)).inserted
             else { continue }
-            distractors.append(other.vietnamese)
+            distractors.append(other.tagalog)
         }
         return shuffledChoices(answer: answer, distractors: distractors, using: &generator)
     }
 
-    /// The phrase with a single syllable's tone swapped, e.g. "Cảm ơn" →
-    /// "Cám ơn". Keeps the original casing and punctuation around the word.
-    static func toneVariants<Generator: RandomNumberGenerator>(
+    /// The phrase with a single word swapped for a look-alike, e.g.
+    /// "Kumain ka na?" → "Kumain kayo na?". Keeps the original casing and
+    /// punctuation around the word.
+    static func lookAlikeVariants<Generator: RandomNumberGenerator>(
         of phrase: String,
         using generator: inout Generator
     ) -> [String] {
@@ -299,7 +295,7 @@ enum ReviewExercisePlanner {
             let core = word.trimmingCharacters(in: .punctuationCharacters.union(.symbols))
             guard !core.isEmpty, let range = word.range(of: core) else { continue }
             let isCapitalized = core.first?.isUppercase == true
-            let swapped = VietnameseTone.variants(of: core.lowercased(with: Locale(identifier: "vi")))
+            let swapped = TagalogLookAlike.variants(of: core.lowercased(with: Locale(identifier: "fil")))
                 .shuffled(using: &generator)
             guard let replacement = swapped.first else { continue }
             let cased = isCapitalized ? replacement.prefix(1).uppercased() + replacement.dropFirst() : replacement

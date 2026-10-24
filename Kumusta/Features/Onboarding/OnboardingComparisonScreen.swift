@@ -8,7 +8,6 @@ struct OnboardingComparisonScreen: View {
     let name: String?
     let goal: LearningGoal
     let level: ProficiencyLevel
-    let accent: VietnameseAccent
     let dailyMinutes: Int
     let didFinishLesson: Bool
     let onContinue: () async -> Void
@@ -109,7 +108,7 @@ struct OnboardingComparisonScreen: View {
             // One row when it fits; wraps at large Dynamic Type sizes.
             WordWrapLayout(horizontalSpacing: 6, verticalSpacing: 6) {
                 planChip("clock.fill", L("%lld min/day", dailyMinutes))
-                planChip("waveform", accent.title)
+                planChip("waveform", L("Everyday Tagalog"))
                 planChip(goal.systemImage, OnboardingComparison.goalLabel(goal))
             }
         }
@@ -439,23 +438,22 @@ private struct FollowCurve: ViewModifier, Animatable {
 }
 
 /// The copy behind the comparison screen. Every benefit describes what the
-/// app actually does: spoken feedback, the learner's accent, real-life
-/// situations, conversations with Bé Trâu, and word review.
+/// app actually does: spoken feedback, everyday Manila Tagalog, real-life
+/// situations, conversations with Kalabaw, and word review.
 enum OnboardingComparison {
     static func headline(level: ProficiencyLevel, didFinishLesson: Bool) -> String {
-        guard didFinishLesson else { return L("You’re one step from speaking Vietnamese.") }
+        guard didFinishLesson else { return L("You’re one step from speaking Tagalog.") }
         return switch level {
-        case .new: L("You just spoke your first Vietnamese words.")
-        case .familiar: L("You just ordered a coffee in Vietnamese.")
-        case .conversational: L("You just made plans like a local.")
-        case .rusty: L("You just answered grandma in Vietnamese.")
+        case .beginner: L("You just spoke your first Tagalog words.")
+        case .intermediate: L("You just ordered merienda in Tagalog.")
+        case .advanced: L("You just made plans like a local.")
         }
     }
 
     static func goalLabel(_ goal: LearningGoal) -> String {
         switch goal {
         case .family: L("Family")
-        case .lifeInVietnam: L("Life in Vietnam")
+        case .lifeInThePhilippines: L("Life in the Philippines")
         case .travel: L("Travel")
         case .partner: L("Partner")
         case .work: L("Work")
@@ -474,7 +472,7 @@ enum OnboardingComparison {
         case .partner:
             [
                 L("Talk to their parents yourself"),
-                L("Say the sweet things in Vietnamese"),
+                L("Say the sweet things in Tagalog"),
                 L("Laugh at the joke the first time")
             ]
         case .travel:
@@ -483,7 +481,7 @@ enum OnboardingComparison {
                 L("Ask the price and understand it"),
                 L("Get a smile and a real chat")
             ]
-        case .lifeInVietnam:
+        case .lifeInThePhilippines:
             [
                 L("Handle the market and the landlord"),
                 L("Pick up the phone with confidence"),
@@ -493,13 +491,13 @@ enum OnboardingComparison {
             [
                 L("Follow the meeting"),
                 L("Build real rapport with colleagues"),
-                L("Make Vietnamese part of your career")
+                L("Make Tagalog part of your career")
             ]
         case .culture:
             [
                 L("Answer, not just understand"),
-                L("Speak with your family’s accent"),
-                L("Make Vietnamese your own voice")
+                L("Use the words your family uses"),
+                L("Make Tagalog your own voice")
             ]
         }
     }
@@ -510,8 +508,7 @@ enum OnboardingComparison {
     OnboardingComparisonScreen(
         name: "Alex",
         goal: .family,
-        level: .familiar,
-        accent: .northern,
+        level: .intermediate,
         dailyMinutes: 7,
         didFinishLesson: true,
         onContinue: {}

@@ -103,7 +103,7 @@ private final class RecordingLiveTranscription: LiveSpeechTranscribing, @uncheck
     func cancel() {}
 }
 
-private struct LiveOnlySpeechService: VietnameseSpeechRecognizing {
+private struct LiveOnlySpeechService: TagalogSpeechRecognizing {
     let live: RecordingLiveTranscription
 
     func transcribe(audio: Data) async throws -> SpeechTranscription {

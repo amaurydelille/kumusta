@@ -43,7 +43,7 @@ struct LivePracticeView: View {
                     // Gives way to the mood picker on short screens.
                     mascot.frame(minHeight: 150, maxHeight: 250)
                 }
-                Text("Bé Trâu")
+                Text("Kalabaw")
                     .scaledFont(compactHeader ? 19 : 23, weight: .bold, design: .rounded)
                     .foregroundStyle(KumustaColors.ink)
                     .padding(.top, compactHeader ? 5 : 10)
@@ -70,7 +70,7 @@ struct LivePracticeView: View {
                     transcript.padding(.top, 12)
                 } else {
                     Spacer(minLength: 20)
-                    Text(L("A little Vietnamese.\nA real conversation."))
+                    Text(L("A little Tagalog.\nA real conversation."))
                         .scaledFont(20, weight: .bold, design: .rounded)
                         .foregroundStyle(KumustaColors.ink)
                         .multilineTextAlignment(.center)
@@ -169,7 +169,7 @@ struct LivePracticeView: View {
         if session.phase == .ended, session.message != nil { return L("Conversation ended · try again when ready") }
         if session.phase == .ended, session.elapsed > 0 {
             return L(
-                "%@ of Vietnamese · nice work",
+                "%@ of Tagalog · nice work",
                 "\(session.elapsed / 60):\(String(format: "%02d", session.elapsed % 60))"
             )
         }
@@ -180,7 +180,7 @@ struct LivePracticeView: View {
         session.isOpen || !session.captions.isEmpty
     }
 
-    /// With the transcript hidden, Bé Trâu grows and takes the center.
+    /// With the transcript hidden, Kalabaw grows and takes the center.
     private var focusesMascot: Bool {
         hasConversation && !showsTranscript
     }
@@ -234,7 +234,7 @@ struct LivePracticeView: View {
             reduceMotion: reduceMotion
         )
         .accessibilityElement()
-        .accessibilityLabel(L("Bé Trâu, your conversation buddy"))
+        .accessibilityLabel(L("Kalabaw, your conversation buddy"))
         .task {
             try? await Task.sleep(for: .seconds(3.6))
             guard !Task.isCancelled else { return }
@@ -267,7 +267,7 @@ struct LivePracticeView: View {
                                     caption.isUser ? KumustaColors.accent : KumustaColors.surface,
                                     in: RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 )
-                                .accessibilityLabel(caption.isUser ? L("You: %@", caption.text) : L("Bé Trâu: %@", caption.text))
+                                .accessibilityLabel(caption.isUser ? L("You: %@", caption.text) : L("Kalabaw: %@", caption.text))
                             if !caption.isUser { Spacer(minLength: 44) }
                         }
                         .id(caption.id)
@@ -348,7 +348,6 @@ struct LivePracticeView: View {
     private var liveProperties: [String: String] {
         var properties = [
             "screen_name": "live_practice",
-            "accent": appState.profile.accent.rawValue,
             "live_engine": livePracticeEngine,
             "personality": personality.rawValue
         ]
@@ -361,7 +360,6 @@ struct LivePracticeView: View {
     private func startLivePractice() {
         didTrackEnd = false
         guard let clientSessionID = session.start(
-            accent: appState.profile.accent.rawValue,
             topic: "",
             lesson: latestLesson,
             lessonID: latestLessonRecord?.lesson.id,
@@ -464,12 +462,12 @@ enum LivePersonality: String, CaseIterable, Identifiable {
         }
     }
 
-    var vietnameseTitle: String {
+    var tagalogTitle: String {
         switch self {
-        case .friendly: "Thân thiện"
-        case .familiar: "Thân mật"
-        case .grumpy: "Cáu kỉnh"
-        case .strict: "Nghiêm khắc"
+        case .friendly: "Palakaibigan"
+        case .familiar: "Barkada"
+        case .grumpy: "Masungit"
+        case .strict: "Istrikto"
         }
     }
 
@@ -486,17 +484,17 @@ enum LivePersonality: String, CaseIterable, Identifiable {
         switch self {
         case .friendly: L("Warm and patient. Cheers you on.")
         case .familiar: L("Like an old friend. Casual words, lots of teasing.")
-        case .grumpy: L("Short-tempered market-stall energy. Keep up!")
+        case .grumpy: L("Short-tempered palengke energy. Keep up!")
         case .strict: L("A demanding teacher. Every mistake gets fixed.")
         }
     }
 
     var sample: String {
         switch self {
-        case .friendly: "Chào bạn! Hôm nay bạn khỏe không?"
-        case .familiar: "Ê, lâu quá hông gặp! Dạo này sao rồi?"
-        case .grumpy: "Gì nữa đây? Nói lẹ lên coi!"
-        case .strict: "Nói lại cho đúng dấu nhé."
+        case .friendly: "Kumusta! Kumusta ang araw mo?"
+        case .familiar: "Uy, bes! Ang tagal nating hindi nagkita!"
+        case .grumpy: "Ano na naman? Bilisan mo!"
+        case .strict: "Ulitin mo. Buong pangungusap."
         }
     }
 }
@@ -507,7 +505,7 @@ private struct LivePersonalityPicker: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(L("Bé Trâu's mood"))
+            Text(L("Kalabaw's mood"))
                 .scaledFont(13, weight: .bold, design: .rounded)
                 .foregroundStyle(KumustaColors.muted)
                 .textCase(.uppercase)
@@ -558,7 +556,7 @@ private struct LivePersonalityPicker: View {
                     .foregroundStyle(KumustaColors.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
-                Text(personality.vietnameseTitle)
+                Text(personality.tagalogTitle)
                     .scaledFont(11, weight: .medium, design: .rounded)
                     .foregroundStyle(KumustaColors.muted)
                     .lineLimit(1)
@@ -578,7 +576,7 @@ private struct LivePersonalityPicker: View {
         }
         .buttonStyle(.plain)
         .tactile()
-        .accessibilityLabel("\(personality.title), \(personality.vietnameseTitle)")
+        .accessibilityLabel("\(personality.title), \(personality.tagalogTitle)")
         .accessibilityHint(personality.summary)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }

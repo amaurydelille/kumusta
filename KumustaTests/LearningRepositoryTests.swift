@@ -4,18 +4,18 @@ import Testing
 
 @Suite("Goal curriculum")
 struct GoalCurriculumTests {
-    private func rows(goal: LearningGoal = .family, accent: VietnameseAccent = .southern) throws -> [GoalCurriculumRow] {
+    private func rows(goal: LearningGoal = .family) throws -> [GoalCurriculumRow] {
         let rounds: [[String: Any]] = (0..<5).map { index in
             var round: [String: Any] = [
-                "situation": "You greet an older relative.", "vietnamese": "Con chào cô ạ.",
+                "situation": "You greet an older relative.", "tagalog": "Kumusta po, Tita.",
                 "translation": "Hello, auntie.", "speakingPrompt": "Greet your aunt.",
-                "chunks": [["vietnamese": "Con", "english": "I", "note": "Younger speaker"],
-                           ["vietnamese": "chào cô ạ.", "english": "greet auntie", "note": "Polite greeting"]],
-                "wordGlosses": [["token": "Con", "english": "I"], ["token": "chào", "english": "greet"],
-                                ["token": "cô", "english": "auntie"], ["token": "ạ.", "english": "polite particle"]],
+                "chunks": [["tagalog": "Kumusta po,", "english": "hello (respectful)", "note": "Po shows respect"],
+                           ["tagalog": "Tita.", "english": "auntie", "note": "Address her by family title"]],
+                "wordGlosses": [["token": "Kumusta", "english": "how are / hello"], ["token": "po,", "english": "(respect)"],
+                                ["token": "Tita.", "english": "auntie"]],
             ]
             if [2, 4].contains(index) {
-                round["responseExercise"] = ["promptVietnamese": "Con chào cô ạ.",
+                round["responseExercise"] = ["promptTagalog": "Kumusta po, Tita.",
                     "promptTranslation": "Hello, auntie.", "correctOptionIndex": 1,
                     "options": [["englishTranslation": "Goodbye."], ["englishTranslation": "Hello, auntie."],
                                 ["englishTranslation": "Thank you."]]]
@@ -25,7 +25,7 @@ struct GoalCurriculumTests {
         let objects: [[String: Any]] = (1...4).flatMap { stage in
             (1...10).map { order in
                 ["id": UUID().uuidString, "goal": goal.rawValue, "stage": stage,
-                 "accent": accent.rawValue, "lesson_order": order, "title": "Visit \(order)",
+                 "lesson_order": order, "title": "Visit \(order)",
                  "summary": "Greet your family", "content": ["title": "Visit \(order)", "minutes": 5, "rounds": rounds]]
             }
         }
@@ -34,20 +34,20 @@ struct GoalCurriculumTests {
 
     @Test func recommendationsRespectLevelAndAdvanceOnlyAfterWholeStage() throws {
         let rows = try rows()
-        #expect(GoalCurriculumSelection.recommendedStage(level: .new, rows: rows, completed: []) == 1)
-        #expect(GoalCurriculumSelection.recommendedStage(level: .familiar, rows: rows, completed: []) == 2)
-        #expect(GoalCurriculumSelection.recommendedStage(level: .conversational, rows: rows, completed: []) == 3)
-        #expect(GoalCurriculumSelection.recommendedStage(level: .rusty, rows: rows, completed: []) == 3)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .beginner, rows: rows, completed: []) == 1)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .intermediate, rows: rows, completed: []) == 2)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .advanced, rows: rows, completed: []) == 3)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .advanced, rows: rows, completed: []) == 3)
         let nine = Set(rows.filter { $0.stage == 1 && $0.lessonOrder < 10 }.map(\.id))
-        #expect(GoalCurriculumSelection.recommendedStage(level: .new, rows: rows, completed: nine) == 1)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .beginner, rows: rows, completed: nine) == 1)
         let ten = Set(rows.filter { $0.stage == 1 }.map(\.id))
-        #expect(GoalCurriculumSelection.recommendedStage(level: .new, rows: rows, completed: ten) == 2)
+        #expect(GoalCurriculumSelection.recommendedStage(level: .beginner, rows: rows, completed: ten) == 2)
     }
 
     @Test func roadmapContainsOnlyTheAdaptiveStageInSequence() throws {
-        let rows = try rows(goal: .partner, accent: .northern)
+        let rows = try rows(goal: .partner)
         let stage = GoalCurriculumSelection.recommendedStage(
-            level: .conversational,
+            level: .advanced,
             rows: rows,
             completed: []
         )
@@ -59,17 +59,16 @@ struct GoalCurriculumTests {
         #expect(Set(roadmap.map(\.id)) == Set(rows.filter { $0.stage == 3 }.map(\.id)))
     }
 
-    @Test func rejectsWrongGoalAccentAndIncompleteCatalog() throws {
+    @Test func rejectsWrongGoalAndIncompleteCatalog() throws {
         let rows = try rows()
-        try GoalCurriculumSelection.validate(rows, goal: .family, accent: .southern)
-        #expect(throws: GoalCurriculumError.self) { try GoalCurriculumSelection.validate(rows, goal: .travel, accent: .southern) }
-        #expect(throws: GoalCurriculumError.self) { try GoalCurriculumSelection.validate(rows, goal: .family, accent: .northern) }
-        #expect(throws: GoalCurriculumError.self) { try GoalCurriculumSelection.validate(Array(rows.dropLast()), goal: .family, accent: .southern) }
+        try GoalCurriculumSelection.validate(rows, goal: .family)
+        #expect(throws: GoalCurriculumError.self) { try GoalCurriculumSelection.validate(rows, goal: .travel) }
+        #expect(throws: GoalCurriculumError.self) { try GoalCurriculumSelection.validate(Array(rows.dropLast()), goal: .family) }
     }
 
     @Test func exercisesAndIdentifiersStayCorrectAcrossGoalsAndLevels() throws {
         var stepIDs = Set<UUID>()
-        for goal in [LearningGoal.family, .lifeInVietnam, .partner, .travel] {
+        for goal in [LearningGoal.family, .lifeInThePhilippines, .partner, .travel] {
             for row in try rows(goal: goal) {
                 let lesson = row.makeLesson().lesson
                 #expect(lesson.steps.map(\.kind) == [.coldListen, .decode, .speak, .coldListen, .decode, .speak,
@@ -84,130 +83,51 @@ struct GoalCurriculumTests {
 
 @Suite("Seeded learning repository")
 struct LearningRepositoryTests {
-    @Test("Authored content IDs are deterministic and stable")
+    @Test("Sample content IDs are deterministic and come from the roadmap")
     func contentIDsAreDeterministic() throws {
         let referenceDate = Date(timeIntervalSince1970: 1_700_000_000)
+        let firstVocabulary = SampleContent.vocabulary(referenceDate: referenceDate)
+        let secondVocabulary = SampleContent.vocabulary(referenceDate: referenceDate)
+        let firstLessons = SampleContent.lessonCatalog()
+        let secondLessons = SampleContent.lessonCatalog()
 
-        for accent in VietnameseAccent.allCases {
-            let firstVocabulary = SampleContent.vocabulary(
-                for: accent,
-                referenceDate: referenceDate
-            )
-            let secondVocabulary = SampleContent.vocabulary(
-                for: accent,
-                referenceDate: referenceDate
-            )
-            let firstLessons = SampleContent.lessonCatalog(for: accent)
-            let secondLessons = SampleContent.lessonCatalog(for: accent)
-
-            #expect(firstVocabulary.map(\.id) == secondVocabulary.map(\.id))
-            #expect(firstLessons.map(\.id) == secondLessons.map(\.id))
-            #expect(firstLessons.flatMap(\.steps).map(\.id) == secondLessons.flatMap(\.steps).map(\.id))
-        }
-
-        let southernFirst = try #require(
-            SampleContent.vocabulary(for: .southern, referenceDate: referenceDate).first
-        )
-        let northernFirst = try #require(
-            SampleContent.vocabulary(for: .northern, referenceDate: referenceDate).first
-        )
-
-        #expect(southernFirst.id.uuidString == "30000000-0000-0000-0000-000000300001")
-        #expect(northernFirst.id.uuidString == "30000000-0000-0000-0000-000000310001")
-        #expect(
-            SampleContent.lessonCatalog(for: .southern).first?.id.uuidString
-                == "20000000-0000-0000-0000-000000000101"
-        )
+        #expect(firstVocabulary.map(\.id) == secondVocabulary.map(\.id))
+        #expect(firstLessons.map(\.id) == secondLessons.map(\.id))
+        #expect(firstLessons.flatMap(\.steps).map(\.id) == secondLessons.flatMap(\.steps).map(\.id))
+        #expect(firstLessons.first?.id.uuidString == "43010000-0000-4000-8100-000000000001")
     }
 
-    @Test("Accent catalogs remain separate")
-    func accentCatalogsRemainSeparate() {
-        let southernVocabulary = SampleContent.vocabulary(for: .southern)
-        let northernVocabulary = SampleContent.vocabulary(for: .northern)
-        let southernLessons = SampleContent.lessonCatalog(for: .southern)
-        let northernLessons = SampleContent.lessonCatalog(for: .northern)
-
-        #expect(Set(southernVocabulary.map(\.id)).isDisjoint(with: Set(northernVocabulary.map(\.id))))
-        #expect(Set(southernLessons.map(\.id)).isDisjoint(with: Set(northernLessons.map(\.id))))
-        #expect(southernVocabulary.allSatisfy { $0.accent == .southern })
-        #expect(northernVocabulary.allSatisfy { $0.accent == .northern })
-        #expect(southernLessons.allSatisfy { $0.accent == .southern })
-        #expect(northernLessons.allSatisfy { $0.accent == .northern })
-
-        let southernText = southernVocabulary
-            .flatMap { [$0.vietnamese, $0.example] }
-            .joined(separator: " ")
-        let northernText = northernVocabulary
-            .flatMap { [$0.vietnamese, $0.example] }
-            .joined(separator: " ")
-        #expect(southernText.contains("quẹo trái"))
-        #expect(southernText.contains("giùm"))
-        #expect(!southernText.contains("rẽ trái"))
-        #expect(northernText.contains("rẽ trái"))
-        #expect(northernText.contains("giúp"))
-        #expect(!northernText.contains("quẹo trái"))
-    }
-
-    @Test("Phrase bank has useful scenario breadth and review distribution")
-    func phraseBankCoverageAndDistribution() {
+    @Test("Sample content is the bundled beginner roadmap")
+    func sampleContentCoverage() {
         let referenceDate = Date(timeIntervalSince1970: 1_700_000_000)
-        let expectedLessonCount = 12
+        let items = SampleContent.vocabulary(referenceDate: referenceDate)
+        let lessons = SampleContent.lessonCatalog()
 
-        for accent in VietnameseAccent.allCases {
-            let items = SampleContent.vocabulary(for: accent, referenceDate: referenceDate)
-            let lessons = SampleContent.lessonCatalog(for: accent)
-
-            #expect(items.count == 18)
-            #expect(lessons.count == expectedLessonCount)
-            #expect(Set(lessons.map(\.scenario)).count == expectedLessonCount)
-            #expect(lessons.allSatisfy { lesson in
-                lesson.steps.map(\.kind) == [.coldListen, .decode, .speak]
-                    && lesson.steps[1].chunks.count >= 3
-            })
-            #expect(items.filter { $0.nextReviewAt <= referenceDate }.count >= 5)
-            #expect(items.filter { $0.nextReviewAt > referenceDate }.count >= 10)
-            #expect(Set(items.map(\.mastery)).count >= 12)
-            #expect(items.allSatisfy { (0...1).contains($0.mastery) })
-        }
-    }
-
-    @Test("Bundled curriculum parses with complete accent coverage")
-    func bundledCurriculumParses() throws {
-        let projectRoot = URL(fileURLWithPath: #filePath)
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-        let resourceURL = projectRoot
-            .appendingPathComponent("Kumusta/Resources/Seed/curriculum-v1.json")
-        let data = try Data(contentsOf: resourceURL)
-        let document = try JSONDecoder().decode(CurriculumSeedDocument.self, from: data)
-
-        #expect(document.version == 1)
-        #expect(document.reviewStatus == "native-speaker-review-required")
-        #expect(document.lessons.count == 12)
-
-        for accent in VietnameseAccent.allCases {
-            let lessons = document.lessons.filter { $0.accent == accent }
-            #expect(lessons.count == 6)
-            #expect(lessons.allSatisfy { $0.steps.map(\.kind) == [.coldListen, .decode, .speak] })
-        }
-
-        let lessonIDs = document.lessons.map(\.id)
-        let stepIDs = document.lessons.flatMap(\.steps).map(\.id)
-        let chunkIDs = document.lessons
-            .flatMap(\.steps)
-            .flatMap(\.chunks)
-            .map(\.id)
-        #expect(Set(lessonIDs).count == lessonIDs.count)
-        #expect(Set(stepIDs).count == stepIDs.count)
-        #expect(Set(chunkIDs).count == chunkIDs.count)
+        #expect(lessons.count == 10)
+        #expect(Set(lessons.map(\.scenario)).count == 10)
+        #expect(lessons.allSatisfy { $0.steps.count == 15 && $0.roundCount == 5 })
+        #expect(items.count >= 40)
+        #expect(Set(items.map { $0.tagalog.lowercased() }).count == items.count)
+        #expect(items.allSatisfy { $0.nextReviewAt == referenceDate && (0...1).contains($0.mastery) })
     }
 
     @Test("Authored roadmaps promote through the sequential levels")
     func authoredRoadmapPromotionOrder() {
-        #expect(ProficiencyLevel.new.nextRoadmapLevel == .familiar)
-        #expect(ProficiencyLevel.familiar.nextRoadmapLevel == .conversational)
-        #expect(ProficiencyLevel.conversational.nextRoadmapLevel == nil)
-        #expect(ProficiencyLevel.rusty.nextRoadmapLevel == nil)
+        #expect(ProficiencyLevel.beginner.nextRoadmapLevel == .intermediate)
+        #expect(ProficiencyLevel.intermediate.nextRoadmapLevel == .advanced)
+        #expect(ProficiencyLevel.advanced.nextRoadmapLevel == nil)
+    }
+
+    @Test("Every level has its own bundled roadmap")
+    func everyLevelHasARoadmap() throws {
+        var firstPhrases: Set<String> = []
+        for level in ProficiencyLevel.allCases {
+            let roadmap = try RoadmapCatalog.load(level: level)
+            #expect(roadmap.count == 10)
+            #expect(roadmap.map(\.lessonOrder) == Array(1...10))
+            firstPhrases.insert(roadmap[0].lesson.steps[0].tagalog)
+        }
+        #expect(firstPhrases.count == ProficiencyLevel.allCases.count)
     }
 
     @Test("Every proficiency level has a distinct icon")
@@ -217,31 +137,25 @@ struct LearningRepositoryTests {
         #expect(Set(icons).count == ProficiencyLevel.allCases.count)
     }
 
-    @Test("Lessons honor every selected accent and level")
+    @Test("Lessons honor every selected level")
     func lessonsHonorPreferences() async throws {
         let repository = SeededLearningRepository()
+        var phrases: Set<String> = []
 
-        for accent in VietnameseAccent.allCases {
-            var phrases: Set<String> = []
+        for level in ProficiencyLevel.allCases {
+            let lesson = try await repository.todayLesson(
+                level: level,
+                dailyMinutes: 5
+            )
 
-            for level in ProficiencyLevel.allCases {
-                let lesson = try await repository.todayLesson(
-                    accent: accent,
-                    level: level,
-                    dailyMinutes: 5
-                )
-
-                #expect(lesson.accent == accent)
-                #expect(lesson.minutes == 5)
-                #expect(lesson.roundCount == 5)
-                #expect(lesson.steps.count == 15)
-                #expect(lesson.steps.allSatisfy { !$0.vietnamese.isEmpty })
-                #expect(lesson.steps[1].chunks.count >= 4)
-                phrases.insert(lesson.steps[0].vietnamese)
-            }
-
-            #expect(phrases.count == ProficiencyLevel.allCases.count)
+            #expect(lesson.minutes == 5)
+            #expect(lesson.roundCount == 5)
+            #expect(lesson.steps.count == 15)
+            #expect(lesson.steps.allSatisfy { !$0.tagalog.isEmpty })
+            #expect(lesson.steps[1].chunks.count >= 2)
+            phrases.insert(lesson.steps[0].tagalog)
         }
+        #expect(phrases.count == ProficiencyLevel.allCases.count)
     }
 
     @Test("Daily time creates a proportionate multi-round session")
@@ -250,8 +164,7 @@ struct LearningRepositoryTests {
 
         for minutes in [5, 7, 10, 15] {
             let lesson = try await repository.todayLesson(
-                accent: .southern,
-                level: .familiar,
+                level: .intermediate,
                 dailyMinutes: minutes
             )
             let expectedRounds = LessonSessionPlan.roundCount(for: minutes)
@@ -259,12 +172,11 @@ struct LearningRepositoryTests {
             #expect(lesson.minutes == minutes)
             #expect(lesson.roundCount == expectedRounds)
             #expect(lesson.steps.count == expectedRounds * 3)
-            #expect(LessonSessionPlan.hearRespondRoundIndexes(for: expectedRounds).count == 2)
             for roundStart in stride(from: 0, to: lesson.steps.count, by: 3) {
-                let roundIndex = roundStart / LessonSessionPlan.stagesPerRound
-                let middleKind: LessonStepKind = LessonSessionPlan
-                    .hearRespondRoundIndexes(for: expectedRounds)
-                    .contains(roundIndex) ? .hearRespond : .decode
+                // Rounds come from the authored roadmap in order, so each keeps
+                // its own listening exercise (rounds 3 and 5 of every lesson).
+                let middleKind = lesson.steps[roundStart + 1].kind
+                #expect([.decode, .hearRespond].contains(middleKind))
                 #expect(
                     Array(lesson.steps[roundStart ..< roundStart + 3]).map(\.kind)
                         == [.coldListen, middleKind, .speak]
@@ -277,9 +189,9 @@ struct LearningRepositoryTests {
                     )
                 }
             }
-            #expect(Set(lesson.steps.filter { $0.kind == .coldListen }.map(\.vietnamese)).count == expectedRounds)
+            #expect(Set(lesson.steps.filter { $0.kind == .coldListen }.map(\.tagalog)).count == expectedRounds)
             #expect(lesson.steps.allSatisfy { step in
-                let tokens = step.vietnamese
+                let tokens = step.tagalog
                     .split(whereSeparator: \.isWhitespace)
                     .map(String.init)
                 var cursor = 0
@@ -296,35 +208,12 @@ struct LearningRepositoryTests {
         }
     }
 
-    @Test("Northern and Southern lessons use region-appropriate softeners")
-    func lessonCopyMatchesAccent() async throws {
+    @Test("Vocabulary is the roadmap's Tagalog")
+    func vocabularyIsTagalog() async throws {
         let repository = SeededLearningRepository()
-        let southern = try await repository.todayLesson(
-            accent: .southern,
-            level: .familiar,
-            dailyMinutes: 5
-        )
-        let northern = try await repository.todayLesson(
-            accent: .northern,
-            level: .familiar,
-            dailyMinutes: 5
-        )
-
-        #expect(southern.steps[0].vietnamese.contains("nha"))
-        #expect(southern.steps[0].vietnamese.contains("ly"))
-        #expect(northern.steps[0].vietnamese.contains("nhé"))
-        #expect(northern.steps[0].vietnamese.contains("cốc"))
-    }
-
-    @Test("Vocabulary results never leak the other accent")
-    func vocabularyMatchesAccent() async throws {
-        let repository = SeededLearningRepository()
-
-        for accent in VietnameseAccent.allCases {
-            let items = try await repository.vocabulary(accent: accent)
-            #expect(!items.isEmpty)
-            #expect(items.allSatisfy { $0.accent == accent })
-        }
+        let items = try await repository.vocabulary()
+        #expect(!items.isEmpty)
+        #expect(items.contains { $0.tagalog.lowercased().contains("kumusta") })
     }
 
     @Test("Save state is shared across repository consumers")
@@ -332,15 +221,15 @@ struct LearningRepositoryTests {
         let suiteName = "kumusta.tests.learning.\(UUID().uuidString)"
         defer { UserDefaults(suiteName: suiteName)?.removePersistentDomain(forName: suiteName) }
         let repository = SeededLearningRepository(defaultsSuiteName: suiteName)
-        let item = try #require(try await repository.vocabulary(accent: .southern).first)
+        let item = try #require(try await repository.vocabulary().first)
 
         try await repository.setVocabularySaved(itemID: item.id, isSaved: false)
-        let afterWordsToggle = try await repository.vocabulary(accent: .southern)
+        let afterWordsToggle = try await repository.vocabulary()
         #expect(afterWordsToggle.first(where: { $0.id == item.id })?.isSaved == false)
 
         try await repository.setVocabularySaved(itemID: item.id, isSaved: true)
         try await repository.recordReview(itemID: item.id, rating: .gotIt)
-        let afterPracticeReview = try await repository.vocabulary(accent: .southern)
+        let afterPracticeReview = try await repository.vocabulary()
         let updated = try #require(afterPracticeReview.first(where: { $0.id == item.id }))
         #expect(updated.isSaved)
         #expect(updated.mastery > item.mastery)
@@ -356,13 +245,13 @@ struct LearningRepositoryTests {
             referenceDate: reviewedAt
         )
         let original = try #require(
-            try await firstRepository.vocabulary(accent: .southern).first
+            try await firstRepository.vocabulary().first
         )
 
         try await firstRepository.recordReview(itemID: original.id, rating: .gotIt)
         let scheduled = try #require(
             try await firstRepository
-                .vocabulary(accent: .southern)
+                .vocabulary()
                 .first(where: { $0.id == original.id })
         )
 
@@ -372,7 +261,7 @@ struct LearningRepositoryTests {
         )
         let restored = try #require(
             try await relaunchedRepository
-                .vocabulary(accent: .southern)
+                .vocabulary()
                 .first(where: { $0.id == original.id })
         )
         #expect(restored.mastery > original.mastery)
@@ -388,15 +277,15 @@ struct LearningRepositoryTests {
             defaultsSuiteName: suiteName,
             referenceDate: referenceDate
         )
-        let item = try #require(try await repository.vocabulary(accent: .southern).first)
+        let item = try #require(try await repository.vocabulary().first)
 
         try await repository.setVocabularySaved(itemID: item.id, isSaved: false)
         try await repository.recordReview(itemID: item.id, rating: .gotIt)
         await repository.reset()
 
-        let resetItem = try #require(try await repository.vocabulary(accent: .southern).first)
+        let resetItem = try #require(try await repository.vocabulary().first)
         let authoredItem = try #require(
-            SampleContent.vocabulary(for: .southern, referenceDate: referenceDate).first
+            SampleContent.vocabulary(referenceDate: referenceDate).first
         )
         #expect(resetItem.mastery == authoredItem.mastery)
         #expect(resetItem.nextReviewAt == authoredItem.nextReviewAt)
@@ -417,7 +306,7 @@ struct LearningRepositoryTests {
     func hearRespondOptionsCanBeRandomized() throws {
         let correctID = UUID()
         let exercise = HearRespondExercise(
-            promptVietnamese: "Xin chào",
+            promptTagalog: "Kumusta",
             promptTranslation: "Hello",
             options: [
                 HearRespondOption(id: correctID, englishTranslation: "Hello"),
@@ -435,12 +324,6 @@ struct LearningRepositoryTests {
         #expect(randomized.first?.id != correctID)
         #expect(randomized.first(where: { $0.id == exercise.correctOptionID })?.englishTranslation == "Hello")
     }
-}
-
-private struct CurriculumSeedDocument: Decodable {
-    let version: Int
-    let reviewStatus: String
-    let lessons: [Lesson]
 }
 
 private struct SequenceRandomNumberGenerator: RandomNumberGenerator {

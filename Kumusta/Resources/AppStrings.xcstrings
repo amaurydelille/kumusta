@@ -31,7 +31,7 @@
     "%@ is speaking…" : {
       "extractionState" : "manual"
     },
-    "%@ of Vietnamese · nice work" : {
+    "%@ of Tagalog · nice work" : {
       "extractionState" : "manual"
     },
     "%@ speed" : {
@@ -193,7 +193,7 @@
     "%lld of %lld phrases" : {
       "extractionState" : "manual"
     },
-    "%lld of %lld syllables right" : {
+    "%lld of %lld words right" : {
       "extractionState" : "manual"
     },
     "%lld percent" : {
@@ -367,7 +367,7 @@
     "A demanding teacher. Every mistake gets fixed." : {
       "extractionState" : "manual"
     },
-    "A few minutes of Vietnamese listening keeps your streak alive." : {
+    "A few minutes of Tagalog listening keeps your streak alive." : {
       "extractionState" : "manual"
     },
     "A few minutes of speaking every day keeps building. Studying on your own tends to stall." : {
@@ -379,7 +379,7 @@
     "A full month. You're building a habit." : {
       "extractionState" : "manual"
     },
-    "A little Vietnamese.\nA real conversation." : {
+    "A little Tagalog.\nA real conversation." : {
       "extractionState" : "manual"
     },
     "A little practice.\nA little higher." : {
@@ -388,7 +388,7 @@
     "A pace you can keep" : {
       "extractionState" : "manual"
     },
-    "A plan unlocks the listening, speaking, and review loop built around your life in Vietnam." : {
+    "A plan unlocks the listening, speaking, and review loop built around your life in the Philippines." : {
       "extractionState" : "manual"
     },
     "A quick lesson now keeps your %lld-day streak going." : {
@@ -625,7 +625,7 @@
     "Best value" : {
       "extractionState" : "manual"
     },
-    "Bring passive Vietnamese back into your voice" : {
+    "Bring passive Tagalog back into your voice" : {
       "extractionState" : "manual"
     },
     "Bring these back to your ear today" : {
@@ -643,13 +643,13 @@
     "Buddy says hi. Pick your reply, then say the next one out loud." : {
       "extractionState" : "manual"
     },
-    "Build it in Vietnamese" : {
+    "Build it in Tagalog" : {
       "extractionState" : "manual"
     },
     "Build my learning plan" : {
       "extractionState" : "manual"
     },
-    "Build practical Vietnamese you can use right away." : {
+    "Build practical Tagalog you can use right away." : {
       "extractionState" : "manual"
     },
     "Build real rapport with colleagues" : {
@@ -670,64 +670,64 @@
     "Building your plan…" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu celebrates the correct answer" : {
+    "Kalabaw celebrates the correct answer" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu celebrates your learning streak" : {
+    "Kalabaw celebrates your learning streak" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu couldn’t answer. Try saying that again." : {
+    "Kalabaw couldn’t answer. Try saying that again." : {
       "extractionState" : "manual"
     },
-    "Bé Trâu encourages another try" : {
+    "Kalabaw encourages another try" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is building the next lesson" : {
+    "Kalabaw is building the next lesson" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is curious" : {
+    "Kalabaw is curious" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is listening" : {
+    "Kalabaw is listening" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is listening back…" : {
+    "Kalabaw is listening back…" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is reviewing your recording" : {
+    "Kalabaw is reviewing your recording" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is talking" : {
+    "Kalabaw is talking" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is thinking…" : {
+    "Kalabaw is thinking…" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu is typing" : {
+    "Kalabaw is typing" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu understood every word." : {
+    "Kalabaw understood every word." : {
       "extractionState" : "manual"
     },
-    "Bé Trâu waves hello" : {
+    "Kalabaw waves hello" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu welcomes you to Kumusta" : {
+    "Kalabaw welcomes you to Kumusta" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu will check every word once your plan starts." : {
+    "Kalabaw will check every word once your plan starts." : {
       "extractionState" : "manual"
     },
-    "Bé Trâu's mood" : {
+    "Kalabaw's mood" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu, the Kumusta mascot" : {
+    "Kalabaw, the Kumusta mascot" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu, your conversation buddy" : {
+    "Kalabaw, your conversation buddy" : {
       "extractionState" : "manual"
     },
-    "Bé Trâu: %@" : {
+    "Kalabaw: %@" : {
       "extractionState" : "manual"
     },
     "CAN’T SPEAK NOW" : {
@@ -775,7 +775,7 @@
     "Catch that? Play it again." : {
       "extractionState" : "manual"
     },
-    "Catch the tones" : {
+    "Catch the sounds" : {
       "extractionState" : "manual"
     },
     "Century mark" : {
@@ -808,7 +808,7 @@
     "Checking purchases…" : {
       "extractionState" : "manual"
     },
-    "Checking your Vietnamese…" : {
+    "Checking your Tagalog…" : {
       "extractionState" : "manual"
     },
     "Checking your take…" : {
@@ -823,7 +823,7 @@
     "Choose one answer in each section. Your feedback saves automatically." : {
       "extractionState" : "manual"
     },
-    "Choose the Vietnamese" : {
+    "Choose the Tagalog" : {
       "extractionState" : "manual"
     },
     "Choose the answer to keep your streak alive" : {
@@ -835,7 +835,7 @@
     "Choose the voice pace to save your feedback." : {
       "extractionState" : "manual"
     },
-    "Choose your Vietnamese accent" : {
+    "Real everyday Tagalog" : {
       "extractionState" : "manual"
     },
     "Choose your move" : {
@@ -1426,7 +1426,7 @@
     "Hear the situation first" : {
       "extractionState" : "manual"
     },
-    "Hear the tones, learn three phrases, then use them in a real mini-conversation with Bé Trâu." : {
+    "Hear the sounds, learn three phrases, then use them in a real mini-conversation with Kalabaw." : {
       "extractionState" : "manual"
     },
     "Hear this phrase" : {
@@ -1450,7 +1450,7 @@
     "Hi there!" : {
       "extractionState" : "manual"
     },
-    "Hi there! I’m Bé Trâu." : {
+    "Hi there! I’m Kalabaw." : {
       "extractionState" : "manual"
     },
     "Hi!" : {
@@ -1510,7 +1510,7 @@
     "I don’t remember" : {
       "extractionState" : "manual"
     },
-    "I grew up around Vietnamese" : {
+    "I grew up around Tagalog" : {
       "extractionState" : "manual"
     },
     "I hear you" : {
@@ -1525,7 +1525,7 @@
     "I'm good, thank you!" : {
       "extractionState" : "manual"
     },
-    "I'm learning Vietnamese with Kumusta — %lld day streak, %lld words. kumusta.app" : {
+    "I'm learning Tagalog with Kumusta — %lld day streak, %lld words. kumusta.app" : {
       "extractionState" : "manual"
     },
     "IN REAL LIFE" : {
@@ -1564,7 +1564,7 @@
     "I’d like" : {
       "extractionState" : "manual"
     },
-    "I’ll be your Vietnamese buddy." : {
+    "I’ll be your Tagalog buddy." : {
       "extractionState" : "manual"
     },
     "I’ll keep it friendly." : {
@@ -1612,10 +1612,10 @@
     "Keep practicing this one" : {
       "extractionState" : "manual"
     },
-    "Keep real Vietnamese\nwithin reach." : {
+    "Keep real Tagalog\nwithin reach." : {
       "extractionState" : "manual"
     },
-    "Keep real Vietnamese within reach" : {
+    "Keep real Tagalog within reach" : {
       "extractionState" : "manual"
     },
     "Keep showing up. Every listen adds up." : {
@@ -1732,7 +1732,7 @@
     "Level" : {
       "extractionState" : "manual"
     },
-    "Life in Vietnam" : {
+    "Life in the Philippines" : {
       "extractionState" : "manual"
     },
     "Light" : {
@@ -1756,7 +1756,7 @@
     "Listen again, read every line, and revisit useful chunks." : {
       "extractionState" : "manual"
     },
-    "Listen again. The red words don't match, often just the tone." : {
+    "Listen again. The red words don't match, often a look-alike word." : {
       "extractionState" : "manual"
     },
     "Listen and choose the meaning you heard." : {
@@ -1792,7 +1792,7 @@
     "Listen to %@ and %@. Then put your ears to the test!" : {
       "extractionState" : "manual"
     },
-    "Listen to everyday Vietnamese, one scene at a time." : {
+    "Listen to everyday Tagalog, one scene at a time." : {
       "extractionState" : "manual"
     },
     "Listen to example" : {
@@ -1819,7 +1819,7 @@
     "Listening…" : {
       "extractionState" : "manual"
     },
-    "Live in Vietnam" : {
+    "Live in the Philippines" : {
       "extractionState" : "manual"
     },
     "Live practice is being set up. Please check back shortly." : {
@@ -1873,10 +1873,10 @@
     "MINUTES" : {
       "extractionState" : "manual"
     },
-    "Make Vietnamese part of your career" : {
+    "Make Tagalog part of your career" : {
       "extractionState" : "manual"
     },
-    "Make Vietnamese your own voice" : {
+    "Make Tagalog your own voice" : {
       "extractionState" : "manual"
     },
     "Make daily life feel like home" : {
@@ -1948,7 +1948,7 @@
     "NEW WORDS" : {
       "extractionState" : "manual"
     },
-    "Nailed it. Bé Trâu heard the full phrase." : {
+    "Nailed it. Kalabaw heard the full phrase." : {
       "extractionState" : "manual"
     },
     "Natural" : {
@@ -1969,7 +1969,7 @@
     "New to Kumusta? Create an account" : {
       "extractionState" : "manual"
     },
-    "New to Vietnamese" : {
+    "New to Tagalog" : {
       "extractionState" : "manual"
     },
     "Next check" : {
@@ -2023,7 +2023,7 @@
     "Nice, you said it!" : {
       "extractionState" : "manual"
     },
-    "No Vietnamese came through. Hold the phone a little closer and speak up." : {
+    "No Tagalog came through. Hold the phone a little closer and speak up." : {
       "extractionState" : "manual"
     },
     "No active purchase was found for this Apple ID." : {
@@ -2068,7 +2068,7 @@
     "Northern + Southern accents" : {
       "extractionState" : "manual"
     },
-    "Northern Vietnamese" : {
+    "Northern Tagalog" : {
       "extractionState" : "manual"
     },
     "Northern voice" : {
@@ -2167,7 +2167,7 @@
     "One hundred days. This is who you are now." : {
       "extractionState" : "manual"
     },
-    "One hundred days. You built a real Vietnamese habit." : {
+    "One hundred days. You built a real Tagalog habit." : {
       "extractionState" : "manual"
     },
     "One more listen will help" : {
@@ -2182,7 +2182,7 @@
     "One opening sound made from a familiar letter pair." : {
       "extractionState" : "manual"
     },
-    "One small step in Vietnamese. That’s today’s win." : {
+    "One small step in Tagalog. That’s today’s win." : {
       "extractionState" : "manual"
     },
     "One step to today’s win" : {
@@ -2344,7 +2344,7 @@
     "Play the sentence once. Notice where your phrase begins and ends." : {
       "extractionState" : "manual"
     },
-    "Playing Vietnamese" : {
+    "Playing Tagalog" : {
       "extractionState" : "manual"
     },
     "Playing phrase" : {
@@ -2353,7 +2353,7 @@
     "Playing the scene…" : {
       "extractionState" : "manual"
     },
-    "Plays the Vietnamese example sentence" : {
+    "Plays the Tagalog example sentence" : {
       "extractionState" : "manual"
     },
     "Plays the phrase" : {
@@ -2419,7 +2419,7 @@
     "Practice what your family really says" : {
       "extractionState" : "manual"
     },
-    "Practice with a consistent Northern or Southern female voice." : {
+    "Practice with one consistent, natural Tagalog voice." : {
       "extractionState" : "manual"
     },
     "Practice your\nVietnamese words" : {
@@ -2497,13 +2497,13 @@
     "Ready when you are" : {
       "extractionState" : "manual"
     },
-    "Real northern Vietnamese" : {
+    "Real northern Tagalog" : {
       "extractionState" : "manual"
     },
     "Real pace" : {
       "extractionState" : "manual"
     },
-    "Real southern Vietnamese" : {
+    "Real southern Tagalog" : {
       "extractionState" : "manual"
     },
     "Recall" : {
@@ -2641,7 +2641,7 @@
     "Round %lld of %lld, %@" : {
       "extractionState" : "manual"
     },
-    "Run them again any time. Bé Trâu checks every word." : {
+    "Run them again any time. Kalabaw checks every word." : {
       "extractionState" : "manual"
     },
     "SCENE %@ · %@" : {
@@ -2719,7 +2719,7 @@
     "Saving your account…" : {
       "extractionState" : "manual"
     },
-    "Say it in Vietnamese" : {
+    "Say it in Tagalog" : {
       "extractionState" : "manual"
     },
     "Say it out loud" : {
@@ -2731,7 +2731,7 @@
     "Say the phrase that means “%@”." : {
       "extractionState" : "manual"
     },
-    "Say the sweet things in Vietnamese" : {
+    "Say the sweet things in Tagalog" : {
       "extractionState" : "manual"
     },
     "Say the whole request" : {
@@ -2812,7 +2812,7 @@
     "Shows options to continue, sign out, or delete your account" : {
       "extractionState" : "manual"
     },
-    "Shows the Vietnamese phrase, meaning, and example" : {
+    "Shows the Tagalog phrase, meaning, and example" : {
       "extractionState" : "manual"
     },
     "Shows the word card" : {
@@ -2896,13 +2896,13 @@
     "Sound natural and flexible" : {
       "extractionState" : "manual"
     },
-    "Sounds, tones, people words, and a replay of your welcome lesson." : {
+    "Sounds, respect words, people words, and a replay of your welcome lesson." : {
       "extractionState" : "manual"
     },
     "Southern" : {
       "extractionState" : "manual"
     },
-    "Southern Vietnamese" : {
+    "Southern Tagalog" : {
       "extractionState" : "manual"
     },
     "Southern voice" : {
@@ -2971,7 +2971,7 @@
     "Start this conversation" : {
       "extractionState" : "manual"
     },
-    "Start today’s Vietnamese journey" : {
+    "Start today’s Tagalog journey" : {
       "extractionState" : "manual"
     },
     "Start today’s lesson: %@" : {
@@ -3013,7 +3013,7 @@
     "Stop" : {
       "extractionState" : "manual"
     },
-    "Stop Vietnamese phrase" : {
+    "Stop Tagalog phrase" : {
       "extractionState" : "manual"
     },
     "Stop audio" : {
@@ -3085,10 +3085,10 @@
     "Talk to their parents yourself" : {
       "extractionState" : "manual"
     },
-    "Talk with Bé Trâu" : {
+    "Talk with Kalabaw" : {
       "extractionState" : "manual"
     },
-    "Talk with Bé Trâu in real time for five minutes" : {
+    "Talk with Kalabaw in real time for five minutes" : {
       "extractionState" : "manual"
     },
     "Talk with family" : {
@@ -3217,10 +3217,10 @@
     "The Supabase publishable key is missing from this build." : {
       "extractionState" : "manual"
     },
-    "The Vietnamese voice could not be loaded." : {
+    "The Tagalog voice could not be loaded." : {
       "extractionState" : "manual"
     },
-    "The Vietnamese voice is unavailable right now. Please try again." : {
+    "The Tagalog voice is unavailable right now. Please try again." : {
       "extractionState" : "manual"
     },
     "The analytics event contains a property that is not allowed." : {
@@ -3301,7 +3301,7 @@
     "The recording stopped unexpectedly. Please try again." : {
       "extractionState" : "manual"
     },
-    "The red words don't match, often just the tone. Fix them and check again." : {
+    "The red words don't match, often a look-alike word. Fix them and check again." : {
       "extractionState" : "manual"
     },
     "The review result could not be synced." : {
@@ -3499,13 +3499,13 @@
     "Understand real situations" : {
       "extractionState" : "manual"
     },
-    "Unlock every listening lesson, unlimited word reviews, and both Vietnamese accents." : {
+    "Unlock every listening lesson, unlimited word reviews, and both Tagalog accents." : {
       "extractionState" : "manual"
     },
     "Unmute" : {
       "extractionState" : "manual"
     },
-    "Use Vietnamese at work" : {
+    "Use Tagalog at work" : {
       "extractionState" : "manual"
     },
     "Use a different email" : {
@@ -3532,7 +3532,7 @@
     "Use this when the phrase comes to mind quickly in a real sentence." : {
       "extractionState" : "manual"
     },
-    "Using your device’s Vietnamese voice for this replay." : {
+    "Using your device’s Tagalog voice for this replay." : {
       "extractionState" : "manual"
     },
     "Victory lap? Your ears are warmed up." : {
@@ -3544,16 +3544,16 @@
     "Kumusta is loading" : {
       "extractionState" : "manual"
     },
-    "Vietnamese basics, at a glance" : {
+    "Tagalog basics, at a glance" : {
       "extractionState" : "manual"
     },
-    "Vietnamese endings can be short, but they still carry meaning." : {
+    "Tagalog endings can be short, but they still carry meaning." : {
       "extractionState" : "manual"
     },
-    "Vietnamese learner" : {
+    "Tagalog learner" : {
       "extractionState" : "manual"
     },
-    "Vietnamese pronouns describe the relationship between people." : {
+    "Tagalog pronouns describe the relationship between people." : {
       "extractionState" : "manual"
     },
     "Vocabulary reviews return when your memory needs them." : {
@@ -3703,7 +3703,7 @@
     "Where do you want to get?" : {
       "extractionState" : "manual"
     },
-    "Where is your Vietnamese today?" : {
+    "Where is your Tagalog today?" : {
       "extractionState" : "manual"
     },
     "Which accent do you want to learn?" : {
@@ -3712,7 +3712,7 @@
     "Which accent?" : {
       "extractionState" : "manual"
     },
-    "Why do you want to learn Vietnamese ?" : {
+    "Why do you want to learn Tagalog ?" : {
       "extractionState" : "manual"
     },
     "With Kumusta: %@" : {
@@ -3724,7 +3724,7 @@
     "Work" : {
       "extractionState" : "manual"
     },
-    "Write this in Vietnamese" : {
+    "Write this in Tagalog" : {
       "extractionState" : "manual"
     },
     "Wrong" : {
@@ -3790,10 +3790,10 @@
     "You got it!" : {
       "extractionState" : "manual"
     },
-    "You handled %lld real-life situation in Vietnamese." : {
+    "You handled %lld real-life situation in Tagalog." : {
       "extractionState" : "manual"
     },
-    "You handled %lld real-life situations in Vietnamese." : {
+    "You handled %lld real-life situations in Tagalog." : {
       "extractionState" : "manual"
     },
     "You have %lld streak freezes. Complete a lesson before midnight to keep your flame." : {
@@ -3802,31 +3802,31 @@
     "You heard it!" : {
       "extractionState" : "manual"
     },
-    "You just answered grandma in Vietnamese." : {
+    "You just answered grandma in Tagalog." : {
       "extractionState" : "manual"
     },
-    "You just had your first conversation in Vietnamese" : {
+    "You just had your first conversation in Tagalog" : {
       "extractionState" : "manual"
     },
     "You just made plans like a local." : {
       "extractionState" : "manual"
     },
-    "You just ordered a coffee in Vietnamese." : {
+    "You just ordered a coffee in Tagalog." : {
       "extractionState" : "manual"
     },
-    "You just spoke Vietnamese!" : {
+    "You just spoke Tagalog!" : {
       "extractionState" : "manual"
     },
-    "You just spoke your first Vietnamese words." : {
+    "You just spoke your first Tagalog words." : {
       "extractionState" : "manual"
     },
-    "You made today’s Vietnamese count." : {
+    "You made today’s Tagalog count." : {
       "extractionState" : "manual"
     },
     "You miss the jokes" : {
       "extractionState" : "manual"
     },
-    "You put Vietnamese into your own voice." : {
+    "You put Tagalog into your own voice." : {
       "extractionState" : "manual"
     },
     "You recalled %lld phrase. They will return when your memory needs them." : {
@@ -3838,7 +3838,7 @@
     "You remembered it!" : {
       "extractionState" : "manual"
     },
-    "You stayed with natural Vietnamese from beginning to end. That’s how real listening confidence grows." : {
+    "You stayed with natural Tagalog from beginning to end. That’s how real listening confidence grows." : {
       "extractionState" : "manual"
     },
     "You understand, but can’t answer" : {
@@ -3847,7 +3847,7 @@
     "You understood a real café order.\nThen you built it yourself." : {
       "extractionState" : "manual"
     },
-    "You understood real Vietnamese" : {
+    "You understood real Tagalog" : {
       "extractionState" : "manual"
     },
     "You used the transcript and finished the full scene. Replay it once more without the hint when you’re ready." : {
@@ -3871,13 +3871,13 @@
     "Your Kumusta Pro subscription will stop renewing. You will keep premium access until the end of your current billing period." : {
       "extractionState" : "manual"
     },
-    "Your Vietnamese conversation buddies" : {
+    "Your Tagalog conversation buddies" : {
       "extractionState" : "manual"
     },
-    "Your Vietnamese is warming up" : {
+    "Your Tagalog is warming up" : {
       "extractionState" : "manual"
     },
-    "Your Vietnamese journey is officially underway." : {
+    "Your Tagalog journey is officially underway." : {
       "extractionState" : "manual"
     },
     "Your XP is safe. Try loading the rankings again." : {
@@ -3961,10 +3961,10 @@
     "Your first little win." : {
       "extractionState" : "manual"
     },
-    "Your first real exchange in Vietnamese is about %lld minute away." : {
+    "Your first real exchange in Tagalog is about %lld minute away." : {
       "extractionState" : "manual"
     },
-    "Your first real exchange in Vietnamese is about %lld minutes away." : {
+    "Your first real exchange in Tagalog is about %lld minutes away." : {
       "extractionState" : "manual"
     },
     "Your last 7 days" : {
@@ -3997,7 +3997,7 @@
     "Your neighbors stay strangers" : {
       "extractionState" : "manual"
     },
-    "Your next Vietnamese milestone" : {
+    "Your next Tagalog milestone" : {
       "extractionState" : "manual"
     },
     "Your next listen is taking shape." : {
@@ -4045,7 +4045,7 @@
     "Your recording is checked automatically when you finish" : {
       "extractionState" : "manual"
     },
-    "Your reference for sounds, tones, people words, and numbers. Tap any example to hear it." : {
+    "Your reference for sounds, respect words, people words, and numbers. Tap any example to hear it." : {
       "extractionState" : "manual"
     },
     "Your result couldn’t sync. Your answers are still saved, so you can try again shortly." : {
@@ -4090,7 +4090,7 @@
     "You’re one step from completing today’s lesson." : {
       "extractionState" : "manual"
     },
-    "You’re one step from speaking Vietnamese." : {
+    "You’re one step from speaking Tagalog." : {
       "extractionState" : "manual"
     },
     "You’re up" : {

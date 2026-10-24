@@ -2,11 +2,10 @@ import Foundation
 
 protocol LearningRepository: Sendable {
     func todayLesson(
-        accent: VietnameseAccent,
         level: ProficiencyLevel,
         dailyMinutes: Int
     ) async throws -> Lesson
-    func vocabulary(accent: VietnameseAccent) async throws -> [VocabularyItem]
+    func vocabulary() async throws -> [VocabularyItem]
     func setVocabularySaved(itemID: UUID, isSaved: Bool) async throws
     func recordReview(itemID: UUID, rating: ReviewRating) async throws
     func authoredVocabularySnapshot() async -> [String: AuthoredVocabularyState]
@@ -56,9 +55,7 @@ actor SeededLearningRepository: LearningRepository {
         }
         self.referenceDate = referenceDate
         self.defaults = defaults
-        var items = VietnameseAccent.allCases.flatMap {
-            SampleContent.vocabulary(for: $0, referenceDate: referenceDate)
-        }
+        var items = SampleContent.vocabulary(referenceDate: referenceDate)
         if
             let data = defaults.data(forKey: Self.persistedStateKey),
             let states = try? JSONDecoder().decode(
@@ -77,19 +74,17 @@ actor SeededLearningRepository: LearningRepository {
     }
 
     func todayLesson(
-        accent: VietnameseAccent,
         level: ProficiencyLevel,
         dailyMinutes: Int
     ) async throws -> Lesson {
         SampleContent.dailySession(
-            accent: accent,
             level: level,
             dailyMinutes: dailyMinutes
         )
     }
 
-    func vocabulary(accent: VietnameseAccent) async throws -> [VocabularyItem] {
-        items.filter { $0.accent == accent }
+    func vocabulary() async throws -> [VocabularyItem] {
+        items
     }
 
     func setVocabularySaved(itemID: UUID, isSaved: Bool) async throws {
@@ -142,9 +137,7 @@ actor SeededLearningRepository: LearningRepository {
 
     func reset() async {
         defaults.removeObject(forKey: Self.persistedStateKey)
-        items = VietnameseAccent.allCases.flatMap {
-            SampleContent.vocabulary(for: $0, referenceDate: referenceDate)
-        }
+        items = SampleContent.vocabulary(referenceDate: referenceDate)
     }
 
     private func persistState() {

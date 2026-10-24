@@ -1,0 +1,132 @@
+{
+  "id": "onboarding-intermediate-v1",
+  "version": 1,
+  "level": "intermediate",
+  "mode": "onboarding",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0112",
+  "replayTitle": "Order merienda like a local",
+  "estimatedMinutes": 2,
+  "intro": {
+    "hook": "Magandang hapon! Ano po sa inyo?",
+    "hookTranslation": "Good afternoon! What would you like?",
+    "title": "From words to real replies",
+    "subtitle": "In about 2 minutes, you’ll be able to:",
+    "goals": [
+      { "tagalog": "Pabili po ng dalawang turon", "meaning": "Order two turon" },
+      { "tagalog": "Wala na po, salamat", "meaning": "Say that’s all" },
+      { "tagalog": "Kwarenta po lahat", "meaning": "Understand the price" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-kuya-ate",
+      "symbol": "person.2.fill",
+      "eyebrow": "WHO’S WHO",
+      "title": "At the counter, call them Kuya or Ate",
+      "body": "In Manila you call a vendor “big brother” or “big sister”, even a stranger. It’s friendly and polite at once.",
+      "samples": [
+        { "text": "Kuya", "meaning": "big brother (for a man)", "contour": "level" },
+        { "text": "Ate", "meaning": "big sister (for a woman)", "contour": "level" }
+      ],
+      "footnote": "Add po too: Kuya, pabili po. Instantly polite, never stiff."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-sa-inyo",
+      "audio": "Ano po sa inyo?",
+      "answer": "What would you like?",
+      "options": ["What would you like?", "Where are you going?", "How much is it?"],
+      "note": "Vendors use po with customers too. Inyo is the respectful “you”."
+    },
+    {
+      "kind": "newPhrase",
+      "id": "new-pabili",
+      "tagalog": "Pabili po ng dalawang turon",
+      "translation": "Two turon, please",
+      "chunks": [
+        { "tagalog": "pabili po", "meaning": "may I buy, please" },
+        { "tagalog": "ng dalawang", "meaning": "two (of)" },
+        { "tagalog": "turon", "meaning": "banana spring roll" }
+      ],
+      "tip": "Ng is said “nang”. Dalawa (two) picks up -ng before the snack: dalawang turon."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-price",
+      "prompt": "How much is it?",
+      "audio": "Kwarenta po lahat.",
+      "answer": "₱40",
+      "options": ["₱40", "₱14", "₱400"],
+      "note": "Prices use Spanish-style numbers: kwarenta is forty. Lahat means “all in”."
+    },
+    {
+      "kind": "build",
+      "id": "build-bayad",
+      "english": "Here’s my payment.",
+      "answer": [
+        { "text": "Heto", "gloss": "here" },
+        { "text": "po", "gloss": "(with respect)" },
+        { "text": "ang", "gloss": "the" },
+        { "text": "bayad", "gloss": "payment" },
+        { "text": "ko", "gloss": "my" }
+      ],
+      "distractors": [
+        { "text": "mo", "gloss": "your" },
+        { "text": "sukli", "gloss": "change" }
+      ]
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "KALABAW RUNS THE CARINDERIA",
+      "title": "Order your merienda",
+      "turns": [
+        {
+          "buddy": "Magandang hapon! Ano po sa inyo?",
+          "buddyTranslation": "Good afternoon! What would you like?",
+          "reply": "Kuya, pabili po ng dalawang turon.",
+          "replyTranslation": "Two turon, please.",
+          "target": "Pabili po ng dalawang turon",
+          "accepted": ["Pabili ng dalawang turon"]
+        },
+        {
+          "buddy": "May iba pa po?",
+          "buddyTranslation": "Anything else?",
+          "reply": "Wala na po, salamat.",
+          "replyTranslation": "That’s all, thanks.",
+          "target": "Wala na po salamat",
+          "accepted": ["Wala na salamat", "Wala na po"]
+        },
+        {
+          "buddy": "Kwarenta po lahat.",
+          "buddyTranslation": "That’s ₱40 in all.",
+          "reply": "Heto po ang bayad ko.",
+          "replyTranslation": "Here’s my payment.",
+          "target": "Heto po ang bayad ko",
+          "accepted": ["Eto po ang bayad ko", "Ito po ang bayad ko", "Heto po bayad ko"]
+        }
+      ],
+      "closing": {
+        "text": "Salamat po! Balik po kayo!",
+        "translation": "Thank you! Come again!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "Merienda ordered!",
+    "subtitle": "You ordered politely, said that’s all, and paid the right price.",
+    "phrases": [
+      { "tagalog": "Pabili po ng dalawang turon", "meaning": "Two turon, please" },
+      { "tagalog": "Wala na po, salamat", "meaning": "That’s all, thanks" },
+      { "tagalog": "Heto po ang bayad ko", "meaning": "Here’s my payment" }
+    ],
+    "words": [
+      { "tagalog": "kuya / ate", "meaning": "big brother / big sister (polite address)" },
+      { "tagalog": "pabili", "meaning": "may I buy" },
+      { "tagalog": "lahat", "meaning": "all / in total" },
+      { "tagalog": "bayad", "meaning": "payment" },
+      { "tagalog": "kwarenta", "meaning": "forty" }
+    ]
+  }
+}

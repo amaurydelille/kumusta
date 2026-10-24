@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// A friendly, comic-style prompt used throughout onboarding so every question
-/// feels like it comes from Bé Trâu instead of reading like a form heading.
+/// feels like it comes from Kalabaw instead of reading like a form heading.
 struct OnboardingSpeechHeader: View {
     let title: String
     let subtitle: String?
@@ -205,8 +205,8 @@ struct OnboardingWelcomeScreen: View {
             Spacer(minLength: 20)
 
             OnboardingSpeechHeader(
-                title: L("Hi there! I’m Bé Trâu."),
-                subtitle: L("I’ll be your Vietnamese buddy."),
+                title: L("Hi there! I’m Kalabaw."),
+                subtitle: L("I’ll be your Tagalog buddy."),
                 typingStartDelay: .zero,
                 showsBuddy: false
             )
@@ -236,7 +236,7 @@ struct GoalSelectionScreen: View {
     var body: some View {
         VStack(spacing: 22) {
             OnboardingSpeechHeader(
-                title: L("Why do you want to learn Vietnamese ?"),
+                title: L("Why do you want to learn Tagalog ?"),
                 subtitle: ""
             )
 
@@ -268,7 +268,7 @@ struct GoalSelectionScreen: View {
     private func goalIconName(for goal: LearningGoal) -> String {
         switch goal {
         case .family: "GoalFamily"
-        case .lifeInVietnam: "GoalLifeVietnam"
+        case .lifeInThePhilippines: "GoalLifePhilippines"
         case .travel: "GoalTravel"
         case .partner: "GoalPartner"
         case .work: "GoalWork"
@@ -284,7 +284,7 @@ struct LevelSelectionScreen: View {
     var body: some View {
         VStack(spacing: 22) {
             OnboardingSpeechHeader(
-                title: L("Where is your Vietnamese today?"),
+                title: L("Where is your Tagalog today?"),
                 subtitle: ""
             )
 
@@ -315,10 +315,9 @@ struct LevelSelectionScreen: View {
 
     private func levelIconName(for level: ProficiencyLevel) -> String {
         switch level {
-        case .new: "LevelStarting"
-        case .familiar: "LevelWords"
-        case .conversational: "LevelBasics"
-        case .rusty: "LevelHeritage"
+        case .beginner: "LevelStarting"
+        case .intermediate: "LevelWords"
+        case .advanced: "LevelBasics"
         }
     }
 }
@@ -397,7 +396,7 @@ struct NameEntryScreen: View {
     private var previewText: String {
         if trimmedName.isEmpty { return L("I can’t wait to meet you!") }
         if hasProfanity { return L("I’ll keep it friendly.") }
-        return L("He Lô %@!", trimmedName)
+        return L("Kumusta, %@!", trimmedName)
     }
 
     private var borderColor: Color {
@@ -522,13 +521,13 @@ struct OnboardingPlanBuildingScreen: View {
     private let reviews = [
         PlanReview(
             title: "Can’t recommend enough",
-            quote: "The app skyrocketed my Vietnamese from A2 to C1 in a few weeks.",
+            quote: "The app skyrocketed my Tagalog from A2 to C1 in a few weeks.",
             reviewer: "baddiewithchronicillness",
             date: "Aug 26, 2026"
         ),
         PlanReview(
             title: "Life changing",
-            quote: "The voices just sound so natural, it recreates real life Vietnamese situations.",
+            quote: "The voices just sound so natural, it recreates real life Tagalog situations.",
             reviewer: "AliceChenGM",
             date: "Aug 20, 2026"
         ),
@@ -566,7 +565,7 @@ struct OnboardingPlanBuildingScreen: View {
                 id: 0,
                 icon: "ear.fill",
                 title: L("Listening"),
-                detail: draft.accent == .southern ? L("Real southern Vietnamese") : L("Real northern Vietnamese")
+                detail: L("Real everyday Tagalog")
             ),
             PlanComponent(
                 id: 1,

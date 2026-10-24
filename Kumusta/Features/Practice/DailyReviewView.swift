@@ -5,7 +5,6 @@ import SwiftUI
 /// Every first answer is saved the moment it is given, so leaving early
 /// never loses progress.
 struct DailyReviewView: View {
-    let accent: VietnameseAccent
     let entryPoint: String
     let onDismiss: () -> Void
 
@@ -126,8 +125,8 @@ struct DailyReviewView: View {
                 reviewed: session.answeredCount,
                 remembered: session.rememberedCount,
                 bestCombo: session.bestCombo,
-                stillDue: dependencies.memoryStore.dueCount(for: accent),
-                nextReview: dependencies.memoryStore.nextReviewDate(for: accent),
+                stillDue: dependencies.memoryStore.dueCount(),
+                nextReview: dependencies.memoryStore.nextReviewDate(),
                 onReviewMore: startSession,
                 onDone: onDismiss
             )
@@ -140,12 +139,12 @@ struct DailyReviewView: View {
     private func startSession() {
         let store = dependencies.memoryStore
         let language = AppLanguage.english
-        let cards = store.sessionCards(for: accent).map { $0.displayed(in: language) }
+        let cards = store.sessionCards().map { $0.displayed(in: language) }
         guard !cards.isEmpty else {
             onDismiss()
             return
         }
-        let pool = store.cards(for: accent).map { $0.displayed(in: language) } + Self.fillerCards(for: accent)
+        let pool = store.allCards().map { $0.displayed(in: language) } + Self.fillerCards()
         withAnimation(reduceMotion ? nil : KumustaMotion.screen) {
             session = DailyReviewSession(
                 cards: cards,
@@ -161,18 +160,17 @@ struct DailyReviewView: View {
                 "screen_name": "daily_review",
                 "entry_point": entryPoint,
                 "total_cards": String(cards.count),
-                "accent": accent.rawValue,
             ],
             clientSessionID: telemetrySessionID
         )
 
         let audioService = dependencies.audioService
         let speed = AudioPreferences.speed(from: defaultSpeedRawValue)
-        let lessonTexts = cards.filter { $0.source == .lesson }.map(\.vietnamese)
-        let wordTexts = cards.filter { $0.source == .savedWord }.map(\.vietnamese)
+        let lessonTexts = cards.filter { $0.source == .lesson }.map(\.tagalog)
+        let wordTexts = cards.filter { $0.source == .savedWord }.map(\.tagalog)
         Task {
-            await audioService.prewarm(texts: lessonTexts, accent: accent, speed: speed, purpose: .lesson)
-            await audioService.prewarm(texts: wordTexts, accent: accent, speed: speed, purpose: .vocabulary)
+            await audioService.prewarm(texts: lessonTexts, speed: speed, purpose: .lesson)
+            await audioService.prewarm(texts: wordTexts, speed: speed, purpose: .vocabulary)
         }
     }
 
@@ -226,14 +224,13 @@ struct DailyReviewView: View {
 
     /// Bundled starter vocabulary, used only as wrong answers so a learner
     /// with a handful of phrases still gets four real choices.
-    private static func fillerCards(for accent: VietnameseAccent) -> [MemoryCard] {
-        return SampleContent.vocabulary(for: accent).map { item in
+    private static func fillerCards() -> [MemoryCard] {
+        return SampleContent.vocabulary().map { item in
             MemoryCard(
-                id: "filler:" + MemoryCard.key(for: item.vietnamese, accent: accent),
-                vietnamese: item.vietnamese,
+                id: "filler:" + MemoryCard.key(for: item.tagalog),
+                tagalog: item.tagalog,
                 translation: item.english,
                 hint: nil,
-                accent: accent,
                 translationLanguage: nil,
                 source: .savedWord,
                 sourceID: item.id,

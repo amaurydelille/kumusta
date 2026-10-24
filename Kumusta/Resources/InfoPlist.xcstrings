@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kumusta uses your microphone when you practice speaking Vietnamese."
+            "value" : "Kumusta uses your microphone when you practice speaking Tagalog."
           }
         }
       }
@@ -18,7 +18,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "If Kumusta’s speech service is unavailable, Apple speech recognition checks your Vietnamese pronunciation instead."
+            "value" : "If Kumusta’s speech service is unavailable, Apple speech recognition checks your Tagalog pronunciation instead."
           }
         }
       }

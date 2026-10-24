@@ -256,7 +256,6 @@ struct LessonFlowView: View {
             ColdListenStep(
                 step: step,
                 lessonID: lesson.id,
-                accent: appState.profile.accent,
                 translationLanguage: contentLanguage,
                 lessonMinutes: lesson.minutes,
                 roundCount: lesson.roundCount,
@@ -278,7 +277,6 @@ struct LessonFlowView: View {
             DecodeStep(
                 step: step,
                 lessonID: lesson.id,
-                accent: appState.profile.accent,
                 translationLanguage: contentLanguage,
                 analyticsProperties: stepTelemetryProperties(index: stepIndex),
                 telemetrySessionID: telemetrySessionID,
@@ -288,7 +286,6 @@ struct LessonFlowView: View {
             if let hearRespond = step.hearRespond {
                 HearRespondStep(
                     exercise: hearRespond,
-                    accent: appState.profile.accent,
                     analyticsProperties: stepTelemetryProperties(index: stepIndex),
                     telemetrySessionID: telemetrySessionID,
                     onContinue: advance
@@ -297,7 +294,6 @@ struct LessonFlowView: View {
                 DecodeStep(
                     step: step,
                     lessonID: lesson.id,
-                    accent: appState.profile.accent,
                     translationLanguage: contentLanguage,
                     analyticsProperties: stepTelemetryProperties(index: stepIndex),
                     telemetrySessionID: telemetrySessionID,
@@ -307,7 +303,6 @@ struct LessonFlowView: View {
         case .speak:
             SpeakStep(
                 step: step,
-                accent: appState.profile.accent,
                 analyticsProperties: stepTelemetryProperties(index: stepIndex),
                 telemetrySessionID: telemetrySessionID,
                 isFinalRound: stepIndex == lesson.steps.count - 1,
@@ -520,7 +515,6 @@ struct LessonFlowView: View {
 private struct ColdListenStep: View {
     let step: LessonStep
     let lessonID: UUID
-    let accent: VietnameseAccent
     let translationLanguage: AppLanguage?
     let lessonMinutes: Int
     let roundCount: Int
@@ -546,7 +540,6 @@ private struct ColdListenStep: View {
     init(
         step: LessonStep,
         lessonID: UUID,
-        accent: VietnameseAccent,
         translationLanguage: AppLanguage?,
         lessonMinutes: Int,
         roundCount: Int,
@@ -557,7 +550,6 @@ private struct ColdListenStep: View {
     ) {
         self.step = step
         self.lessonID = lessonID
-        self.accent = accent
         self.translationLanguage = translationLanguage
         self.lessonMinutes = lessonMinutes
         self.roundCount = roundCount
@@ -567,10 +559,10 @@ private struct ColdListenStep: View {
         self.onContinue = onContinue
 
         var generator = SystemRandomNumberGenerator()
-        let syllableCount = ListenTileBank.tileTexts(in: step.vietnamese).count
+        let syllableCount = ListenTileBank.tileTexts(in: step.tagalog).count
         _tileBank = State(
             initialValue: ListenTileBank.make(
-                sentence: step.vietnamese,
+                sentence: step.tagalog,
                 distractorCount: ListenTileBank.distractorCount(forSyllables: syllableCount),
                 using: &generator
             )
@@ -623,8 +615,7 @@ private struct ColdListenStep: View {
 
             VStack(spacing: 16) {
                 AudioSpeedControls(
-                    text: step.vietnamese,
-                    accent: accent,
+                    text: step.tagalog,
                     analyticsProperties: analyticsProperties,
                     telemetrySessionID: telemetrySessionID,
                     autoplay: true,
@@ -675,18 +666,16 @@ private struct ColdListenStep: View {
         .sheet(item: $selectedGloss) { gloss in
             LessonWordGlossSheet(
                 gloss: gloss,
-                sentence: step.vietnamese,
+                sentence: step.tagalog,
                 sentenceTranslation: step.translation,
                 isSaved: dependencies.savedLessonWordStore.contains(
-                    token: gloss.token,
-                    accent: accent
+                    token: gloss.token
                 )
             ) {
                 dependencies.savedLessonWordStore.save(
                     gloss: gloss,
-                    sentence: step.vietnamese,
+                    sentence: step.tagalog,
                     sentenceTranslation: step.translation,
-                    accent: accent,
                     lessonID: lessonID,
                     translationLanguage: translationLanguage
                 )
@@ -736,7 +725,7 @@ private struct ColdListenStep: View {
                             .frame(maxWidth: .infinity)
                     }
                     if step.wordGlosses.isEmpty {
-                        Text(step.vietnamese)
+                        Text(step.tagalog)
                             .scaledFont(27, weight: .bold, design: .rounded)
                             .foregroundStyle(KumustaColors.ink)
                             .multilineTextAlignment(.center)
@@ -771,7 +760,7 @@ private struct ColdListenStep: View {
             } else {
                 Button(action: revealSentence) {
                     VStack(alignment: .center, spacing: 14) {
-                        SentencePlaceholder(text: step.vietnamese)
+                        SentencePlaceholder(text: step.tagalog)
                         Label(L("Tap to reveal and decode"), systemImage: "hand.tap.fill")
                             .scaledFont(14, weight: .semibold, design: .rounded)
                             .foregroundStyle(KumustaColors.accentDeep)
@@ -854,7 +843,7 @@ private struct ColdListenStep: View {
             .accessibilityLabel(L("Your sentence"))
 
             if !wrongTilePositions.isEmpty {
-                Text(L("Listen again. The red words don't match, often just the tone."))
+                Text(L("Listen again. The red words don't match, often a look-alike word."))
                     .font(KumustaTypography.body)
                     .foregroundStyle(KumustaColors.accentDeep)
                     .multilineTextAlignment(.center)
@@ -1033,7 +1022,6 @@ private struct LessonFormatExplainer: View {
 
 private struct HearRespondStep: View {
     let exercise: HearRespondExercise
-    let accent: VietnameseAccent
     let analyticsProperties: [String: String]
     let telemetrySessionID: UUID
     let onContinue: () -> Void
@@ -1047,13 +1035,11 @@ private struct HearRespondStep: View {
 
     init(
         exercise: HearRespondExercise,
-        accent: VietnameseAccent,
         analyticsProperties: [String: String],
         telemetrySessionID: UUID,
         onContinue: @escaping () -> Void
     ) {
         self.exercise = exercise
-        self.accent = accent
         self.analyticsProperties = analyticsProperties
         self.telemetrySessionID = telemetrySessionID
         self.onContinue = onContinue
@@ -1123,8 +1109,7 @@ private struct HearRespondStep: View {
                 .accessibilityHidden(true)
 
             AudioSpeedControls(
-                text: exercise.promptVietnamese,
-                accent: accent,
+                text: exercise.promptTagalog,
                 analyticsProperties: analyticsProperties,
                 telemetrySessionID: telemetrySessionID,
                 iconOnly: true,
@@ -1163,7 +1148,7 @@ private struct HearRespondStep: View {
 
                 if isCorrect {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(exercise.promptVietnamese)
+                        Text(exercise.promptTagalog)
                             .scaledFont(19, weight: .bold, design: .rounded)
                             .foregroundStyle(KumustaColors.ink)
                         Text(exercise.promptTranslation)
@@ -1334,7 +1319,6 @@ private struct HearRespondOptionRow: View {
 private struct DecodeStep: View {
     let step: LessonStep
     let lessonID: UUID
-    let accent: VietnameseAccent
     let translationLanguage: AppLanguage?
     let analyticsProperties: [String: String]
     let telemetrySessionID: UUID
@@ -1354,7 +1338,7 @@ private struct DecodeStep: View {
 
                 VStack(alignment: .leading, spacing: 7) {
                     if step.wordGlosses.isEmpty {
-                        Text(step.vietnamese)
+                        Text(step.tagalog)
                             .scaledFont(27, weight: .bold, design: .rounded)
                             .foregroundStyle(KumustaColors.ink)
                             .fixedSize(horizontal: false, vertical: true)
@@ -1383,8 +1367,7 @@ private struct DecodeStep: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
 
                 AudioSpeedControls(
-                    text: step.vietnamese,
-                    accent: accent,
+                    text: step.tagalog,
                     analyticsProperties: analyticsProperties,
                     telemetrySessionID: telemetrySessionID
                 )
@@ -1403,18 +1386,16 @@ private struct DecodeStep: View {
         .sheet(item: $selectedGloss) { gloss in
             LessonWordGlossSheet(
                 gloss: gloss,
-                sentence: step.vietnamese,
+                sentence: step.tagalog,
                 sentenceTranslation: step.translation,
                 isSaved: dependencies.savedLessonWordStore.contains(
-                    token: gloss.token,
-                    accent: accent
+                    token: gloss.token
                 )
             ) {
                 dependencies.savedLessonWordStore.save(
                     gloss: gloss,
-                    sentence: step.vietnamese,
+                    sentence: step.tagalog,
                     sentenceTranslation: step.translation,
-                    accent: accent,
                     lessonID: lessonID,
                     translationLanguage: translationLanguage
                 )
@@ -1640,7 +1621,6 @@ struct WordWrapLayout: Layout {
 
 private struct SpeakStep: View {
     let step: LessonStep
-    let accent: VietnameseAccent
     let analyticsProperties: [String: String]
     let telemetrySessionID: UUID
     let isFinalRound: Bool
@@ -1690,8 +1670,7 @@ private struct SpeakStep: View {
                             .fixedSize(horizontal: false, vertical: true)
 
                         AudioSpeedControls(
-                            text: step.vietnamese,
-                            accent: accent,
+                            text: step.tagalog,
                             analyticsProperties: analyticsProperties,
                             telemetrySessionID: telemetrySessionID,
                             iconOnly: true
@@ -1726,7 +1705,7 @@ private struct SpeakStep: View {
 
                 if feedbackState.hasResult {
                     Label(
-                        matchedTarget ? L("Nailed it. Bé Trâu heard the full phrase.") : L("Close one. Listen and try again."),
+                        matchedTarget ? L("Nailed it. Kalabaw heard the full phrase.") : L("Close one. Listen and try again."),
                         systemImage: matchedTarget ? "checkmark.seal.fill" : "arrow.counterclockwise"
                     )
                         .font(KumustaTypography.bodyStrong)
@@ -1774,7 +1753,7 @@ private struct SpeakStep: View {
     }
 
     private func phraseText(size: CGFloat) -> some View {
-        Text(step.vietnamese)
+        Text(step.tagalog)
             .scaledFont(size, weight: .bold, design: .rounded)
             .foregroundStyle(KumustaColors.ink)
     }
@@ -1809,7 +1788,7 @@ private struct SpeakStep: View {
             } else if feedbackState.isProcessing {
                 HStack(spacing: 10) {
                     ProgressView().tint(.white)
-                    Text(L("Checking your Vietnamese…"))
+                    Text(L("Checking your Tagalog…"))
                 }
                 .font(KumustaTypography.bodyStrong)
                 .foregroundStyle(.white)
@@ -1913,8 +1892,7 @@ private struct SpeakStep: View {
             let outcome = await PronunciationFeedbackEngine.evaluate(
                 audio: audio,
                 live: live,
-                targetPhrase: step.vietnamese,
-                accent: accent,
+                targetPhrase: step.tagalog,
                 speechService: speechService
             )
             guard !Task.isCancelled, outcome.state != .idle else { return }
@@ -2116,7 +2094,6 @@ struct AudioSpeedControls: View {
     )
 
     let text: String
-    let accent: VietnameseAccent?
     let usesSystemSpeech: Bool
     let usesOfflineAudioService: Bool
     let bundledAudioResourceName: String?
@@ -2133,7 +2110,7 @@ struct AudioSpeedControls: View {
     let forceAutoplay: Bool
     let onPlaybackCompleted: (() -> Void)?
 
-    @State private var systemSpeechService: SystemVietnameseAudioService?
+    @State private var systemSpeechService: SystemTagalogAudioService?
     @State private var bundledAudioService: BundledAudioService?
 
     @Environment(AppState.self) private var appState
@@ -2150,7 +2127,6 @@ struct AudioSpeedControls: View {
 
     init(
         text: String,
-        accent: VietnameseAccent? = nil,
         usesSystemSpeech: Bool = false,
         usesOfflineAudioService: Bool = false,
         bundledAudioResourceName: String? = nil,
@@ -2168,7 +2144,6 @@ struct AudioSpeedControls: View {
         onPlaybackCompleted: (() -> Void)? = nil
     ) {
         self.text = text
-        self.accent = accent
         self.usesSystemSpeech = usesSystemSpeech
         self.usesOfflineAudioService = usesOfflineAudioService
         self.bundledAudioResourceName = bundledAudioResourceName
@@ -2182,7 +2157,7 @@ struct AudioSpeedControls: View {
         self.iconOnly = iconOnly
         self.iconSize = iconSize
         _systemSpeechService = State(
-            initialValue: usesSystemSpeech ? SystemVietnameseAudioService() : nil
+            initialValue: usesSystemSpeech ? SystemTagalogAudioService() : nil
         )
         _bundledAudioService = State(
             initialValue: bundledAudioServiceOverride ?? bundledAudioResourceName.map {
@@ -2354,7 +2329,6 @@ struct AudioSpeedControls: View {
             }
             try await service.play(
                 text: text,
-                accent: accent ?? appState.profile.accent,
                 speed: speed,
                 purpose: purpose
             )

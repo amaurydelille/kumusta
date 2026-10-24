@@ -143,7 +143,7 @@ private struct LaunchView: View {
             Text("Kumusta")
                 .font(.custom("Patriot-Black", size: 30, relativeTo: .largeTitle))
                 .foregroundStyle(KumustaColors.ink)
-            Text(L("Your Vietnamese is warming up"))
+            Text(L("Your Tagalog is warming up"))
                 .scaledFont(15, weight: .medium, design: .rounded)
                 .foregroundStyle(KumustaColors.muted)
         }

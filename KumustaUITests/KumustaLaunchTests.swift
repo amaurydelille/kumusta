@@ -27,7 +27,7 @@ final class KumustaLaunchTests: XCTestCase {
         app.launchArguments = ["-UITestScenario", "firstLaunch"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Hi there! I’m Bé Trâu."].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Hi there! I’m Kalabaw."].waitForExistence(timeout: 5))
     }
 
     func testOnboardingBuildsPersonalizedPlanWithoutListeningDemo() {
@@ -40,7 +40,7 @@ final class KumustaLaunchTests: XCTestCase {
         nameField.tap()
         nameField.typeText("Alex")
         app.buttons["Continue"].firstMatch.tap()
-        // No accent step: Kumusta teaches one Cantonese.
+        // No accent step: Kumusta teaches one Tagalog.
         XCTAssertFalse(app.buttons["Use this accent"].exists)
         tapButton(containing: "Talk with family", in: app)
         tapButton(containing: "I know some words", in: app)
@@ -221,7 +221,7 @@ final class KumustaLaunchTests: XCTestCase {
         app.buttons["Delete account permanently"].tap()
 
         XCTAssertTrue(
-            app.staticTexts["Vietnamese you can actually use."].waitForExistence(timeout: 5),
+            app.staticTexts["Tagalog you can actually use."].waitForExistence(timeout: 5),
             app.debugDescription
         )
     }
@@ -292,7 +292,7 @@ final class KumustaLaunchTests: XCTestCase {
             }
             XCTAssertTrue(app.staticTexts["REPEAT THIS LINE"].waitForExistence(timeout: 5))
             XCTAssertTrue(
-                app.staticTexts["Repeat the Vietnamese line below exactly. You’re copying the line, not answering it."].exists
+                app.staticTexts["Repeat the Tagalog line below exactly. You’re copying the line, not answering it."].exists
             )
             let continueTitle = round == 7
                 ? "Finish without recording"
@@ -378,13 +378,13 @@ final class KumustaLaunchTests: XCTestCase {
         let continueButton = app.buttons["CONTINUE"]
         for _ in 0..<40 where !done.exists {
             if app.staticTexts["What does this mean?"].waitForExistence(timeout: 1)
-                || app.staticTexts["Choose the Vietnamese"].exists {
+                || app.staticTexts["Choose the Tagalog"].exists {
                 let kind = app.staticTexts["What does this mean?"].exists ? "Listen" : "Pick"
                 captureOnce("\(kind) question")
                 app.buttons.matching(identifier: "reviewChoice").firstMatch.tap()
                 check.tap()
                 captureOnce("\(kind) feedback")
-            } else if app.staticTexts["Build it in Vietnamese"].exists {
+            } else if app.staticTexts["Build it in Tagalog"].exists {
                 captureOnce("Build question")
                 for _ in 0..<16 where !check.isEnabled {
                     let tiles = app.buttons.matching(identifier: "reviewTile").allElementsBoundByIndex
@@ -398,7 +398,7 @@ final class KumustaLaunchTests: XCTestCase {
                     app.buttons["Show me the answer"].tap()
                 }
                 captureOnce("Build feedback")
-            } else if app.staticTexts["Say it in Vietnamese"].exists {
+            } else if app.staticTexts["Say it in Tagalog"].exists {
                 captureOnce("Speak question")
                 app.buttons.matching(NSPredicate(format: "label BEGINSWITH[c] %@", "I don")).firstMatch.tap()
                 captureOnce("Speak feedback")

@@ -29,7 +29,7 @@ struct FirstStepsOfferView: View {
                             .font(KumustaTypography.hero)
                             .foregroundStyle(KumustaColors.ink)
                             .fixedSize(horizontal: false, vertical: true)
-                        Text(L("Hear the tones, learn three phrases, then use them in a real mini-conversation with Bé Trâu."))
+                        Text(L("Hear the sounds, learn three phrases, then use them in a real mini-conversation with Kalabaw."))
                             .font(KumustaTypography.body)
                             .foregroundStyle(KumustaColors.muted)
                             .fixedSize(horizontal: false, vertical: true)
@@ -64,9 +64,9 @@ struct FirstStepsOfferView: View {
                     }
 
                     HStack(spacing: 10) {
-                        offerFeature(symbol: "ear.fill", title: L("Hear"), detail: L("Catch the tones"))
+                        offerFeature(symbol: "ear.fill", title: L("Hear"), detail: L("Catch the sounds"))
                         offerFeature(symbol: "mic.fill", title: L("Speak"), detail: L("Say it out loud"))
-                        offerFeature(symbol: "bubble.left.and.bubble.right.fill", title: L("Chat"), detail: L("Talk with Bé Trâu"))
+                        offerFeature(symbol: "bubble.left.and.bubble.right.fill", title: L("Chat"), detail: L("Talk with Kalabaw"))
                     }
 
                     HStack(spacing: 10) {
@@ -135,12 +135,12 @@ struct FirstStepsOfferView: View {
 
 private struct FirstStepsReferencePair: Identifiable {
     let id: String
-    let vietnamese: String
+    let tagalog: String
     let meaning: String
 
-    init(vietnamese: String, meaning: String) {
-        id = vietnamese
-        self.vietnamese = vietnamese
+    init(tagalog: String, meaning: String) {
+        id = tagalog
+        self.tagalog = tagalog
         self.meaning = meaning
     }
 }
@@ -151,7 +151,6 @@ private struct FirstStepsCheatSheetEntry: Identifiable {
     let explanation: String
     let example: String?
     let translation: String?
-    let accent: VietnameseAccent?
     let usesSystemSpeech: Bool
     let bundledAudioResourceName: String?
     let referencePairs: [FirstStepsReferencePair]?
@@ -163,7 +162,6 @@ private struct FirstStepsCheatSheetEntry: Identifiable {
         explanation: String,
         example: String? = nil,
         translation: String? = nil,
-        accent: VietnameseAccent?,
         usesSystemSpeech: Bool = false,
         bundledAudioResourceName: String? = nil,
         referencePairs: [FirstStepsReferencePair]? = nil,
@@ -174,7 +172,6 @@ private struct FirstStepsCheatSheetEntry: Identifiable {
         self.explanation = explanation
         self.example = example
         self.translation = translation
-        self.accent = accent
         self.usesSystemSpeech = usesSystemSpeech
         self.bundledAudioResourceName = bundledAudioResourceName
         self.referencePairs = referencePairs
@@ -192,205 +189,153 @@ private struct FirstStepsCheatSheetSection: Identifiable {
     static var all: [FirstStepsCheatSheetSection] { [
         FirstStepsCheatSheetSection(
             id: "vowels",
-            title: L("Vowel sounds + diacritics"),
-            summary: L("The marks change the vowel. They are part of the pronunciation."),
+            title: L("Five clear vowels"),
+            summary: L("Tagalog is read the way it is written. Every letter is pronounced."),
             symbol: "textformat.abc",
             entries: [
                 FirstStepsCheatSheetEntry(
                     id: "vowel-shapes",
-                    title: "a · ă · â · e · ê · o · ô · ơ · u · ư",
-                    explanation: L("Different marks create different vowel sounds."),
-                    example: "anh · ăn · âm · em · mon · hôn · hơn · mun · mưn",
-                    translation: "A quick map of Vietnamese vowel shapes.",
-                    accent: nil,
-                    bundledAudioResourceName: "sounds"
+                    title: "a · e · i · o · u",
+                    explanation: L("Each vowel keeps one short, clean sound, and two vowels side by side are both said."),
+                    example: "ama · ewan · isda · oras · ulan",
+                    translation: "father · don’t know · fish · time · rain"
                 ),
             ]
         ),
         FirstStepsCheatSheetSection(
-            id: "tones",
-            title: L("Tone marks"),
-            summary: L("The same letters can become different words when the melody changes."),
-            symbol: "chart.line.uptrend.xyaxis",
-            entries: [
-                FirstStepsCheatSheetEntry(
-                    id: "six-tones",
-                    title: "ma · má · mà · mả · mã · mạ",
-                    explanation: L("Six tone paths. Start by hearing the movement before naming it."),
-                    example: "ma · má · mà · mả · mã · mạ",
-                    translation: "One syllable, six meanings.",
-                    accent: nil,
-                    bundledAudioResourceName: "tones"
-                ),
-                FirstStepsCheatSheetEntry(
-                    id: "tone-sentence",
-                    title: L("Tone inside a sentence"),
-                    explanation: L("The melody stays active when tones meet other words."),
-                    example: "Mẹ mua cá.",
-                    translation: "Mum buys fish.",
-                    accent: nil
-                )
-            ]
-        ),
-        FirstStepsCheatSheetSection(
-            id: "accents",
-            title: L("Northern + Southern accents"),
-            summary: L("The words stay the same. The musical fingerprint can change."),
-            symbol: "waveform.path.ecg",
-            entries: [
-                FirstStepsCheatSheetEntry(
-                    id: "southern-accent",
-                    title: L("Southern voice"),
-                    explanation: L("A Southern pronunciation example."),
-                    example: "Bạn tên gì?",
-                    translation: "What’s your name?",
-                    accent: .southern
-                ),
-                FirstStepsCheatSheetEntry(
-                    id: "northern-accent",
-                    title: L("Northern voice"),
-                    explanation: L("The same sentence in a Northern pronunciation."),
-                    example: "Bạn tên gì?",
-                    translation: "What’s your name?",
-                    accent: .northern
-                )
-            ]
-        ),
-        FirstStepsCheatSheetSection(
-            id: "combinations",
-            title: L("Common letter combinations"),
-            summary: L("Keep these letters together when you hear and say them."),
+            id: "ng",
+            title: L("The ng sound"),
+            summary: L("Ng is one sound, like the end of “sing”, even at the start of a word."),
             symbol: "link",
             entries: [
                 FirstStepsCheatSheetEntry(
-                    id: "combinations-ng-nh-ph",
-                    title: "ng · nh · ph · th",
-                    explanation: L("One opening sound made from a familiar letter pair."),
-                    example: "Ngon · nhà · phở · thôi.",
-                    translation: "Delicious · house · pho · stop / well then.",
-                    accent: nil,
-                    bundledAudioResourceName: "ngonnhaphothoi"
+                    id: "ng-start",
+                    title: "ng · mga",
+                    explanation: L("Start words with the “sing” sound. Mga, the plural marker, is said “ma-NGA”."),
+                    example: "ngayon · ngiti · mga bata",
+                    translation: "now · smile · children"
+                ),
+            ]
+        ),
+        FirstStepsCheatSheetSection(
+            id: "stress",
+            title: L("Stress changes the word"),
+            summary: L("Tagalog is written without stress marks, but where the stress falls can change the meaning."),
+            symbol: "waveform.path.ecg",
+            entries: [
+                FirstStepsCheatSheetEntry(
+                    id: "stress-pairs",
+                    title: "",
+                    explanation: "",
+                    referencePairs: [
+                        FirstStepsReferencePair(tagalog: "BU-hay", meaning: "life"),
+                        FirstStepsReferencePair(tagalog: "bu-HAY", meaning: "alive"),
+                        FirstStepsReferencePair(tagalog: "A-so", meaning: "dog"),
+                        FirstStepsReferencePair(tagalog: "a-SO", meaning: "smoke")
+                    ]
                 ),
                 FirstStepsCheatSheetEntry(
-                    id: "combinations-ch-tr",
-                    title: "ch · tr",
-                    explanation: L("Two common openings to recognize in everyday words."),
-                    example: "Cho mình trà.",
-                    translation: "Tea for me, please.",
-                    accent: nil
+                    id: "glottal-catch",
+                    title: L("The little catch"),
+                    explanation: L("Many words end with a short catch in the throat, like the break in “uh-oh”."),
+                    example: "bata · oo · hindi",
+                    translation: "child · yes · no"
                 )
             ]
         ),
         FirstStepsCheatSheetSection(
-            id: "endings",
-            title: L("Final sounds"),
-            summary: L("Vietnamese endings can be short, but they still carry meaning."),
-            symbol: "arrow.down.right.and.arrow.up.left",
+            id: "respect",
+            title: L("Respect: po and opo"),
+            summary: L("Filipinos show respect in the words themselves. Use it with elders, strangers and anyone serving you."),
+            symbol: "hand.raised.fill",
             entries: [
                 FirstStepsCheatSheetEntry(
-                    id: "endings-n-ng",
-                    title: "-n · -ng",
-                    explanation: L("Finish at the front for n; let ng finish further back."),
-                    example: "ăn · đang",
-                    translation: "eat · be doing",
-                    accent: nil
+                    id: "respect-po",
+                    title: "po · opo",
+                    explanation: L("Add po to sound respectful. Opo is a respectful yes."),
+                    example: "Salamat po. · Opo.",
+                    translation: "Thank you. · Yes. (both respectful)"
                 ),
                 FirstStepsCheatSheetEntry(
-                    id: "endings-t-k",
-                    title: "-t · -c",
-                    explanation: L("Short final stops close the word cleanly."),
-                    example: "một · học",
-                    translation: "one · study",
-                    accent: nil
-                ),
-                FirstStepsCheatSheetEntry(
-                    id: "endings-m-p",
-                    title: "-m · -p",
-                    explanation: L("Close the lips at the end instead of letting the word fade."),
-                    example: "cơm · đáp",
-                    translation: "rice · answer",
-                    accent: nil
+                    id: "respect-kayo",
+                    title: "ka · kayo",
+                    explanation: L("Say kayo instead of ka to one older person; ka is for friends and peers."),
+                    example: "Kumusta po kayo?",
+                    translation: "How are you? (respectful)"
                 )
             ]
         ),
         FirstStepsCheatSheetSection(
             id: "people",
             title: L("People words"),
-            summary: L("Vietnamese pronouns describe the relationship between people."),
+            summary: L("Pronouns and the names you call family and older people."),
             symbol: "person.2.fill",
             entries: [
                 FirstStepsCheatSheetEntry(
-                    id: "people-map",
+                    id: "people-pronouns",
                     title: "",
                     explanation: "",
-                    accent: nil,
-                    bundledAudioResourceName: "pronouns",
                     referencePairs: [
-                        FirstStepsReferencePair(vietnamese: "mình", meaning: "I / me"),
-                        FirstStepsReferencePair(vietnamese: "bạn", meaning: "you"),
-                        FirstStepsReferencePair(vietnamese: "anh", meaning: "older brother"),
-                        FirstStepsReferencePair(vietnamese: "chị", meaning: "older sister"),
-                        FirstStepsReferencePair(vietnamese: "em", meaning: "younger sibling"),
-                        FirstStepsReferencePair(vietnamese: "cô", meaning: "auntie"),
-                        FirstStepsReferencePair(vietnamese: "chú", meaning: "uncle"),
-                        FirstStepsReferencePair(vietnamese: "họ", meaning: "they")
+                        FirstStepsReferencePair(tagalog: "ako", meaning: "I / me"),
+                        FirstStepsReferencePair(tagalog: "ikaw · ka", meaning: "you"),
+                        FirstStepsReferencePair(tagalog: "siya", meaning: "he / she"),
+                        FirstStepsReferencePair(tagalog: "tayo", meaning: "we (with you)"),
+                        FirstStepsReferencePair(tagalog: "kami", meaning: "we (not you)"),
+                        FirstStepsReferencePair(tagalog: "kayo", meaning: "you all / you (respectful)"),
+                        FirstStepsReferencePair(tagalog: "sila", meaning: "they")
                     ],
-                    referenceAudioText: "mình · bạn · anh · chị · em · cô · chú · họ"
+                    referenceAudioText: "ako · ikaw · siya · tayo · kami · kayo · sila"
+                ),
+                FirstStepsCheatSheetEntry(
+                    id: "people-family",
+                    title: "",
+                    explanation: "",
+                    referencePairs: [
+                        FirstStepsReferencePair(tagalog: "Kuya", meaning: "older brother / older guy"),
+                        FirstStepsReferencePair(tagalog: "Ate", meaning: "older sister / older woman"),
+                        FirstStepsReferencePair(tagalog: "Lola · Lolo", meaning: "grandma · grandpa"),
+                        FirstStepsReferencePair(tagalog: "Tita · Tito", meaning: "auntie · uncle")
+                    ],
+                    referenceAudioText: "Kuya · Ate · Lola · Lolo · Tita · Tito"
                 )
             ]
         ),
         FirstStepsCheatSheetSection(
             id: "numbers",
             title: L("Numbers"),
-            summary: L("Numbers become useful when you order, buy, and ask how much."),
+            summary: L("Count in Tagalog, but expect Spanish-derived numbers for prices and the time."),
             symbol: "123.rectangle.fill",
             entries: [
                 FirstStepsCheatSheetEntry(
-                    id: "numbers-zero-to-ten",
+                    id: "numbers-one-to-ten",
                     title: "",
                     explanation: "",
-                    accent: nil,
                     referencePairs: [
-                        FirstStepsReferencePair(vietnamese: "không", meaning: "0"),
-                        FirstStepsReferencePair(vietnamese: "một", meaning: "1"),
-                        FirstStepsReferencePair(vietnamese: "hai", meaning: "2"),
-                        FirstStepsReferencePair(vietnamese: "ba", meaning: "3"),
-                        FirstStepsReferencePair(vietnamese: "bốn", meaning: "4"),
-                        FirstStepsReferencePair(vietnamese: "năm", meaning: "5"),
-                        FirstStepsReferencePair(vietnamese: "sáu", meaning: "6"),
-                        FirstStepsReferencePair(vietnamese: "bảy", meaning: "7"),
-                        FirstStepsReferencePair(vietnamese: "tám", meaning: "8"),
-                        FirstStepsReferencePair(vietnamese: "chín", meaning: "9"),
-                        FirstStepsReferencePair(vietnamese: "mười", meaning: "10")
-                    ]
+                        FirstStepsReferencePair(tagalog: "isa", meaning: "1"),
+                        FirstStepsReferencePair(tagalog: "dalawa", meaning: "2"),
+                        FirstStepsReferencePair(tagalog: "tatlo", meaning: "3"),
+                        FirstStepsReferencePair(tagalog: "apat", meaning: "4"),
+                        FirstStepsReferencePair(tagalog: "lima", meaning: "5"),
+                        FirstStepsReferencePair(tagalog: "anim", meaning: "6"),
+                        FirstStepsReferencePair(tagalog: "pito", meaning: "7"),
+                        FirstStepsReferencePair(tagalog: "walo", meaning: "8"),
+                        FirstStepsReferencePair(tagalog: "siyam", meaning: "9"),
+                        FirstStepsReferencePair(tagalog: "sampu", meaning: "10")
+                    ],
+                    referenceAudioText: "isa · dalawa · tatlo · apat · lima · anim · pito · walo · siyam · sampu"
                 ),
                 FirstStepsCheatSheetEntry(
-                    id: "numbers-round-tens",
+                    id: "numbers-prices",
                     title: "",
                     explanation: "",
-                    accent: nil,
                     referencePairs: [
-                        FirstStepsReferencePair(vietnamese: "hai mươi", meaning: "20"),
-                        FirstStepsReferencePair(vietnamese: "ba mươi", meaning: "30"),
-                        FirstStepsReferencePair(vietnamese: "bốn mươi", meaning: "40"),
-                        FirstStepsReferencePair(vietnamese: "năm mươi", meaning: "50"),
-                        FirstStepsReferencePair(vietnamese: "sáu mươi", meaning: "60"),
-                        FirstStepsReferencePair(vietnamese: "bảy mươi", meaning: "70"),
-                        FirstStepsReferencePair(vietnamese: "tám mươi", meaning: "80"),
-                        FirstStepsReferencePair(vietnamese: "chín mươi", meaning: "90")
-                    ]
-                ),
-                FirstStepsCheatSheetEntry(
-                    id: "numbers-big-landmarks",
-                    title: "",
-                    explanation: "",
-                    accent: nil,
-                    referencePairs: [
-                        FirstStepsReferencePair(vietnamese: "một trăm", meaning: "100"),
-                        FirstStepsReferencePair(vietnamese: "một nghìn", meaning: "1,000"),
-                        FirstStepsReferencePair(vietnamese: "một triệu", meaning: "1,000,000"),
-                        FirstStepsReferencePair(vietnamese: "một tỷ", meaning: "1,000,000,000")
-                    ]
+                        FirstStepsReferencePair(tagalog: "bente", meaning: "20 (pesos)"),
+                        FirstStepsReferencePair(tagalog: "singkwenta", meaning: "50 (pesos)"),
+                        FirstStepsReferencePair(tagalog: "isang daan", meaning: "100"),
+                        FirstStepsReferencePair(tagalog: "isang libo", meaning: "1,000"),
+                        FirstStepsReferencePair(tagalog: "alas-tres", meaning: "3 o’clock")
+                    ],
+                    referenceAudioText: "bente · singkwenta · isang daan · isang libo · alas-tres"
                 )
             ]
         )
@@ -431,13 +376,13 @@ private struct FirstStepsCheatSheetView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 9) {
-                        Text(L("Vietnamese basics, at a glance"))
+                        Text(L("Tagalog basics, at a glance"))
                             .font(KumustaTypography.title)
                             .foregroundStyle(KumustaColors.ink)
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
-                    Label(L("Your reference for sounds, tones, people words, and numbers. Tap any example to hear it."), systemImage: "ear.fill")
+                    Label(L("Your reference for sounds, respect words, people words, and numbers. Tap any example to hear it."), systemImage: "ear.fill")
                         .font(KumustaTypography.bodyStrong)
                         .foregroundStyle(KumustaColors.accentDeep)
                         .padding(16)
@@ -479,7 +424,7 @@ private struct FirstStepsCheatSheetView: View {
                     Text(L("Replay your lessons"))
                         .font(KumustaTypography.title2)
                         .foregroundStyle(KumustaColors.ink)
-                    Text(L("Run them again any time. Bé Trâu checks every word."))
+                    Text(L("Run them again any time. Kalabaw checks every word."))
                         .font(KumustaTypography.supporting)
                         .foregroundStyle(KumustaColors.muted)
                         .fixedSize(horizontal: false, vertical: true)
@@ -599,10 +544,9 @@ private struct FirstStepsCheatSheetView: View {
             if let audioText = entry.referenceAudioText ?? entry.example {
                 AudioSpeedControls(
                     text: audioText,
-                    accent: entry.accent,
                     usesSystemSpeech: entry.usesSystemSpeech,
                     bundledAudioResourceName: entry.bundledAudioResourceName,
-                    purpose: entry.accent == nil ? .lesson : .accentComparison,
+                    purpose: .lesson,
                     analyticsProperties: ["screen_name": "first_steps_cheat_sheet", "step_id": entry.id],
                     showsSpeedChoices: false,
                     singlePlaybackSpeed: .natural
@@ -617,7 +561,7 @@ private struct FirstStepsCheatSheetView: View {
         VStack(alignment: .leading, spacing: 10) {
             ForEach(pairs) { pair in
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(pair.vietnamese)
+                    Text(pair.tagalog)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(":")
                         .foregroundStyle(KumustaColors.muted)
@@ -650,18 +594,6 @@ struct FirstStepsCourseView: View {
         self.reviewMode = reviewMode
     }
 
-    private var accent: VietnameseAccent {
-        #if DEBUG
-        let arguments = ProcessInfo.processInfo.arguments
-        if let flag = arguments.firstIndex(of: "-FirstLessonAccent"),
-           arguments.indices.contains(flag + 1),
-           let accent = VietnameseAccent(rawValue: arguments[flag + 1]) {
-            return accent
-        }
-        #endif
-        return appState.profile.accent
-    }
-
     private var learnerName: String? {
         FirstLessonCatalog.spokenName(from: appState.profile.name)
     }
@@ -669,7 +601,7 @@ struct FirstStepsCourseView: View {
     /// The lesson First Steps teaches when it is not a replay.
     private var defaultFile: String {
         #if DEBUG
-        // Simulator shortcut: `-FirstLessonFile onboarding-familiar`.
+        // Simulator shortcut: `-FirstLessonFile onboarding-intermediate`.
         let arguments = ProcessInfo.processInfo.arguments
         if let flag = arguments.firstIndex(of: "-FirstLessonFile"), arguments.indices.contains(flag + 1) {
             return arguments[flag + 1]
@@ -739,7 +671,7 @@ struct FirstStepsCourseView: View {
     }
 
     private func script(_ file: String) -> FirstLessonScript? {
-        try? FirstLessonCatalog.load(file, accent: accent, learnerName: learnerName)
+        try? FirstLessonCatalog.load(file, learnerName: learnerName)
     }
 
     private func finish(_ script: FirstLessonScript) {

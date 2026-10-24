@@ -98,7 +98,7 @@ final class NotificationService {
 
         let content = UNMutableNotificationContent()
         content.title = Self.dailyReminderTitle
-        content.body = L("A few minutes of Vietnamese listening keeps your streak alive.")
+        content.body = L("A few minutes of Tagalog listening keeps your streak alive.")
         content.sound = .default
         content.interruptionLevel = .timeSensitive
 

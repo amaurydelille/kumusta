@@ -47,7 +47,7 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.education
-        NSMicrophoneUsageDescription: Kumusta uses your microphone when you practice speaking Vietnamese.
+        NSMicrophoneUsageDescription: Kumusta uses your microphone when you practice speaking Tagalog.
         NSUserTrackingUsageDescription: Kumusta uses your activity to measure ad performance and improve the relevance of our promotions.
         SUPABASE_PROJECT_URL: $(SUPABASE_PROJECT_URL)
         SUPABASE_PUBLISHABLE_KEY: $(SUPABASE_PUBLISHABLE_KEY)

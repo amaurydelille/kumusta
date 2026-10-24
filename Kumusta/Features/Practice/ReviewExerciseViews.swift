@@ -13,13 +13,13 @@ struct ReviewExerciseView: View {
         switch task.kind {
         case .listenMeaning:
             ReviewChoiceExercise(mode: .meaning, card: task.card, pool: pool, onAnswered: onAnswered, onContinue: onContinue)
-        case .pickVietnamese:
-            ReviewChoiceExercise(mode: .vietnamese, card: task.card, pool: pool, onAnswered: onAnswered, onContinue: onContinue)
+        case .pickTagalog:
+            ReviewChoiceExercise(mode: .tagalog, card: task.card, pool: pool, onAnswered: onAnswered, onContinue: onContinue)
         case .build:
             if let bank = ReviewBuildExercise.tileBank(for: task.card) {
                 ReviewBuildExercise(card: task.card, tileBank: bank, onAnswered: onAnswered, onContinue: onContinue)
             } else {
-                ReviewChoiceExercise(mode: .vietnamese, card: task.card, pool: pool, onAnswered: onAnswered, onContinue: onContinue)
+                ReviewChoiceExercise(mode: .tagalog, card: task.card, pool: pool, onAnswered: onAnswered, onContinue: onContinue)
             }
         case .speak:
             ReviewSpeakExercise(card: task.card, onAnswered: onAnswered, onContinue: onContinue, onCantSpeak: onCantSpeak)
@@ -133,7 +133,7 @@ struct ReviewFeedbackPanel: View {
 
             HStack(alignment: .center, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(card.vietnamese)
+                    Text(card.tagalog)
                         .scaledFont(20, weight: .bold, design: .rounded)
                         .foregroundStyle(KumustaColors.ink)
                     Text(card.translation)
@@ -144,8 +144,7 @@ struct ReviewFeedbackPanel: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 AudioSpeedControls(
-                    text: card.vietnamese,
-                    accent: card.accent,
+                    text: card.tagalog,
                     purpose: card.audioPurpose,
                     showsSpeedChoices: false,
                     iconOnly: true,
@@ -189,7 +188,7 @@ private struct ReviewContinueButtonStyle: ButtonStyle {
 /// answer lights up even when the learner picked another.
 private struct ReviewChoiceRow: View {
     let choice: ReviewExerciseChoice
-    let isVietnamese: Bool
+    let isTagalog: Bool
     let isSelected: Bool
     let isSubmitted: Bool
     let shakeTrigger: Int
@@ -204,7 +203,7 @@ private struct ReviewChoiceRow: View {
         Button(action: onSelect) {
             HStack(spacing: 12) {
                 Text(choice.text)
-                    .scaledFont(isVietnamese ? 20 : 18, weight: isVietnamese ? .bold : .semibold, design: .rounded)
+                    .scaledFont(isTagalog ? 20 : 18, weight: isTagalog ? .bold : .semibold, design: .rounded)
                     .foregroundStyle(textColor)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
@@ -302,10 +301,10 @@ private enum ReviewPraise {
 
 // MARK: - Multiple choice
 
-/// Hear the Vietnamese and pick the meaning, or see the meaning and pick the
-/// Vietnamese among tone look-alikes.
+/// Hear the Tagalog and pick the meaning, or see the meaning and pick the
+/// Tagalog among look-alikes.
 private struct ReviewChoiceExercise: View {
-    enum Mode { case meaning, vietnamese }
+    enum Mode { case meaning, tagalog }
 
     let mode: Mode
     let card: MemoryCard
@@ -335,7 +334,7 @@ private struct ReviewChoiceExercise: View {
         _choices = State(
             initialValue: mode == .meaning
                 ? ReviewExercisePlanner.meaningChoices(for: card, pool: pool, using: &generator)
-                : ReviewExercisePlanner.vietnameseChoices(for: card, pool: pool, using: &generator)
+                : ReviewExercisePlanner.tagalogChoices(for: card, pool: pool, using: &generator)
         )
     }
 
@@ -346,7 +345,7 @@ private struct ReviewChoiceExercise: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                ReviewExerciseTitle(text: mode == .meaning ? L("What does this mean?") : L("Choose the Vietnamese"))
+                ReviewExerciseTitle(text: mode == .meaning ? L("What does this mean?") : L("Choose the Tagalog"))
 
                 if mode == .meaning {
                     listenHero
@@ -358,7 +357,7 @@ private struct ReviewChoiceExercise: View {
                     ForEach(choices) { choice in
                         ReviewChoiceRow(
                             choice: choice,
-                            isVietnamese: mode == .vietnamese,
+                            isTagalog: mode == .tagalog,
                             isSelected: selectedID == choice.id,
                             isSubmitted: isSubmitted,
                             shakeTrigger: shakeTrigger
@@ -384,7 +383,7 @@ private struct ReviewChoiceExercise: View {
                     title: isCorrect ? praise : L("Correct answer:"),
                     card: card,
                     // The meaning question already played the phrase.
-                    autoplaysAnswer: mode == .vietnamese,
+                    autoplaysAnswer: mode == .tagalog,
                     onContinue: onContinue
                 )
             } else {
@@ -408,8 +407,7 @@ private struct ReviewChoiceExercise: View {
                 .accessibilityHidden(true)
 
             AudioSpeedControls(
-                text: card.vietnamese,
-                accent: card.accent,
+                text: card.tagalog,
                 purpose: card.audioPurpose,
                 iconOnly: true,
                 iconSize: 72,
@@ -449,8 +447,8 @@ private struct ReviewChoiceExercise: View {
 
 // MARK: - Build from tiles
 
-/// See the meaning and rebuild the Vietnamese from syllable tiles mixed with
-/// tone-swapped look-alikes. A wrong check marks the bad tiles in red so the
+/// See the meaning and rebuild the Tagalog from syllable tiles mixed with
+/// look-alike words. A wrong check marks the bad tiles in red so the
 /// learner can fix them once before revealing the answer.
 private struct ReviewBuildExercise: View {
     let card: MemoryCard
@@ -482,7 +480,7 @@ private struct ReviewBuildExercise: View {
     static func tileBank(for card: MemoryCard) -> ListenTileBank? {
         var generator = SystemRandomNumberGenerator()
         return ListenTileBank.make(
-            sentence: card.vietnamese,
+            sentence: card.tagalog,
             distractorCount: ListenTileBank.distractorCount(forSyllables: card.syllableCount),
             using: &generator
         )
@@ -494,7 +492,7 @@ private struct ReviewBuildExercise: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                ReviewExerciseTitle(text: L("Build it in Vietnamese"))
+                ReviewExerciseTitle(text: L("Build it in Tagalog"))
                 ReviewPromptBubble(card: card, motion: mascotMotion)
                 builder
             }
@@ -579,7 +577,7 @@ private struct ReviewBuildExercise: View {
             .accessibilityLabel(L("Your sentence"))
 
             if !wrongPositions.isEmpty, outcome == nil {
-                Text(L("The red words don't match, often just the tone. Fix them and check again."))
+                Text(L("The red words don't match, often a look-alike word. Fix them and check again."))
                     .font(KumustaTypography.body)
                     .foregroundStyle(KumustaColors.accentDeep)
                     .multilineTextAlignment(.center)
@@ -671,7 +669,7 @@ private struct ReviewBuildExercise: View {
 
 // MARK: - Speak from memory
 
-/// See the meaning and say the Vietnamese without seeing it. The phrase is
+/// See the meaning and say the Tagalog without seeing it. The phrase is
 /// only revealed after an attempt, so this tests recall, not reading.
 private struct ReviewSpeakExercise: View {
     let card: MemoryCard
@@ -693,7 +691,7 @@ private struct ReviewSpeakExercise: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 ReviewExerciseTitle(
-                    text: feedbackState.isProcessing ? L("Checking your take…") : L("Say it in Vietnamese")
+                    text: feedbackState.isProcessing ? L("Checking your take…") : L("Say it in Tagalog")
                 )
                 ReviewPromptBubble(card: card, motion: mascotMotion)
 
@@ -766,7 +764,7 @@ private struct ReviewSpeakExercise: View {
             if feedbackState.isProcessing || recorder.isFinishingRecording || recorder.hasRecording {
                 HStack(spacing: 10) {
                     ProgressView().tint(.white)
-                    Text(L("Checking your Vietnamese…"))
+                    Text(L("Checking your Tagalog…"))
                 }
                 .font(KumustaTypography.bodyStrong)
                 .foregroundStyle(.white)
@@ -862,8 +860,7 @@ private struct ReviewSpeakExercise: View {
             let result = await PronunciationFeedbackEngine.evaluate(
                 audio: audio,
                 live: live,
-                targetPhrase: card.vietnamese,
-                accent: card.accent,
+                targetPhrase: card.tagalog,
                 speechService: speechService
             )
             guard !Task.isCancelled, result.state != .idle else { return }

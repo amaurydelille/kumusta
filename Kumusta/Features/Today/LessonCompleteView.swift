@@ -86,7 +86,7 @@ struct LessonCompleteView: View {
                     .foregroundStyle(KumustaColors.caution)
                     .multilineTextAlignment(.center)
                     .accessibilityAddTraits(.isHeader)
-                Text(L(one: "You handled %lld real-life situation in Vietnamese.", other: "You handled %lld real-life situations in Vietnamese.", count: roundCount))
+                Text(L(one: "You handled %lld real-life situation in Tagalog.", other: "You handled %lld real-life situations in Tagalog.", count: roundCount))
                     .font(KumustaTypography.body)
                     .foregroundStyle(KumustaColors.muted)
                     .multilineTextAlignment(.center)

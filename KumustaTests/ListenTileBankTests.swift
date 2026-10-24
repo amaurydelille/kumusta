@@ -10,54 +10,34 @@ struct ListenTileBankTests {
         }
     }
 
-    @Test("Reads the tone written on a syllable")
-    func readsTone() {
-        #expect(VietnameseTone.of("ma") == .level)
-        #expect(VietnameseTone.of("mà") == .falling)
-        #expect(VietnameseTone.of("người") == .falling)
-        #expect(VietnameseTone.of("mạ") == .heavy)
-        #expect(VietnameseTone.of("hỏi") == .question)
+    @Test("Offers the words learners really confuse")
+    func offersLookAlikes() {
+        #expect(Set(TagalogLookAlike.variants(of: "ang")) == ["ng", "sa"])
+        #expect(TagalogLookAlike.variants(of: "ka") == ["kayo"])
+        #expect(Set(TagalogLookAlike.variants(of: "ito")) == ["iyan", "iyon"])
+        #expect(TagalogLookAlike.variants(of: "nagluto") == ["magluto"])
+        #expect(TagalogLookAlike.variants(of: "magluluto").contains("nagluluto"))
     }
 
-    @Test("Swaps a tone that is already written")
-    func swapsExistingTone() {
-        #expect(VietnameseTone.applying(.rising, to: "mà") == "má")
-        #expect(VietnameseTone.applying(.heavy, to: "người") == "người".replacingOccurrences(of: "ờ", with: "ợ"))
-        #expect(VietnameseTone.applying(.level, to: "bán") == "ban")
-        #expect(VietnameseTone.applying(.falling, to: "tiếng") == "tiềng")
+    @Test("Short or unknown words have no look-alikes")
+    func unknownWordsHaveNone() {
+        #expect(TagalogLookAlike.variants(of: "kape").isEmpty)
+        #expect(TagalogLookAlike.variants(of: "mag").isEmpty)
     }
 
-    @Test("Places a new tone on the right vowel")
-    func placesNewTone() {
-        #expect(VietnameseTone.applying(.rising, to: "mua") == "múa")
-        #expect(VietnameseTone.applying(.falling, to: "hai") == "hài")
-        #expect(VietnameseTone.applying(.rising, to: "toan") == "toán")
-        #expect(VietnameseTone.applying(.rising, to: "qua") == "quá")
-        #expect(VietnameseTone.applying(.question, to: "gia") == "giả")
-        #expect(VietnameseTone.applying(.falling, to: "tôi") == "tồi")
-        #expect(VietnameseTone.applying(.falling, to: "nguoi") == "nguòi")
-        #expect(VietnameseTone.applying(.falling, to: "ươi") == "ười")
-    }
-
-    @Test("Syllables without a vowel have no tone variants")
-    func noVowelNoVariants() {
-        #expect(VietnameseTone.variants(of: "ngh").isEmpty)
-        #expect(VietnameseTone.variants(of: "ma").count == 5)
-    }
-
-    @Test("Builds tiles from the sentence plus tone look-alikes")
+    @Test("Builds tiles from the sentence plus look-alikes")
     func buildsBank() throws {
         var generator = SeededGenerator(state: 7)
         let bank = try #require(
             ListenTileBank.make(
-                sentence: "Cho tôi một ly cà phê.",
+                sentence: "Gusto ko ang kape dito.",
                 distractorCount: 3,
                 using: &generator
             )
         )
-        #expect(bank.answer == ["cho", "tôi", "một", "ly", "cà", "phê"])
-        #expect(bank.tiles.count == 9)
-        #expect(Set(bank.tiles.map(\.id)).count == 9)
+        #expect(bank.answer == ["gusto", "ko", "ang", "kape", "dito"])
+        #expect(bank.tiles.count == 8)
+        #expect(Set(bank.tiles.map(\.id)).count == 8)
 
         let distractors = bank.tiles.map(\.text).filter { !bank.answer.contains($0) }
         #expect(distractors.count == 3)
@@ -68,11 +48,11 @@ struct ListenTileBankTests {
     func checksPicks() throws {
         var generator = SeededGenerator(state: 3)
         let bank = try #require(
-            ListenTileBank.make(sentence: "Dạ, dạ được", distractorCount: 2, using: &generator)
+            ListenTileBank.make(sentence: "Sige, sige po", distractorCount: 2, using: &generator)
         )
         let ids = { (text: String) in bank.tiles.filter { $0.text == text }.map(\.id) }
-        let das = ids("dạ")
-        let duoc = try #require(ids("được").first)
+        let das = ids("sige")
+        let duoc = try #require(ids("po").first)
         #expect(das.count == 2)
 
         #expect(bank.isCorrect([das[1], das[0], duoc]))
@@ -85,8 +65,8 @@ struct ListenTileBankTests {
     @Test("Skips sentences that are too short or too long")
     func skipsUnusableSentences() {
         var generator = SeededGenerator(state: 1)
-        #expect(ListenTileBank.make(sentence: "Dạ.", distractorCount: 2, using: &generator) == nil)
-        let long = Array(repeating: "ba", count: ListenTileBank.maximumSyllables + 1).joined(separator: " ")
+        #expect(ListenTileBank.make(sentence: "Opo.", distractorCount: 2, using: &generator) == nil)
+        let long = Array(repeating: "isa", count: ListenTileBank.maximumSyllables + 1).joined(separator: " ")
         #expect(ListenTileBank.make(sentence: long, distractorCount: 2, using: &generator) == nil)
     }
 }

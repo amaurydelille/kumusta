@@ -52,7 +52,7 @@ enum SpeechRecognitionError: LocalizedError, Sendable {
     }
 }
 
-protocol VietnameseSpeechRecognizing: Sendable {
+protocol TagalogSpeechRecognizing: Sendable {
     func transcribe(audio: Data) async throws -> SpeechTranscription
     func transcribeOnboarding(audio: Data) async throws -> SpeechTranscription
     /// Starts streaming a take as it is recorded, or nil when this service
@@ -60,7 +60,7 @@ protocol VietnameseSpeechRecognizing: Sendable {
     func makeLiveTranscription(onboarding: Bool) -> (any LiveSpeechTranscribing)?
 }
 
-extension VietnameseSpeechRecognizing {
+extension TagalogSpeechRecognizing {
     func transcribeOnboarding(audio: Data) async throws -> SpeechTranscription {
         try await transcribe(audio: audio)
     }
@@ -73,7 +73,7 @@ extension VietnameseSpeechRecognizing {
 /// Uploads one bounded, ephemeral M4A take through the authenticated Supabase
 /// boundary. The ElevenLabs credential and provider response never enter the
 /// application bundle.
-actor SupabaseElevenLabsSpeechRecognitionService: VietnameseSpeechRecognizing {
+actor SupabaseElevenLabsSpeechRecognitionService: TagalogSpeechRecognizing {
     static let maximumUploadBytes = 1_500_000
     private static let logger = Logger(subsystem: "com.kumusta.app", category: "SpeechRecognition")
 
@@ -113,7 +113,7 @@ actor SupabaseElevenLabsSpeechRecognitionService: VietnameseSpeechRecognizing {
         )
         guard
             response.version == 1,
-            response.languageCode == "vie",
+            response.languageCode == "fil",
             (1 ... 500).contains(response.transcript.count),
             response.words.count <= 100,
             response.words.allSatisfy({
@@ -236,13 +236,13 @@ actor SupabaseElevenLabsSpeechRecognitionService: VietnameseSpeechRecognizing {
     }
 }
 
-actor PreviewSpeechRecognitionService: VietnameseSpeechRecognizing {
+actor PreviewSpeechRecognitionService: TagalogSpeechRecognizing {
     func transcribe(audio: Data) async throws -> SpeechTranscription {
         try await Task.sleep(for: .milliseconds(450))
         return SpeechTranscription(
             version: 1,
-            transcript: "Cho mình một cà phê sữa đá.",
-            languageCode: "vie",
+            transcript: "Isang kape nga po.",
+            languageCode: "fil",
             languageProbability: 0.99,
             words: []
         )
@@ -252,8 +252,8 @@ actor PreviewSpeechRecognitionService: VietnameseSpeechRecognizing {
         try await Task.sleep(for: .milliseconds(450))
         return SpeechTranscription(
             version: 1,
-            transcript: "Chào bạn, bạn uống cà phê không?",
-            languageCode: "vie",
+            transcript: "Kumusta! Ako si Alex.",
+            languageCode: "fil",
             languageProbability: 0.99,
             words: []
         )
@@ -263,11 +263,11 @@ actor PreviewSpeechRecognitionService: VietnameseSpeechRecognizing {
 /// ElevenLabs first; Apple's recognizer only when the provider is down.
 /// Errors about the learner or their access (silence, sign-in, Pro, rate
 /// limit) surface unchanged, so the fallback never bypasses a server gate.
-struct FallbackSpeechRecognitionService: VietnameseSpeechRecognizing {
+struct FallbackSpeechRecognitionService: TagalogSpeechRecognizing {
     private static let logger = Logger(subsystem: "com.kumusta.app", category: "SpeechRecognition")
 
-    let primary: any VietnameseSpeechRecognizing
-    let fallback: any VietnameseSpeechRecognizing
+    let primary: any TagalogSpeechRecognizing
+    let fallback: any TagalogSpeechRecognizing
 
     func transcribe(audio: Data) async throws -> SpeechTranscription {
         try await run { try await $0.transcribe(audio: audio) }
@@ -284,7 +284,7 @@ struct FallbackSpeechRecognitionService: VietnameseSpeechRecognizing {
     }
 
     private func run(
-        _ operation: (any VietnameseSpeechRecognizing) async throws -> SpeechTranscription
+        _ operation: (any TagalogSpeechRecognizing) async throws -> SpeechTranscription
     ) async throws -> SpeechTranscription {
         do {
             return try await operation(primary)
@@ -304,11 +304,11 @@ struct FallbackSpeechRecognitionService: VietnameseSpeechRecognizing {
     }
 }
 
-/// Apple's Vietnamese recognizer, used only as a fallback. It prefers
+/// Apple's Tagalog recognizer, used only as a fallback. It prefers
 /// on-device recognition when the device supports it, and asks for speech
 /// permission lazily, the first time it is actually needed.
-struct AppleSpeechRecognitionService: VietnameseSpeechRecognizing {
-    private static let locale = Locale(identifier: "vi-VN")
+struct AppleSpeechRecognitionService: TagalogSpeechRecognizing {
+    private static let locale = Locale(identifier: "fil-PH")
 
     func transcribe(audio: Data) async throws -> SpeechTranscription {
         guard await Self.isAuthorized(),
@@ -368,7 +368,7 @@ struct AppleSpeechRecognitionService: VietnameseSpeechRecognizing {
             SpeechTranscription(
                 version: 1,
                 transcript: String(transcript.prefix(500)),
-                languageCode: "vie",
+                languageCode: "fil",
                 languageProbability: nil,
                 words: best.segments.prefix(100).map {
                     SpeechTranscriptionWord(

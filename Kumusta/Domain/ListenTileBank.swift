@@ -1,104 +1,35 @@
 import Foundation
 
-/// The six Vietnamese tones and the combining mark each one adds to a vowel.
-enum VietnameseTone: CaseIterable, Sendable {
-    case level
-    case falling
-    case rising
-    case question
-    case tumbling
-    case heavy
+/// Tagalog words learners really confuse, used as wrong choices: the case
+/// markers, pronoun pairs, demonstratives, and the mag-/nag- aspect prefixes
+/// that separate "do" from "did".
+enum TagalogLookAlike {
+    private static let groups: [[String]] = [
+        ["ang", "ng", "sa"],
+        ["si", "ni", "kay"],
+        ["ka", "kayo"],
+        ["ako", "ko", "akin"],
+        ["ikaw", "mo", "iyo"],
+        ["siya", "niya"],
+        ["kami", "tayo"],
+        ["ito", "iyan", "iyon"],
+        ["dito", "diyan", "doon"],
+        ["na", "pa"],
+        ["hindi", "huwag", "wala"],
+        ["gusto", "ayaw"],
+        ["oo", "opo", "hindi po"],
+        ["ngayon", "kanina", "mamaya", "bukas"],
+    ]
 
-    var mark: Unicode.Scalar? {
-        switch self {
-        case .level: nil
-        case .falling: "\u{0300}"
-        case .rising: "\u{0301}"
-        case .question: "\u{0309}"
-        case .tumbling: "\u{0303}"
-        case .heavy: "\u{0323}"
+    /// Every look-alike of a lowercased word, without the word itself.
+    static func variants(of word: String) -> [String] {
+        var variants = groups.first { $0.contains(word) }?.filter { $0 != word } ?? []
+        // Aspect: magluto (will/to cook) vs nagluto (cooked).
+        for (from, to) in [("mag", "nag"), ("nag", "mag")]
+        where word.hasPrefix(from) && word.count > from.count + 2 {
+            variants.append(to + word.dropFirst(from.count))
         }
-    }
-
-    init(mark: Unicode.Scalar) {
-        self = Self.allCases.first { $0.mark == mark } ?? .level
-    }
-
-    static func isToneMark(_ scalar: Unicode.Scalar) -> Bool {
-        allCases.contains { $0.mark == scalar }
-    }
-
-    /// The tone written on a single syllable, or `.level` when it carries no mark.
-    static func of(_ syllable: String) -> VietnameseTone {
-        let mark = syllable.decomposedStringWithCanonicalMapping.unicodeScalars
-            .first(where: isToneMark)
-        return mark.map(VietnameseTone.init(mark:)) ?? .level
-    }
-
-    /// Rewrites one syllable with `tone`, keeping its consonants and vowel
-    /// shapes. Returns nil when the syllable has no vowel to carry a tone.
-    static func applying(_ tone: VietnameseTone, to syllable: String) -> String? {
-        // Each cluster is a base letter followed by its combining marks.
-        var clusters: [[Unicode.Scalar]] = []
-        var toneCarrier: Int?
-        for scalar in syllable.decomposedStringWithCanonicalMapping.unicodeScalars {
-            if isToneMark(scalar) {
-                toneCarrier = clusters.indices.last
-            } else if scalar.properties.canonicalCombiningClass == .notReordered || clusters.isEmpty {
-                clusters.append([scalar])
-            } else {
-                clusters[clusters.count - 1].append(scalar)
-            }
-        }
-
-        guard let carrier = toneCarrier ?? toneCarrierIndex(in: clusters) else { return nil }
-        if let mark = tone.mark {
-            clusters[carrier].append(mark)
-        }
-        var scalars = String.UnicodeScalarView()
-        clusters.joined().forEach { scalars.append($0) }
-        return String(scalars).precomposedStringWithCanonicalMapping
-    }
-
-    /// Every other tone of `syllable`, e.g. "ma" → "mà", "má", "mả", "mã", "mạ".
-    static func variants(of syllable: String) -> [String] {
-        let current = of(syllable)
-        return allCases
-            .filter { $0 != current }
-            .compactMap { applying($0, to: syllable) }
-    }
-
-    private static let vowels: Set<Character> = ["a", "e", "i", "o", "u", "y"]
-    private static let vowelShapeMarks: Set<Unicode.Scalar> = ["\u{0302}", "\u{0306}", "\u{031B}"]
-
-    /// Where an unmarked syllable takes its tone: a shaped vowel (â, ơ, ư…)
-    /// wins; otherwise the last vowel of a closed syllable, or the second to
-    /// last vowel of an open one ("hoà" style is written "hòa").
-    private static func toneCarrierIndex(in clusters: [[Unicode.Scalar]]) -> Int? {
-        let letters = clusters.map { Character($0[0]).lowercased().first ?? " " }
-        var nucleus = letters.indices.filter { vowels.contains(letters[$0]) }
-        guard let first = nucleus.first else { return nil }
-
-        // The u of "qu" and the i of "gi" belong to the consonant.
-        if nucleus.count > 1,
-           (first == 1 && letters[0] == "q" && letters[1] == "u")
-            || (first == 1 && letters[0] == "g" && letters[1] == "i") {
-            nucleus.removeFirst()
-        }
-        // Only the first run of vowels forms the nucleus.
-        var run: [Int] = []
-        for index in nucleus where run.isEmpty || index == run[run.count - 1] + 1 {
-            run.append(index)
-        }
-
-        if let shaped = run.last(where: { index in
-            clusters[index].dropFirst().contains(where: vowelShapeMarks.contains)
-        }) {
-            return shaped
-        }
-        guard run.count > 1 else { return run[0] }
-        let isClosed = run[run.count - 1] < letters.count - 1
-        return isClosed ? run[run.count - 1] : run[run.count - 2]
+        return variants
     }
 }
 
@@ -108,9 +39,9 @@ struct ListenTile: Identifiable, Equatable, Sendable {
 }
 
 /// Word tiles for rebuilding a sentence heard during a cold listen: the
-/// sentence's own syllables plus tone-swapped look-alikes as wrong choices.
+/// sentence's own words plus Tagalog look-alikes as wrong choices.
 struct ListenTileBank: Equatable, Sendable {
-    /// The syllables of the sentence, in order, as they appear on tiles.
+    /// The words of the sentence, in order, as they appear on tiles.
     let answer: [String]
     let tiles: [ListenTile]
 
@@ -128,7 +59,7 @@ struct ListenTileBank: Equatable, Sendable {
         var variantsBySource = Array(answerSet)
             .sorted()
             .map { source in
-                VietnameseTone.variants(of: source)
+                TagalogLookAlike.variants(of: source)
                     .filter { !answerSet.contains($0) }
                     .shuffled(using: &generator)
             }
@@ -166,7 +97,7 @@ struct ListenTileBank: Equatable, Sendable {
             .split(whereSeparator: \.isWhitespace)
             .map {
                 $0.trimmingCharacters(in: .punctuationCharacters.union(.symbols))
-                    .lowercased(with: Locale(identifier: "vi"))
+                    .lowercased(with: Locale(identifier: "fil"))
             }
             .filter { !$0.isEmpty }
     }

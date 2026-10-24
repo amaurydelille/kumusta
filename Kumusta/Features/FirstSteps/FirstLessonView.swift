@@ -2,7 +2,7 @@ import SwiftUI
 
 /// A guided lesson played from a `FirstLessonScript`: hear, notice,
 /// recognize, and say a few phrases, then use them in a short conversation
-/// with Bé Trâu. Missed answers come back at the end of the lesson, so every
+/// with Kalabaw. Missed answers come back at the end of the lesson, so every
 /// learner leaves having answered everything correctly at least once.
 ///
 /// The same view runs the in-app First Steps lesson and the short onboarding
@@ -55,7 +55,6 @@ struct FirstLessonView: View {
         self.onClose = onClose
         self.onScreenChange = onScreenChange
         _voice = State(initialValue: FirstLessonVoice(
-            accent: script.accent,
             usesPaidVoice: !isPrePaywall,
             learnerName: learnerName
         ))
@@ -358,10 +357,9 @@ struct FirstLessonView: View {
         let store = dependencies.savedLessonWordStore
         for word in script.completion.words {
             store.save(
-                gloss: LessonWordGloss(id: UUID(), token: word.vietnamese, translation: word.meaning),
-                sentence: word.vietnamese,
+                gloss: LessonWordGloss(id: UUID(), token: word.tagalog, translation: word.meaning),
+                sentence: word.tagalog,
                 sentenceTranslation: word.meaning,
-                accent: script.accent,
                 lessonID: script.sourceID,
                 translationLanguage: script.language
             )
@@ -449,7 +447,6 @@ enum FirstLessonAnalytics {
             "lesson_id": script.id,
             "mode": script.mode.rawValue,
             "level": script.level.rawValue,
-            "accent": script.accent.rawValue,
             "entry_point": isPrePaywall ? "onboarding" : "first_steps"
         ]
     }
@@ -487,10 +484,9 @@ enum FirstLessonAnalytics {
 /// Speaks lesson lines from the best available source: a bundled clip, then
 /// (in the app) the regular lesson voice. Before the paywall, the learner's
 /// name line uses the server's fixed onboarding template and anything else
-/// falls back to Apple's Vietnamese voice, so no paid generation is needed.
+/// falls back to Apple's Tagalog voice, so no paid generation is needed.
 @MainActor
 final class FirstLessonVoice {
-    let accent: VietnameseAccent
     let usesPaidVoice: Bool
     let learnerName: String?
 
@@ -501,10 +497,9 @@ final class FirstLessonVoice {
     private var current: (any AudioService)?
     private var playToken = 0
     private var isPlayingTemplate = false
-    private let systemVoice = SystemVietnameseAudioService()
+    private let systemVoice = SystemTagalogAudioService()
 
-    init(accent: VietnameseAccent, usesPaidVoice: Bool, learnerName: String?) {
-        self.accent = accent
+    init(usesPaidVoice: Bool, learnerName: String?) {
         self.usesPaidVoice = usesPaidVoice
         self.learnerName = learnerName
     }
@@ -521,16 +516,16 @@ final class FirstLessonVoice {
         defer {
             if playToken == token { current = nil }
         }
-        if let url = FirstLessonScript.bundledAudioURL(for: text, accent: accent) {
+        if let url = FirstLessonScript.bundledAudioURL(for: text) {
             let service = BundledAudioService(url: url)
             current = service
-            try await service.play(text: text, accent: accent, speed: speed, purpose: .lesson)
+            try await service.play(text: text, speed: speed, purpose: .lesson)
             return
         }
         guard let dependencies else { return }
         if usesPaidVoice {
             current = dependencies.audioService
-            try await dependencies.audioService.play(text: text, accent: accent, speed: speed, purpose: .lesson)
+            try await dependencies.audioService.play(text: text, speed: speed, purpose: .lesson)
             return
         }
         if isNameLine(text), let learnerName {
@@ -539,13 +534,12 @@ final class FirstLessonVoice {
             try await dependencies.onboardingConversationAudio.play(
                 line: .replyName,
                 text: text,
-                name: learnerName,
-                accent: accent
+                name: learnerName
             )
             return
         }
         current = systemVoice
-        try await systemVoice.play(text: text, accent: accent, speed: speed, purpose: .lesson)
+        try await systemVoice.play(text: text, speed: speed, purpose: .lesson)
     }
 
     func stop() async {
@@ -562,32 +556,30 @@ final class FirstLessonVoice {
     /// any missing clip through the lesson voice in the app.
     func prewarm(_ texts: [String]) {
         guard let dependencies else { return }
-        let missing = texts.filter { FirstLessonScript.bundledAudioURL(for: $0, accent: accent) == nil }
+        let missing = texts.filter { FirstLessonScript.bundledAudioURL(for: $0) == nil }
         guard !missing.isEmpty else { return }
         if usesPaidVoice {
             let audioService = dependencies.audioService
-            let accent = accent
-            Task { await audioService.prewarm(texts: missing, accent: accent, speed: .natural) }
+            Task { await audioService.prewarm(texts: missing, speed: .natural) }
         } else if missing.contains(where: isNameLine), let learnerName {
-            dependencies.onboardingConversationAudio.prefetch(lines: [.replyName], name: learnerName, accent: accent)
+            dependencies.onboardingConversationAudio.prefetch(lines: [.replyName], name: learnerName)
         }
     }
 
     /// The only personalized line the pre-paywall voice server accepts.
     private func isNameLine(_ text: String) -> Bool {
         guard let learnerName else { return false }
-        return FirstLessonScript.normalizedAudioText(text) == "Mình tên là \(learnerName)."
+        return FirstLessonScript.normalizedAudioText(text) == "Ako si \(learnerName)."
     }
 }
 
 // MARK: - Grading
 
 enum FirstLessonGrading {
-    /// True when any accepted wording was heard, graded for the learner's
-    /// accent (Southern hỏi and ngã are the same tone, for example).
-    static func matches(transcript: String, targets: [String], accent: VietnameseAccent) -> Bool {
+    /// True when any accepted wording was heard.
+    static func matches(transcript: String, targets: [String]) -> Bool {
         targets.contains { target in
-            PronunciationReview(target: target, transcript: transcript, accent: accent).isMatch
+            PronunciationReview(target: target, transcript: transcript).isMatch
         }
     }
 }
@@ -665,7 +657,7 @@ private struct StepTitle: View {
     }
 }
 
-/// Bé Trâu next to a speech bubble holding the step's content.
+/// Kalabaw next to a speech bubble holding the step's content.
 private struct BuddySays<Content: View>: View {
     let motion: BuddyMotion
     var mascotSize: CGFloat = 104
@@ -1076,7 +1068,7 @@ private struct FirstLessonIntroStep: View {
                                 .frame(width: 34, height: 34)
                                 .background(Circle().fill(KumustaColors.focusFill))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(goal.vietnamese)
+                                Text(goal.tagalog)
                                     .scaledFont(19, weight: .bold, design: .rounded)
                                     .foregroundStyle(KumustaColors.ink)
                                     .fixedSize(horizontal: false, vertical: true)
@@ -1350,15 +1342,15 @@ private struct FirstLessonNewPhraseStep: View {
 
                 BuddySays(motion: .listening) {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(phrase.vietnamese)
-                            .scaledFont(phrase.vietnamese.count > 18 ? 26 : 34, weight: .heavy, design: .rounded)
+                        Text(phrase.tagalog)
+                            .scaledFont(phrase.tagalog.count > 18 ? 26 : 34, weight: .heavy, design: .rounded)
                             .foregroundStyle(KumustaColors.ink)
                             .fixedSize(horizontal: false, vertical: true)
                         Text(phrase.translation)
                             .font(KumustaTypography.bodyStrong)
                             .foregroundStyle(KumustaColors.muted)
                             .fixedSize(horizontal: false, vertical: true)
-                        VoiceButtons(text: phrase.vietnamese, voice: voice, size: 50, autoplay: true)
+                        VoiceButtons(text: phrase.tagalog, voice: voice, size: 50, autoplay: true)
                             .padding(.top, 6)
                     }
                 }
@@ -1414,10 +1406,10 @@ private struct FirstLessonNewPhraseStep: View {
             withAnimation(reduceMotion ? nil : KumustaMotion.press) {
                 _ = revealedChunks.insert(chunk.id)
             }
-            playPhrase(chunk.vietnamese, voice: voice)
+            playPhrase(chunk.tagalog, voice: voice)
         } label: {
             VStack(spacing: 6) {
-                Text(chunk.vietnamese)
+                Text(chunk.tagalog)
                     .scaledFont(22, weight: .heavy, design: .rounded)
                     .foregroundStyle(KumustaColors.ink)
                     .fixedSize()
@@ -1433,7 +1425,7 @@ private struct FirstLessonNewPhraseStep: View {
             face: isRevealed ? KumustaColors.focus.opacity(0.1) : KumustaColors.surface,
             border: isRevealed ? KumustaColors.focus : KumustaColors.line
         ))
-        .accessibilityLabel(isRevealed ? "\(chunk.vietnamese), \(chunk.meaning)" : chunk.vietnamese)
+        .accessibilityLabel(isRevealed ? "\(chunk.tagalog), \(chunk.meaning)" : chunk.tagalog)
         .accessibilityHint(L("Plays the word and shows its meaning"))
     }
 }
@@ -1704,7 +1696,7 @@ private struct FirstLessonBuildStep: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 26) {
-                StepTitle(text: L("Write this in Vietnamese"))
+                StepTitle(text: L("Write this in Tagalog"))
 
                 BuddySays(motion: result.mascotMotion) {
                     Text(build.english)
@@ -1906,7 +1898,6 @@ private final class FirstLessonSpeechCheck {
 
     func evaluate(
         targets: [String],
-        accent: VietnameseAccent,
         dependencies: DependencyContainer,
         onResult: @escaping (Outcome) -> Void
     ) {
@@ -1943,16 +1934,14 @@ private final class FirstLessonSpeechCheck {
                 guard !Task.isCancelled else { return }
                 let matched = FirstLessonGrading.matches(
                     transcript: transcription.transcript,
-                    targets: targets,
-                    accent: accent
+                    targets: targets
                 )
                 matchedTarget = matched
                 feedbackState = .result(
                     transcription,
                     PronunciationReview(
                         target: targets.first ?? "",
-                        transcript: transcription.transcript,
-                        accent: accent
+                        transcript: transcription.transcript
                     )
                 )
                 if matched {
@@ -2019,7 +2008,7 @@ private struct SpeakFooter: View {
             if speech.feedbackState.isProcessing || speech.recorder.isFinishingRecording || speech.recorder.hasRecording {
                 HStack(spacing: 10) {
                     ProgressView().tint(.white)
-                    Text(L("Bé Trâu is listening back…"))
+                    Text(L("Kalabaw is listening back…"))
                 }
                 .font(KumustaTypography.bodyStrong)
                 .foregroundStyle(.white)
@@ -2073,7 +2062,7 @@ private struct SpeakFooter: View {
 
 private enum UncheckedTake {
     static var headline: String { L("Nice, you said it!") }
-    static var detail: String { L("Bé Trâu will check every word once your plan starts.") }
+    static var detail: String { L("Kalabaw will check every word once your plan starts.") }
 }
 
 private struct FirstLessonSpeakStep: View {
@@ -2178,13 +2167,12 @@ private struct FirstLessonSpeakStep: View {
             guard hasRecording else { return }
             speech.evaluate(
                 targets: [speak.target] + speak.accepted,
-                accent: voice.accent,
                 dependencies: dependencies
             ) { outcome in
                 switch outcome {
                 case .matched:
                     track("speech_matched")
-                    result = .correct(headline: Praise.random(), detail: L("Bé Trâu understood every word."))
+                    result = .correct(headline: Praise.random(), detail: L("Kalabaw understood every word."))
                 case .unchecked:
                     track("speech_unchecked")
                     result = .neutral(headline: UncheckedTake.headline, detail: UncheckedTake.detail)
@@ -2338,7 +2326,7 @@ private struct FirstLessonConversationStep: View {
         .safeAreaInset(edge: .bottom, spacing: 0) {
             if isFinished {
                 CheckFooter(
-                    result: .correct(headline: L("You just spoke Vietnamese!"), detail: L("A real conversation, start to finish.")),
+                    result: .correct(headline: L("You just spoke Tagalog!"), detail: L("A real conversation, start to finish.")),
                     canCheck: true,
                     onCheck: {},
                     onContinue: finish
@@ -2358,7 +2346,6 @@ private struct FirstLessonConversationStep: View {
             guard hasRecording, let currentTurn else { return }
             speech.evaluate(
                 targets: [currentTurn.replyTarget] + currentTurn.accepted,
-                accent: voice.accent,
                 dependencies: dependencies
             ) { outcome in
                 switch outcome {
@@ -2438,7 +2425,7 @@ private struct FirstLessonConversationStep: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(message.fromBuddy ? "Bé Trâu" : L("You")): \(message.text), \(message.translation)")
+        .accessibilityLabel("\(message.fromBuddy ? "Kalabaw" : L("You")): \(message.text), \(message.translation)")
     }
 
     private var typingIndicator: some View {
@@ -2462,7 +2449,7 @@ private struct FirstLessonConversationStep: View {
             .clipShape(Capsule())
             Spacer()
         }
-        .accessibilityLabel(L("Bé Trâu is typing"))
+        .accessibilityLabel(L("Kalabaw is typing"))
     }
 
     private func replyPrompt(_ turn: FirstLessonScript.Turn) -> some View {
@@ -2489,7 +2476,7 @@ private struct FirstLessonConversationStep: View {
         .accessibilityElement(children: .combine)
     }
 
-    /// Bé Trâu types, then says a line out loud.
+    /// Kalabaw types, then says a line out loud.
     @MainActor
     private func say(_ text: String, translation: String) async {
         withAnimation { isBuddyTyping = true }
@@ -2562,7 +2549,7 @@ private struct FirstLessonExitSheet: View {
                     .scaledFont(24, weight: .heavy, design: .rounded)
                     .foregroundStyle(KumustaColors.ink)
                 Text(isOnboarding
-                     ? L(one: "Your first real exchange in Vietnamese is about %lld minute away.", other: "Your first real exchange in Vietnamese is about %lld minutes away.", count: minutes)
+                     ? L(one: "Your first real exchange in Tagalog is about %lld minute away.", other: "Your first real exchange in Tagalog is about %lld minutes away.", count: minutes)
                      : L("You’re a few minutes away from your first conversation."))
                     .font(KumustaTypography.body)
                     .foregroundStyle(KumustaColors.muted)
@@ -2708,7 +2695,7 @@ private struct FirstLessonCompleteView: View {
 
             ForEach(Array(completion.phrases.enumerated()), id: \.element.id) { index, phrase in
                 Button {
-                    playPhrase(FirstLessonScript.playableText(phrase.vietnamese), voice: voice)
+                    playPhrase(FirstLessonScript.playableText(phrase.tagalog), voice: voice)
                 } label: {
                     HStack(spacing: 14) {
                         Image(systemName: "checkmark")
@@ -2717,7 +2704,7 @@ private struct FirstLessonCompleteView: View {
                             .frame(width: 32, height: 32)
                             .background(Circle().fill(KumustaColors.success))
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(phrase.vietnamese)
+                            Text(phrase.tagalog)
                                 .scaledFont(19, weight: .bold, design: .rounded)
                                 .foregroundStyle(KumustaColors.ink)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -2734,7 +2721,7 @@ private struct FirstLessonCompleteView: View {
                 .buttonStyle(ChoiceCardButtonStyle(face: KumustaColors.surface, border: KumustaColors.line))
                 .opacity(index < visiblePhrases ? 1 : 0)
                 .offset(x: index < visiblePhrases || reduceMotion ? 0 : -24)
-                .accessibilityLabel("\(phrase.vietnamese), \(phrase.meaning)")
+                .accessibilityLabel("\(phrase.tagalog), \(phrase.meaning)")
                 .accessibilityHint(L("Plays the phrase"))
             }
 
@@ -2769,7 +2756,7 @@ private struct FirstLessonCompleteView: View {
 
 #if DEBUG
 #Preview("First lesson") {
-    if let script = try? FirstLessonCatalog.load(FirstLessonCatalog.fullLessonFile, accent: .southern, learnerName: "Alex") {
+    if let script = try? FirstLessonCatalog.load(FirstLessonCatalog.fullLessonFile, learnerName: "Alex") {
         FirstLessonView(script: script, learnerName: "Alex", onFinish: {}, onClose: {})
             .environment(DependencyContainer.preview())
             .environment(AppState(dependencies: .preview()))

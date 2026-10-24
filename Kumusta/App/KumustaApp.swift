@@ -51,12 +51,10 @@ struct KumustaApp: App {
     /// so the simulator and UI tests see weak, medium and strong cards due.
     private static func seedDueReviews(in store: MemoryStore) {
         store.reset()
-        for accent in VietnameseAccent.allCases {
-            store.enroll(
-                lesson: SampleContent.dailySession(accent: accent, level: .new, dailyMinutes: 7),
-                at: .now.addingTimeInterval(-120 * 86_400)
-            )
-        }
+        store.enroll(
+            lesson: SampleContent.dailySession(level: .beginner, dailyMinutes: 7),
+            at: .now.addingTimeInterval(-120 * 86_400)
+        )
         for (index, card) in store.cards.values.sorted(by: { $0.id < $1.id }).enumerated() {
             let reviews = [0, 1, 3][index % 3]
             for _ in 0..<reviews {

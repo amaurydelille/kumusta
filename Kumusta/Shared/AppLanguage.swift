@@ -2,7 +2,7 @@ import Foundation
 import Observation
 import os
 
-/// The interface language. Kumusta ships in English only; Cantonese learning
+/// The interface language. Kumusta ships in English only; Tagalog learning
 /// content is never translated.
 enum AppLanguage: String, CaseIterable, Codable, Identifiable, Sendable {
     case english = "en"

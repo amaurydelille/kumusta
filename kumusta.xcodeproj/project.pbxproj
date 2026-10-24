@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0401D270AE2BC4C797F6AA53 /* libPods-Kumusta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22AE289D28B131F6358BB5FC /* libPods-Kumusta.a */; };
 		09375EEE4D961C3D1F45B134 /* AppStrings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 943AD63676F7A6FFA53AFC96 /* AppStrings.xcstrings */; };
 		095F9097AA639CA5B5ECFFC2 /* LessonProgressStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4007E8208A4A6EE821F20DB8 /* LessonProgressStoreTests.swift */; };
 		0D11C6D8F0594C74ABC8BC84 /* LivePracticeGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1073F72B1638EE7D0E78A2 /* LivePracticeGateway.swift */; };
+		0D383E8084CB77143C27D633 /* advanced-tagalog-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = FA16253587D5EECEE36BF4E5 /* advanced-tagalog-v1.json */; };
 		0F5EADADC61983E65D1B6F4F /* OfflineVocabularyCandidateBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60209C6741D6B4AAABA4381A /* OfflineVocabularyCandidateBank.swift */; };
 		11989419F1C0FD8DDB5D657F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B50AC8C05C395D56AE88D228 /* InfoPlist.xcstrings */; };
 		1405E9F32C4A728FCA697C97 /* RevenueCatPurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED5FA3FE1776341CCEAA7C6 /* RevenueCatPurchaseService.swift */; };
@@ -28,6 +28,7 @@
 		2DC6C41F6F25BAA28DA27C0C /* OnboardingComparisonScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FC97B323B535779ED90EA /* OnboardingComparisonScreen.swift */; };
 		30352D915D437BCD5078FAAF /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2A1F2F8A85F1C7B3B4A1F /* ProfileRepository.swift */; };
 		30BCEB9E4A258BB73A93FAFD /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC443837955709B0F725E1 /* OnboardingFlowView.swift */; };
+		34A14B6B20C184B48EE229CC /* beginner-tagalog-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D245AF8D5F70CD88B89EC9 /* beginner-tagalog-v1.json */; };
 		36C83C4A329655A809488629 /* PaywallExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40611594596DA97C712D56FB /* PaywallExitView.swift */; };
 		36F4E6EE1F0460BD0CAB8724 /* ProfileRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208AED35831721293768A88 /* ProfileRepositoryTests.swift */; };
 		372A21695FCCADDCFA8506E3 /* MemoryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C809A389EC33761017AEB43 /* MemoryStoreTests.swift */; };
@@ -100,6 +101,7 @@
 		AD0BE8AC4EDCAE43CC621D51 /* RealtimeSpeechTranscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630283F29174B6EE5D4A2278 /* RealtimeSpeechTranscription.swift */; };
 		AEE46480D94D73BC87F6A99D /* StreakCelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0DA71C0B765A5DCAF90114 /* StreakCelebrationView.swift */; };
 		B11021A377008CA8690AF6A2 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37F1418F2143B91E5232E4F /* AppLanguage.swift */; };
+		B38A620FADC41A0E245034FB /* intermediate-tagalog-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */; };
 		B7C17367F8BC9045D1150D09 /* familiar-vietnamese-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */; };
 		BBC1A597098A0396578725AE /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437538A11088DFFFBC6CE9 /* AccountCreationView.swift */; };
 		BC339D27445D0CF96B9EFA80 /* FirstStepsCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0413D31DA95D6BDC907FF01 /* FirstStepsCourse.swift */; };
@@ -195,7 +197,6 @@
 		174C94A396D873EAD2A8460A /* new-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "new-vietnamese-v1.json"; sourceTree = "<group>"; };
 		1EE83F7F7E1C185A5D1EDBE3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		206E3B9B6A2424F34F2619A3 /* OnboardingScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreens.swift; sourceTree = "<group>"; };
-		22AE289D28B131F6358BB5FC /* libPods-Kumusta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kumusta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25CEA234A4E04EA7DDD44E79 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		296CC616FB8B87AC8139A2E8 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 		29EAF6C35264725688796E34 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
@@ -243,7 +244,6 @@
 		7C5FD97C41E1DA735636685B /* ListenTileBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenTileBankTests.swift; sourceTree = "<group>"; };
 		7C809A389EC33761017AEB43 /* MemoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStoreTests.swift; sourceTree = "<group>"; };
 		815C4649BC999846256A0AF3 /* demo-before-paywall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "demo-before-paywall.mp3"; sourceTree = "<group>"; };
-		8325BD6EE465A811967DEAAC /* Pods-Kumusta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kumusta.debug.xcconfig"; path = "Target Support Files/Pods-Kumusta/Pods-Kumusta.debug.xcconfig"; sourceTree = "<group>"; };
 		83530CAFA1E82B59ED713B48 /* MetaAppEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaAppEvents.swift; sourceTree = "<group>"; };
 		83D3C8D1242F0393C90DBF8B /* LearningJourneyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningJourneyStore.swift; sourceTree = "<group>"; };
 		845CA314021A431284E99DF0 /* LearningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRepository.swift; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 		CF1073F72B1638EE7D0E78A2 /* LivePracticeGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePracticeGateway.swift; sourceTree = "<group>"; };
 		D2B7B5CB916C6BD2C0AB8409 /* SpeakingRecorderSecurityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingRecorderSecurityTests.swift; sourceTree = "<group>"; };
 		D37F1418F2143B91E5232E4F /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
-		D39EE38BC3B526EF60A07104 /* Pods-Kumusta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kumusta.release.xcconfig"; path = "Target Support Files/Pods-Kumusta/Pods-Kumusta.release.xcconfig"; sourceTree = "<group>"; };
 		D5AE6CDD9869B7BF9FB8028D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "intermediate-tagalog-v1.json"; sourceTree = "<group>"; };
 		D740DF2000BDD3C7010B2EBF /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "familiar-vietnamese-v1.json"; sourceTree = "<group>"; };
 		DCC112DDC135C8B766120882 /* Tests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Tests-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -304,6 +304,7 @@
 		DED5FA3FE1776341CCEAA7C6 /* RevenueCatPurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatPurchaseService.swift; sourceTree = "<group>"; };
 		E1601C7EDF574D3DC6C9EA60 /* LiveAudioMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMeter.swift; sourceTree = "<group>"; };
 		E3D982AA063931A57F9F4AD6 /* PracticeSessionChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionChooser.swift; sourceTree = "<group>"; };
+		E5D245AF8D5F70CD88B89EC9 /* beginner-tagalog-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "beginner-tagalog-v1.json"; sourceTree = "<group>"; };
 		E64E217419185A71B675B6F4 /* LearningJourneyStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningJourneyStoreTests.swift; sourceTree = "<group>"; };
 		E6561224AC63FDDE10FCF6B8 /* LessonProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonProgressStore.swift; sourceTree = "<group>"; };
 		E6A3E834130B70D95F93DCE6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -317,6 +318,7 @@
 		F8B89DA0B39493DA91960DE1 /* RevenueCatHostedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatHostedPaywallView.swift; sourceTree = "<group>"; };
 		F9B5108DFFBD4F9A703FBD00 /* MemoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
 		FA1550A11E01705144423528 /* ElevenLabsTTSGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsTTSGateway.swift; sourceTree = "<group>"; };
+		FA16253587D5EECEE36BF4E5 /* advanced-tagalog-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "advanced-tagalog-v1.json"; sourceTree = "<group>"; };
 		FB41AE840D5339EE40341C2D /* badge.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = badge.mp3; sourceTree = "<group>"; };
 		FEA93BFEFB9ECC6EB09FDDA6 /* ReviewSchedulingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSchedulingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -331,7 +333,6 @@
 				E7883A0DBF23F8F3981F8C06 /* RevenueCatUI in Frameworks */,
 				4CD4B4421F3420155A4546E7 /* PostHog in Frameworks */,
 				CF1754BB604B77A27F8CDE1F /* FacebookCore in Frameworks */,
-				0401D270AE2BC4C797F6AA53 /* libPods-Kumusta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,14 +378,6 @@
 				CB08EC85DD5BB79766EE2818 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		07E8F42A7E0111F7253259E3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				22AE289D28B131F6358BB5FC /* libPods-Kumusta.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		135FF0FD6700B8CA20DF458C /* Domain */ = {
@@ -470,16 +463,6 @@
 				630283F29174B6EE5D4A2278 /* RealtimeSpeechTranscription.swift */,
 			);
 			path = AI;
-			sourceTree = "<group>";
-		};
-		3AE35B4937CF909566E41E72 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8325BD6EE465A811967DEAAC /* Pods-Kumusta.debug.xcconfig */,
-				D39EE38BC3B526EF60A07104 /* Pods-Kumusta.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		3E272B1CB6D8C3955836B93C /* Products */ = {
@@ -689,8 +672,6 @@
 				30A87E425411EF12DE5899BF /* KumustaTests */,
 				BF5C3D66068EFD187EBC07AA /* KumustaUITests */,
 				3E272B1CB6D8C3955836B93C /* Products */,
-				3AE35B4937CF909566E41E72 /* Pods */,
-				07E8F42A7E0111F7253259E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -705,9 +686,12 @@
 		BFFC573ABFD409649824B3F3 /* Seed */ = {
 			isa = PBXGroup;
 			children = (
+				FA16253587D5EECEE36BF4E5 /* advanced-tagalog-v1.json */,
+				E5D245AF8D5F70CD88B89EC9 /* beginner-tagalog-v1.json */,
 				50CF0134F252416C62F55599 /* conversational-vietnamese-v1.json */,
 				F028A0F2E9D440D98ACA0D62 /* curriculum-v1.json */,
 				DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */,
+				D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */,
 				174C94A396D873EAD2A8460A /* new-vietnamese-v1.json */,
 				A5F7F4543DD4F6BBFA8253A7 /* rusty-vietnamese-v1.json */,
 			);
@@ -780,11 +764,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBF38850482207472E491566 /* Build configuration list for PBXNativeTarget "Kumusta" */;
 			buildPhases = (
-				34C56CCF299BE8CBF7FAF091 /* [CP] Check Pods Manifest.lock */,
 				8592CFCE2A2F58BFBEDB223E /* Sources */,
 				AD5FCD3CAA003557A8AFA994 /* Resources */,
 				4335F2434157C780D7DDFC9E /* Frameworks */,
-				1AA1B517383A8CC470CF5702 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -814,6 +796,8 @@
 				3F7814371D3844F1A1CCD88A /* PBXTargetDependency */,
 			);
 			name = KumustaTests;
+			packageProductDependencies = (
+			);
 			productName = KumustaTests;
 			productReference = 4D05C548628BB5D4E159C83E /* KumustaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -830,6 +814,8 @@
 				9FBC6222F6E4635D04982B07 /* PBXTargetDependency */,
 			);
 			name = KumustaUITests;
+			packageProductDependencies = (
+			);
 			productName = KumustaUITests;
 			productReference = B942B4F303C77118809A1CB3 /* KumustaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -899,12 +885,15 @@
 				DE2ACA6117545E2B8FCC1F64 /* Patriot-Black.otf in Resources */,
 				8DDAB170A6AFE95B439C6992 /* Patriot-Regular.otf in Resources */,
 				6EEC183521FDCA65472B6F70 /* PrivacyInfo.xcprivacy in Resources */,
+				0D383E8084CB77143C27D633 /* advanced-tagalog-v1.json in Resources */,
 				6D764754789DEBE4709B3BFB /* badge.mp3 in Resources */,
+				34A14B6B20C184B48EE229CC /* beginner-tagalog-v1.json in Resources */,
 				616AEE00CDFE69FA45DF2977 /* conversational-vietnamese-v1.json in Resources */,
 				F407605EEE210EE913B5CF0A /* curriculum-v1.json in Resources */,
 				BD671E949A6618FD162969FE /* demo-before-paywall.mp3 in Resources */,
 				B7C17367F8BC9045D1150D09 /* familiar-vietnamese-v1.json in Resources */,
 				F52495C22E06DD1556B809FD /* finished_lesson.mp3 in Resources */,
+				B38A620FADC41A0E245034FB /* intermediate-tagalog-v1.json in Resources */,
 				87F3932280CCAEAD5217A7C1 /* linh_chi_northern_onboarding.mp3 in Resources */,
 				57BF7595FDF895BC9044BDC8 /* mixkit-correct-answer-tone-2870.wav in Resources */,
 				6D5CF7E7FE10FB61FE030FC6 /* new-vietnamese-v1.json in Resources */,
@@ -921,48 +910,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1AA1B517383A8CC470CF5702 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		34C56CCF299BE8CBF7FAF091 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Kumusta-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0DAABD589064643C41F6CA86 /* Sources */ = {
@@ -1260,11 +1207,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.3;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC -lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumusta.app;
 				PRODUCT_NAME = Kumusta;
 				SDKROOT = iphoneos;
@@ -1354,11 +1297,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.3;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC -lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumusta.app;
 				PRODUCT_NAME = Kumusta;
 				SDKROOT = iphoneos;

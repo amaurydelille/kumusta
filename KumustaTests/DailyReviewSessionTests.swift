@@ -14,13 +14,12 @@ struct DailyReviewSessionTests {
 
     private let start = Date(timeIntervalSince1970: 1_790_000_000)
 
-    private func card(_ vietnamese: String, _ translation: String, stability: Double) -> MemoryCard {
+    private func card(_ tagalog: String, _ translation: String, stability: Double) -> MemoryCard {
         MemoryCard(
-            id: MemoryCard.key(for: vietnamese, accent: .southern),
-            vietnamese: vietnamese,
+            id: MemoryCard.key(for: tagalog),
+            tagalog: tagalog,
             translation: translation,
             hint: nil,
-            accent: .southern,
             translationLanguage: nil,
             source: .lesson,
             sourceID: UUID(),
@@ -38,8 +37,8 @@ struct DailyReviewSessionTests {
 
     private func makeSession(canSpeak: Bool = true) -> DailyReviewSession {
         let cards = [
-            card("Cảm ơn bạn.", "Thank you.", stability: 30),
-            card("Bao nhiêu tiền?", "How much is it?", stability: 5),
+            card("Salamat sa iyo.", "Thank you.", stability: 30),
+            card("Magkano ito?", "How much is it?", stability: 5),
             card("Ngon quá!", "So tasty!", stability: 1),
         ]
         var generator = SeededGenerator(state: 42)

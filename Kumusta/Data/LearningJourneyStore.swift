@@ -250,7 +250,6 @@ final class LearningJourneyStore {
                     requestedTopic: pendingPreparation.requestedTopic,
                     retry: false
                 ),
-                   content.lesson.accent == profile.accent,
                    shouldAccept(content, for: pendingPreparation) {
                     preparedContent = content
                     self.pendingPreparation = nil
@@ -301,7 +300,6 @@ final class LearningJourneyStore {
                 requestedTopic: pendingPreparation.requestedTopic,
                 retry: true
             ),
-               content.lesson.accent == profile.accent,
                shouldAccept(content, for: pendingPreparation) {
                 preparedContent = content
                 self.pendingPreparation = nil
@@ -327,10 +325,8 @@ final class LearningJourneyStore {
         await pollForPreparedLesson(using: service, profile: profile)
     }
 
-    func consumePreparedContent(accent: VietnameseAccent? = nil) -> PersonalizedLearningContent? {
-        guard let preparedContent,
-              accent == nil || preparedContent.lesson.accent == accent else { return nil }
-        return preparedContent
+    func consumePreparedContent() -> PersonalizedLearningContent? {
+        preparedContent
     }
 
     @discardableResult

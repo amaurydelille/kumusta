@@ -23,8 +23,8 @@ struct PaywallExitView: View {
 
                     ScreenHeader(
                         eyebrow: L("YOUR COURSE IS READY"),
-                        title: L("Keep real Vietnamese\nwithin reach."),
-                        subtitle: L("A plan unlocks the listening, speaking, and review loop built around your life in Vietnam.")
+                        title: L("Keep real Tagalog\nwithin reach."),
+                        subtitle: L("A plan unlocks the listening, speaking, and review loop built around your life in the Philippines.")
                     )
 
                     VStack(spacing: 12) {
@@ -35,8 +35,8 @@ struct PaywallExitView: View {
                         )
                         PaywallExitBenefit(
                             symbol: "waveform",
-                            title: L("Choose your Vietnamese accent"),
-                            detail: L("Practice with a consistent Northern or Southern female voice.")
+                            title: L("Real everyday Tagalog"),
+                            detail: L("Practice with one consistent, natural Tagalog voice.")
                         )
                         PaywallExitBenefit(
                             symbol: "rectangle.stack.badge.plus",

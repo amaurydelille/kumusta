@@ -198,7 +198,6 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
         }
         guard response.version == 3 else { throw PersonalizedLearningError.invalidResponse }
         guard let remoteLesson = response.lesson else { return nil }
-        guard remoteLesson.accent == profile.accent else { throw PersonalizedLearningError.invalidResponse }
         let content = try Self.map(remoteLesson, queueDepth: response.queueDepth)
         cached = (identity.id, Self.signature(for: profile), content, .now)
         return content
@@ -282,7 +281,6 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
         try Task.checkCancellation()
         guard response.version == 3 else { throw PersonalizedLearningError.invalidResponse }
         guard let remoteLesson = response.lesson else { return nil }
-        guard remoteLesson.accent == profile.accent else { throw PersonalizedLearningError.invalidResponse }
         let mapped = try Self.map(remoteLesson, queueDepth: response.queueDepth)
         let content = Self.applyingPendingVocabularyReviews(
             outbox.events(for: identity.id),
@@ -462,7 +460,7 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
             by: LessonSessionPlan.stagesPerRound
         ).allSatisfy { start in
             let round = remote.steps[start ..< start + LessonSessionPlan.stagesPerRound]
-            return Set(round.map(\.vietnamese)).count == 1
+            return Set(round.map(\.tagalog)).count == 1
                 && Set(round.map(\.translation)).count == 1
         }
         guard
@@ -473,11 +471,11 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
             (1 ... 5).contains(remote.difficulty),
             GeneratedLessonCopyValidator.isSafeInterfaceText(
                 remote.title,
-                spokenUtterances: remote.steps.map(\.vietnamese)
+                spokenUtterances: remote.steps.map(\.tagalog)
             ),
             GeneratedLessonCopyValidator.isSafeInterfaceText(
                 remote.scenario,
-                spokenUtterances: remote.steps.map(\.vietnamese)
+                spokenUtterances: remote.steps.map(\.tagalog)
             ),
             remote.steps.map(\.kind) == expectedKinds,
             roundContentIsAligned,
@@ -487,17 +485,17 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
                 return expectedHearRespond == (step.hearRespond != nil)
                     && (step.hearRespond == nil || Self.isValidHearRespond(
                         step.hearRespond!,
-                        target: step.vietnamese,
+                        target: step.tagalog,
                         targetTranslation: step.translation
                     ))
             },
             remote.steps.allSatisfy({ (2 ... 5).contains($0.chunks.count) }),
             remote.steps.allSatisfy({ step in
-                Self.lexicalGlossesCoverPhrase(step.wordGlosses, phrase: step.vietnamese)
+                Self.lexicalGlossesCoverPhrase(step.wordGlosses, phrase: step.tagalog)
                     && step.wordGlosses.allSatisfy { !$0.translation.isEmpty }
             }),
             remote.steps.allSatisfy({
-                !SpokenUtterance.hasLeadingSpeakerLabel($0.vietnamese)
+                !SpokenUtterance.hasLeadingSpeakerLabel($0.tagalog)
                     && !SpokenUtterance.hasLeadingSpeakerLabel($0.translation)
             }),
             remote.vocabulary.allSatisfy({
@@ -513,18 +511,17 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
             id: remote.id,
             scenario: remote.scenario,
             minutes: remote.minutes,
-            accent: remote.accent,
             steps: remote.steps.map { step in
                 LessonStep(
                     id: step.id,
                     kind: step.kind,
                     prompt: step.prompt,
-                    vietnamese: step.vietnamese,
+                    tagalog: step.tagalog,
                     translation: step.translation,
                     chunks: step.chunks.map {
                         PhraseChunk(
                             id: $0.id,
-                            vietnamese: $0.vietnamese,
+                            tagalog: $0.tagalog,
                             english: $0.english,
                             note: $0.note
                         )
@@ -543,11 +540,10 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
         let vocabulary = remote.vocabulary.map {
             VocabularyItem(
                 id: $0.id,
-                vietnamese: $0.vietnamese,
+                tagalog: $0.tagalog,
                 english: $0.english,
                 example: $0.example,
                 exampleTranslation: $0.exampleTranslation,
-                accent: remote.accent,
                 mastery: min(1, max(0, $0.mastery ?? 0.05)),
                 nextReviewAt: $0.dueAt.flatMap(parseProviderDate) ?? .now,
                 // Generated vocabulary is a recommendation until the learner
@@ -573,11 +569,11 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
             exercise.options.count == 3,
             let correctOption = exercise.correctOption,
             Set(exercise.options.map(\.id)).count == exercise.options.count,
-            !exercise.promptVietnamese.isEmpty,
-            normalizePhrase(exercise.promptVietnamese) == normalizePhrase(target),
+            !exercise.promptTagalog.isEmpty,
+            normalizePhrase(exercise.promptTagalog) == normalizePhrase(target),
             GeneratedLessonCopyValidator.isSafeInterfaceText(exercise.promptTranslation),
             normalizePhrase(exercise.promptTranslation) == normalizePhrase(targetTranslation),
-            !SpokenUtterance.hasLeadingSpeakerLabel(exercise.promptVietnamese),
+            !SpokenUtterance.hasLeadingSpeakerLabel(exercise.promptTagalog),
             normalizePhrase(correctOption.englishTranslation) == normalizePhrase(targetTranslation),
             Set(exercise.options.map { normalizePhrase($0.englishTranslation) }).count == exercise.options.count,
             exercise.options.allSatisfy({ option in
@@ -593,7 +589,7 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
 
     private static func normalizePhrase(_ value: String) -> String {
         value
-            .folding(options: [.caseInsensitive], locale: Locale(identifier: "vi_VN"))
+            .folding(options: [.caseInsensitive], locale: Locale(identifier: "fil_PH"))
             .filter { $0.isLetter || $0.isNumber || $0.isWhitespace }
             .split(whereSeparator: \.isWhitespace)
             .joined(separator: " ")
@@ -626,7 +622,7 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
     }
 
     private static func normalizedGlossToken(_ value: String) -> String {
-        let lowercased = value.lowercased(with: Locale(identifier: "vi_VN"))
+        let lowercased = value.lowercased(with: Locale(identifier: "fil_PH"))
         return String(lowercased.unicodeScalars.filter {
             !CharacterSet.punctuationCharacters.contains($0)
                 && !CharacterSet.symbols.contains($0)
@@ -687,7 +683,6 @@ actor SupabaseAdaptiveLessonService: PersonalizedLearningProviding {
 
     private static func signature(for profile: UserProfile) -> String {
         [
-            profile.accent.rawValue,
             profile.goal.rawValue,
             profile.level.rawValue,
             String(profile.adaptiveTargetLevel),
@@ -712,7 +707,7 @@ enum GeneratedLessonCopyValidator {
     ) -> Bool {
         let copy = value.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !copy.isEmpty else { return false }
-        guard !containsVietnameseOrthography(copy) else { return false }
+        guard !containsTagalogSentence(copy) else { return false }
 
         let normalizedCopy = normalizedForAnswerLeakage(copy)
         return !spokenUtterances.contains { utterance in
@@ -725,24 +720,26 @@ enum GeneratedLessonCopyValidator {
         }
     }
 
-    private static func containsVietnameseOrthography(_ value: String) -> Bool {
-        let vietnameseSpecific =
-            "[ĂăÂâĐđÊêÔôƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]"
-        if value.range(of: vietnameseSpecific, options: .regularExpression) != nil {
-            return true
-        }
-        let sharedLatinAccents = "[ÀàÁáÃãÈèÉéÌìÍíÒòÓóÕõÙùÚúÝý]"
-        guard let expression = try? NSRegularExpression(pattern: sharedLatinAccents) else {
-            return false
-        }
-        let range = NSRange(value.startIndex..., in: value)
-        return expression.numberOfMatches(in: value, range: range) >= 2
+    /// Mirrors the server's `containsTagalogSentence`: one Tagalog culture
+    /// word is fine in English copy, two distinct function words are not.
+    private static func containsTagalogSentence(_ value: String) -> Bool {
+        let words = value
+            .lowercased(with: Locale(identifier: "fil"))
+            .split(whereSeparator: { !$0.isLetter })
+            .map(String.init)
+        return Set(words.filter(tagalogFunctionWords.contains)).count >= 2
     }
+
+    private static let tagalogFunctionWords: Set<String> = [
+        "ang", "ng", "mga", "ako", "ikaw", "siya", "kami", "tayo", "kayo", "sila",
+        "hindi", "opo", "po", "salamat", "kumusta", "ito", "iyan", "iyon", "dito",
+        "doon", "naman", "lang", "rin", "yung", "ninyo", "natin", "namin", "akin",
+        "magkano", "saan", "ano", "paano",
+    ]
 
     private static func normalizedForAnswerLeakage(_ value: String) -> String {
         value
-            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "vi_VN"))
-            .replacingOccurrences(of: "đ", with: "d")
+            .folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "fil_PH"))
             .filter { $0.isLetter || $0.isNumber || $0.isWhitespace }
             .split(whereSeparator: \.isWhitespace)
             .joined(separator: " ")
@@ -895,14 +892,13 @@ private struct RemoteGeneratedLesson: Decodable {
     let title: String
     let scenario: String
     let minutes: Int
-    let accent: VietnameseAccent
     let difficulty: Double
     let steps: [RemoteGeneratedStep]
     let vocabulary: [RemoteGeneratedVocabulary]
     let queuePriority: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id, model, source, title, scenario, minutes, accent, difficulty, steps, vocabulary
+        case id, model, source, title, scenario, minutes, difficulty, steps, vocabulary
         case schemaVersion = "schema_version"
         case promptVersion = "prompt_version"
         case queuePriority = "queue_priority"
@@ -913,14 +909,14 @@ private struct RemoteGeneratedStep: Decodable {
     let id: UUID
     let kind: LessonStepKind
     let prompt: String
-    let vietnamese: String
+    let tagalog: String
     let translation: String
     let chunks: [RemoteGeneratedChunk]
     let wordGlosses: [RemoteGeneratedWordGloss]
     let hearRespond: HearRespondExercise?
 
     enum CodingKeys: String, CodingKey {
-        case id, kind, prompt, vietnamese, translation, chunks
+        case id, kind, prompt, tagalog, translation, chunks
         case wordGlosses = "word_glosses"
         case hearRespond = "hear_respond"
     }
@@ -934,14 +930,14 @@ private struct RemoteGeneratedWordGloss: Decodable {
 
 private struct RemoteGeneratedChunk: Decodable {
     let id: UUID
-    let vietnamese: String
+    let tagalog: String
     let english: String
     let note: String
 }
 
 private struct RemoteGeneratedVocabulary: Decodable {
     let id: UUID
-    let vietnamese: String
+    let tagalog: String
     let english: String
     let example: String
     let exampleTranslation: String
@@ -949,7 +945,7 @@ private struct RemoteGeneratedVocabulary: Decodable {
     let dueAt: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, vietnamese, english, example, mastery
+        case id, tagalog, english, example, mastery
         case exampleTranslation = "example_translation"
         case dueAt = "due_at"
     }

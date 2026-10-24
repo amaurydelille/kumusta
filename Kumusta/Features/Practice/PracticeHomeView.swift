@@ -83,7 +83,7 @@ struct PracticeHomeView: View {
                 )
             }
         }
-        .task(id: "\(appState.profile.accent.rawValue)-\(appState.profile.level.rawValue)") {
+        .task(id: "\(appState.profile.level.rawValue)") {
             if !didTrackPracticeOpen {
                 didTrackPracticeOpen = true
                 dependencies.analytics.track(
@@ -509,7 +509,7 @@ struct PracticeHomeView: View {
     }
 
     private var voiceLabel: String {
-        appState.profile.accent == .southern ? "LINH · SAIGON" : "LAN · HANOI"
+        "KALABAW · MANILA"
     }
 
     private func barHeight(_ index: Int) -> CGFloat {
@@ -520,7 +520,7 @@ struct PracticeHomeView: View {
 
     private func playPhrase() {
         guard let currentLesson = lesson,
-              let phrase = currentLesson.steps.first?.vietnamese,
+              let phrase = currentLesson.steps.first?.tagalog,
               !isPlaying else { return }
         isPlaying = true
         listenCount += 1
@@ -529,7 +529,6 @@ struct PracticeHomeView: View {
             do {
                 try await dependencies.audioService.play(
                     text: phrase,
-                    accent: currentLesson.accent,
                     speed: AudioPreferences().defaultSpeed
                 )
             } catch {
@@ -570,10 +569,6 @@ struct PracticeHomeView: View {
             return
         }
 
-        if lesson?.accent != appState.profile.accent {
-            lesson = nil
-            personalizedContent = nil
-        }
         if dependencies.learningJourneyStore.isPreparingNextLesson {
             lesson = nil
             personalizedContent = nil
@@ -581,7 +576,7 @@ struct PracticeHomeView: View {
             errorMessage = nil
             return
         }
-        if let prepared = dependencies.learningJourneyStore.consumePreparedContent(accent: appState.profile.accent) {
+        if let prepared = dependencies.learningJourneyStore.consumePreparedContent() {
             personalizedContent = prepared
             lesson = prepared.lesson
             isLoading = false
@@ -596,7 +591,6 @@ struct PracticeHomeView: View {
         // Resolve both sources before painting the flow so an authored lesson
         // cannot flash over an in-progress personalized lesson.
         let authoredLesson = try? await dependencies.learningRepository.todayLesson(
-            accent: appState.profile.accent,
             level: appState.profile.level,
             dailyMinutes: appState.profile.dailyMinutes
         )
@@ -749,13 +743,11 @@ struct PracticeHomeView: View {
     private func loadRoadmap() {
         do {
             roadmapLessons = try RoadmapCatalog.load(
-                accent: appState.profile.accent,
                 level: appState.profile.level
             )
             isUsingAuthoritativeRoadmap = true
         } catch {
             roadmapLessons = RoadmapCatalog.fallback(
-                accent: appState.profile.accent,
                 level: appState.profile.level
             )
             isUsingAuthoritativeRoadmap = false
@@ -799,7 +791,7 @@ struct PracticeHomeView: View {
         )
         applyPreparedContentIfAvailable()
         if !dependencies.learningJourneyStore.isPreparingNextLesson,
-           dependencies.learningJourneyStore.consumePreparedContent(accent: appState.profile.accent) == nil,
+           dependencies.learningJourneyStore.consumePreparedContent() == nil,
            lesson == nil,
            !Task.isCancelled {
             await loadAuthoredFallbackLesson()
@@ -820,7 +812,7 @@ struct PracticeHomeView: View {
         )
         applyPreparedContentIfAvailable()
         if !dependencies.learningJourneyStore.isPreparingNextLesson,
-           dependencies.learningJourneyStore.consumePreparedContent(accent: appState.profile.accent) == nil,
+           dependencies.learningJourneyStore.consumePreparedContent() == nil,
            lesson == nil,
            !Task.isCancelled {
             await loadAuthoredFallbackLesson()
@@ -829,7 +821,7 @@ struct PracticeHomeView: View {
 
     private func applyPreparedContentIfAvailable() {
         guard currentTodayRoadmapLesson == nil else { return }
-        guard let prepared = dependencies.learningJourneyStore.consumePreparedContent(accent: appState.profile.accent) else { return }
+        guard let prepared = dependencies.learningJourneyStore.consumePreparedContent() else { return }
         personalizedContent = prepared
         lesson = prepared.lesson
         selectedChoiceID = nil
@@ -840,7 +832,6 @@ struct PracticeHomeView: View {
 
     private func loadAuthoredFallbackLesson() async {
         let fallback = try? await dependencies.learningRepository.todayLesson(
-            accent: appState.profile.accent,
             level: appState.profile.level,
             dailyMinutes: appState.profile.dailyMinutes
         )

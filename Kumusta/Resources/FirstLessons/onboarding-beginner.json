@@ -1,0 +1,129 @@
+{
+  "id": "onboarding-beginner-v1",
+  "version": 1,
+  "level": "beginner",
+  "mode": "onboarding",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0111",
+  "replayTitle": "Say hello, your name and thanks",
+  "estimatedMinutes": 2,
+  "intro": {
+    "hook": "Kumusta!",
+    "hookTranslation": "Hi! How are you?",
+    "title": "Your first words in Tagalog",
+    "subtitle": "In about 2 minutes, you’ll say these out loud:",
+    "goals": [
+      { "tagalog": "Kumusta!", "meaning": "Hi! How are you?" },
+      { "tagalog": "Ako si…", "meaning": "I’m…" },
+      { "tagalog": "Salamat!", "meaning": "Thank you!" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-po",
+      "symbol": "hand.wave.fill",
+      "eyebrow": "THE MAGIC WORD",
+      "title": "Add po to show respect",
+      "body": "Filipinos add a tiny word, po, to be polite with elders, strangers and staff. Same greeting, warmer manners. Tap each one.",
+      "samples": [
+        { "text": "Kumusta", "meaning": "Hi! (to a friend)", "contour": "level" },
+        { "text": "Kumusta po", "meaning": "Hi! (with respect)", "contour": "level" }
+      ],
+      "footnote": "Kalabaw is your new friend, so you can skip po with him."
+    },
+    {
+      "kind": "listenPick",
+      "id": "pick-po",
+      "prompt": "Which one did you hear?",
+      "answer": "Kumusta po",
+      "options": [
+        { "text": "Kumusta", "meaning": "Hi! (to a friend)", "contour": "level" },
+        { "text": "Kumusta po", "meaning": "Hi! (with respect)", "contour": "level" }
+      ]
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-pangalan",
+      "audio": "Anong pangalan mo?",
+      "answer": "What’s your name?",
+      "options": ["What’s your name?", "How are you?", "Thank you"],
+      "note": "Pangalan means name, and mo means your."
+    },
+    {
+      "kind": "build",
+      "id": "build-ako-si",
+      "english": "Hi! I’m…",
+      "answer": [
+        { "text": "Hi", "gloss": "hi" },
+        { "text": "ako", "gloss": "I" },
+        { "text": "si", "gloss": "(comes before a name)" }
+      ],
+      "distractors": [
+        { "text": "ka", "gloss": "you" },
+        { "text": "mo", "gloss": "your" }
+      ]
+    },
+    {
+      "kind": "newPhrase",
+      "id": "new-salamat",
+      "tagalog": "Salamat po",
+      "translation": "Thank you",
+      "chunks": [
+        { "tagalog": "salamat", "meaning": "thanks" },
+        { "tagalog": "po", "meaning": "(with respect)" }
+      ],
+      "tip": "Stress the last beat: sa-la-MAT. With a friend, plain Salamat! is perfect."
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "PUT IT TOGETHER",
+      "title": "Your first conversation",
+      "turns": [
+        {
+          "buddy": "Kumusta!",
+          "buddyTranslation": "Hi! How are you?",
+          "reply": "Kumusta!",
+          "replyTranslation": "Hi!",
+          "target": "Kumusta",
+          "accepted": ["Kamusta"]
+        },
+        {
+          "buddy": "Anong pangalan mo?",
+          "buddyTranslation": "What’s your name?",
+          "reply": "Ako si {name}.",
+          "replyTranslation": "I’m {name}.",
+          "target": "Ako si"
+        },
+        {
+          "buddy": "Ikinagagalak kitang makilala!",
+          "buddyTranslation": "Nice to meet you!",
+          "reply": "Salamat!",
+          "replyTranslation": "Thank you!",
+          "target": "Salamat",
+          "accepted": ["Salamat po"]
+        }
+      ],
+      "closing": {
+        "text": "Sige, ingat ka!",
+        "translation": "Okay, take care!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "You just spoke Tagalog!",
+    "subtitle": "A greeting, your name and a thank you: your first real exchange.",
+    "phrases": [
+      { "tagalog": "Kumusta!", "meaning": "Hi! How are you?" },
+      { "tagalog": "Ako si…", "meaning": "I’m…" },
+      { "tagalog": "Salamat po", "meaning": "Thank you (with respect)" }
+    ],
+    "words": [
+      { "tagalog": "kumusta", "meaning": "hi / how are you" },
+      { "tagalog": "po", "meaning": "(adds respect)" },
+      { "tagalog": "ako", "meaning": "I / me" },
+      { "tagalog": "pangalan", "meaning": "name" },
+      { "tagalog": "salamat", "meaning": "thank you" }
+    ]
+  }
+}

@@ -41,12 +41,14 @@
 	<string>Kumusta</string>
 	<key>FacebookSKAdNetworkReportEnabled</key>
 	<false/>
+	<key>KUMUSTA_ENTITLEMENT_ID</key>
+	<string>$(KUMUSTA_ENTITLEMENT_ID)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.education</string>
 	<key>NSAdvertisingAttributionReportEndpoint</key>
 	<string>https://appsflyer-skadnetwork.com/</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Kumusta uses your microphone when you practice speaking Vietnamese.</string>
+	<string>Kumusta uses your microphone when you practice speaking Tagalog.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Kumusta uses your activity to measure ad performance and improve the relevance of our promotions.</string>
 	<key>POSTHOG_HOST</key>
@@ -80,7 +82,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>KUMUSTA_ENTITLEMENT_ID</key>
-	<string>$(KUMUSTA_ENTITLEMENT_ID)</string>
 </dict>
 </plist>

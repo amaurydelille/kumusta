@@ -80,7 +80,6 @@ struct OnboardingFlowView: View {
                     name: spokenName,
                     goal: draft.goal,
                     level: draft.level,
-                    accent: draft.accent,
                     dailyMinutes: draft.dailyMinutes,
                     didFinishLesson: didFinishLesson
                 ) {
@@ -135,7 +134,7 @@ struct OnboardingFlowView: View {
         .onChange(of: step) {
             trackStep()
             // Personalized clips take ~10s+ to generate. Start as soon as the
-            // name and accent are known so the greeting is ready on arrival;
+            // name is known so the greeting is ready on arrival;
             // repeat at plan building in case either was changed. Requests
             // already in flight are reused.
             // Only the name line is generated live; every other lesson line
@@ -143,8 +142,7 @@ struct OnboardingFlowView: View {
             if step == .goal || step == .building, let spokenName {
                 dependencies.onboardingConversationAudio.prefetch(
                     lines: [.replyName],
-                    name: spokenName,
-                    accent: draft.accent
+                    name: spokenName
                 )
             }
         }
@@ -210,13 +208,12 @@ struct OnboardingFlowView: View {
         }
     }
 
-    /// The level- and accent-specific welcome lesson, right before the
+    /// The level-specific welcome lesson, right before the
     /// paywall. Finishing or skipping it completes onboarding.
     @ViewBuilder
     private var firstLesson: some View {
         if let script = try? FirstLessonCatalog.load(
             FirstLessonCatalog.onboardingFile(for: draft.level),
-            accent: draft.accent,
             learnerName: spokenName
         ) {
             FirstLessonView(

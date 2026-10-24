@@ -4,7 +4,6 @@ import SwiftUI
 /// quiet confirmation once they are done, and a one-line reminder that the
 /// deck exists when nothing is due yet. Hidden until the first lesson.
 struct DailyReviewCard: View {
-    let accent: VietnameseAccent
     let onStart: () -> Void
 
     @Environment(DependencyContainer.self) private var dependencies
@@ -16,8 +15,8 @@ struct DailyReviewCard: View {
 
     var body: some View {
         let _ = refreshDate
-        let deckSize = store.cards(for: accent).count
-        let due = store.dueCount(for: accent)
+        let deckSize = store.allCards().count
+        let due = store.dueCount()
         let today = store.todaySummary()
 
         Group {
@@ -28,12 +27,12 @@ struct DailyReviewCard: View {
             } else if today.reviewed > 0 {
                 statusLine(
                     title: L("Review done · %lld of %lld remembered", today.recalled, today.reviewed),
-                    detail: store.nextReviewDate(for: accent).map { ReviewSchedulePhrasing.nextReview($0) }
+                    detail: store.nextReviewDate().map { ReviewSchedulePhrasing.nextReview($0) }
                 )
             } else {
                 statusLine(
                     title: L(one: "%lld phrase in your memory", other: "%lld phrases in your memory", count: deckSize),
-                    detail: store.nextReviewDate(for: accent).map { ReviewSchedulePhrasing.nextReview($0) }
+                    detail: store.nextReviewDate().map { ReviewSchedulePhrasing.nextReview($0) }
                 )
             }
         }

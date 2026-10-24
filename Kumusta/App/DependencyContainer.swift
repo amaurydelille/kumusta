@@ -12,13 +12,12 @@ final class DependencyContainer {
     let purchaseService: any PurchaseService
     let audioService: any AudioService
     let offlineAudioService: any AudioService
-    let accentSampleAudioService: any AccentSampleAudioService
     let onboardingDemoAudioService: any OnboardingDemoAudioService
     let onboardingConversationAudio: OnboardingConversationAudio
     let analytics: any AnalyticsTracking
     let authSessionProvider: (any AuthSessionProviding)?
     let signedInRepository: (any SignedInKumustaSyncing)?
-    let speechRecognitionService: (any VietnameseSpeechRecognizing)?
+    let speechRecognitionService: (any TagalogSpeechRecognizing)?
     let personalizedLearningService: (any PersonalizedLearningProviding)?
     let accountDataService: (any AccountDataServicing)?
     let savedLessonWordStore: SavedLessonWordStore
@@ -38,13 +37,12 @@ final class DependencyContainer {
         purchaseService: any PurchaseService,
         audioService: any AudioService,
         offlineAudioService: (any AudioService)? = nil,
-        accentSampleAudioService: any AccentSampleAudioService,
         onboardingDemoAudioService: any OnboardingDemoAudioService,
         onboardingConversationAudio: OnboardingConversationAudio? = nil,
         analytics: any AnalyticsTracking,
         authSessionProvider: (any AuthSessionProviding)? = nil,
         signedInRepository: (any SignedInKumustaSyncing)? = nil,
-        speechRecognitionService: (any VietnameseSpeechRecognizing)? = nil,
+        speechRecognitionService: (any TagalogSpeechRecognizing)? = nil,
         personalizedLearningService: (any PersonalizedLearningProviding)? = nil,
         accountDataService: (any AccountDataServicing)? = nil,
         savedLessonWordStore: SavedLessonWordStore = SavedLessonWordStore(),
@@ -63,7 +61,6 @@ final class DependencyContainer {
         self.purchaseService = purchaseService
         self.audioService = audioService
         self.offlineAudioService = offlineAudioService ?? audioService
-        self.accentSampleAudioService = accentSampleAudioService
         self.onboardingDemoAudioService = onboardingDemoAudioService
         self.onboardingConversationAudio = onboardingConversationAudio ?? OnboardingConversationAudio()
         self.analytics = analytics
@@ -102,7 +99,6 @@ final class DependencyContainer {
             Task {
                 await audioService.prewarm(
                     texts: [word.word],
-                    accent: word.accent,
                     speed: speed,
                     purpose: .vocabulary
                 )
@@ -134,7 +130,7 @@ final class DependencyContainer {
             configuration: configuration,
             analytics: analytics
         )
-        let fallbackAudio = SystemVietnameseAudioService()
+        let fallbackAudio = SystemTagalogAudioService()
         let bundledOnboardingAudio = BundledOnboardingAudioService(bundle: bundle)
 
         guard
@@ -148,7 +144,6 @@ final class DependencyContainer {
                 purchaseService: purchaseService,
                 audioService: fallbackAudio,
                 offlineAudioService: fallbackAudio,
-                accentSampleAudioService: bundledOnboardingAudio,
                 onboardingDemoAudioService: bundledOnboardingAudio,
                 analytics: analytics
             )
@@ -181,11 +176,10 @@ final class DependencyContainer {
             learningRepository: SeededLearningRepository(),
             purchaseService: purchaseService,
             // A regional learning voice must never be silently replaced by
-            // Apple's generic Vietnamese synthesizer. Provider failures stay
+            // Apple's generic Tagalog synthesizer. Provider failures stay
             // visible and retryable instead of teaching the wrong speaker.
             audioService: lessonAudio,
             offlineAudioService: fallbackAudio,
-            accentSampleAudioService: bundledOnboardingAudio,
             onboardingDemoAudioService: bundledOnboardingAudio,
             onboardingConversationAudio: OnboardingConversationAudio(
                 client: supabase.client,
@@ -223,7 +217,6 @@ final class DependencyContainer {
             learningRepository: SeededLearningRepository(),
             purchaseService: PreviewPurchaseService(),
             audioService: PreviewAudioService(),
-            accentSampleAudioService: bundledOnboardingAudio,
             onboardingDemoAudioService: bundledOnboardingAudio,
             analytics: AppAnalytics(),
             speechRecognitionService: PreviewSpeechRecognitionService(),

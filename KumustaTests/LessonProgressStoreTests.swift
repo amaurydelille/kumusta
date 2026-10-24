@@ -10,8 +10,7 @@ struct LessonProgressStoreTests {
         let defaults = try #require(UserDefaults(suiteName: suiteName))
         defer { defaults.removePersistentDomain(forName: suiteName) }
         let lesson = SampleContent.dailySession(
-            accent: .southern,
-            level: .familiar,
+            level: .intermediate,
             dailyMinutes: 7
         )
 
@@ -28,8 +27,7 @@ struct LessonProgressStoreTests {
         let defaults = try #require(UserDefaults(suiteName: suiteName))
         defer { defaults.removePersistentDomain(forName: suiteName) }
         let lesson = SampleContent.dailySession(
-            accent: .southern,
-            level: .familiar,
+            level: .intermediate,
             dailyMinutes: 5
         )
         let store = LessonProgressStore(defaults: defaults)
@@ -46,8 +44,7 @@ struct LessonProgressStoreTests {
         let defaults = try #require(UserDefaults(suiteName: suiteName))
         defer { defaults.removePersistentDomain(forName: suiteName) }
         let lesson = SampleContent.dailySession(
-            accent: .northern,
-            level: .conversational,
+            level: .advanced,
             dailyMinutes: 5
         )
         let store = LessonProgressStore(defaults: defaults)

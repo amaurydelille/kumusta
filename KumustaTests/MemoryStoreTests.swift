@@ -32,7 +32,7 @@ struct MemoryStoreTests {
 
     private func step(
         _ kind: LessonStepKind,
-        _ vietnamese: String,
+        _ tagalog: String,
         _ translation: String,
         prompt: String = "Listen"
     ) -> LessonStep {
@@ -40,25 +40,24 @@ struct MemoryStoreTests {
             id: UUID(),
             kind: kind,
             prompt: prompt,
-            vietnamese: vietnamese,
+            tagalog: tagalog,
             translation: translation,
             chunks: []
         )
     }
 
-    private func greetingLesson(accent: VietnameseAccent = .southern) -> Lesson {
+    private func greetingLesson() -> Lesson {
         Lesson(
             id: UUID(),
             scenario: "Greetings",
             minutes: 5,
-            accent: accent,
             steps: [
-                step(.coldListen, "Chào anh ạ.", "Hello."),
-                step(.decode, "Chào anh ạ.", "Hello."),
-                step(.speak, "Chào anh ạ.", "Hello.", prompt: "Greet an older man politely."),
-                step(.coldListen, "Chào chị ạ.", "Hello."),
-                step(.speak, "Chào chị ạ.", "Hello.", prompt: "Greet an older woman politely."),
-                step(.coldListen, "Cảm ơn bạn.", "Thank you."),
+                step(.coldListen, "Kumusta po, Kuya.", "Hello."),
+                step(.decode, "Kumusta po, Kuya.", "Hello."),
+                step(.speak, "Kumusta po, Kuya.", "Hello.", prompt: "Greet an older man politely."),
+                step(.coldListen, "Kumusta po, Ate.", "Hello."),
+                step(.speak, "Kumusta po, Ate.", "Hello.", prompt: "Greet an older woman politely."),
+                step(.coldListen, "Salamat sa iyo.", "Thank you."),
             ]
         )
     }
@@ -71,12 +70,12 @@ struct MemoryStoreTests {
 
         store.enroll(lesson: greetingLesson())
 
-        let cards = store.cards(for: .southern)
+        let cards = store.allCards()
         #expect(cards.count == 3)
-        let older = store.cards[MemoryCard.key(for: "chào anh ạ", accent: .southern)]
+        let older = store.cards[MemoryCard.key(for: "kumusta po kuya")]
         #expect(older?.hint == "Greet an older man politely.")
         #expect(older?.source == .lesson)
-        #expect(store.cards[MemoryCard.key(for: "Cảm ơn bạn", accent: .southern)]?.hint == nil)
+        #expect(store.cards[MemoryCard.key(for: "Salamat sa iyo")]?.hint == nil)
     }
 
     @Test
@@ -87,17 +86,17 @@ struct MemoryStoreTests {
         let store = makeStore(fileURL: file, clock: clock)
 
         store.enroll(lesson: greetingLesson())
-        #expect(store.dueCount(for: .southern) == 0)
+        #expect(store.dueCount() == 0)
 
         clock.date = start.addingTimeInterval(86_400)
-        #expect(store.dueCount(for: .southern) == 3)
-        #expect(store.dueCount(for: .northern) == 0)
+        #expect(store.dueCount() == 3)
     }
 
     @Test
-    func toneMarksKeepPhrasesApart() {
-        #expect(MemoryCard.key(for: "ma", accent: .southern) != MemoryCard.key(for: "má", accent: .southern))
-        #expect(MemoryCard.key(for: "  Chào   bạn! ", accent: .southern) == MemoryCard.key(for: "chào bạn", accent: .southern))
+    func stressMarksAndCaseDoNotSplitAPhrase() {
+        #expect(MemoryCard.key(for: "salamat") == MemoryCard.key(for: "Salámat"))
+        #expect(MemoryCard.key(for: "salamat") != MemoryCard.key(for: "salamat po"))
+        #expect(MemoryCard.key(for: "  Kumusta   ka! ") == MemoryCard.key(for: "kumusta ka"))
     }
 
     @Test
@@ -119,9 +118,9 @@ struct MemoryStoreTests {
         )
 
         store.reconcile(completedLessons: [record], savedWords: [])
-        #expect(store.dueCount(for: .southern) == 3)
+        #expect(store.dueCount() == 3)
 
-        let key = MemoryCard.key(for: "Cảm ơn bạn", accent: .southern)
+        let key = MemoryCard.key(for: "Salamat sa iyo")
         store.record(cardID: key, grade: .good, exercise: .listenMeaning)
         let reviewed = store.cards[key]
 
@@ -137,20 +136,19 @@ struct MemoryStoreTests {
         let store = makeStore(fileURL: file, clock: Clock(start))
         let word = SavedLessonWord(
             id: UUID(),
-            word: "bạn",
+            word: "kaibigan",
             translation: "friend",
-            sentence: "Chào bạn.",
+            sentence: "Kumusta, kaibigan.",
             sentenceTranslation: "Hi.",
-            accent: .northern,
             lessonID: UUID(),
             savedAt: start
         )
 
         store.enroll(savedWord: word)
 
-        let card = store.cards[MemoryCard.key(for: "bạn", accent: .northern)]
+        let card = store.cards[MemoryCard.key(for: "kaibigan")]
         #expect(card?.source == .savedWord)
-        #expect(card?.hint == "Chào bạn.")
+        #expect(card?.hint == "Kumusta, kaibigan.")
     }
 
     @Test
@@ -160,16 +158,16 @@ struct MemoryStoreTests {
         let clock = Clock(start)
         let store = makeStore(fileURL: file, clock: clock)
         let steps = (0..<20).map { index in
-            step(.coldListen, "câu số \(index)", "sentence \(index)")
+            step(.coldListen, "pangungusap \(index)", "sentence \(index)")
         }
-        let lesson = Lesson(id: UUID(), scenario: "Many", minutes: 5, accent: .southern, steps: steps)
+        let lesson = Lesson(id: UUID(), scenario: "Many", minutes: 5, steps: steps)
         store.enroll(lesson: lesson)
-        let forgotten = MemoryCard.key(for: "câu số 7", accent: .southern)
+        let forgotten = MemoryCard.key(for: "pangungusap 7")
         // A lapse leaves this card weaker than the rest of the due set.
         store.record(cardID: forgotten, grade: .again, exercise: .listenMeaning, at: start.addingTimeInterval(86_400 * 1.5))
         clock.date = start.addingTimeInterval(86_400 * 4)
 
-        let session = store.sessionCards(for: .southern)
+        let session = store.sessionCards()
 
         #expect(session.count == MemoryStore.sessionSize)
         #expect(session.first?.id == forgotten)
@@ -185,12 +183,12 @@ struct MemoryStoreTests {
         let store = makeStore(fileURL: file, clock: clock)
         store.enroll(lesson: greetingLesson())
         clock.date = start.addingTimeInterval(86_400 * 2)
-        let key = MemoryCard.key(for: "Chào chị ạ", accent: .southern)
+        let key = MemoryCard.key(for: "Kumusta po, Ate")
 
         let updated = store.record(cardID: key, grade: .good, exercise: .build)
 
         #expect(updated?.memory.reps == 2)
-        #expect(store.dueCards(for: .southern).contains { $0.id == key } == false)
+        #expect(store.dueCards().contains { $0.id == key } == false)
         #expect(store.todaySummary(calendar: Self.utcCalendar) == (reviewed: 1, recalled: 1))
         #expect(store.log.last?.exercise == .build)
     }
@@ -202,7 +200,7 @@ struct MemoryStoreTests {
         let clock = Clock(start)
         let store = makeStore(fileURL: file, clock: clock)
         store.enroll(lesson: greetingLesson())
-        let key = MemoryCard.key(for: "Chào anh ạ", accent: .southern)
+        let key = MemoryCard.key(for: "Kumusta po, Kuya")
         store.record(cardID: key, grade: .good, exercise: .speak)
 
         let restored = makeStore(fileURL: file, clock: clock)
@@ -225,12 +223,12 @@ struct MemoryStoreTests {
         let lesson = greetingLesson()
         phone.enroll(lesson: lesson)
         tablet.enroll(lesson: lesson)
-        let key = MemoryCard.key(for: "Chào anh ạ", accent: .southern)
+        let key = MemoryCard.key(for: "Kumusta po, Kuya")
         clock.date = start.addingTimeInterval(86_400 * 2)
         tablet.record(cardID: key, grade: .good, exercise: .speak)
         phone.enroll(savedWord: SavedLessonWord(
-            id: UUID(), word: "nước", translation: "water", sentence: "", sentenceTranslation: "",
-            accent: .southern, lessonID: UUID(), savedAt: start
+            id: UUID(), word: "tubig", translation: "water", sentence: "", sentenceTranslation: "",
+            lessonID: UUID(), savedAt: start
         ))
 
         phone.merge(tablet.snapshot())

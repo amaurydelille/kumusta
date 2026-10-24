@@ -158,7 +158,7 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
         return SpeechTranscription(
             version: 1,
             transcript: transcript,
-            languageCode: "vie",
+            languageCode: "fil",
             languageProbability: nil,
             words: []
         )
@@ -181,7 +181,7 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
     }
 }
 
-extension VietnameseSpeechRecognizing {
+extension TagalogSpeechRecognizing {
     /// Prefers the transcript streamed during the take and uploads the take
     /// only when the stream cannot deliver. Access errors surface directly so
     /// the same gate is not spent twice.

@@ -73,7 +73,7 @@ final class MemoryStore {
     func reconcile(completedLessons: [CompletedLessonRecord], savedWords: [SavedLessonWord]) {
         var changed = false
         for record in completedLessons.sorted(by: { $0.completedAt < $1.completedAt }) {
-            let candidates = MemoryCandidate.phrases(in: record.lesson, accent: record.lesson.accent)
+            let candidates = MemoryCandidate.phrases(in: record.lesson)
             changed = insertMissing(candidates, metAt: record.completedAt, grade: .hard) || changed
             changed = repairMeaningLanguage(from: candidates) || changed
         }
@@ -90,7 +90,7 @@ final class MemoryStore {
     /// produce the phrase again.
     func enroll(lesson: Lesson, at date: Date? = nil) {
         let date = date ?? now()
-        let candidates = MemoryCandidate.phrases(in: lesson, accent: lesson.accent)
+        let candidates = MemoryCandidate.phrases(in: lesson)
         var changed = insertMissing(candidates, metAt: date, grade: .hard)
         for candidate in candidates {
             guard var card = cards[candidate.key],
@@ -116,18 +116,18 @@ final class MemoryStore {
             changed = true
         }
         for lesson in lessons {
-            let candidates = MemoryCandidate.phrases(in: lesson, accent: lesson.accent)
+            let candidates = MemoryCandidate.phrases(in: lesson)
             guard let language = candidates.first.map({ $0.translationLanguage ?? .english }) else { continue }
             for candidate in candidates {
                 learn(.init(translation: candidate.translation, hint: candidate.hint), language: language, for: candidate.key)
             }
-            // A word means different things in different phrases ("bộ" is
-            // "set" alone, "progress" in "tiến bộ"), so only the gloss from
+            // A word means different things in different phrases ("na" is
+            // "already" alone, a linker in "mabuting tao"), so only the gloss from
             // the sentence the word was saved from counts.
             for step in lesson.steps {
-                let sentence = MemoryCard.normalized(step.vietnamese)
+                let sentence = MemoryCard.normalized(step.tagalog)
                 for gloss in step.wordGlosses {
-                    let key = MemoryCard.key(for: gloss.token, accent: lesson.accent)
+                    let key = MemoryCard.key(for: gloss.token)
                     guard let card = cards[key],
                           card.source == .savedWord,
                           card.hint.map(MemoryCard.normalized) == sentence,
@@ -172,10 +172,9 @@ final class MemoryStore {
             let key = candidate.key
             let card = MemoryCard(
                 id: key,
-                vietnamese: candidate.vietnamese,
+                tagalog: candidate.tagalog,
                 translation: candidate.translation,
                 hint: candidate.hint,
-                accent: candidate.accent,
                 translationLanguage: candidate.translationLanguage,
                 source: candidate.source,
                 sourceID: candidate.sourceID,
@@ -190,14 +189,14 @@ final class MemoryStore {
 
     // MARK: - Queries
 
-    func cards(for accent: VietnameseAccent) -> [MemoryCard] {
-        cards.values.filter { $0.accent == accent }
+    func allCards() -> [MemoryCard] {
+        Array(cards.values)
     }
 
     /// Cards whose review day has come, the most-forgotten first.
-    func dueCards(for accent: VietnameseAccent, at date: Date? = nil) -> [MemoryCard] {
+    func dueCards(at date: Date? = nil) -> [MemoryCard] {
         let date = date ?? now()
-        let due: [(card: MemoryCard, recall: Double)] = cards(for: accent)
+        let due: [(card: MemoryCard, recall: Double)] = allCards()
             .filter { $0.memory.dueAt <= date }
             .map { ($0, scheduler.retrievability(of: $0.memory, at: date)) }
         return due
@@ -207,23 +206,23 @@ final class MemoryStore {
             .map(\.card)
     }
 
-    func dueCount(for accent: VietnameseAccent) -> Int {
+    func dueCount() -> Int {
         let date = now()
         return cards.values.reduce(0) { count, card in
-            count + (card.accent == accent && card.memory.dueAt <= date ? 1 : 0)
+            count + (card.memory.dueAt <= date ? 1 : 0)
         }
     }
 
     /// One short session: the most-forgotten due cards, capped so a backlog
     /// never turns into a wall of reviews.
-    func sessionCards(for accent: VietnameseAccent, limit: Int = MemoryStore.sessionSize) -> [MemoryCard] {
-        Array(dueCards(for: accent).prefix(limit))
+    func sessionCards(limit: Int = MemoryStore.sessionSize) -> [MemoryCard] {
+        Array(dueCards().prefix(limit))
     }
 
     /// The earliest upcoming review day for cards that are not due yet.
-    func nextReviewDate(for accent: VietnameseAccent) -> Date? {
+    func nextReviewDate() -> Date? {
         let date = now()
-        return cards(for: accent)
+        return allCards()
             .map(\.memory.dueAt)
             .filter { $0 > date }
             .min()

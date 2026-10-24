@@ -127,7 +127,7 @@ final class DailyReviewSession {
         canSpeak = false
         for position in tasks.indices where position >= index && tasks[position].kind == .speak {
             let canBuild = (2...ListenTileBank.maximumSyllables).contains(tasks[position].card.syllableCount)
-            tasks[position].kind = canBuild ? .build : .pickVietnamese
+            tasks[position].kind = canBuild ? .build : .pickTagalog
         }
     }
 }

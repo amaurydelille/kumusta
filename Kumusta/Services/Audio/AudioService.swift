@@ -98,10 +98,6 @@ struct AudioPreferences: Codable, Equatable, Sendable {
 enum AudioPlaybackPurpose: String, Codable, Sendable {
     case lesson
     case vocabulary
-    /// An explicit side-by-side accent sample. Unlike normal lesson audio,
-    /// this must honor the accent supplied by the caller even when it differs
-    /// from the learner's saved preference.
-    case accentComparison
 }
 
 enum CachedAudioError: LocalizedError, Sendable {
@@ -120,7 +116,6 @@ protocol AudioService: Sendable {
     /// (or is stopped), so callers can drive UI state from real audio.
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws
@@ -129,7 +124,6 @@ protocol AudioService: Sendable {
     /// flashcard session uses this to prevent provider generation on a card.
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws
@@ -142,31 +136,27 @@ protocol AudioService: Sendable {
     /// provider or network is unavailable.
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async
 }
 
 extension AudioService {
-    func play(text: String, accent: VietnameseAccent, speed: PlaybackSpeed) async throws {
-        try await play(text: text, accent: accent, speed: speed, purpose: .lesson)
+    func play(text: String, speed: PlaybackSpeed) async throws {
+        try await play(text: text, speed: speed, purpose: .lesson)
     }
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
         _ = text
-        _ = accent
         _ = speed
         _ = purpose
         throw CachedAudioError.notPrewarmed
@@ -178,19 +168,18 @@ extension AudioService {
 extension AudioService {
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
-        guard purpose == .lesson || purpose == .accentComparison else { return }
-        await prewarm(texts: texts, accent: accent, speed: speed)
+        guard purpose == .lesson else { return }
+        await prewarm(texts: texts, speed: speed)
     }
 
     func prewarm(lesson: Lesson, speed: PlaybackSpeed) async {
         var seen = Set<String>()
         let texts = lesson.steps.flatMap { step -> [String] in
-            var candidates = [step.vietnamese]
-            if let prompt = step.hearRespond?.promptVietnamese {
+            var candidates = [step.tagalog]
+            if let prompt = step.hearRespond?.promptTagalog {
                 candidates.append(prompt)
             }
             return candidates.compactMap { candidate in
@@ -199,16 +188,14 @@ extension AudioService {
                 return text
             }
         }
-        await prewarm(texts: texts, accent: lesson.accent, speed: speed)
+        await prewarm(texts: texts, speed: speed)
     }
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         _ = texts
-        _ = accent
         _ = speed
     }
 }
@@ -287,25 +274,17 @@ final class DataPlaybackDelegate: NSObject, AVAudioPlayerDelegate, @unchecked Se
     }
 }
 
-protocol AccentSampleAudioService: Sendable {
-    func playSample(for accent: VietnameseAccent) async throws -> TimeInterval
-    func stop() async
-}
-
 protocol OnboardingDemoAudioService: Sendable {
     func playDemo() async throws -> TimeInterval
     func stop() async
 }
 
 enum BundledOnboardingAudioError: LocalizedError, Sendable {
-    case resourceMissing(VietnameseAccent)
     case demoResourceMissing
     case playbackFailed
 
     var errorDescription: String? {
         switch self {
-        case let .resourceMissing(accent):
-            L("The %@ sample is missing from this build.", accent.title)
         case .demoResourceMissing:
             L("The pre-paywall demo audio is missing from this build.")
         case .playbackFailed:
@@ -315,27 +294,13 @@ enum BundledOnboardingAudioError: LocalizedError, Sendable {
 }
 
 @MainActor
-final class BundledOnboardingAudioService: AccentSampleAudioService, OnboardingDemoAudioService {
-    private let resourceURLs: [VietnameseAccent: URL]
+final class BundledOnboardingAudioService: OnboardingDemoAudioService {
     private let demoURL: URL?
     private var delegate = DataPlaybackDelegate()
     private var player: AVAudioPlayer?
     private var glowToken: UUID?
 
     init(bundle: Bundle = .main) {
-        resourceURLs = Dictionary(
-            uniqueKeysWithValues: VietnameseAccent.allCases.compactMap { accent in
-                let url = bundle.url(
-                    forResource: accent.sampleAudioResourceName,
-                    withExtension: "mp3",
-                    subdirectory: "Audio/AccentSamples"
-                ) ?? bundle.url(
-                    forResource: accent.sampleAudioResourceName,
-                    withExtension: "mp3"
-                )
-                return url.map { (accent, $0) }
-            }
-        )
         demoURL = bundle.url(
             forResource: "demo-before-paywall",
             withExtension: "mp3",
@@ -344,13 +309,6 @@ final class BundledOnboardingAudioService: AccentSampleAudioService, OnboardingD
             forResource: "demo-before-paywall",
             withExtension: "mp3"
         )
-    }
-
-    func playSample(for accent: VietnameseAccent) async throws -> TimeInterval {
-        guard let url = resourceURLs[accent] else {
-            throw BundledOnboardingAudioError.resourceMissing(accent)
-        }
-        return try await play(url: url)
     }
 
     func playDemo() async throws -> TimeInterval {
@@ -428,11 +386,7 @@ final class BundledOnboardingAudioService: AccentSampleAudioService, OnboardingD
     }
 }
 
-actor PreviewOnboardingAudioService: AccentSampleAudioService, OnboardingDemoAudioService {
-    func playSample(for accent: VietnameseAccent) async throws -> TimeInterval {
-        0.9
-    }
-
+actor PreviewOnboardingAudioService: OnboardingDemoAudioService {
     func playDemo() async throws -> TimeInterval {
         0.9
     }
@@ -443,7 +397,6 @@ actor PreviewOnboardingAudioService: AccentSampleAudioService, OnboardingDemoAud
 actor PreviewAudioService: AudioService {
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
@@ -452,11 +405,10 @@ actor PreviewAudioService: AudioService {
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
-        try await play(text: text, accent: accent, speed: speed, purpose: purpose)
+        try await play(text: text, speed: speed, purpose: purpose)
     }
 
     func stop() async {}
@@ -465,7 +417,7 @@ actor PreviewAudioService: AudioService {
 /// Offline and pre-entitlement fallback. Production ElevenLabs traffic is
 /// handled by `AuthenticatedElevenLabsAudioService`; this type never sends a
 /// publishable key as though it were a user bearer token.
-actor SystemVietnameseAudioService: AudioService {
+actor SystemTagalogAudioService: AudioService {
     private let synthesizer = AVSpeechSynthesizer()
     private let delegate = SpeechPlaybackDelegate()
     private var isConfigured = false
@@ -473,7 +425,6 @@ actor SystemVietnameseAudioService: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
@@ -482,7 +433,7 @@ actor SystemVietnameseAudioService: AudioService {
             isConfigured = true
         }
         let utterance = AVSpeechUtterance(string: SpokenUtterance.playbackText(from: text))
-        utterance.voice = AVSpeechSynthesisVoice(language: "vi-VN")
+        utterance.voice = AVSpeechSynthesisVoice(language: "fil-PH")
         utterance.rate = switch speed {
         case .slow: 0.38
         case .natural: 0.48
@@ -502,11 +453,10 @@ actor SystemVietnameseAudioService: AudioService {
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
-        try await play(text: text, accent: accent, speed: speed, purpose: purpose)
+        try await play(text: text, speed: speed, purpose: purpose)
     }
 
     func stop() async {
@@ -551,7 +501,6 @@ actor BundledAudioService: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
@@ -608,11 +557,10 @@ actor BundledAudioService: AudioService {
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
-        try await play(text: text, accent: accent, speed: speed, purpose: purpose)
+        try await play(text: text, speed: speed, purpose: purpose)
     }
 
     func stop() async {
@@ -669,12 +617,10 @@ actor ResilientAudioService: AudioService {
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         await prewarm(
             texts: texts,
-            accent: accent,
             speed: speed,
             purpose: .lesson
         )
@@ -682,13 +628,11 @@ actor ResilientAudioService: AudioService {
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
         await primary.prewarm(
             texts: texts,
-            accent: accent,
             speed: speed,
             purpose: purpose
         )
@@ -696,13 +640,11 @@ actor ResilientAudioService: AudioService {
 
     func playCached(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
         try await primary.playCached(
             text: text,
-            accent: accent,
             speed: speed,
             purpose: purpose
         )
@@ -710,14 +652,12 @@ actor ResilientAudioService: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {
         do {
             try await primary.play(
                 text: text,
-                accent: accent,
                 speed: speed,
                 purpose: purpose
             )
@@ -734,7 +674,6 @@ actor ResilientAudioService: AudioService {
             }
             try await fallback.play(
                 text: text,
-                accent: accent,
                 speed: speed,
                 purpose: purpose
             )

@@ -39,15 +39,15 @@ struct Achievement: Identifiable, Equatable, Sendable {
 
     var celebrationCopy: String {
         switch kind {
-        case .firstLesson: L("Your Vietnamese journey is officially underway.")
+        case .firstLesson: L("Your Tagalog journey is officially underway.")
         case .streak7: L("Seven days of showing up. That is how fluency starts.")
         case .streak30: L("A whole month of listening is now part of your rhythm.")
-        case .streak100: L("One hundred days. You built a real Vietnamese habit.")
+        case .streak100: L("One hundred days. You built a real Tagalog habit.")
         case .words10: L("Ten useful words are ready to come back when you need them.")
         case .words50: L("Fifty words in your sound map. Your ear is getting stronger.")
         case .lessons5: L("Five focused lessons completed. You are finding your pace.")
         case .lessons20: L("Twenty lessons down. That is serious listening mileage.")
-        case .firstPronunciation: L("You put Vietnamese into your own voice.")
+        case .firstPronunciation: L("You put Tagalog into your own voice.")
         case .weekComplete: L("Seven lessons in one week. You are in the groove.")
         }
     }

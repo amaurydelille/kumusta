@@ -58,7 +58,7 @@ struct ProfileView: View {
             .sheet(isPresented: $isEditingProfile) {
                 ProfileEditorView(profile: appState.profile) { updated in
                     try await appState.updateProfile(updated)
-                    dependencies.analytics.track(.profileUpdated, properties: ["screen_name": "profile_editor", "accent": updated.accent.rawValue, "goal": updated.goal.rawValue, "level": updated.level.rawValue, "daily_minutes": String(updated.dailyMinutes)])
+                    dependencies.analytics.track(.profileUpdated, properties: ["screen_name": "profile_editor", "goal": updated.goal.rawValue, "level": updated.level.rawValue, "daily_minutes": String(updated.dailyMinutes)])
                 }
                 .onAppear { dependencies.analytics.track(.screenViewed, properties: ["screen_name": "profile_editor"]) }
             }
@@ -134,7 +134,7 @@ struct ProfileView: View {
                     .font(KumustaTypography.title)
                     .foregroundStyle(KumustaColors.ink)
                     .lineLimit(2)
-                Label(accentLabel, systemImage: "waveform")
+                Label(L("Everyday Tagalog"), systemImage: "waveform")
                     .font(KumustaTypography.body)
                     .foregroundStyle(KumustaColors.muted)
             }
@@ -184,7 +184,7 @@ struct ProfileView: View {
         let isInProgress = store.lessonStatus == .inProgress
         // Learners past the beginner level go straight to the cheat sheet,
         // where they can replay their welcome lesson.
-        let opensCheatSheet = isComplete || appState.profile.level != .new
+        let opensCheatSheet = isComplete || appState.profile.level != .beginner
         let title = isComplete
             ? L("Review First Steps")
             : opensCheatSheet
@@ -195,7 +195,7 @@ struct ProfileView: View {
         let detail = isComplete
             ? L("Your basics cheat sheet is unlocked. Replay your lessons anytime.")
             : opensCheatSheet
-                ? L("Sounds, tones, people words, and a replay of your welcome lesson.")
+                ? L("Sounds, respect words, people words, and a replay of your welcome lesson.")
                 : isInProgress
                     ? L("Finish your first lesson: three phrases and a mini-conversation.")
                     : L("A 6-minute first lesson: say hello, your name, and thank you.")
@@ -702,14 +702,7 @@ struct ProfileView: View {
 
     private var displayName: String {
         let name = appState.profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        return name.isEmpty ? L("Vietnamese learner") : name
-    }
-
-    private var accentLabel: String {
-        switch appState.profile.accent {
-        case .northern: L("Northern Vietnamese")
-        case .southern: L("Southern Vietnamese")
-        }
+        return name.isEmpty ? L("Tagalog learner") : name
     }
 
     private func appearanceTitle(_ option: AppAppearance) -> String {
@@ -721,7 +714,7 @@ struct ProfileView: View {
     }
 
     private var shareText: String {
-        L("I'm learning Vietnamese with Kumusta — %lld day streak, %lld words. kumusta.app", activity.currentStreak(), appState.profile.totalWordsLearned)
+        L("I'm learning Tagalog with Kumusta — %lld day streak, %lld words. kumusta.app", activity.currentStreak(), appState.profile.totalWordsLearned)
     }
 
     private var exportText: String {
@@ -1644,7 +1637,7 @@ private struct LeaderboardInlinePreview: View {
 
     private func inlineName(for entry: RemoteLeaderboardEntry, isCurrentUser: Bool) -> String {
         let name = entry.displayName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return name.isEmpty ? L("Vietnamese learner") : name
+        return name.isEmpty ? L("Tagalog learner") : name
     }
 
     private func inlineState(symbol: String, title: String, detail: String) -> some View {
@@ -2021,7 +2014,7 @@ private struct LeaderboardView: View {
 
     private func entryName(for entry: RemoteLeaderboardEntry) -> String {
         let name = entry.displayName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return name.isEmpty ? L("Vietnamese learner") : name
+        return name.isEmpty ? L("Tagalog learner") : name
     }
 
     private func medalColor(for rank: Int64) -> Color {

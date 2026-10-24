@@ -18,12 +18,12 @@ struct PracticeSessionChooser: View {
                     modeCard(
                         eyebrow: L("REAL-TIME CHAT"),
                         badge: L("5 MIN"),
-                        title: L("Talk with Bé Trâu"),
+                        title: L("Talk with Kalabaw"),
                         subtitle: L("Free conversation, role-play, and instant feedback."),
                         symbol: "mic.fill",
                         color: KumustaColors.focusFill,
                         shadowColor: KumustaColors.lessonAccentShadow,
-                        accessibilityLabel: L("Talk with Bé Trâu in real time for five minutes"),
+                        accessibilityLabel: L("Talk with Kalabaw in real time for five minutes"),
                         action: onRealtime
                     ) {
                         RealtimePracticeMascots(height: 83)
@@ -153,6 +153,6 @@ private struct RealtimePracticeMascots: View {
                 .rotationEffect(.degrees(3))
         }
         .frame(height: height)
-        .accessibilityLabel(L("Your Vietnamese conversation buddies"))
+        .accessibilityLabel(L("Your Tagalog conversation buddies"))
     }
 }

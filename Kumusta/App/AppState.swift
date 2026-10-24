@@ -88,10 +88,9 @@ final class AppState {
             profile = UserProfile(
                 id: profile.id,
                 name: "Amaury",
-                accent: .southern,
                 goal: .family,
                 dailyMinutes: 7,
-                level: .familiar,
+                level: .intermediate,
                 hasCompletedOnboarding: true,
                 currentStreak: dependencies.learningActivityStore.currentStreak(),
                 totalWordsLearned: 12,
@@ -147,10 +146,9 @@ final class AppState {
                 profile = UserProfile(
                     id: profile.id,
                     name: "Amaury",
-                    accent: .southern,
                     goal: .family,
                     dailyMinutes: 7,
-                    level: .familiar,
+                    level: .intermediate,
                     hasCompletedOnboarding: true,
                     currentStreak: dependencies.learningActivityStore.currentStreak(),
                     totalWordsLearned: max(profile.totalWordsLearned, 12),
@@ -211,7 +209,6 @@ final class AppState {
         profile = UserProfile(
             id: profile.id,
             name: draft.name.trimmingCharacters(in: .whitespacesAndNewlines),
-            accent: draft.accent,
             goal: draft.goal,
             dailyMinutes: draft.dailyMinutes,
             level: draft.level,
@@ -232,7 +229,6 @@ final class AppState {
                     "screen_name": "onboarding_first_lesson",
                     "step": "first_lesson",
                     "position": "7",
-                    "accent": profile.accent.rawValue,
                     "goal": profile.goal.rawValue,
                     "level": profile.level.rawValue,
                     "daily_minutes": String(profile.dailyMinutes)
@@ -294,18 +290,8 @@ final class AppState {
     }
 
     func updateProfile(_ updatedProfile: UserProfile) async throws {
-        let accentChanged = profile.accent != updatedProfile.accent
         try await dependencies.profileRepository.saveProfile(updatedProfile)
         profile = updatedProfile
-
-        if accentChanged {
-            // Any queued lesson and local voice bytes belong to the previous
-            // regional profile. Drop them before syncing the new preference so
-            // a Southern pending request cannot fail a Northern session.
-            dependencies.learningJourneyStore.abandonPendingPreparation()
-            await dependencies.personalizedLearningService?.reset()
-            await dependencies.audioService.reset()
-        }
 
         if let remote = dependencies.signedInRepository {
             try? await remote.syncProfile(
@@ -490,10 +476,9 @@ final class AppState {
         profile = UserProfile(
             id: user.id,
             name: "",
-            accent: .southern,
             goal: .family,
             dailyMinutes: 7,
-            level: .new,
+            level: .beginner,
             hasCompletedOnboarding: false,
             currentStreak: 0,
             totalWordsLearned: 0,
@@ -549,12 +534,6 @@ final class AppState {
             return
         }
 
-        // Accent is persisted in the learning-preferences row, not in the
-        // lightweight profile row above. Read it during account restoration
-        // so a device without the newer cloud-state snapshot can still honor
-        // the learner's selected regional voice.
-        let remoteLearningPreferences = try? await dependencies.signedInRepository?.fetchLearningPreferences()
-
         let remoteState: CloudUserState?
         do {
             remoteState = try await dependencies.signedInRepository?.fetchUserState()
@@ -575,7 +554,6 @@ final class AppState {
 
         if let remoteState {
             await applyCloudState(remoteState, userID: user.id)
-            applyStoredAccent(from: remoteLearningPreferences)
             try? await dependencies.profileRepository.saveProfile(profile)
             scheduleCloudStateSync()
             if profile.hasCompletedOnboarding {
@@ -602,17 +580,15 @@ final class AppState {
                 profile = UserProfile(
                     id: user.id,
                     name: remoteProfile.displayName ?? "",
-                    accent: .southern,
                     goal: .family,
                     dailyMinutes: 7,
-                    level: .familiar,
+                    level: .intermediate,
                     hasCompletedOnboarding: true,
                     currentStreak: dependencies.learningActivityStore.currentStreak(),
                     totalWordsLearned: 0,
                     avatarSeed: remoteProfile.avatarSeed ?? DiceBearAvatar.seed(for: user.id)
                 )
             }
-            applyStoredAccent(from: remoteLearningPreferences)
             try? await dependencies.profileRepository.saveProfile(profile)
             try? await dependencies.signedInRepository?.syncProfile(
                 profile,
@@ -1057,18 +1033,10 @@ final class AppState {
         profileWithID(profile, userID: userID)
     }
 
-    private func applyStoredAccent(from preferences: RemoteLearningPreferences?) {
-        guard let rawAccent = preferences?.accent,
-              let accent = VietnameseAccent(rawValue: rawAccent)
-        else { return }
-        profile.accent = accent
-    }
-
     private func profileWithID(_ source: UserProfile, userID: UUID) -> UserProfile {
         UserProfile(
             id: userID,
             name: source.name,
-            accent: source.accent,
             goal: source.goal,
             dailyMinutes: source.dailyMinutes,
             level: source.level,

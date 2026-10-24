@@ -1,8 +1,8 @@
 import Foundation
 
 enum FlashcardDirection: String, CaseIterable, Identifiable, Sendable {
-    case englishAudioToVietnamese
-    case vietnameseAudioToEnglish
+    case englishAudioToTagalog
+    case tagalogAudioToEnglish
 
     var id: Self { self }
 
@@ -10,12 +10,12 @@ enum FlashcardDirection: String, CaseIterable, Identifiable, Sendable {
 
 struct OfflineVocabularyCandidate: Identifiable, Codable, Equatable, Sendable {
     let id: UUID
-    let vietnamese: String
+    let tagalog: String
     let english: String
 
-    init(id: UUID = UUID(), vietnamese: String, english: String) {
+    init(id: UUID = UUID(), tagalog: String, english: String) {
         self.id = id
-        self.vietnamese = vietnamese
+        self.tagalog = tagalog
         self.english = english
     }
 }
@@ -32,106 +32,86 @@ struct FlashcardChoice: Identifiable, Equatable, Sendable {
 /// without changing the flashcard interaction.
 enum OfflineVocabularyCandidateBank {
     static let all: [OfflineVocabularyCandidate] = [
-        candidate("xin chào", "hello"),
-        candidate("cảm ơn", "thank you"),
-        candidate("xin lỗi", "sorry"),
-        candidate("làm ơn", "please"),
-        candidate("tạm biệt", "goodbye"),
-        candidate("không sao", "no problem"),
-        candidate("được không", "is it okay"),
-        candidate("đúng rồi", "that’s right"),
-        candidate("chưa", "not yet"),
-        candidate("rồi", "already"),
-        candidate("hôm nay", "today"),
-        candidate("ngày mai", "tomorrow"),
-        candidate("hôm qua", "yesterday"),
-        candidate("bây giờ", "now"),
-        candidate("sau đó", "after that"),
-        candidate("ở đâu", "where"),
-        candidate("khi nào", "when"),
-        candidate("tại sao", "why"),
-        candidate("bao nhiêu", "how much / how many"),
-        candidate("ai", "who"),
-        candidate("gì", "what"),
-        candidate("nào", "which"),
-        candidate("mình", "I / me"),
-        candidate("tôi", "I / me, formal"),
-        candidate("bạn", "you / friend"),
-        candidate("anh", "older brother / you"),
-        candidate("chị", "older sister / you"),
-        candidate("em", "younger person / I"),
-        candidate("ông", "grandfather / Mr"),
-        candidate("bà", "grandmother / Mrs"),
-        candidate("người", "person"),
-        candidate("nhà", "home / house"),
-        candidate("phòng", "room"),
-        candidate("cửa", "door"),
-        candidate("bàn", "table"),
-        candidate("ghế", "chair"),
-        candidate("đường", "street"),
-        candidate("chợ", "market"),
-        candidate("cửa hàng", "shop"),
-        candidate("trường", "school"),
-        candidate("bệnh viện", "hospital"),
-        candidate("sân bay", "airport"),
-        candidate("bến xe", "bus station"),
-        candidate("nhà ga", "train station"),
-        candidate("quán", "shop / café"),
-        candidate("cà phê", "coffee"),
-        candidate("nước", "water"),
-        candidate("cơm", "rice / meal"),
-        candidate("phở", "pho"),
-        candidate("bánh mì", "bread"),
-        candidate("trà", "tea"),
-        candidate("sữa", "milk"),
-        candidate("đá", "ice"),
-        candidate("ngon", "delicious"),
-        candidate("đói", "hungry"),
-        candidate("khát", "thirsty"),
-        candidate("nóng", "hot"),
-        candidate("lạnh", "cold"),
-        candidate("ngọt", "sweet"),
-        candidate("cay", "spicy"),
-        candidate("mặn", "salty"),
-        candidate("thêm", "more / another"),
-        candidate("bớt", "reduce / less"),
-        candidate("một", "one"),
-        candidate("hai", "two"),
-        candidate("nhiều", "many / much"),
-        candidate("ít", "few / little"),
-        candidate("lớn", "big"),
-        candidate("nhỏ", "small"),
-        candidate("tốt", "good"),
-        candidate("xấu", "bad"),
-        candidate("mới", "new"),
-        candidate("cũ", "old"),
-        candidate("nhanh", "fast / quick"),
-        candidate("chậm", "slow"),
-        candidate("gần", "near"),
-        candidate("xa", "far"),
-        candidate("trái", "left"),
-        candidate("phải", "right"),
-        candidate("thẳng", "straight"),
-        candidate("đi", "go"),
-        candidate("đến", "arrive / come"),
-        candidate("về", "return / go home"),
-        candidate("rẽ", "turn"),
-        candidate("nghe", "hear / listen"),
-        candidate("nói", "speak / say"),
-        candidate("hiểu", "understand"),
-        candidate("biết", "know"),
-        candidate("nhớ", "remember / miss"),
-        candidate("quên", "forget"),
-        candidate("muốn", "want"),
-        candidate("cần", "need"),
-        candidate("thích", "like"),
-        candidate("giúp", "help"),
-        candidate("gọi", "call"),
-        candidate("mua", "buy"),
-        candidate("bán", "sell"),
-        candidate("trả", "pay / return"),
-        candidate("mượn", "borrow"),
-        candidate("đợi", "wait")
+        candidate("kumusta", "how are you / hello"),
+        candidate("salamat", "thank you"),
+        candidate("paalam", "goodbye"),
+        candidate("pasensya na", "sorry / excuse me"),
+        candidate("walang anuman", "you're welcome"),
+        candidate("puwede ba", "may I / can I"),
+        candidate("sige", "okay / go ahead"),
+        candidate("oo", "yes"),
+        candidate("hindi", "no / not"),
+        candidate("opo", "yes (respectful)"),
+        candidate("kape", "coffee"),
+        candidate("tubig", "water"),
+        candidate("kanin", "cooked rice"),
+        candidate("ulam", "main dish (with rice)"),
+        candidate("tinapay", "bread"),
+        candidate("gatas", "milk"),
+        candidate("yelo", "ice"),
+        candidate("masarap", "delicious"),
+        candidate("gutom", "hungry"),
+        candidate("uhaw", "thirsty"),
+        candidate("mainit", "hot"),
+        candidate("malamig", "cold"),
+        candidate("matamis", "sweet"),
+        candidate("maanghang", "spicy"),
+        candidate("maalat", "salty"),
+        candidate("dagdag", "more / extra"),
+        candidate("bawas", "less"),
+        candidate("isa", "one"),
+        candidate("dalawa", "two"),
+        candidate("marami", "many / a lot"),
+        candidate("kaunti", "a little"),
+        candidate("malaki", "big"),
+        candidate("maliit", "small"),
+        candidate("mabuti", "good / well"),
+        candidate("pangit", "ugly / bad"),
+        candidate("bago", "new"),
+        candidate("luma", "old (things)"),
+        candidate("mabilis", "fast"),
+        candidate("mabagal", "slow"),
+        candidate("malapit", "near"),
+        candidate("malayo", "far"),
+        candidate("kaliwa", "left"),
+        candidate("kanan", "right"),
+        candidate("diretso", "straight ahead"),
+        candidate("pumunta", "go"),
+        candidate("dumating", "arrive"),
+        candidate("umuwi", "go home"),
+        candidate("lumiko", "turn"),
+        candidate("makinig", "listen"),
+        candidate("magsalita", "speak"),
+        candidate("maintindihan", "understand"),
+        candidate("alam", "know"),
+        candidate("tandaan", "remember"),
+        candidate("nakalimutan", "forgot"),
+        candidate("gusto", "want / like"),
+        candidate("kailangan", "need"),
+        candidate("tulong", "help"),
+        candidate("tumawag", "call"),
+        candidate("bumili", "buy"),
+        candidate("magbayad", "pay"),
+        candidate("hiram", "borrow"),
+        candidate("maghintay", "wait"),
+        candidate("bahay", "house / home"),
+        candidate("palengke", "market"),
+        candidate("tindahan", "store"),
+        candidate("paaralan", "school"),
+        candidate("ospital", "hospital"),
+        candidate("paliparan", "airport"),
+        candidate("trabaho", "work / job"),
+        candidate("pamilya", "family"),
+        candidate("kaibigan", "friend"),
+        candidate("ngayon", "now / today"),
+        candidate("bukas", "tomorrow"),
+        candidate("kahapon", "yesterday"),
+        candidate("mamaya", "later"),
+        candidate("saan", "where"),
+        candidate("kailan", "when"),
+        candidate("bakit", "why"),
+        candidate("magkano", "how much"),
+        candidate("ano", "what")
     ]
 
     private static func meaning(of candidate: OfflineVocabularyCandidate, in language: AppLanguage) -> String {
@@ -144,16 +124,16 @@ enum OfflineVocabularyCandidateBank {
         count: Int = 4
     ) -> [FlashcardChoice] {
         let choiceCount = max(2, min(count, all.count + 1))
-        let targetText = direction == .englishAudioToVietnamese
+        let targetText = direction == .englishAudioToTagalog
             ? optionText(target.word)
             : optionText(target.translation)
-        let targetVietnamese = normalized(target.word)
+        let targetTagalog = normalized(target.word)
         let targetEnglish = normalized(target.translation)
         let language = target.translationLanguage ?? .english
 
         let distractors = all
             .filter {
-                normalized($0.vietnamese) != targetVietnamese
+                normalized($0.tagalog) != targetTagalog
                     && normalized(meaning(of: $0, in: language)) != targetEnglish
             }
             .shuffled()
@@ -161,8 +141,8 @@ enum OfflineVocabularyCandidateBank {
             .map { candidate in
                 FlashcardChoice(
                     id: candidate.id,
-                    text: direction == .englishAudioToVietnamese
-                        ? optionText(candidate.vietnamese)
+                    text: direction == .englishAudioToTagalog
+                        ? optionText(candidate.tagalog)
                         : optionText(meaning(of: candidate, in: language)),
                     isCorrect: false
                 )
@@ -174,8 +154,8 @@ enum OfflineVocabularyCandidateBank {
         ).shuffled()
     }
 
-    private static func candidate(_ vietnamese: String, _ english: String) -> OfflineVocabularyCandidate {
-        OfflineVocabularyCandidate(vietnamese: vietnamese, english: english)
+    private static func candidate(_ tagalog: String, _ english: String) -> OfflineVocabularyCandidate {
+        OfflineVocabularyCandidate(tagalog: tagalog, english: english)
     }
 
     private static func optionText(_ value: String) -> String {
@@ -191,9 +171,8 @@ enum OfflineVocabularyCandidateBank {
         value
             .folding(
                 options: [.caseInsensitive, .diacriticInsensitive],
-                locale: Locale(identifier: "vi")
+                locale: Locale(identifier: "fil")
             )
-            .replacingOccurrences(of: "đ", with: "d")
             .trimmingCharacters(in: .punctuationCharacters.union(.whitespacesAndNewlines))
     }
 }

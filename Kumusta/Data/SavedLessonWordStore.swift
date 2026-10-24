@@ -7,7 +7,6 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
     let translation: String
     let sentence: String
     let sentenceTranslation: String
-    let accent: VietnameseAccent
     let lessonID: UUID
     let savedAt: Date
     var mastery: Double
@@ -23,7 +22,6 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
         translation: String,
         sentence: String,
         sentenceTranslation: String,
-        accent: VietnameseAccent,
         lessonID: UUID,
         savedAt: Date,
         mastery: Double = 0.05,
@@ -36,7 +34,6 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
         self.translation = translation
         self.sentence = sentence
         self.sentenceTranslation = sentenceTranslation
-        self.accent = accent
         self.lessonID = lessonID
         self.savedAt = savedAt
         self.mastery = min(1, max(0, mastery))
@@ -51,7 +48,6 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
         case translation
         case sentence
         case sentenceTranslation
-        case accent
         case lessonID
         case savedAt
         case mastery
@@ -68,7 +64,6 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
             translation: try container.decode(String.self, forKey: .translation),
             sentence: try container.decode(String.self, forKey: .sentence),
             sentenceTranslation: try container.decode(String.self, forKey: .sentenceTranslation),
-            accent: try container.decode(VietnameseAccent.self, forKey: .accent),
             lessonID: try container.decode(UUID.self, forKey: .lessonID),
             savedAt: try container.decode(Date.self, forKey: .savedAt),
             mastery: try container.decodeIfPresent(Double.self, forKey: .mastery) ?? 0.05,
@@ -81,7 +76,7 @@ struct SavedLessonWord: Identifiable, Codable, Equatable, Sendable {
     var normalizedWord: String {
         word.folding(
             options: [.caseInsensitive, .diacriticInsensitive],
-            locale: Locale(identifier: "vi")
+            locale: Locale(identifier: "fil")
         )
         .trimmingCharacters(in: .punctuationCharacters.union(.whitespacesAndNewlines))
     }
@@ -131,7 +126,6 @@ final class SavedLessonWordStore {
         gloss: LessonWordGloss,
         sentence: String,
         sentenceTranslation: String,
-        accent: VietnameseAccent,
         lessonID: UUID,
         translationLanguage: AppLanguage? = nil
     ) -> SavedLessonWord {
@@ -140,7 +134,6 @@ final class SavedLessonWordStore {
             translation: gloss.translation,
             sentence: sentence,
             sentenceTranslation: sentenceTranslation,
-            accent: accent,
             lessonID: lessonID,
             translationLanguage: translationLanguage
         )
@@ -149,11 +142,10 @@ final class SavedLessonWordStore {
     @discardableResult
     func save(vocabularyItem: VocabularyItem) -> SavedLessonWord {
         save(
-            word: vocabularyItem.vietnamese,
+            word: vocabularyItem.tagalog,
             translation: vocabularyItem.english,
             sentence: vocabularyItem.example,
             sentenceTranslation: vocabularyItem.exampleTranslation,
-            accent: vocabularyItem.accent,
             lessonID: vocabularyItem.id
         )
     }
@@ -163,14 +155,13 @@ final class SavedLessonWordStore {
         translation: String,
         sentence: String,
         sentenceTranslation: String,
-        accent: VietnameseAccent,
         lessonID: UUID,
         translationLanguage: AppLanguage? = nil
     ) -> SavedLessonWord {
         let displayWord = Self.displayWord(from: word)
         let normalized = Self.normalized(displayWord)
         if let existingIndex = words.firstIndex(where: {
-            $0.accent == accent && $0.normalizedWord == normalized
+            $0.normalizedWord == normalized
         }) {
             if !words[existingIndex].isInFlashcards {
                 words[existingIndex].isInFlashcards = true
@@ -188,7 +179,6 @@ final class SavedLessonWordStore {
             translation: translation,
             sentence: sentence,
             sentenceTranslation: sentenceTranslation,
-            accent: accent,
             lessonID: lessonID,
             savedAt: .now,
             translationLanguage: translationLanguage
@@ -200,10 +190,10 @@ final class SavedLessonWordStore {
         return saved
     }
 
-    func contains(token: String, accent: VietnameseAccent) -> Bool {
+    func contains(token: String) -> Bool {
         let normalized = Self.normalized(Self.displayWord(from: token))
         return words.contains {
-            $0.accent == accent && $0.normalizedWord == normalized
+            $0.normalizedWord == normalized
         }
     }
 
@@ -293,7 +283,7 @@ final class SavedLessonWordStore {
     private static func normalized(_ word: String) -> String {
         word.folding(
             options: [.caseInsensitive, .diacriticInsensitive],
-            locale: Locale(identifier: "vi")
+            locale: Locale(identifier: "fil")
         )
         .trimmingCharacters(in: .punctuationCharacters.union(.whitespacesAndNewlines))
     }

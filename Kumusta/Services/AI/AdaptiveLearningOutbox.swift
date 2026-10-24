@@ -1,7 +1,6 @@
 import Foundation
 
 struct AdaptiveLearnerSnapshot: Codable, Equatable, Sendable {
-    let accent: String
     let goal: String
     let selfAssessedLevel: String
     let targetLevel: Int
@@ -9,7 +8,6 @@ struct AdaptiveLearnerSnapshot: Codable, Equatable, Sendable {
     let dailyMinutes: Int
 
     init(profile: UserProfile) {
-        accent = profile.accent.rawValue
         goal = profile.goal.rawValue
         selfAssessedLevel = profile.level.rawValue
         targetLevel = profile.adaptiveTargetLevel
@@ -18,7 +16,7 @@ struct AdaptiveLearnerSnapshot: Codable, Equatable, Sendable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case accent, goal
+        case goal
         case selfAssessedLevel = "self_assessed_level"
         case targetLevel = "target_level"
         case challengePreference = "challenge_preference"

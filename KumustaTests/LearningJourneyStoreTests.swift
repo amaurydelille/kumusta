@@ -16,7 +16,7 @@ struct LearningJourneyStoreTests {
             let id = UUID()
             ids.insert(id)
             store.recordCompletion(lesson: Lesson(id: id, scenario: "Lesson \(index)", minutes: 5,
-                accent: .southern, steps: []), generatedLessonID: nil,
+                steps: []), generatedLessonID: nil,
                 feedback: SessionFeedback(difficulty: .justRight, audioPace: .justRight, nextLessonTopic: nil))
         }
         #expect(store.completedLessons.count == 100)
@@ -40,8 +40,7 @@ struct LearningJourneyStoreTests {
             .appendingPathComponent("\(suiteName).json")
         defer { try? FileManager.default.removeItem(at: historyURL) }
         let lesson = SampleContent.dailySession(
-            accent: .southern,
-            level: .familiar,
+            level: .intermediate,
             dailyMinutes: 5
         )
         let generatedID = UUID()
@@ -74,8 +73,7 @@ struct LearningJourneyStoreTests {
             .appendingPathComponent("\(suiteName).json")
         defer { try? FileManager.default.removeItem(at: historyURL) }
         let completed = SampleContent.dailySession(
-            accent: .southern,
-            level: .familiar,
+            level: .intermediate,
             dailyMinutes: 5
         )
         let stale = lessonCopy(completed, id: UUID(), title: "Older queue lesson")
@@ -99,9 +97,8 @@ struct LearningJourneyStoreTests {
 
         #expect(store.preparedContent?.lesson.id == requested.id)
         #expect(store.isPreparingNextLesson == false)
-        #expect(store.consumePreparedContent(accent: .northern) == nil)
-        #expect(store.consumePreparedContent(accent: .southern)?.lesson.id == requested.id)
-        // Switching accents must not delete a prepared lesson or its progress.
+        #expect(store.consumePreparedContent()?.lesson.id == requested.id)
+        // Reading the prepared lesson must not delete it or its progress.
         #expect(store.preparedContent?.lesson.id == requested.id)
     }
 
@@ -115,8 +112,7 @@ struct LearningJourneyStoreTests {
             .appendingPathComponent("\(suiteName).json")
         defer { try? FileManager.default.removeItem(at: historyURL) }
         let completed = SampleContent.dailySession(
-            accent: .southern,
-            level: .familiar,
+            level: .intermediate,
             dailyMinutes: 5
         )
         let nextLesson = lessonCopy(completed, id: UUID(), title: "A fresh lesson")
@@ -242,7 +238,7 @@ struct LearningJourneyStoreTests {
         let defaults = try #require(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
         let store = LearningJourneyStore(defaults: defaults)
-        let lesson = SampleContent.dailySession(accent: .southern, level: .familiar, dailyMinutes: 5)
+        let lesson = SampleContent.dailySession(level: .intermediate, dailyMinutes: 5)
         let service = JourneyLearningServiceStub(contents: [content(lesson: lesson, priority: 100)])
         store.beginPreparingNextLesson(after: UUID(), requestedTopic: "Coffee", requestedAt: .now.addingTimeInterval(-90))
         await store.pollForPreparedLesson(using: service, profile: .newUser, maximumAttempts: 1)
@@ -257,7 +253,7 @@ struct LearningJourneyStoreTests {
         let defaults = try #require(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
         let store = LearningJourneyStore(defaults: defaults)
-        let lesson = SampleContent.dailySession(accent: .southern, level: .familiar, dailyMinutes: 5)
+        let lesson = SampleContent.dailySession(level: .intermediate, dailyMinutes: 5)
         let service = JourneyLearningServiceStub(contents: [content(lesson: lesson, priority: 100)])
         store.beginPreparingNextLesson(after: UUID(), requestedTopic: "Coffee", requiresFreshGeneration: true)
         store.failPendingPreparation(with: PersonalizedLearningError.generationFailed)
@@ -272,7 +268,6 @@ struct LearningJourneyStoreTests {
             id: id,
             scenario: title,
             minutes: lesson.minutes,
-            accent: lesson.accent,
             steps: lesson.steps
         )
     }

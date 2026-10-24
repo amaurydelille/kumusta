@@ -29,7 +29,7 @@ struct WordsView: View {
 
     private var savedWords: [SavedLessonWord] {
         let words = dependencies.savedLessonWordStore.words
-            .filter { $0.accent == appState.profile.accent }
+            
 
         switch sortOption {
         case .recent:
@@ -116,7 +116,6 @@ struct WordsView: View {
 
     private var reviewAudioPreparationID: String {
         [
-            appState.profile.accent.rawValue,
             defaultSpeedRawValue,
             activeFlashcardWords.map { $0.id.uuidString }.joined(separator: ",")
         ].joined(separator: "|")
@@ -129,18 +128,12 @@ struct WordsView: View {
         }
 
         isPreparingReviewAudio = true
-        // Cards play with the accent they were saved in, so warm each accent's
-        // cache key separately rather than assuming the current profile accent.
-        let wordsByAccent = Dictionary(grouping: activeFlashcardWords, by: \.accent)
         let speed = AudioPreferences.speed(from: defaultSpeedRawValue)
-        for (accent, words) in wordsByAccent {
-            await dependencies.audioService.prewarm(
-                texts: words.map(\.word),
-                accent: accent,
-                speed: speed,
-                purpose: .vocabulary
-            )
-        }
+        await dependencies.audioService.prewarm(
+            texts: activeFlashcardWords.map(\.word),
+            speed: speed,
+            purpose: .vocabulary
+        )
         guard !Task.isCancelled else { return }
         isPreparingReviewAudio = false
     }
@@ -307,7 +300,6 @@ struct WordsView: View {
             do {
                 try await dependencies.audioService.play(
                     text: savedWord.word,
-                    accent: savedWord.accent,
                     speed: AudioPreferences.speed(from: defaultSpeedRawValue),
                     purpose: .vocabulary
                 )
@@ -323,7 +315,7 @@ struct WordsView: View {
             } catch is CancellationError {
                 return
             } catch {
-                errorMessage = L("The Vietnamese voice is unavailable right now. Please try again.")
+                errorMessage = L("The Tagalog voice is unavailable right now. Please try again.")
             }
         }
     }
@@ -529,7 +521,7 @@ private struct SavedWordDetailView: View {
                             .foregroundStyle(word.isInFlashcards ? KumustaColors.accentDeep : KumustaColors.success)
 
                             Text(word.word)
-                                .font(KumustaTypography.vietnameseHero)
+                                .font(KumustaTypography.tagalogHero)
                                 .foregroundStyle(KumustaColors.ink)
                                 .fixedSize(horizontal: false, vertical: true)
 
@@ -550,7 +542,6 @@ private struct SavedWordDetailView: View {
                                 do {
                                     try await dependencies.audioService.play(
                                         text: word.word,
-                                        accent: word.accent,
                                         speed: .natural,
                                         purpose: .vocabulary
                                     )
@@ -585,7 +576,7 @@ private struct SavedWordDetailView: View {
                                         .scaledFont(20, weight: .semibold)
                                 }
 
-                                Text(isPlaying ? L("Playing Vietnamese") : L("Hear this phrase"))
+                                Text(isPlaying ? L("Playing Tagalog") : L("Hear this phrase"))
                                     .font(KumustaTypography.bodyStrong)
 
                                 Spacer()
@@ -660,7 +651,7 @@ private struct FlashcardReviewView: View {
     private var defaultSpeedRawValue = AudioPreferences.fallbackSpeed.rawValue
 
     @State private var cards: [SavedLessonWord]
-    @State private var direction: FlashcardDirection = .vietnameseAudioToEnglish
+    @State private var direction: FlashcardDirection = .tagalogAudioToEnglish
     @State private var choices: [FlashcardChoice] = []
     @State private var phase: FlashcardPhase = .listening
     @State private var selectedChoiceID: UUID?
@@ -762,7 +753,7 @@ private struct FlashcardReviewView: View {
             Button(L("Retry")) { replayCurrentCard() }
             Button(L("Close"), role: .cancel) { audioErrorMessage = nil }
         } message: {
-            Text(audioErrorMessage ?? L("The Vietnamese voice could not be loaded."))
+            Text(audioErrorMessage ?? L("The Tagalog voice could not be loaded."))
         }
         .animation(reduceMotion ? nil : .spring(response: 0.38, dampingFraction: 0.82), value: phase)
     }
@@ -850,10 +841,10 @@ private struct FlashcardReviewView: View {
 
     @ViewBuilder
     private func sourceCard(for card: SavedLessonWord) -> some View {
-        vietnameseAudioCard(for: card)
+        tagalogAudioCard(for: card)
     }
 
-    private func vietnameseAudioCard(for card: SavedLessonWord) -> some View {
+    private func tagalogAudioCard(for card: SavedLessonWord) -> some View {
         VStack(spacing: 16) {
             HStack {
                 Label(
@@ -904,7 +895,7 @@ private struct FlashcardReviewView: View {
             if phase == .incorrect || phase == .correct {
                 VStack(spacing: 4) {
                     Text(card.word)
-                        .font(KumustaTypography.vietnameseHero)
+                        .font(KumustaTypography.tagalogHero)
                         .foregroundStyle(.white)
                         .multilineTextAlignment(.center)
                     Text(card.translation)
@@ -1097,7 +1088,7 @@ private struct FlashcardReviewView: View {
             clientSessionID: telemetrySessionID
         )
 
-        direction = .vietnameseAudioToEnglish
+        direction = .tagalogAudioToEnglish
         choices = OfflineVocabularyCandidateBank.choices(for: card, direction: direction)
         selectedChoiceID = nil
 
@@ -1129,7 +1120,6 @@ private struct FlashcardReviewView: View {
                 do {
                     try await dependencies.audioService.playCached(
                         text: card.word,
-                        accent: card.accent,
                         speed: speed,
                         purpose: .vocabulary
                     )
@@ -1138,7 +1128,6 @@ private struct FlashcardReviewView: View {
                     // one card on demand instead of failing on every retry.
                     try await dependencies.audioService.play(
                         text: card.word,
-                        accent: card.accent,
                         speed: speed,
                         purpose: .vocabulary
                     )

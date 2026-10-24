@@ -8,10 +8,9 @@ struct AdaptiveLearningOutboxTests {
         let profile = UserProfile(
             id: UUID(),
             name: "Lan",
-            accent: .southern,
             goal: .family,
             dailyMinutes: 5,
-            level: .familiar,
+            level: .intermediate,
             hasCompletedOnboarding: true,
             currentStreak: 0,
             totalWordsLearned: 0
@@ -42,10 +41,9 @@ struct AdaptiveLearningOutboxTests {
         let profile = UserProfile(
             id: UUID(),
             name: "Lan",
-            accent: .southern,
             goal: .family,
             dailyMinutes: 7,
-            level: .familiar,
+            level: .intermediate,
             hasCompletedOnboarding: true,
             currentStreak: 0,
             totalWordsLearned: 0
@@ -72,7 +70,6 @@ struct AdaptiveLearningOutboxTests {
         #expect(persisted.difficultyFeedback == "too_easy")
         #expect(persisted.paceFeedback == "too_fast")
         #expect(persisted.nextLessonTopic == "Renewing my papers")
-        #expect(persisted.profile.accent == "southern")
     }
 
     @Test
@@ -84,10 +81,9 @@ struct AdaptiveLearningOutboxTests {
         let profile = UserProfile(
             id: UUID(),
             name: "Lan",
-            accent: .northern,
             goal: .travel,
             dailyMinutes: 5,
-            level: .new,
+            level: .beginner,
             hasCompletedOnboarding: true,
             currentStreak: 0,
             totalWordsLearned: 0

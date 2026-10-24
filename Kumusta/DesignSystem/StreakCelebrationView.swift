@@ -86,7 +86,7 @@ struct StreakCelebrationView: View {
         case 30: L("A full month. You're building a habit.")
         case 60: L("Two months. Real progress.")
         case 100: L("One hundred days. This is who you are now.")
-        case 365: L("One year. Chúc mừng.")
+        case 365: L("One year. Ang galing mo!")
         default: L("%lld days and counting", streak)
         }
     }

@@ -8,23 +8,23 @@ struct SpokenUtteranceTests {
     func stripsEnglishRole() {
         #expect(
             SpokenUtterance.playbackText(
-                from: "Barista: Chào anh! Anh muốn uống gì ạ?"
-            ) == "Chào anh! Anh muốn uống gì ạ?"
+                from: "Barista: Magandang umaga po! Ano po ang order ninyo?"
+            ) == "Magandang umaga po! Ano po ang order ninyo?"
         )
     }
 
-    @Test("Vietnamese role label is not spoken")
-    func stripsVietnameseRole() {
+    @Test("Tagalog role label is not spoken")
+    func stripsTagalogRole() {
         #expect(
             SpokenUtterance.playbackText(
-                from: "Người bán hàng: Chào anh!"
-            ) == "Chào anh!"
+                from: "Tindera: Magkano po?"
+            ) == "Magkano po?"
         )
     }
 
-    @Test("A spoken Vietnamese vocative remains intact")
+    @Test("A spoken Tagalog vocative remains intact")
     func preservesVocative() {
-        let phrase = "Anh ơi, cho mình một cà phê sữa đá nha."
+        let phrase = "Kuya, isang kape nga po, walang asukal."
         #expect(SpokenUtterance.playbackText(from: phrase) == phrase)
         #expect(!SpokenUtterance.hasLeadingSpeakerLabel(phrase))
     }
@@ -32,20 +32,20 @@ struct SpokenUtteranceTests {
 
 @Suite("Onboarding first conversation")
 struct OnboardingFirstConversationTests {
-    @Test("Speech matching ignores tones, punctuation, and the learner's name")
+    @Test("Speech matching ignores case, punctuation, variants, and the learner's name")
     func lenientMatching() {
-        #expect(OnboardingSpeechMatcher.matches(transcript: "chao ban", target: "Chào bạn!", ignoringName: nil))
-        #expect(OnboardingSpeechMatcher.matches(transcript: "Mình tên là Amory", target: "Mình tên là Amaury.", ignoringName: "Amaury"))
-        #expect(OnboardingSpeechMatcher.matches(transcript: "tên là", target: "Mình tên là Amaury.", ignoringName: "Amaury"))
-        #expect(!OnboardingSpeechMatcher.matches(transcript: "tạm biệt", target: "Chào bạn!", ignoringName: nil))
-        #expect(!OnboardingSpeechMatcher.matches(transcript: "Amaury", target: "Mình tên là Amaury.", ignoringName: "Amaury"))
+        #expect(OnboardingSpeechMatcher.matches(transcript: "kamusta po", target: "Kumusta po!", ignoringName: nil))
+        #expect(OnboardingSpeechMatcher.matches(transcript: "Ako si Amory", target: "Ako si Amaury.", ignoringName: "Amaury"))
+        #expect(OnboardingSpeechMatcher.matches(transcript: "si", target: "Ako si Amaury.", ignoringName: "Amaury"))
+        #expect(!OnboardingSpeechMatcher.matches(transcript: "paalam", target: "Kumusta po!", ignoringName: nil))
+        #expect(!OnboardingSpeechMatcher.matches(transcript: "Amaury", target: "Ako si Amaury.", ignoringName: "Amaury"))
     }
 
     @Test("Only plain first names are spoken")
     func spokenFirstName() {
         #expect(OnboardingConversationAudio.spokenFirstName(from: "  amaury delille ") == "Amaury")
         #expect(OnboardingConversationAudio.spokenFirstName(from: "Jean-Luc") == "Jean-Luc")
-        #expect(OnboardingConversationAudio.spokenFirstName(from: "Thảo") == "Thảo")
+        #expect(OnboardingConversationAudio.spokenFirstName(from: "Niño") == "Niño")
         #expect(OnboardingConversationAudio.spokenFirstName(from: "R2D2") == nil)
         #expect(OnboardingConversationAudio.spokenFirstName(from: "😀") == nil)
         #expect(OnboardingConversationAudio.spokenFirstName(from: "") == nil)
@@ -60,154 +60,96 @@ struct PronunciationReviewTests {
 
     @Test("Case and punctuation never fail a clean take")
     func ignoresCaseAndPunctuation() {
-        let review = PronunciationReview(target: "Chào bạn, khỏe không?", transcript: "chào bạn khỏe không")
+        let review = PronunciationReview(target: "Kumusta ka, Ate?", transcript: "kumusta ka ate")
         #expect(review.isMatch)
         #expect(review.tips.isEmpty)
     }
 
-    @Test("Composed and decomposed Unicode compare equal")
-    func unicodeNormalization() {
-        let decomposed = "Chào bạn".decomposedStringWithCanonicalMapping
-        #expect(PronunciationReview(target: "Chào bạn", transcript: decomposed).isMatch)
+    @Test("Stress marks a transcriber adds never fail a take")
+    func stressMarksFold() {
+        #expect(PronunciationReview(target: "Salamat po", transcript: "Salámat pô").isMatch)
     }
 
-    @Test("A wrong tone is flagged as a tone, not a wrong word")
-    func toneMistake() {
-        let review = PronunciationReview(target: "Cảm ơn", transcript: "cám ơn")
-        #expect(!review.isMatch)
-        #expect(marks(review.target) == [.tone, .correct])
-        #expect(review.tips.first?.mark == .tone)
-        #expect(review.tips.first?.message.contains("hỏi") == true)
+    @Test("Everyday spelling variants are the same word", arguments: [
+        ("Puwede po ba?", "pwede po ba"),
+        ("Ako rin", "ako din"),
+        ("Kumusta ka?", "kamusta ka"),
+        ("Salamat po", "salamat ho"),
+        ("Anong pangalan mo?", "ano'ng pangalan mo"),
+        ("Gusto ko ng halo-halo", "gusto ko ng halo halo"),
+        ("Saka na lang", "tsaka na lang"),
+    ])
+    func spellingVariants(target: String, transcript: String) {
+        #expect(PronunciationReview(target: target, transcript: transcript).isMatch)
     }
 
-    @Test("A vowel-mark slip is an almost, not a tone")
-    func vowelMistake() {
-        let review = PronunciationReview(target: "mơ", transcript: "mo")
+    @Test("A vowel slip is an almost, not a wrong word")
+    func vowelSlip() {
+        let review = PronunciationReview(target: "lalaki", transcript: "lalake")
         #expect(marks(review.target) == [.spelling])
+        #expect(review.tips.first?.mark == .spelling)
     }
 
-    @Test("Skipped syllables are missing and grouped in one tip")
-    func missingSyllables() {
-        let review = PronunciationReview(target: "Tôi muốn uống cà phê", transcript: "tôi muốn cà phê")
-        #expect(marks(review.target) == [.correct, .correct, .missing, .correct, .correct])
-        #expect(review.tips == [.init(mark: .missing, message: "Don’t skip **uống**.")])
+    @Test("Skipped words are missing and grouped in one tip")
+    func missingWords() {
+        let review = PronunciationReview(target: "Gusto ko ng kape", transcript: "gusto kape")
+        #expect(marks(review.target) == [.correct, .missing, .missing, .correct])
+        #expect(review.tips == [.init(mark: .missing, message: "Don’t skip **ko ng**.")])
+        #expect(!review.isMatch)
     }
 
     @Test("A different word is wrong, an added word is extra")
     func wrongAndExtra() {
-        let review = PronunciationReview(target: "Tôi là sinh viên", transcript: "tôi là giáo viên ạ")
-        #expect(marks(review.target) == [.correct, .correct, .wrong, .correct])
-        #expect(marks(review.heard) == [.correct, .correct, .wrong, .correct, .extra])
+        let review = PronunciationReview(target: "Kumain ka na ba", transcript: "kumain kayo na ba eh")
+        #expect(marks(review.target) == [.correct, .wrong, .correct, .correct])
+        #expect(marks(review.heard) == [.correct, .wrong, .correct, .correct, .extra])
     }
 
-    @Test("Extra filler syllables do not fail an otherwise clean take")
+    @Test("Extra filler words do not fail an otherwise clean take")
     func extraFillerStillMatches() {
-        #expect(PronunciationReview(target: "Cảm ơn", transcript: "à cảm ơn").isMatch)
+        #expect(PronunciationReview(target: "Salamat po", transcript: "ay salamat po").isMatch)
     }
 
-    @Test("Digits from the transcriber match spelled-out numbers")
-    func numbersAreSpelled() {
-        #expect(PronunciationReview(target: "Hai mươi lăm nghìn", transcript: "25 nghìn").isMatch)
-        #expect(VietnameseNumber.spell(21) == ["hai", "mươi", "mốt"])
-        #expect(VietnameseNumber.spell(105) == ["một", "trăm", "linh", "năm"])
+    @Test("Digits match native and Spanish-derived number words")
+    func numbersMatch() {
+        #expect(PronunciationReview(target: "Singkwenta pesos po", transcript: "50 pesos po").isMatch)
+        #expect(PronunciationReview(target: "Limampu", transcript: "50").isMatch)
+        #expect(PronunciationReview(target: "Dalawa po", transcript: "dos po").isMatch)
+        #expect(!PronunciationReview(target: "Dalawa po", transcript: "tatlo po").isMatch)
     }
 
-    @Test("Punctuation anywhere never fails a take", arguments: [
-        "Chào bạn… khỏe không!!",
-        "« chào bạn » , khỏe không ?",
-        "chào-bạn khỏe-không",
-        "Chào bạn.Khỏe không",
-    ])
-    func punctuationIsForgiven(transcript: String) {
-        let review = PronunciationReview(target: "Chào bạn, khỏe không?", transcript: transcript)
-        #expect(review.isMatch)
-        #expect(marks(review.target) == [.correct, .correct, .correct, .correct])
-    }
-
-    @Test("Where the tone mark sits and i/y spellings are the same word")
-    func spellingVariants() {
-        #expect(PronunciationReview(target: "hoà bình", transcript: "hòa bình").isMatch)
-        #expect(PronunciationReview(target: "Thuý", transcript: "thúy").isMatch)
-        #expect(PronunciationReview(target: "kỹ sư", transcript: "kĩ sư").isMatch)
-        #expect(PronunciationReview(target: "lý do", transcript: "lí do").isMatch)
-        // Real vowel differences stay differences.
-        #expect(!PronunciationReview(target: "tay", transcript: "tai").isMatch)
-    }
-
-    @Test("Sounds every accent merges count as correct")
-    func everyAccentMerges() {
-        for accent in VietnameseAccent.allCases {
-            #expect(PronunciationReview(target: "đi chợ", transcript: "đi trợ", accent: accent).isMatch, "tr/ch \(accent)")
-            #expect(PronunciationReview(target: "xin chào", transcript: "sin chào", accent: accent).isMatch, "s/x \(accent)")
-            #expect(PronunciationReview(target: "thích quá", transcript: "thíc quá", accent: accent).isMatch, "-ch/-c \(accent)")
-        }
-    }
-
-    @Test("Southern merges: hỏi/ngã, v/d, final t/c, n/ng, nh/n, iêu/iu")
-    func southernMerges() {
-        let pairs = [
-            ("Mẹ nghĩ", "mẹ nghỉ"),
-            ("về nhà", "dề nhà"),
-            ("mắt đẹp", "mắc đẹp"),
-            ("cái bàn", "cái bàng"),
-            ("anh ơi", "an ơi"),
-            ("nhiều lắm", "nhìu lắm"),
-        ]
-        for (target, heard) in pairs {
-            #expect(PronunciationReview(target: target, transcript: heard, accent: .southern).isMatch, "\(target)")
-            #expect(!PronunciationReview(target: target, transcript: heard, accent: .northern).isMatch, "\(target)")
-        }
-    }
-
-    @Test("Northern merges r, d and gi")
-    func northernMerges() {
-        #expect(PronunciationReview(target: "rất vui", transcript: "dất vui", accent: .northern).isMatch)
-        #expect(PronunciationReview(target: "rất vui", transcript: "giất vui", accent: .northern).isMatch)
-        #expect(!PronunciationReview(target: "rất vui", transcript: "dất vui", accent: .southern).isMatch)
-    }
-
-    @Test("A dropped or mistoned polite particle at the end is forgiven")
+    @Test("A dropped enclitic at the end is forgiven")
     func trailingParticles() {
-        #expect(PronunciationReview(target: "Chào anh ạ.", transcript: "chào anh").isMatch)
-        #expect(PronunciationReview(target: "Chào anh ạ.", transcript: "chào anh à").isMatch)
-        #expect(PronunciationReview(target: "Đi nhé!", transcript: "đi").isMatch)
+        #expect(PronunciationReview(target: "Salamat po.", transcript: "salamat").isMatch)
+        #expect(PronunciationReview(target: "Kain na!", transcript: "kain").isMatch)
         // Only at the end: a skipped word mid-phrase still fails.
-        #expect(!PronunciationReview(target: "Dạ em cảm ơn", transcript: "em cảm ơn").isMatch)
+        #expect(!PronunciationReview(target: "Magandang umaga po", transcript: "umaga po").isMatch)
     }
 
-    @Test("One slip passes in a phrase of three or more syllables, two do not")
+    @Test("One slip passes in a phrase of three or more words, two do not")
     func singleSlipAllowance() {
-        let one = PronunciationReview(target: "Tôi muốn uống cà phê", transcript: "tôi muốn uống cá phê")
+        let one = PronunciationReview(target: "Ang lalaki ay mabait", transcript: "ang lalake ay mabait")
         #expect(one.isMatch)
-        #expect(marks(one.target) == [.correct, .correct, .correct, .tone, .correct])
-        #expect(one.tips.first?.mark == .tone)
-        #expect(!PronunciationReview(target: "Tôi muốn uống cà phê", transcript: "tối muốn uống cá phê").isMatch)
-        #expect(!PronunciationReview(target: "Tôi muốn uống cà phê", transcript: "tôi muốn ăn cà phê").isMatch)
+        #expect(marks(one.target) == [.correct, .spelling, .correct, .correct])
+        #expect(!PronunciationReview(target: "lalaki", transcript: "lalake").isMatch)
+        #expect(!PronunciationReview(target: "Gusto ko ng kape", transcript: "gusto ko ng tubig").isMatch)
     }
 
-    @Test("Short phrases forgive only the low tones that sound alike")
-    func softToneSlips() {
-        #expect(PronunciationReview(target: "bạn", transcript: "bàn").isMatch)
-        #expect(PronunciationReview(target: "một ly", transcript: "mốt ly").isMatch)
-        #expect(!PronunciationReview(target: "bạn", transcript: "bán").isMatch)
-        #expect(!PronunciationReview(target: "ma", transcript: "mả").isMatch)
-    }
-
-    @Test("Silence marks every target syllable missing")
+    @Test("Silence marks every target word missing")
     func emptyTranscript() {
-        let review = PronunciationReview(target: "Xin chào", transcript: "")
+        let review = PronunciationReview(target: "Magandang umaga", transcript: "")
         #expect(review.heardNothing)
         #expect(marks(review.target) == [.missing, .missing])
         #expect(!review.isMatch)
     }
 }
 
-private struct StubSpeechRecognizer: VietnameseSpeechRecognizing {
+private struct StubSpeechRecognizer: TagalogSpeechRecognizing {
     let result: Result<String, SpeechRecognitionError>
 
     func transcribe(audio: Data) async throws -> SpeechTranscription {
         let transcript = try result.get()
-        return SpeechTranscription(version: 1, transcript: transcript, languageCode: "vie", languageProbability: nil, words: [])
+        return SpeechTranscription(version: 1, transcript: transcript, languageCode: "fil", languageProbability: nil, words: [])
     }
 }
 
@@ -219,9 +161,9 @@ struct SpeechRecognitionFallbackTests {
     func outageUsesFallback() async throws {
         let service = FallbackSpeechRecognitionService(
             primary: StubSpeechRecognizer(result: .failure(.temporarilyUnavailable)),
-            fallback: StubSpeechRecognizer(result: .success("xin chào"))
+            fallback: StubSpeechRecognizer(result: .success("kumusta"))
         )
-        #expect(try await service.transcribe(audio: audio).transcript == "xin chào")
+        #expect(try await service.transcribe(audio: audio).transcript == "kumusta")
     }
 
     @Test("Access and learner errors never reach the fallback", arguments: [
@@ -234,7 +176,7 @@ struct SpeechRecognitionFallbackTests {
     func gatedErrorsSurface(error: SpeechRecognitionError) async {
         let service = FallbackSpeechRecognitionService(
             primary: StubSpeechRecognizer(result: .failure(error)),
-            fallback: StubSpeechRecognizer(result: .success("xin chào"))
+            fallback: StubSpeechRecognizer(result: .success("kumusta"))
         )
         await #expect(throws: error) { try await service.transcribe(audio: audio) }
     }
@@ -277,8 +219,8 @@ struct RealtimeSpeechTranscriptionTests {
     @Test("A streamed transcript is used without uploading the take")
     func streamedTranscriptWins() async throws {
         let service = StubSpeechRecognizer(result: .failure(.temporarilyUnavailable))
-        let live = StubLiveTranscription(result: .success("xin chào"))
-        #expect(try await service.transcribe(audio: audio, live: live).transcript == "xin chào")
+        let live = StubLiveTranscription(result: .success("kumusta"))
+        #expect(try await service.transcribe(audio: audio, live: live).transcript == "kumusta")
     }
 
     @Test("A failed or silent stream falls back to the upload", arguments: [
@@ -287,9 +229,9 @@ struct RealtimeSpeechTranscriptionTests {
         .responseInvalid
     ])
     func streamFailureUploads(error: SpeechRecognitionError) async throws {
-        let service = StubSpeechRecognizer(result: .success("cảm ơn"))
+        let service = StubSpeechRecognizer(result: .success("salamat"))
         let live = StubLiveTranscription(result: .failure(error))
-        #expect(try await service.transcribe(audio: audio, live: live).transcript == "cảm ơn")
+        #expect(try await service.transcribe(audio: audio, live: live).transcript == "salamat")
     }
 
     @Test("Access errors from the stream are not retried as an upload", arguments: [
@@ -298,7 +240,7 @@ struct RealtimeSpeechTranscriptionTests {
         .authenticationRequired
     ])
     func accessErrorsSurface(error: SpeechRecognitionError) async {
-        let service = StubSpeechRecognizer(result: .success("cảm ơn"))
+        let service = StubSpeechRecognizer(result: .success("salamat"))
         let live = StubLiveTranscription(result: .failure(error))
         await #expect(throws: error) {
             try await service.transcribe(audio: audio, live: live)
@@ -307,10 +249,10 @@ struct RealtimeSpeechTranscriptionTests {
 
     @Test("Streamed text is normalized like the upload path")
     func normalizesTranscript() throws {
-        let decomposed = "  xin  cha\u{0300}o\n bạn "
+        let decomposed = "  sala\u{0301}mat  po\n Ate "
         let transcription = try ElevenLabsRealtimeTranscription.transcription(from: decomposed)
-        #expect(transcription.transcript == "xin chào bạn")
-        #expect(transcription.transcript.unicodeScalars.count == "xin chào bạn".unicodeScalars.count)
+        #expect(transcription.transcript == "salámat po Ate")
+        #expect(transcription.transcript.unicodeScalars.count == "salámat po Ate".unicodeScalars.count)
         #expect(throws: SpeechRecognitionError.speechNotDetected) {
             try ElevenLabsRealtimeTranscription.transcription(from: "  ")
         }

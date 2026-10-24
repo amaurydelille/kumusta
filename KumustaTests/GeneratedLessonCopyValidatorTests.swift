@@ -11,7 +11,7 @@ struct GeneratedLessonCopyValidatorTests {
         )
     }
 
-    @Test("A single European accent in English UI copy is accepted")
+    @Test("A single accented loanword in English UI copy is accepted")
     func acceptsCafeInEnglishSituationCopy() {
         #expect(
             GeneratedLessonCopyValidator.isSafeInterfaceText(
@@ -20,11 +20,11 @@ struct GeneratedLessonCopyValidatorTests {
         )
     }
 
-    @Test("Vietnamese utterances cannot become answer choices")
-    func rejectsVietnameseAnswerLeakage() {
+    @Test("Tagalog utterances cannot become answer choices")
+    func rejectsTagalogAnswerLeakage() {
         #expect(
             !GeneratedLessonCopyValidator.isSafeInterfaceText(
-                "Mời anh chị vào nhà chơi nha!"
+                "Pasok po kayo, kain tayo!"
             )
         )
     }
@@ -33,8 +33,8 @@ struct GeneratedLessonCopyValidatorTests {
     func rejectsTransliteratedAnswerLeakage() {
         #expect(
             !GeneratedLessonCopyValidator.isSafeInterfaceText(
-                "Moi anh chi vao nha choi",
-                spokenUtterances: ["Mời anh chị vào nhà chơi nha!"]
+                "pasok kayo kain tayo",
+                spokenUtterances: ["Pasok kayo, kain tayo!"]
             )
         )
     }

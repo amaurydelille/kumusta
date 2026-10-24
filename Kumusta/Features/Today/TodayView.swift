@@ -31,7 +31,7 @@ struct TodayView: View {
                             VStack(spacing: 12) {
                                 KumustaScreenTopBar(streak: activity.currentStreak())
                                 roadmapSummary
-                                DailyReviewCard(accent: appState.profile.accent) {
+                                DailyReviewCard() {
                                     isReviewing = true
                                 }
                             }
@@ -55,7 +55,6 @@ struct TodayView: View {
                     // Attached outside the lazy stack, which may unload the card.
                     .fullScreenCover(isPresented: $isReviewing) {
                         DailyReviewView(
-                            accent: appState.profile.accent,
                             entryPoint: "today",
                             onDismiss: { isReviewing = false }
                         )
@@ -80,7 +79,7 @@ struct TodayView: View {
             .onChange(of: roadmapLessons.map(\.id), initial: true) { _, _ in
                 dependencies.memoryStore.learnMeanings(from: roadmapLessons.map(\.lesson))
             }
-            .task(id: "\(appState.profile.id)-\(appState.profile.goal.rawValue)-\(appState.profile.level.rawValue)-\(appState.profile.accent.rawValue)") {
+            .task(id: "\(appState.profile.id)-\(appState.profile.goal.rawValue)-\(appState.profile.level.rawValue)") {
                 await loadRoadmap()
             }
             .fullScreenCover(
@@ -138,7 +137,7 @@ struct TodayView: View {
             Image(systemName: completedRoadmapCount == roadmapLessons.count ? "trophy.fill" : "flag.fill")
                 .scaledFont(25, weight: .bold)
                 .foregroundStyle(completedRoadmapCount == roadmapLessons.count ? KumustaColors.accentDeep : KumustaColors.muted)
-            Text(completedRoadmapCount == roadmapLessons.count ? L("Learning path complete") : L("Your next Vietnamese milestone"))
+            Text(completedRoadmapCount == roadmapLessons.count ? L("Learning path complete") : L("Your next Tagalog milestone"))
                 .scaledFont(15, weight: .bold, design: .rounded)
                 .foregroundStyle(KumustaColors.ink)
             Text(completedRoadmapCount == roadmapLessons.count ? L("Every lesson stays open for practice.") : L("Complete each lesson to reach the flag."))
@@ -203,11 +202,11 @@ struct TodayView: View {
 
         do {
             guard let service = dependencies.goalCurriculum else { throw GoalCurriculumError.unavailable }
-            let rows = try await service.lessons(goal: profile.goal, accent: profile.accent)
+            let rows = try await service.lessons(goal: profile.goal)
             try Task.checkCancellation()
             guard appState.profile.id == profile.id, appState.profile.goal == profile.goal,
-                  appState.profile.accent == profile.accent, appState.profile.level == profile.level else { return }
-            try GoalCurriculumSelection.validate(rows, goal: profile.goal, accent: profile.accent)
+                  appState.profile.level == profile.level else { return }
+            try GoalCurriculumSelection.validate(rows, goal: profile.goal)
             goalRows = rows
             goalStage = GoalCurriculumSelection.recommendedStage(level: profile.level, rows: rows, completed: completedLessonIDs)
             appendGoalStage()
@@ -255,10 +254,9 @@ struct TodayView: View {
             return GoalCurriculumSelection.title(appState.profile.goal)
         }
         return switch appState.profile.level {
-        case .new: L("New to Vietnamese")
-        case .familiar: L("Turn words into conversation")
-        case .conversational: L("Handle real conversations")
-        case .rusty: L("Speak with cultural confidence")
+        case .beginner: L("New to Tagalog")
+        case .intermediate: L("Turn words into conversation")
+        case .advanced: L("Handle real conversations")
         }
     }
 
@@ -269,14 +267,12 @@ struct TodayView: View {
     private func loadBundledRoadmap(for profile: UserProfile) {
         do {
             roadmapLessons = try RoadmapCatalog.load(
-                accent: profile.accent,
                 level: profile.level
             )
             isUsingAuthoritativeRoadmap = true
             loadError = nil
         } catch {
             roadmapLessons = RoadmapCatalog.fallback(
-                accent: profile.accent,
                 level: profile.level
             )
             isUsingAuthoritativeRoadmap = false
@@ -697,38 +693,32 @@ struct RoadmapLesson: Identifiable, Equatable {
 
 enum RoadmapCatalog {
     static func load(
-        accent: VietnameseAccent,
-        level: ProficiencyLevel = .new,
+        level: ProficiencyLevel = .beginner,
         bundle: Bundle = .main
     ) throws -> [RoadmapLesson] {
-        let (catalog, catalogLevel) = switch level {
-        case .new: ("new-vietnamese-v1", "new")
-        case .familiar: ("familiar-vietnamese-v1", "familiar")
-        case .conversational: ("conversational-vietnamese-v1", "conversational")
-        case .rusty: ("rusty-vietnamese-v1", "rusty")
-        }
+        let catalog = "\(level.rawValue)-tagalog-v1"
+        let catalogLevel = level.rawValue
         guard let url = bundle.url(forResource: catalog, withExtension: "json") else {
             throw RoadmapCatalogError.resourceMissing
         }
         let root = try JSONDecoder().decode(RoadmapCatalogRoot.self, from: Data(contentsOf: url))
         let lessons = root.lessons
-            .filter { $0.level == catalogLevel && $0.accent == accent.rawValue }
+            .filter { $0.level == catalogLevel }
             .sorted { $0.lessonOrder < $1.lessonOrder }
-            .map { $0.makeRoadmapLesson(accent: accent) }
+            .map { $0.makeRoadmapLesson() }
         guard !lessons.isEmpty else { throw RoadmapCatalogError.emptyCatalog }
         return lessons
     }
 
     static func fallback(
-        accent: VietnameseAccent,
-        level: ProficiencyLevel = .new
+        level: ProficiencyLevel = .beginner
     ) -> [RoadmapLesson] {
-        guard level == .new else { return [] }
-        return SampleContent.lessonCatalog(for: accent).enumerated().map { index, lesson in
+        guard level == .beginner else { return [] }
+        return SampleContent.lessonCatalog().enumerated().map { index, lesson in
             RoadmapLesson(
                 lesson: lesson,
                 title: lesson.scenario,
-                summary: L("Build practical Vietnamese you can use right away."),
+                summary: L("Build practical Tagalog you can use right away."),
                 unitTitle: L("First conversations"),
                 unitOrder: 1,
                 lessonOrder: index + 1
@@ -749,7 +739,6 @@ private struct RoadmapCatalogRow: Decodable {
     let id: UUID
     let summary: String
     let level: String
-    let accent: String
     let unitTitle: String
     let unitOrder: Int
     let lessonOrder: Int
@@ -757,11 +746,10 @@ private struct RoadmapCatalogRow: Decodable {
     /// The English title when the row shows a translation.
     var sourceTitle: String? = nil
 
-    func makeRoadmapLesson(accent: VietnameseAccent) -> RoadmapLesson {
+    func makeRoadmapLesson() -> RoadmapLesson {
         let identifierNamespaceOffset = switch level {
-        case "familiar": 10
-        case "conversational": 20
-        case "rusty": 30
+        case "intermediate": 10
+        case "advanced": 20
         default: 0
         }
         return RoadmapLesson(
@@ -769,10 +757,8 @@ private struct RoadmapCatalogRow: Decodable {
                 id: id,
                 scenario: content.title,
                 minutes: content.minutes,
-                accent: accent,
                 steps: content.rounds.enumerated().flatMap { roundIndex, round in
                     round.makeSteps(
-                        accent: accent,
                         lessonOrder: lessonOrder,
                         roundIndex: roundIndex,
                         identifierNamespaceOffset: identifierNamespaceOffset
@@ -797,7 +783,7 @@ struct RoadmapLessonContent: Decodable, Sendable {
 
 struct RoadmapRound: Decodable, Sendable {
     let situation: String
-    let vietnamese: String
+    let tagalog: String
     let translation: String
     let chunks: [RoadmapChunk]
     let wordGlosses: [RoadmapWordGloss]
@@ -805,7 +791,6 @@ struct RoadmapRound: Decodable, Sendable {
     let responseExercise: RoadmapResponseExercise?
 
     func makeSteps(
-        accent: VietnameseAccent,
         lessonOrder: Int,
         roundIndex: Int,
         identifierNamespaceOffset: Int,
@@ -813,21 +798,20 @@ struct RoadmapRound: Decodable, Sendable {
     ) -> [LessonStep] {
         let mappedChunks = chunks.enumerated().map { index, chunk in
             PhraseChunk(
-                id: RoadmapIdentifier.uuid(namespace: 43 + identifierNamespaceOffset, accent: accent, lessonOrder: lessonOrder, position: roundIndex * (lessonID == nil ? 10 : 100) + index + 1, lessonID: lessonID),
-                vietnamese: chunk.vietnamese,
+                id: RoadmapIdentifier.uuid(namespace: 43 + identifierNamespaceOffset, lessonOrder: lessonOrder, position: roundIndex * (lessonID == nil ? 10 : 100) + index + 1, lessonID: lessonID),
+                tagalog: chunk.tagalog,
                 english: chunk.english,
                 note: chunk.note
             )
         }
         let mappedGlosses = wordGlosses.enumerated().map { index, gloss in
             LessonWordGloss(
-                id: RoadmapIdentifier.uuid(namespace: 44 + identifierNamespaceOffset, accent: accent, lessonOrder: lessonOrder, position: roundIndex * (lessonID == nil ? 10 : 100) + index + 1, lessonID: lessonID),
+                id: RoadmapIdentifier.uuid(namespace: 44 + identifierNamespaceOffset, lessonOrder: lessonOrder, position: roundIndex * (lessonID == nil ? 10 : 100) + index + 1, lessonID: lessonID),
                 token: gloss.token,
                 translation: gloss.english
             )
         }
         let mappedResponse = responseExercise?.makeExercise(
-            accent: accent,
             lessonOrder: lessonOrder,
             roundIndex: roundIndex,
             identifierNamespaceOffset: identifierNamespaceOffset,
@@ -843,14 +827,13 @@ struct RoadmapRound: Decodable, Sendable {
             LessonStep(
                 id: RoadmapIdentifier.uuid(
                     namespace: 42 + identifierNamespaceOffset,
-                    accent: accent,
                     lessonOrder: lessonOrder,
                     position: roundIndex * LessonSessionPlan.stagesPerRound + stageIndex + 1,
                     lessonID: lessonID
                 ),
                 kind: stage.0,
                 prompt: stage.1,
-                vietnamese: vietnamese,
+                tagalog: tagalog,
                 translation: translation,
                 chunks: mappedChunks,
                 wordGlosses: mappedGlosses,
@@ -861,7 +844,7 @@ struct RoadmapRound: Decodable, Sendable {
 }
 
 struct RoadmapChunk: Decodable, Sendable {
-    let vietnamese: String
+    let tagalog: String
     let english: String
     let note: String
 }
@@ -872,13 +855,12 @@ struct RoadmapWordGloss: Decodable, Sendable {
 }
 
 struct RoadmapResponseExercise: Decodable, Sendable {
-    let promptVietnamese: String
+    let promptTagalog: String
     let promptTranslation: String
     let options: [RoadmapResponseOption]
     let correctOptionIndex: Int
 
     func makeExercise(
-        accent: VietnameseAccent,
         lessonOrder: Int,
         roundIndex: Int,
         identifierNamespaceOffset: Int,
@@ -889,7 +871,6 @@ struct RoadmapResponseExercise: Decodable, Sendable {
             HearRespondOption(
                 id: RoadmapIdentifier.uuid(
                     namespace: 45 + identifierNamespaceOffset,
-                    accent: accent,
                     lessonOrder: lessonOrder,
                     position: roundIndex * 10 + index + 1,
                     lessonID: lessonID
@@ -898,7 +879,7 @@ struct RoadmapResponseExercise: Decodable, Sendable {
             )
         }
         return HearRespondExercise(
-            promptVietnamese: promptVietnamese,
+            promptTagalog: promptTagalog,
             promptTranslation: promptTranslation,
             options: mappedOptions,
             correctOptionID: mappedOptions[correctOptionIndex].id
@@ -911,7 +892,7 @@ struct RoadmapResponseOption: Decodable, Sendable {
 }
 
 private enum RoadmapIdentifier {
-    static func uuid(namespace: Int, accent: VietnameseAccent, lessonOrder: Int, position: Int, lessonID: UUID? = nil) -> UUID {
+    static func uuid(namespace: Int, lessonOrder: Int, position: Int, lessonID: UUID? = nil) -> UUID {
         if let lessonID {
             let digest = SHA256.hash(data: Data("\(lessonID.uuidString):\(namespace):\(position)".utf8))
             let hex = digest.prefix(16).map { String(format: "%02x", $0) }.joined()
@@ -920,11 +901,10 @@ private enum RoadmapIdentifier {
                 .map { String(characters[$0]) }.joined(separator: "-")
             return UUID(uuidString: value)!
         }
-        let accentCode = accent == .southern ? 8101 : 8102
         let value = String(
             format: "%02d000000-0000-4000-%04d-%012d",
             namespace,
-            accentCode,
+            8100,
             lessonOrder * 1_000 + position
         )
         return UUID(uuidString: value)!
@@ -934,23 +914,24 @@ private enum RoadmapIdentifier {
 enum GoalCurriculumError: Error { case unavailable, incomplete }
 
 protocol GoalCurriculumProviding: Sendable {
-    func lessons(goal: LearningGoal, accent: VietnameseAccent) async throws -> [GoalCurriculumRow]
+    func lessons(goal: LearningGoal) async throws -> [GoalCurriculumRow]
 }
 
 struct PreviewGoalCurriculum: GoalCurriculumProviding {
-    func lessons(goal: LearningGoal, accent: VietnameseAccent) async throws -> [GoalCurriculumRow] {
+    func lessons(goal: LearningGoal) async throws -> [GoalCurriculumRow] {
         // Deterministic bundled fixtures keep previews and UI tests offline.
-        let resources = ["new-vietnamese-v1", "familiar-vietnamese-v1", "conversational-vietnamese-v1", "rusty-vietnamese-v1"]
+        // Four goal stages from the three authored levels; advanced fills the last two.
+        let resources = ["beginner-tagalog-v1", "intermediate-tagalog-v1", "advanced-tagalog-v1", "advanced-tagalog-v1"]
         return try resources.enumerated().flatMap { stage, resource in
             guard let url = Bundle.main.url(forResource: resource, withExtension: "json") else {
                 throw GoalCurriculumError.unavailable
             }
             let root = try JSONDecoder().decode(RoadmapCatalogRoot.self, from: Data(contentsOf: url))
-            return root.lessons.filter { $0.accent == accent.rawValue }
+            return root.lessons
                 .sorted { $0.lessonOrder < $1.lessonOrder }.prefix(10).enumerated().map { index, row in
-                    GoalCurriculumRow(id: RoadmapIdentifier.uuid(namespace: 91, accent: accent,
+                    GoalCurriculumRow(id: RoadmapIdentifier.uuid(namespace: 91,
                         lessonOrder: stage * 10 + index + 1, position: 1), goal: goal, stage: stage + 1,
-                        accent: accent, lessonOrder: index + 1, title: row.content.title,
+                        lessonOrder: index + 1, title: row.content.title,
                         summary: row.summary, content: row.content)
                 }
         }
@@ -961,8 +942,8 @@ actor SupabaseGoalCurriculum: GoalCurriculumProviding {
     private let client: SupabaseClient
     init(client: SupabaseClient) { self.client = client }
 
-    func lessons(goal: LearningGoal, accent: VietnameseAccent) async throws -> [GoalCurriculumRow] {
-        try await sourceLessons(goal: goal, accent: accent)
+    func lessons(goal: LearningGoal) async throws -> [GoalCurriculumRow] {
+        try await sourceLessons(goal: goal)
     }
 
     private static var cacheDirectory: URL {
@@ -970,20 +951,19 @@ actor SupabaseGoalCurriculum: GoalCurriculumProviding {
             .appendingPathComponent("goal-curriculum-v1", isDirectory: true)
     }
 
-    private func sourceLessons(goal: LearningGoal, accent: VietnameseAccent) async throws -> [GoalCurriculumRow] {
+    private func sourceLessons(goal: LearningGoal) async throws -> [GoalCurriculumRow] {
         let cacheDirectory = Self.cacheDirectory
-        let cacheURL = cacheDirectory.appendingPathComponent("\(goal.rawValue)-\(accent.rawValue).json")
+        let cacheURL = cacheDirectory.appendingPathComponent("\(goal.rawValue).json")
         do {
             let data = try await client.from("kumusta_goal_lessons")
-                .select("id,goal,stage,accent,lesson_order,title,summary,content")
+                .select("id,goal,stage,lesson_order,title,summary,content")
                 .eq("curriculum_version", value: "goals-v1")
                 .eq("goal", value: goal.rawValue)
-                .eq("accent", value: accent.rawValue)
                 .eq("is_published", value: true)
                 .order("stage").order("lesson_order")
                 .execute().data
             let rows = try JSONDecoder().decode([GoalCurriculumRow].self, from: data)
-            try GoalCurriculumSelection.validate(rows, goal: goal, accent: accent)
+            try GoalCurriculumSelection.validate(rows, goal: goal)
             try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
             try? data.write(to: cacheURL, options: .atomic)
             return rows
@@ -991,7 +971,7 @@ actor SupabaseGoalCurriculum: GoalCurriculumProviding {
             try Task.checkCancellation()
             if let data = try? Data(contentsOf: cacheURL),
                let rows = try? JSONDecoder().decode([GoalCurriculumRow].self, from: data),
-               (try? GoalCurriculumSelection.validate(rows, goal: goal, accent: accent)) != nil {
+               (try? GoalCurriculumSelection.validate(rows, goal: goal)) != nil {
                 return rows
             }
             throw error
@@ -1003,7 +983,6 @@ struct GoalCurriculumRow: Decodable, Sendable {
     let id: UUID
     let goal: LearningGoal
     let stage: Int
-    let accent: VietnameseAccent
     let lessonOrder: Int
     let title: String
     let summary: String
@@ -1011,14 +990,14 @@ struct GoalCurriculumRow: Decodable, Sendable {
     /// The English title when the row shows a translation (not decoded).
     var sourceTitle: String? = nil
     enum CodingKeys: String, CodingKey {
-        case id, goal, stage, accent, title, summary, content
+        case id, goal, stage, title, summary, content
         case lessonOrder = "lesson_order"
     }
     func makeLesson(unitOrderOffset: Int = 0) -> RoadmapLesson {
         RoadmapLesson(
-            lesson: Lesson(id: id, scenario: title, minutes: content.minutes, accent: accent,
+            lesson: Lesson(id: id, scenario: title, minutes: content.minutes,
                 steps: content.rounds.enumerated().flatMap { index, round in
-                    round.makeSteps(accent: accent, lessonOrder: lessonOrder, roundIndex: index,
+                    round.makeSteps(lessonOrder: lessonOrder, roundIndex: index,
                                     identifierNamespaceOffset: 0, lessonID: id)
                 }, sourceScenario: sourceTitle),
             title: title, summary: summary,
@@ -1030,11 +1009,11 @@ struct GoalCurriculumRow: Decodable, Sendable {
 
 enum GoalCurriculumSelection {
     static func supports(_ goal: LearningGoal) -> Bool {
-        [.lifeInVietnam, .family, .partner, .travel].contains(goal)
+        [.lifeInThePhilippines, .family, .partner, .travel].contains(goal)
     }
     static func title(_ goal: LearningGoal) -> String {
         switch goal {
-        case .lifeInVietnam: L("Make daily life feel like home")
+        case .lifeInThePhilippines: L("Make daily life feel like home")
         case .family: L("Speak naturally with family")
         case .partner: L("Share more of your partner’s world")
         case .travel: L("Travel with confidence")
@@ -1062,17 +1041,16 @@ enum GoalCurriculumSelection {
     }
 
     static func recommendedStage(level: ProficiencyLevel, rows: [GoalCurriculumRow], completed: Set<UUID>) -> Int {
-        // Heritage exposure is not proof of advanced productive ability. Keep all levels accessible.
-        let entry: Int = switch level { case .new: 1; case .familiar: 2; case .conversational, .rusty: 3 }
+        let entry: Int = switch level { case .beginner: 1; case .intermediate: 2; case .advanced: 3 }
         for stage in entry...4 {
             let lessons = rows.filter { $0.stage == stage }
             if lessons.count != 10 || lessons.contains(where: { !completed.contains($0.id) }) { return stage }
         }
         return 4
     }
-    static func validate(_ rows: [GoalCurriculumRow], goal: LearningGoal, accent: VietnameseAccent) throws {
+    static func validate(_ rows: [GoalCurriculumRow], goal: LearningGoal) throws {
         guard rows.count == 40, Set(rows.map(\.id)).count == 40,
-              rows.allSatisfy({ $0.goal == goal && $0.accent == accent }) else { throw GoalCurriculumError.incomplete }
+              rows.allSatisfy({ $0.goal == goal }) else { throw GoalCurriculumError.incomplete }
         for stage in 1...4 {
             let lessons = rows.filter { $0.stage == stage }
             guard Set(lessons.map(\.lessonOrder)) == Set(1...10), lessons.count == 10 else { throw GoalCurriculumError.incomplete }

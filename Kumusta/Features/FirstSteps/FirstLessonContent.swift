@@ -1,9 +1,7 @@
 import Foundation
 
-/// A guided lesson built from bundled JSON in `Resources/FirstLessons`. One
-/// file covers both accents: any line can be a plain string or a
-/// `{"southern": …, "northern": …}` pair, and `{name}` is replaced with the
-/// learner's first name. The same files drive the audio generator in
+/// A guided lesson built from bundled JSON in `Resources/FirstLessons`.
+/// `{name}` in any line is replaced with the learner's first name. The same files drive the audio generator in
 /// `scripts/generate-first-lesson-audio.ts`, so text and clips never drift.
 struct FirstLessonScript: Equatable, Sendable {
     enum Mode: String, Decodable, Sendable {
@@ -16,7 +14,6 @@ struct FirstLessonScript: Equatable, Sendable {
     let id: String
     let level: ProficiencyLevel
     let mode: Mode
-    let accent: VietnameseAccent
     let sourceID: UUID
     let replayTitle: String
     let estimatedMinutes: Int
@@ -27,10 +24,10 @@ struct FirstLessonScript: Equatable, Sendable {
     var language: AppLanguage = .english
 
     struct Chunk: Identifiable, Equatable, Sendable {
-        let vietnamese: String
+        let tagalog: String
         let meaning: String
 
-        var id: String { vietnamese }
+        var id: String { tagalog }
     }
 
     struct Intro: Equatable, Sendable {
@@ -81,7 +78,7 @@ struct FirstLessonScript: Equatable, Sendable {
     }
 
     struct NewPhrase: Equatable, Sendable {
-        let vietnamese: String
+        let tagalog: String
         let translation: String
         let chunks: [Chunk]
         let tip: String
@@ -95,7 +92,7 @@ struct FirstLessonScript: Equatable, Sendable {
         /// What pronunciation feedback grades. Names are left out because
         /// speech-to-text cannot be expected to spell a foreign name.
         let target: String
-        /// Other takes that count as correct, such as dạ for vâng.
+        /// Other takes that count as correct, such as oo for opo.
         let accepted: [String]
         let tip: String?
         /// What the voice reads aloud when it differs from `target`, such as
@@ -235,8 +232,8 @@ struct FirstLessonScript: Equatable, Sendable {
             case let .listenPick(_, pick):
                 texts += pick.options.map(\.text)
             case let .newPhrase(_, phrase):
-                texts.append(phrase.vietnamese)
-                texts += phrase.chunks.map(\.vietnamese)
+                texts.append(phrase.tagalog)
+                texts += phrase.chunks.map(\.tagalog)
             case let .speak(_, speak):
                 texts.append(speak.spokenText)
             case let .meaningPick(_, pick):
@@ -252,12 +249,12 @@ struct FirstLessonScript: Equatable, Sendable {
                 if let closing = conversation.closing { texts.append(closing.text) }
             }
         }
-        texts += completion.phrases.map { Self.playableText($0.vietnamese) }
+        texts += completion.phrases.map { Self.playableText($0.tagalog) }
         var seen = Set<String>()
         return texts.filter { seen.insert(Self.normalizedAudioText($0)).inserted }
     }
 
-    /// Strips the ellipsis used for open phrases such as "Mình tên là…".
+    /// Strips the ellipsis used for open phrases such as "Ako si…".
     static func playableText(_ text: String) -> String {
         text.replacingOccurrences(of: "…", with: "").trimmingCharacters(in: .whitespaces)
     }
@@ -286,13 +283,12 @@ extension FirstLessonScript {
 
     static func bundledAudioURL(
         for text: String,
-        accent: VietnameseAccent,
         bundle: Bundle = .main
     ) -> URL? {
         bundle.url(
             forResource: audioKey(for: text),
             withExtension: "mp3",
-            subdirectory: "FirstLessons/audio/\(accent.rawValue)"
+            subdirectory: "FirstLessons/audio"
         )
     }
 }
@@ -301,7 +297,7 @@ extension FirstLessonScript {
 
 enum FirstLessonCatalog {
     /// The complete in-app beginner lesson behind First Steps.
-    static let fullLessonFile = "first-lesson-new"
+    static let fullLessonFile = "first-lesson-beginner"
 
     /// The short onboarding lesson for a level, shown before the paywall and
     /// replayable from the basics cheat sheet.
@@ -317,7 +313,6 @@ enum FirstLessonCatalog {
 
     static func load(
         _ file: String,
-        accent: VietnameseAccent,
         learnerName: String?,
         bundle: Bundle = .main
     ) throws -> FirstLessonScript {
@@ -325,7 +320,7 @@ enum FirstLessonCatalog {
             throw LoadError.missing(file)
         }
         let raw = try JSONDecoder().decode(RawLesson.self, from: Data(contentsOf: url))
-        return raw.resolved(accent: accent, name: learnerName)
+        return raw.resolved(name: learnerName)
     }
 
     /// The learner's first name as the lesson speaks it, or nil when the
@@ -337,38 +332,21 @@ enum FirstLessonCatalog {
 
 // MARK: - JSON
 
-/// A line that is either shared or written once per accent.
-private struct AccentText: Decodable {
-    let southern: String
-    let northern: String
+/// One line of lesson text.
+private struct ScriptText: Decodable {
+    let value: String
 
     init(from decoder: any Decoder) throws {
-        if let single = try? decoder.singleValueContainer().decode(String.self) {
-            southern = single
-            northern = single
-            return
-        }
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        southern = try container.decode(String.self, forKey: .southern)
-        northern = try container.decode(String.self, forKey: .northern)
-    }
-
-    func callAsFunction(_ accent: VietnameseAccent) -> String {
-        accent == .southern ? southern : northern
-    }
-
-    private enum CodingKeys: String, CodingKey {
-        case southern, northern
+        value = try decoder.singleValueContainer().decode(String.self)
     }
 }
 
 private struct ResolveContext {
-    let accent: VietnameseAccent
     let name: String?
 
     /// Fills `{name}`. Without a name, display text shows an ellipsis.
-    func text(_ value: AccentText) -> String {
-        let text = value(accent)
+    func text(_ value: ScriptText) -> String {
+        let text = value.value
         guard text.contains("{name}") else { return text }
         if let name { return text.replacingOccurrences(of: "{name}", with: name) }
         return text
@@ -377,14 +355,14 @@ private struct ResolveContext {
     }
 
     /// Audio is only personalized when there is a name; otherwise nil.
-    func audio(_ value: AccentText?) -> String? {
+    func audio(_ value: ScriptText?) -> String? {
         guard let value else { return nil }
-        let text = value(accent)
+        let text = value.value
         guard text.contains("{name}") else { return text }
         return name.map { text.replacingOccurrences(of: "{name}", with: $0) }
     }
 
-    func optional(_ value: AccentText?) -> String? {
+    func optional(_ value: ScriptText?) -> String? {
         value.map(text)
     }
 }
@@ -400,13 +378,12 @@ private struct RawLesson: Decodable {
     let steps: [RawStep]
     let completion: RawCompletion
 
-    func resolved(accent: VietnameseAccent, name: String?) -> FirstLessonScript {
-        let context = ResolveContext(accent: accent, name: name)
+    func resolved(name: String?) -> FirstLessonScript {
+        let context = ResolveContext(name: name)
         return FirstLessonScript(
             id: id,
             level: level,
             mode: mode,
-            accent: accent,
             sourceID: sourceID,
             replayTitle: replayTitle,
             estimatedMinutes: estimatedMinutes,
@@ -429,46 +406,46 @@ private struct RawLesson: Decodable {
 }
 
 private struct RawIntro: Decodable {
-    let hook: AccentText
-    let hookTranslation: AccentText
-    let title: AccentText
-    let subtitle: AccentText
+    let hook: ScriptText
+    let hookTranslation: ScriptText
+    let title: ScriptText
+    let subtitle: ScriptText
     let goals: [RawChunk]
 }
 
 private struct RawCompletion: Decodable {
-    let title: AccentText
-    let subtitle: AccentText
+    let title: ScriptText
+    let subtitle: ScriptText
     let phrases: [RawChunk]
     let words: [RawChunk]
 }
 
 private struct RawChunk: Decodable {
-    let vietnamese: AccentText
-    let meaning: AccentText
+    let tagalog: ScriptText
+    let meaning: ScriptText
 
     func resolved(_ context: ResolveContext) -> FirstLessonScript.Chunk {
-        FirstLessonScript.Chunk(vietnamese: context.text(vietnamese), meaning: context.text(meaning))
+        FirstLessonScript.Chunk(tagalog: context.text(tagalog), meaning: context.text(meaning))
     }
 }
 
 private struct RawSample: Decodable {
-    let text: AccentText
-    let meaning: AccentText
-    let contour: AccentText
+    let text: ScriptText
+    let meaning: ScriptText
+    let contour: ScriptText
 
     func resolved(_ context: ResolveContext) -> FirstLessonScript.ToneSample {
         FirstLessonScript.ToneSample(
             text: context.text(text),
             meaning: context.text(meaning),
-            contour: FirstLessonScript.ToneContour(rawValue: contour(context.accent)) ?? .level
+            contour: FirstLessonScript.ToneContour(rawValue: contour.value) ?? .level
         )
     }
 }
 
 private struct RawTile: Decodable {
-    let text: AccentText
-    let gloss: AccentText?
+    let text: ScriptText
+    let gloss: ScriptText?
 
     func resolved(_ context: ResolveContext) -> FirstLessonScript.Tile {
         FirstLessonScript.Tile(text: context.text(text), gloss: context.optional(gloss))
@@ -476,25 +453,25 @@ private struct RawTile: Decodable {
 }
 
 private struct RawNaturalOption: Decodable {
-    let text: AccentText
-    let translation: AccentText
-    let verdict: AccentText
-    let explanation: AccentText
+    let text: ScriptText
+    let translation: ScriptText
+    let verdict: ScriptText
+    let explanation: ScriptText
     let isBest: Bool?
 }
 
 private struct RawTurn: Decodable {
-    let buddy: AccentText
-    let buddyTranslation: AccentText
-    let reply: AccentText
-    let replyTranslation: AccentText
-    let target: AccentText
-    let accepted: [AccentText]?
+    let buddy: ScriptText
+    let buddyTranslation: ScriptText
+    let reply: ScriptText
+    let replyTranslation: ScriptText
+    let target: ScriptText
+    let accepted: [ScriptText]?
 }
 
 private struct RawLine: Decodable {
-    let text: AccentText
-    let translation: AccentText
+    let text: ScriptText
+    let translation: ScriptText
 }
 
 private struct RawStep: Decodable {
@@ -502,34 +479,34 @@ private struct RawStep: Decodable {
     let id: String
     // Shared and per-kind fields; each kind reads only its own.
     let symbol: String?
-    let eyebrow: AccentText?
-    let title: AccentText?
-    let body: AccentText?
+    let eyebrow: ScriptText?
+    let title: ScriptText?
+    let body: ScriptText?
     let samples: [RawSample]?
-    let footnote: AccentText?
-    let prompt: AccentText?
+    let footnote: ScriptText?
+    let prompt: ScriptText?
     let answer: AnswerField?
     let options: OptionsField?
-    let vietnamese: AccentText?
-    let translation: AccentText?
+    let tagalog: ScriptText?
+    let translation: ScriptText?
     let chunks: [RawChunk]?
-    let tip: AccentText?
-    let tipWithoutName: AccentText?
-    let display: AccentText?
-    let target: AccentText?
-    let accepted: [AccentText]?
-    let audio: AccentText?
-    let note: AccentText?
-    let context: AccentText?
-    let contextTranslation: AccentText?
-    let english: AccentText?
+    let tip: ScriptText?
+    let tipWithoutName: ScriptText?
+    let display: ScriptText?
+    let target: ScriptText?
+    let accepted: [ScriptText]?
+    let audio: ScriptText?
+    let note: ScriptText?
+    let context: ScriptText?
+    let contextTranslation: ScriptText?
+    let english: ScriptText?
     let distractors: [RawTile]?
     let turns: [RawTurn]?
     let closing: RawLine?
 
     /// `answer` is a string for picks and a tile list for build steps.
     enum AnswerField: Decodable {
-        case text(AccentText)
+        case text(ScriptText)
         case tiles([RawTile])
 
         init(from decoder: any Decoder) throws {
@@ -537,7 +514,7 @@ private struct RawStep: Decodable {
             if let tiles = try? container.decode([RawTile].self) {
                 self = .tiles(tiles)
             } else {
-                self = .text(try container.decode(AccentText.self))
+                self = .text(try container.decode(ScriptText.self))
             }
         }
     }
@@ -546,7 +523,7 @@ private struct RawStep: Decodable {
     enum OptionsField: Decodable {
         case samples([RawSample])
         case natural([RawNaturalOption])
-        case texts([AccentText])
+        case texts([ScriptText])
 
         init(from decoder: any Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -555,13 +532,13 @@ private struct RawStep: Decodable {
             } else if let samples = try? container.decode([RawSample].self) {
                 self = .samples(samples)
             } else {
-                self = .texts(try container.decode([AccentText].self))
+                self = .texts(try container.decode([ScriptText].self))
             }
         }
     }
 
     func resolved(_ c: ResolveContext) -> FirstLessonScript.Step {
-        func t(_ value: AccentText?) -> String { value.map(c.text) ?? "" }
+        func t(_ value: ScriptText?) -> String { value.map(c.text) ?? "" }
         switch kind {
         case "teach":
             return .teach(id: id, FirstLessonScript.Teach(
@@ -581,7 +558,7 @@ private struct RawStep: Decodable {
             ))
         case "newPhrase":
             return .newPhrase(id: id, FirstLessonScript.NewPhrase(
-                vietnamese: t(vietnamese),
+                tagalog: t(tagalog),
                 translation: t(translation),
                 chunks: (chunks ?? []).map { $0.resolved(c) },
                 tip: t(tip)

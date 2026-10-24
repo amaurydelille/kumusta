@@ -4,7 +4,6 @@ struct Lesson: Identifiable, Codable, Equatable, Sendable {
     let id: UUID
     let scenario: String
     let minutes: Int
-    let accent: VietnameseAccent
     let steps: [LessonStep]
     /// The English title when `scenario` holds a translation. Ad SDK events
     /// keep reporting the English title so campaigns don't split by language.
@@ -66,7 +65,7 @@ enum LessonStepKind: String, Codable, Sendable {
 }
 
 struct HearRespondExercise: Codable, Equatable, Sendable {
-    let promptVietnamese: String
+    let promptTagalog: String
     let promptTranslation: String
     let options: [HearRespondOption]
     let correctOptionID: UUID
@@ -86,7 +85,7 @@ struct HearRespondExercise: Codable, Equatable, Sendable {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case promptVietnamese = "prompt_vietnamese"
+        case promptTagalog = "prompt_tagalog"
         case promptTranslation = "prompt_translation"
         case options
         case correctOptionID = "correct_option_id"
@@ -107,7 +106,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
     let id: UUID
     let kind: LessonStepKind
     let prompt: String
-    let vietnamese: String
+    let tagalog: String
     let translation: String
     let chunks: [PhraseChunk]
     let wordGlosses: [LessonWordGloss]
@@ -117,7 +116,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
         id: UUID,
         kind: LessonStepKind,
         prompt: String,
-        vietnamese: String,
+        tagalog: String,
         translation: String,
         chunks: [PhraseChunk],
         wordGlosses: [LessonWordGloss] = [],
@@ -126,7 +125,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
         self.id = id
         self.kind = kind
         self.prompt = prompt
-        self.vietnamese = vietnamese
+        self.tagalog = tagalog
         self.translation = translation
         self.chunks = chunks
         self.wordGlosses = wordGlosses
@@ -134,7 +133,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case id, kind, prompt, vietnamese, translation, chunks, wordGlosses, hearRespond
+        case id, kind, prompt, tagalog, translation, chunks, wordGlosses, hearRespond
     }
 
     init(from decoder: any Decoder) throws {
@@ -142,7 +141,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
         id = try container.decode(UUID.self, forKey: .id)
         kind = try container.decode(LessonStepKind.self, forKey: .kind)
         prompt = try container.decode(String.self, forKey: .prompt)
-        vietnamese = try container.decode(String.self, forKey: .vietnamese)
+        tagalog = try container.decode(String.self, forKey: .tagalog)
         translation = try container.decode(String.self, forKey: .translation)
         chunks = try container.decode([PhraseChunk].self, forKey: .chunks)
         wordGlosses = try container.decodeIfPresent(
@@ -160,7 +159,7 @@ struct LessonStep: Identifiable, Codable, Equatable, Sendable {
         try container.encode(id, forKey: .id)
         try container.encode(kind, forKey: .kind)
         try container.encode(prompt, forKey: .prompt)
-        try container.encode(vietnamese, forKey: .vietnamese)
+        try container.encode(tagalog, forKey: .tagalog)
         try container.encode(translation, forKey: .translation)
         try container.encode(chunks, forKey: .chunks)
         try container.encode(wordGlosses, forKey: .wordGlosses)
@@ -176,7 +175,7 @@ struct LessonWordGloss: Identifiable, Codable, Equatable, Sendable {
 
 struct PhraseChunk: Identifiable, Codable, Equatable, Sendable {
     let id: UUID
-    let vietnamese: String
+    let tagalog: String
     let english: String
     let note: String
 }
@@ -215,11 +214,10 @@ enum ReviewRating: String, Codable, CaseIterable, Identifiable, Sendable {
 
 struct VocabularyItem: Identifiable, Codable, Equatable, Sendable {
     let id: UUID
-    let vietnamese: String
+    let tagalog: String
     let english: String
     let example: String
     let exampleTranslation: String
-    let accent: VietnameseAccent
     var mastery: Double
     var nextReviewAt: Date
     var isSaved: Bool

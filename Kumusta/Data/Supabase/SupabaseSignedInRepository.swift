@@ -38,7 +38,6 @@ enum SupabaseSyncError: LocalizedError, Sendable {
 
 protocol SignedInKumustaSyncing: Sendable {
     func fetchProfile() async throws -> RemoteProfile?
-    func fetchLearningPreferences() async throws -> RemoteLearningPreferences?
     func fetchLeaderboard(periodKind: String, periodKey: String, limit: Int) async throws -> RemoteLeaderboardSnapshot
     func leaderboardChanges() async -> AsyncStream<Void>
     func fetchUserState() async throws -> CloudUserState?
@@ -102,18 +101,6 @@ actor SupabaseSignedInRepository: SignedInKumustaSyncing {
             onboardingCompletedAt: profile.onboardingCompletedAt,
             avatarSeed: seed
         )
-    }
-
-    func fetchLearningPreferences() async throws -> RemoteLearningPreferences? {
-        let userID = try await authenticatedUserID()
-        let rows: [RemoteLearningPreferences] = try await client
-            .from("kumusta_learning_preferences")
-            .select("accent")
-            .eq("user_id", value: userID)
-            .limit(1)
-            .execute()
-            .value
-        return rows.first
     }
 
     func fetchLeaderboard(
@@ -286,8 +273,6 @@ actor SupabaseSignedInRepository: SignedInKumustaSyncing {
         let userID = try await authenticatedUserID()
         let row = LearningPreferencesMutation(
             userID: userID,
-            accent: profile.accent.rawValue,
-            preferredVoiceID: profile.accent.elevenLabsVoiceID,
             goal: Self.remoteGoal(profile.goal),
             selfAssessedLevel: Self.remoteLevel(profile.level),
             targetLevel: profile.adaptiveTargetLevel,
@@ -634,7 +619,7 @@ actor SupabaseSignedInRepository: SignedInKumustaSyncing {
     static func validateAnalyticsProperties(_ properties: [String: String]) throws {
         let allowedKeys = [
             "app_build", "app_version", "onboarding_flow_version", "client_session_id", "offering",
-            "accent", "active_seconds", "answer_id", "assistant_fragments", "attempt",
+            "active_seconds", "answer_id", "assistant_fragments", "attempt",
             "audio_duration_ms", "autoplay", "availability", "card_id", "card_index",
             "cards_answered", "cards_presented", "catalog_count", "category", "choice_id",
             "content_kind", "correct_count", "daily_limit_seconds",
@@ -731,8 +716,6 @@ private struct OnboardingMutation: Encodable {
 
 private struct LearningPreferencesMutation: Encodable {
     let userID: UUID
-    let accent: String
-    let preferredVoiceID: String
     let goal: String
     let selfAssessedLevel: String
     let targetLevel: Int
@@ -742,8 +725,6 @@ private struct LearningPreferencesMutation: Encodable {
 
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"
-        case accent
-        case preferredVoiceID = "preferred_voice_id"
         case goal
         case selfAssessedLevel = "self_assessed_level"
         case targetLevel = "target_level"

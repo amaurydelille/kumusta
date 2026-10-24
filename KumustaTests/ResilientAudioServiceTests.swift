@@ -12,13 +12,12 @@ struct ResilientAudioServiceTests {
             id: UUID(),
             scenario: "Meeting someone new",
             minutes: 5,
-            accent: .southern,
             steps: [
                 LessonStep(
                     id: UUID(),
                     kind: .coldListen,
                     prompt: "Listen",
-                    vietnamese: "Linh: \(phrase)",
+                    tagalog: "Linh: \(phrase)",
                     translation: "Hello, I’m Linh.",
                     chunks: []
                 ),
@@ -26,7 +25,7 @@ struct ResilientAudioServiceTests {
                     id: UUID(),
                     kind: .decode,
                     prompt: "Decode",
-                    vietnamese: phrase,
+                    tagalog: phrase,
                     translation: "Hello, I’m Linh.",
                     chunks: []
                 ),
@@ -34,7 +33,7 @@ struct ResilientAudioServiceTests {
                     id: UUID(),
                     kind: .speak,
                     prompt: "Speak",
-                    vietnamese: phrase,
+                    tagalog: phrase,
                     translation: "Hello, I’m Linh.",
                     chunks: []
                 )
@@ -42,7 +41,7 @@ struct ResilientAudioServiceTests {
         )
         let responseID = UUID()
         let responseExercise = HearRespondExercise(
-            promptVietnamese: phrase,
+            promptTagalog: phrase,
             promptTranslation: "Hello, I’m Linh.",
             options: [
                 HearRespondOption(
@@ -64,14 +63,13 @@ struct ResilientAudioServiceTests {
             id: lesson.id,
             scenario: lesson.scenario,
             minutes: lesson.minutes,
-            accent: lesson.accent,
             steps: lesson.steps.enumerated().map { index, step in
                 guard index == 1 else { return step }
                 return LessonStep(
                     id: step.id,
                     kind: .hearRespond,
                     prompt: step.prompt,
-                    vietnamese: step.vietnamese,
+                    tagalog: step.tagalog,
                     translation: step.translation,
                     chunks: step.chunks,
                     wordGlosses: step.wordGlosses,
@@ -93,7 +91,6 @@ struct ResilientAudioServiceTests {
 
         await service.prewarm(
             texts: ["Xin chào"],
-            accent: .southern,
             speed: .natural
         )
 
@@ -108,7 +105,6 @@ struct ResilientAudioServiceTests {
 
         await service.prewarm(
             texts: ["Xin chào"],
-            accent: .northern,
             speed: .slow
         )
 
@@ -122,7 +118,6 @@ struct ResilientAudioServiceTests {
 
         await service.prewarm(
             texts: ["Xin chào"],
-            accent: .southern,
             speed: .fast
         )
 
@@ -136,7 +131,6 @@ struct ResilientAudioServiceTests {
 
         await service.prewarm(
             texts: ["Xin chào"],
-            accent: .southern,
             speed: .natural,
             purpose: .vocabulary
         )
@@ -146,15 +140,14 @@ struct ResilientAudioServiceTests {
 
     @Test("One failed prewarm item does not block the remaining phrases")
     func prewarmingIsolatesIndividualFailures() async {
-        let gateway = BestEffortTTSGateway(failingText: "Xin lỗi")
+        let gateway = BestEffortTTSGateway(failingText: "Pasensya na")
 
         await gateway.prefetch(
-            texts: ["Xin chào", "Xin lỗi", "Cảm ơn"],
-            accent: .southern,
+            texts: ["Kumusta", "Pasensya na", "Salamat"],
             speed: .natural
         )
 
-        #expect(await gateway.requestedTexts == ["Xin chào", "Xin lỗi", "Cảm ơn"])
+        #expect(await gateway.requestedTexts == ["Kumusta", "Pasensya na", "Salamat"])
     }
 
     @Test("Stopping before a request cannot poison the next audio clip")
@@ -166,7 +159,7 @@ struct ResilientAudioServiceTests {
         await service.stop()
         let clock = ContinuousClock()
         let startedAt = clock.now
-        try await service.play(text: "Xin chào", accent: .southern, speed: .natural)
+        try await service.play(text: "Xin chào", speed: .natural)
 
         #expect(clock.now - startedAt > .milliseconds(150))
     }
@@ -179,7 +172,6 @@ struct ResilientAudioServiceTests {
         let playback = Task {
             try await service.playCached(
                 text: "Xin chào",
-                accent: .southern,
                 speed: .natural,
                 purpose: .vocabulary
             )
@@ -202,7 +194,7 @@ struct ResilientAudioServiceTests {
         let fallback = AudioServiceSpy(behavior: .success)
         let service = ResilientAudioService(primary: primary, fallback: fallback)
 
-        try await service.play(text: "Xin chào", accent: .southern, speed: .natural)
+        try await service.play(text: "Xin chào", speed: .natural)
 
         #expect(await primary.playCount == 1)
         #expect(await fallback.playCount == 1)
@@ -215,7 +207,7 @@ struct ResilientAudioServiceTests {
         let service = ResilientAudioService(primary: primary, fallback: fallback)
 
         await #expect(throws: CancellationError.self) {
-            try await service.play(text: "Xin chào", accent: .northern, speed: .slow)
+            try await service.play(text: "Xin chào", speed: .slow)
         }
         #expect(await primary.playCount == 1)
         #expect(await fallback.playCount == 0)
@@ -254,9 +246,9 @@ struct ResilientAudioServiceTests {
 
     @Test("Cancelling bundled onboarding playback allows the next play")
     func bundledPlaybackCancellationAllowsReplay() async throws {
-        let service = BundledAudioService(resourceName: "tuyet_southern_onboarding")
+        let service = BundledAudioService(resourceName: "typing")
         let playback = Task {
-            try await service.play(text: "Chào bạn", accent: .southern, speed: .natural)
+            try await service.play(text: "Kumusta", speed: .natural)
         }
         try await Task.sleep(for: .milliseconds(150))
         playback.cancel()
@@ -266,7 +258,7 @@ struct ResilientAudioServiceTests {
 
         let clock = ContinuousClock()
         let startedAt = clock.now
-        try await service.play(text: "Chào bạn", accent: .southern, speed: .natural)
+        try await service.play(text: "Kumusta", speed: .natural)
         #expect(clock.now - startedAt > .milliseconds(500))
     }
 
@@ -302,7 +294,6 @@ private actor PrewarmAudioServiceSpy: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {}
@@ -311,14 +302,13 @@ private actor PrewarmAudioServiceSpy: AudioService {
 
     func prewarm(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         prewarmedTexts.append(contentsOf: texts)
     }
 }
 
-private actor RecordingTTSGateway: VietnameseTTSProviding {
+private actor RecordingTTSGateway: TagalogTTSProviding {
     private(set) var prefetchCallCount = 0
     private(set) var lastPrefetchedTexts: [String] = []
     private(set) var lastPrefetchedPurpose: AudioPlaybackPurpose?
@@ -326,7 +316,6 @@ private actor RecordingTTSGateway: VietnameseTTSProviding {
 
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data {
@@ -335,7 +324,6 @@ private actor RecordingTTSGateway: VietnameseTTSProviding {
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         prefetchCallCount += 1
@@ -345,7 +333,6 @@ private actor RecordingTTSGateway: VietnameseTTSProviding {
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
@@ -356,7 +343,7 @@ private actor RecordingTTSGateway: VietnameseTTSProviding {
     }
 }
 
-private actor BestEffortTTSGateway: VietnameseTTSProviding {
+private actor BestEffortTTSGateway: TagalogTTSProviding {
     private let failingText: String
     private(set) var requestedTexts: [String] = []
 
@@ -366,7 +353,6 @@ private actor BestEffortTTSGateway: VietnameseTTSProviding {
 
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data {
@@ -378,12 +364,11 @@ private actor BestEffortTTSGateway: VietnameseTTSProviding {
     }
 }
 
-private struct StubTTSGateway: VietnameseTTSProviding {
+private struct StubTTSGateway: TagalogTTSProviding {
     let audio: Data
 
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data {
@@ -392,7 +377,6 @@ private struct StubTTSGateway: VietnameseTTSProviding {
 
     func cachedAudio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data? {
@@ -416,7 +400,6 @@ private actor AudioServiceSpy: AudioService {
 
     func play(
         text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws {

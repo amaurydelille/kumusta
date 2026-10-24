@@ -1,0 +1,203 @@
+{
+  "id": "first-lesson-beginner-v1",
+  "version": 1,
+  "level": "beginner",
+  "mode": "full",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0121",
+  "replayTitle": "Your first conversation",
+  "estimatedMinutes": 6,
+  "intro": {
+    "hook": "Kumusta!",
+    "hookTranslation": "Hi! How are you?",
+    "title": "Your first Tagalog conversation",
+    "subtitle": "In about 6 minutes, you’ll say these out loud:",
+    "goals": [
+      { "tagalog": "Kumusta po!", "meaning": "Hi! (with respect)" },
+      { "tagalog": "Ako si…", "meaning": "I’m…" },
+      { "tagalog": "Mabuti po, salamat", "meaning": "I’m fine, thank you" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-po",
+      "symbol": "hand.wave.fill",
+      "eyebrow": "THE MAGIC WORD",
+      "title": "Po turns on respect",
+      "body": "Filipinos add a tiny word, po, to be polite with elders, strangers and staff. Same words, warmer manners. Tap each one.",
+      "samples": [
+        { "text": "Salamat", "meaning": "Thanks (to a friend)", "contour": "level" },
+        { "text": "Salamat po", "meaning": "Thank you (with respect)", "contour": "level" }
+      ],
+      "footnote": "With friends your age, leave po off. With Lola, never forget it."
+    },
+    {
+      "kind": "listenPick",
+      "id": "pick-po-1",
+      "prompt": "Which one did you hear?",
+      "answer": "Salamat po",
+      "options": [
+        { "text": "Salamat", "meaning": "Thanks (to a friend)", "contour": "level" },
+        { "text": "Salamat po", "meaning": "Thank you (with respect)", "contour": "level" }
+      ]
+    },
+    {
+      "kind": "listenPick",
+      "id": "pick-po-2",
+      "prompt": "And this one?",
+      "answer": "Salamat",
+      "options": [
+        { "text": "Salamat", "meaning": "Thanks (to a friend)", "contour": "level" },
+        { "text": "Salamat po", "meaning": "Thank you (with respect)", "contour": "level" }
+      ]
+    },
+    {
+      "kind": "newPhrase",
+      "id": "new-kumusta",
+      "tagalog": "Kumusta po",
+      "translation": "Hi! How are you? (with respect)",
+      "chunks": [
+        { "tagalog": "kumusta", "meaning": "hi / how are you" },
+        { "tagalog": "po", "meaning": "(with respect)" }
+      ],
+      "tip": "Kumusta comes from Spanish “¿cómo está?”. It works as both hi and how are you."
+    },
+    {
+      "kind": "speak",
+      "id": "speak-kumusta",
+      "title": "Greet someone politely",
+      "display": "Kumusta po!",
+      "translation": "Hi! (with respect)",
+      "target": "Kumusta po",
+      "accepted": ["Kamusta po", "Kumusta"],
+      "tip": "Po goes right after the word it softens: Kumusta po."
+    },
+    {
+      "kind": "newPhrase",
+      "id": "new-mabuti",
+      "tagalog": "Mabuti po, salamat",
+      "translation": "I’m fine, thank you",
+      "chunks": [
+        { "tagalog": "mabuti", "meaning": "good / fine" },
+        { "tagalog": "po", "meaning": "(with respect)" },
+        { "tagalog": "salamat", "meaning": "thank you" }
+      ],
+      "tip": "Friends often say Ayos lang, which means “I’m okay”."
+    },
+    {
+      "kind": "speak",
+      "id": "speak-mabuti",
+      "title": "Say you’re fine",
+      "display": "Mabuti po, salamat!",
+      "translation": "I’m fine, thank you!",
+      "target": "Mabuti po salamat",
+      "accepted": ["Mabuti salamat", "Mabuti naman po salamat"],
+      "tip": "Stress the last beat of each word: ma-bu-TI, sa-la-MAT."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-opo",
+      "audio": "Opo.",
+      "answer": "Yes (with respect)",
+      "options": ["Yes (with respect)", "No", "Thank you"],
+      "note": "Opo is yes with respect. With friends, just say oo."
+    },
+    {
+      "kind": "teach",
+      "id": "teach-ka-kayo",
+      "symbol": "person.2.fill",
+      "eyebrow": "PEOPLE WORDS",
+      "title": "Ka and kayo",
+      "body": "Tagalog has two ways to say “you”. Use ka with a friend, and kayo with an elder or someone you’ve just met.",
+      "samples": [
+        { "text": "Kumusta ka?", "meaning": "How are you? (to a friend)", "contour": "level" },
+        { "text": "Kumusta po kayo?", "meaning": "How are you? (with respect)", "contour": "level" }
+      ],
+      "footnote": "Kayo also means “you all”. It pairs naturally with po."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-pangalan",
+      "audio": "Anong pangalan mo?",
+      "answer": "What’s your name?",
+      "options": ["What’s your name?", "How are you?", "I’m fine, thank you"],
+      "note": "Pangalan means name, and mo means your."
+    },
+    {
+      "kind": "build",
+      "id": "build-ako-si",
+      "english": "Hi! I’m…",
+      "answer": [
+        { "text": "Hi", "gloss": "hi" },
+        { "text": "ako", "gloss": "I" },
+        { "text": "si", "gloss": "(comes before a name)" }
+      ],
+      "distractors": [
+        { "text": "ka", "gloss": "you" },
+        { "text": "mo", "gloss": "your" }
+      ]
+    },
+    {
+      "kind": "speak",
+      "id": "speak-ako-si",
+      "title": "Introduce yourself",
+      "display": "Ako si {name}.",
+      "translation": "I’m {name}.",
+      "target": "Ako si",
+      "audio": "Ako si {name}.",
+      "tipWithoutName": "Add your own name at the end."
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "PUT IT TOGETHER",
+      "title": "Your first conversation",
+      "turns": [
+        {
+          "buddy": "Kumusta!",
+          "buddyTranslation": "Hi! How are you?",
+          "reply": "Kumusta!",
+          "replyTranslation": "Hi!",
+          "target": "Kumusta",
+          "accepted": ["Kamusta"]
+        },
+        {
+          "buddy": "Anong pangalan mo?",
+          "buddyTranslation": "What’s your name?",
+          "reply": "Ako si {name}.",
+          "replyTranslation": "I’m {name}.",
+          "target": "Ako si"
+        },
+        {
+          "buddy": "Kumusta ka?",
+          "buddyTranslation": "How are you?",
+          "reply": "Mabuti, salamat!",
+          "replyTranslation": "I’m fine, thanks!",
+          "target": "Mabuti salamat",
+          "accepted": ["Mabuti po salamat", "Mabuti naman salamat", "Ayos lang salamat"]
+        }
+      ],
+      "closing": {
+        "text": "Ikinagagalak kitang makilala! Ingat!",
+        "translation": "Nice to meet you! Take care!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "First lesson complete!",
+    "subtitle": "You just had your first conversation in Tagalog.",
+    "phrases": [
+      { "tagalog": "Kumusta po!", "meaning": "Hi! (with respect)" },
+      { "tagalog": "Ako si…", "meaning": "I’m…" },
+      { "tagalog": "Mabuti po, salamat", "meaning": "I’m fine, thank you" }
+    ],
+    "words": [
+      { "tagalog": "po", "meaning": "(adds respect)" },
+      { "tagalog": "opo", "meaning": "yes (with respect)" },
+      { "tagalog": "oo", "meaning": "yes (to a friend)" },
+      { "tagalog": "ka", "meaning": "you (a friend)" },
+      { "tagalog": "kayo", "meaning": "you (with respect, or you all)" },
+      { "tagalog": "salamat", "meaning": "thank you" }
+    ]
+  }
+}

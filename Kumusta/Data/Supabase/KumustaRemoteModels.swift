@@ -87,14 +87,6 @@ struct RemoteProfile: Codable, Equatable, Sendable {
     }
 }
 
-struct RemoteLearningPreferences: Codable, Equatable, Sendable {
-    let accent: String
-
-    enum CodingKeys: String, CodingKey {
-        case accent
-    }
-}
-
 struct OnboardingSyncInput: Equatable, Sendable {
     let motivation: String?
     let desiredOutcome: String?

@@ -17,10 +17,9 @@ enum TTSGatewayError: LocalizedError, Sendable {
     }
 }
 
-protocol VietnameseTTSProviding: Sendable {
+protocol TagalogTTSProviding: Sendable {
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data
@@ -30,13 +29,11 @@ protocol VietnameseTTSProviding: Sendable {
     /// independently cacheable and tolerate partial failure.
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async
@@ -45,30 +42,26 @@ protocol VietnameseTTSProviding: Sendable {
     /// invoke the Edge Function from this method.
     func cachedAudio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data?
     func reset() async
 }
 
-extension VietnameseTTSProviding {
+extension TagalogTTSProviding {
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async throws -> Data {
-        try await audio(for: text, accent: accent, speed: speed, purpose: .lesson)
+        try await audio(for: text, speed: speed, purpose: .lesson)
     }
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         await prefetch(
             texts: texts,
-            accent: accent,
             speed: speed,
             purpose: .lesson
         )
@@ -76,14 +69,12 @@ extension VietnameseTTSProviding {
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
         for text in texts {
             _ = try? await audio(
                 for: text,
-                accent: accent,
                 speed: speed,
                 purpose: purpose
             )
@@ -92,12 +83,10 @@ extension VietnameseTTSProviding {
 
     func cachedAudio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data? {
         _ = text
-        _ = accent
         _ = speed
         _ = purpose
         return nil
@@ -106,9 +95,9 @@ extension VietnameseTTSProviding {
     func reset() async {}
 }
 
-/// Fetches audio through the authenticated Edge Function. The client supplies
-/// an accent, never a voice ID, so provider configuration stays server-owned.
-actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
+/// Fetches audio through the authenticated Edge Function. The client never
+/// supplies a voice ID, so provider configuration stays server-owned.
+actor SupabaseElevenLabsTTSGateway: TagalogTTSProviding {
     private static let maximumCachedItems = 32
     private static let maximumDiskCachedItems = 160
     private static let maximumPrefetchConcurrency = 3
@@ -142,13 +131,11 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
     func audio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data {
         let (normalizedText, key) = try requestMaterial(
             for: text,
-            accent: accent,
             speed: speed,
             purpose: purpose
         )
@@ -167,10 +154,8 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
         let requestID = UUID()
         let request = TTSGatewayRequest(
             text: normalizedText,
-            accent: accent.rawValue,
             speed: speed.sourceSpeed.rawValue,
-            purpose: purpose.providerPurpose.rawValue,
-            honorRequestedAccent: purpose == .accentComparison
+            purpose: purpose.rawValue
         )
         let task = Task { [self] in
             try await fetchAndCache(request, key: key)
@@ -184,12 +169,10 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed
     ) async {
         await prefetch(
             texts: texts,
-            accent: accent,
             speed: speed,
             purpose: .lesson
         )
@@ -197,7 +180,6 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
     func prefetch(
         texts: [String],
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async {
@@ -212,7 +194,6 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
                 group.addTask { [self] in
                     _ = try? await audio(
                         for: text,
-                        accent: accent,
                         speed: speed,
                         purpose: purpose
                     )
@@ -226,7 +207,6 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
                 group.addTask { [self] in
                     _ = try? await audio(
                         for: text,
-                        accent: accent,
                         speed: speed,
                         purpose: purpose
                     )
@@ -237,13 +217,11 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
     func cachedAudio(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) async throws -> Data? {
         let (_, key) = try requestMaterial(
             for: text,
-            accent: accent,
             speed: speed,
             purpose: purpose
         )
@@ -274,7 +252,6 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
     private func requestMaterial(
         for text: String,
-        accent: VietnameseAccent,
         speed: PlaybackSpeed,
         purpose: AudioPlaybackPurpose
     ) throws -> (normalizedText: String, key: String) {
@@ -286,7 +263,7 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
         let purposeSuffix = purpose == .vocabulary ? "|\(purpose.rawValue)" : ""
         return (
             normalizedText,
-            "\(accent.rawValue)|\(sourceSpeed.rawValue)\(purposeSuffix)|\(normalizedText)"
+            "\(sourceSpeed.rawValue)\(purposeSuffix)|\(normalizedText)"
         )
     }
 
@@ -441,24 +418,14 @@ actor SupabaseElevenLabsTTSGateway: VietnameseTTSProviding {
 
 private struct TTSGatewayRequest: Encodable {
     let text: String
-    let accent: String
     let speed: String
     let purpose: String
-    let honorRequestedAccent: Bool
-}
-
-private extension AudioPlaybackPurpose {
-    /// Accent comparisons use the lesson cache namespace so they can reuse
-    /// the already-published phrase audio for each explicit accent.
-    var providerPurpose: AudioPlaybackPurpose {
-        self == .accentComparison ? .lesson : self
-    }
 }
 
 // MARK: - Onboarding first conversation
 
 /// Fixed lines of the pre-paywall first conversation. The server turns each
-/// line (plus an optional validated first name) into Vietnamese text, so the
+/// line (plus an optional validated first name) into Tagalog text, so the
 /// client can never request arbitrary speech before the paywall.
 enum OnboardingConversationLine: String, CaseIterable, Sendable {
     case greeting
@@ -473,7 +440,7 @@ enum OnboardingConversationLine: String, CaseIterable, Sendable {
         self == .greeting || self == .replyName || self == .niceToMeet
     }
 
-    /// Every line except the name reply has a shared "bạn" version.
+    /// Every line except the name reply has a shared, nameless version.
     var hasGenericVersion: Bool {
         self != .replyName
     }
@@ -488,14 +455,14 @@ enum OnboardingConversationAudioSource: String, Sendable {
 /// Fetches the first-conversation clips from the TTS Edge Function, keeps
 /// them in memory for replays, and plays them. Personalized clips fall back
 /// to the shared generic clip (cached server-side for every learner), then to
-/// Apple's Vietnamese voice when the device is offline.
+/// Apple's Tagalog voice when the device is offline.
 @MainActor
 final class OnboardingConversationAudio {
     private static let clipWaitTimeout = Duration.seconds(4)
 
     private let client: SupabaseClient?
     private let authSessionProvider: (any AuthSessionProviding)?
-    private let systemVoice = SystemVietnameseAudioService()
+    private let systemVoice = SystemTagalogAudioService()
     private var clips: [String: Task<Data?, Never>] = [:]
     private var delegate = DataPlaybackDelegate()
     private var player: AVAudioPlayer?
@@ -507,7 +474,7 @@ final class OnboardingConversationAudio {
     }
 
     /// The first word of the onboarding name, if it is a plain name the
-    /// server will accept. Anything else uses the generic "bạn" wording.
+    /// server will accept. Anything else uses the generic wording.
     nonisolated static func spokenFirstName(from rawName: String) -> String? {
         guard let firstWord = rawName
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -527,13 +494,13 @@ final class OnboardingConversationAudio {
 
     /// Starts generating every clip the conversation can need, including the
     /// generic fallbacks, so playback is instant when the learner arrives.
-    func prefetch(lines: [OnboardingConversationLine], name: String?, accent: VietnameseAccent) {
+    func prefetch(lines: [OnboardingConversationLine], name: String?) {
         for line in lines {
             if line.usesName, let name {
-                _ = clipTask(line: line, name: name, accent: accent)
+                _ = clipTask(line: line, name: name)
             }
             if line.hasGenericVersion {
-                _ = clipTask(line: line, name: nil, accent: accent)
+                _ = clipTask(line: line, name: nil)
             }
         }
     }
@@ -544,19 +511,18 @@ final class OnboardingConversationAudio {
         line: OnboardingConversationLine,
         text: String,
         name: String?,
-        accent: VietnameseAccent
     ) async throws -> OnboardingConversationAudioSource {
         if line.usesName, let name,
-           let data = await clipData(line: line, name: name, accent: accent) {
+           let data = await clipData(line: line, name: name) {
             try await play(data: data)
             return .personalized
         }
         if line.hasGenericVersion,
-           let data = await clipData(line: line, name: nil, accent: accent) {
+           let data = await clipData(line: line, name: nil) {
             try await play(data: data)
             return .generic
         }
-        try await systemVoice.play(text: text, accent: accent, speed: .natural, purpose: .lesson)
+        try await systemVoice.play(text: text, speed: .natural, purpose: .lesson)
         return .system
     }
 
@@ -572,9 +538,8 @@ final class OnboardingConversationAudio {
     private func clipData(
         line: OnboardingConversationLine,
         name: String?,
-        accent: VietnameseAccent
     ) async -> Data? {
-        let task = clipTask(line: line, name: name, accent: accent)
+        let task = clipTask(line: line, name: name)
         let timeout = Self.clipWaitTimeout
         return await withTaskGroup(of: Data?.self) { group in
             // Waiting is bounded, but the fetch itself keeps running so a slow
@@ -593,9 +558,8 @@ final class OnboardingConversationAudio {
     private func clipTask(
         line: OnboardingConversationLine,
         name: String?,
-        accent: VietnameseAccent
     ) -> Task<Data?, Never> {
-        let key = "\(accent.rawValue)|\(line.rawValue)|\(name ?? "")"
+        let key = "\(line.rawValue)|\(name ?? "")"
         if let existing = clips[key] { return existing }
         let client = client
         let authSessionProvider = authSessionProvider
@@ -606,8 +570,7 @@ final class OnboardingConversationAudio {
                 authSessionProvider: authSessionProvider,
                 body: OnboardingConversationTTSBody(
                     line: line.rawValue,
-                    name: name,
-                    accent: accent.rawValue
+                    name: name
                 )
             )
             // Forget failures so the next request retries instead of
@@ -691,5 +654,4 @@ private struct OnboardingConversationTTSBody: Encodable, Sendable {
     let purpose = "onboarding_conversation"
     let line: String
     let name: String?
-    let accent: String
 }
