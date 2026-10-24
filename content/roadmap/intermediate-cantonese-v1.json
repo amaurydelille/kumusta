@@ -1,0 +1,3870 @@
+{
+  "version": 1,
+  "roadmap": "intermediate-cantonese-v1",
+  "lessons": [
+    {
+      "id": "43000000-0000-4000-8102-000000000001",
+      "slug": "intermediate-01-family-dinner",
+      "summary": "Join a family dinner at Grandma’s and say the right things at the table.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 1,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "talk-with-people-you-love",
+      "unitTitle": "Talk with people you love",
+      "unitOrder": 1,
+      "lessonOrder": 1,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.25,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "family",
+        "culture"
+      ],
+      "content": {
+        "title": "Family dinner",
+        "scenarioKey": "roadmap_intermediate_01_family_dinner",
+        "scenario": "Join a family dinner at Grandma’s and say the right things at the table.",
+        "minutes": 5,
+        "difficulty": 2.25,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_01_family_dinner",
+            "situation": "Grandma has finished cooking. Call everyone to the table.",
+            "cantonese": "嫲嫲叫大家食飯啦！",
+            "jyutping": "maa4 maa4 giu3 daai6 gaa1 sik6 faan6 laa1",
+            "translation": "Grandma says it’s time to eat, everyone!",
+            "chunks": [
+              {
+                "cantonese": "嫲嫲叫大家",
+                "jyutping": "maa4 maa4 giu3 daai6 gaa1",
+                "english": "Grandma is telling everyone",
+                "note": "嫲嫲 is your dad’s mum; your mum’s mum is 婆婆."
+              },
+              {
+                "cantonese": "食飯啦",
+                "jyutping": "sik6 faan6 laa1",
+                "english": "time to eat",
+                "note": "啦 turns it into a warm, friendly nudge."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "嫲嫲",
+                "jyutping": "maa4 maa4",
+                "english": "grandma (father’s mother)"
+              },
+              {
+                "token": "叫",
+                "jyutping": "giu3",
+                "english": "call / tell"
+              },
+              {
+                "token": "大家",
+                "jyutping": "daai6 gaa1",
+                "english": "everyone"
+              },
+              {
+                "token": "食飯",
+                "jyutping": "sik6 faan6",
+                "english": "eat a meal"
+              },
+              {
+                "token": "啦",
+                "jyutping": "laa1",
+                "english": "(friendly nudge)"
+              }
+            ],
+            "speakingPrompt": "Call the family to the table for Grandma."
+          },
+          {
+            "topicKey": "roadmap_intermediate_01_family_dinner",
+            "situation": "Before you pick up your chopsticks, invite each elder to eat.",
+            "cantonese": "嫲嫲食飯，爺爺食飯。",
+            "jyutping": "maa4 maa4 sik6 faan6 je4 je2 sik6 faan6",
+            "translation": "Grandma, please eat. Grandpa, please eat.",
+            "chunks": [
+              {
+                "cantonese": "嫲嫲食飯",
+                "jyutping": "maa4 maa4 sik6 faan6",
+                "english": "Grandma, please eat",
+                "note": "Kids invite every elder by name before they start. Elders notice!"
+              },
+              {
+                "cantonese": "爺爺食飯",
+                "jyutping": "je4 je2 sik6 faan6",
+                "english": "Grandpa, please eat",
+                "note": "Go from oldest to youngest."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "嫲嫲",
+                "jyutping": "maa4 maa4",
+                "english": "grandma (father’s mother)"
+              },
+              {
+                "token": "食飯",
+                "jyutping": "sik6 faan6",
+                "english": "eat a meal"
+              },
+              {
+                "token": "爺爺",
+                "jyutping": "je4 je2",
+                "english": "grandpa (father’s father)"
+              },
+              {
+                "token": "食飯",
+                "jyutping": "sik6 faan6",
+                "english": "eat a meal"
+              }
+            ],
+            "speakingPrompt": "Invite Grandma and Grandpa to start eating."
+          },
+          {
+            "topicKey": "roadmap_intermediate_01_family_dinner",
+            "situation": "You taste Grandma’s slow-cooked soup.",
+            "cantonese": "呢個湯好好飲呀！",
+            "jyutping": "ni1 go3 tong1 hou2 hou2 jam2 aa3",
+            "translation": "This soup is so good!",
+            "chunks": [
+              {
+                "cantonese": "呢個湯",
+                "jyutping": "ni1 go3 tong1",
+                "english": "this soup",
+                "note": "Soup comes first at a Cantonese family dinner."
+              },
+              {
+                "cantonese": "好好飲呀",
+                "jyutping": "hou2 hou2 jam2 aa3",
+                "english": "is so good",
+                "note": "Soup is drunk, so it’s 好飲, not 好食."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "呢個",
+                "jyutping": "ni1 go3",
+                "english": "this"
+              },
+              {
+                "token": "湯",
+                "jyutping": "tong1",
+                "english": "soup"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "好飲",
+                "jyutping": "hou2 jam2",
+                "english": "tasty (to drink)"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(adds warmth)"
+              }
+            ],
+            "speakingPrompt": "Compliment Grandma’s soup.",
+            "responseExercise": {
+              "promptCantonese": "呢個湯好好飲呀！",
+              "promptJyutping": "ni1 go3 tong1 hou2 hou2 jam2 aa3",
+              "promptTranslation": "This soup is so good!",
+              "options": [
+                {
+                  "englishTranslation": "This soup is too salty."
+                },
+                {
+                  "englishTranslation": "This soup is so good!"
+                },
+                {
+                  "englishTranslation": "I can’t eat any more, I’m so full."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_01_family_dinner",
+            "situation": "Grandma keeps putting food in your bowl.",
+            "cantonese": "我食唔落喇，好飽呀。",
+            "jyutping": "ngo5 sik6 m4 lok6 laa3 hou2 baau2 aa3",
+            "translation": "I can’t eat any more, I’m so full.",
+            "chunks": [
+              {
+                "cantonese": "我食唔落喇",
+                "jyutping": "ngo5 sik6 m4 lok6 laa3",
+                "english": "I can’t eat any more",
+                "note": "喇 signals a change: you were hungry, now you’re not."
+              },
+              {
+                "cantonese": "好飽呀",
+                "jyutping": "hou2 baau2 aa3",
+                "english": "I’m so full",
+                "note": "Say it with a smile. Grandma will try anyway."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "食唔落",
+                "jyutping": "sik6 m4 lok6",
+                "english": "can’t eat any more"
+              },
+              {
+                "token": "喇",
+                "jyutping": "laa3",
+                "english": "(now, a change)"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "飽",
+                "jyutping": "baau2",
+                "english": "full"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(adds warmth)"
+              }
+            ],
+            "speakingPrompt": "Politely tell Grandma you’re full."
+          },
+          {
+            "topicKey": "roadmap_intermediate_01_family_dinner",
+            "situation": "Leaving after dinner, promise to come back.",
+            "cantonese": "我下個禮拜再嚟食！",
+            "jyutping": "ngo5 haa6 go3 lai5 baai3 zoi3 lai4 sik6",
+            "translation": "I’ll come eat again next week!",
+            "chunks": [
+              {
+                "cantonese": "我下個禮拜",
+                "jyutping": "ngo5 haa6 go3 lai5 baai3",
+                "english": "next week I",
+                "note": "Put the time before the action."
+              },
+              {
+                "cantonese": "再嚟食",
+                "jyutping": "zoi3 lai4 sik6",
+                "english": "will come eat again",
+                "note": "嚟 means come. It’s the best goodbye at Grandma’s."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "下個禮拜",
+                "jyutping": "haa6 go3 lai5 baai3",
+                "english": "next week"
+              },
+              {
+                "token": "再",
+                "jyutping": "zoi3",
+                "english": "again"
+              },
+              {
+                "token": "嚟",
+                "jyutping": "lai4",
+                "english": "come"
+              },
+              {
+                "token": "食",
+                "jyutping": "sik6",
+                "english": "eat"
+              }
+            ],
+            "speakingPrompt": "Promise Grandma you’ll come back next week.",
+            "responseExercise": {
+              "promptCantonese": "我下個禮拜再嚟食！",
+              "promptJyutping": "ngo5 haa6 go3 lai5 baai3 zoi3 lai4 sik6",
+              "promptTranslation": "I’ll come eat again next week!",
+              "options": [
+                {
+                  "englishTranslation": "Grandma says it’s time to eat, everyone!"
+                },
+                {
+                  "englishTranslation": "This soup is so good!"
+                },
+                {
+                  "englishTranslation": "I’ll come eat again next week!"
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "食飯",
+            "jyutping": "sik6 faan6",
+            "english": "eat a meal",
+            "example": "嫲嫲叫大家食飯啦！",
+            "exampleJyutping": "maa4 maa4 giu3 daai6 gaa1 sik6 faan6 laa1",
+            "exampleTranslation": "Grandma says it’s time to eat, everyone!"
+          },
+          {
+            "cantonese": "大家",
+            "jyutping": "daai6 gaa1",
+            "english": "everyone",
+            "example": "嫲嫲叫大家食飯啦！",
+            "exampleJyutping": "maa4 maa4 giu3 daai6 gaa1 sik6 faan6 laa1",
+            "exampleTranslation": "Grandma says it’s time to eat, everyone!"
+          },
+          {
+            "cantonese": "嫲嫲",
+            "jyutping": "maa4 maa4",
+            "english": "grandma (father’s mother)",
+            "example": "嫲嫲食飯，爺爺食飯。",
+            "exampleJyutping": "maa4 maa4 sik6 faan6 je4 je2 sik6 faan6",
+            "exampleTranslation": "Grandma, please eat. Grandpa, please eat."
+          },
+          {
+            "cantonese": "爺爺",
+            "jyutping": "je4 je2",
+            "english": "grandpa (father’s father)",
+            "example": "嫲嫲食飯，爺爺食飯。",
+            "exampleJyutping": "maa4 maa4 sik6 faan6 je4 je2 sik6 faan6",
+            "exampleTranslation": "Grandma, please eat. Grandpa, please eat."
+          },
+          {
+            "cantonese": "湯",
+            "jyutping": "tong1",
+            "english": "soup",
+            "example": "呢個湯好好飲呀！",
+            "exampleJyutping": "ni1 go3 tong1 hou2 hou2 jam2 aa3",
+            "exampleTranslation": "This soup is so good!"
+          },
+          {
+            "cantonese": "好飲",
+            "jyutping": "hou2 jam2",
+            "english": "tasty (to drink)",
+            "example": "呢個湯好好飲呀！",
+            "exampleJyutping": "ni1 go3 tong1 hou2 hou2 jam2 aa3",
+            "exampleTranslation": "This soup is so good!"
+          },
+          {
+            "cantonese": "食唔落",
+            "jyutping": "sik6 m4 lok6",
+            "english": "can’t eat any more",
+            "example": "我食唔落喇，好飽呀。",
+            "exampleJyutping": "ngo5 sik6 m4 lok6 laa3 hou2 baau2 aa3",
+            "exampleTranslation": "I can’t eat any more, I’m so full."
+          },
+          {
+            "cantonese": "飽",
+            "jyutping": "baau2",
+            "english": "full",
+            "example": "我食唔落喇，好飽呀。",
+            "exampleJyutping": "ngo5 sik6 m4 lok6 laa3 hou2 baau2 aa3",
+            "exampleTranslation": "I can’t eat any more, I’m so full."
+          },
+          {
+            "cantonese": "下個禮拜",
+            "jyutping": "haa6 go3 lai5 baai3",
+            "english": "next week",
+            "example": "我下個禮拜再嚟食！",
+            "exampleJyutping": "ngo5 haa6 go3 lai5 baai3 zoi3 lai4 sik6",
+            "exampleTranslation": "I’ll come eat again next week!"
+          },
+          {
+            "cantonese": "嚟",
+            "jyutping": "lai4",
+            "english": "come",
+            "example": "我下個禮拜再嚟食！",
+            "exampleJyutping": "ngo5 haa6 go3 lai5 baai3 zoi3 lai4 sik6",
+            "exampleTranslation": "I’ll come eat again next week!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000002",
+      "slug": "intermediate-02-the-particles",
+      "summary": "Chat with a friend about a café and sound natural with sentence-final particles.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 2,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "talk-with-people-you-love",
+      "unitTitle": "Talk with people you love",
+      "unitOrder": 1,
+      "lessonOrder": 2,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.3,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "lifeInHongKong",
+        "culture"
+      ],
+      "content": {
+        "title": "The particles",
+        "scenarioKey": "roadmap_intermediate_02_the_particles",
+        "scenario": "Chat with a friend about a café and sound natural with sentence-final particles.",
+        "minutes": 5,
+        "difficulty": 2.3,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_02_the_particles",
+            "situation": "You tell a friend about a café you love.",
+            "cantonese": "呢間cafe好正㗎！",
+            "jyutping": "ni1 gaan1 cafe hou2 zeng3 gaa3",
+            "translation": "This café is really great, you know!",
+            "chunks": [
+              {
+                "cantonese": "呢間cafe",
+                "jyutping": "ni1 gaan1 cafe",
+                "english": "this café",
+                "note": "Locals just say cafe in English."
+              },
+              {
+                "cantonese": "好正㗎",
+                "jyutping": "hou2 zeng3 gaa3",
+                "english": "is really great, you know",
+                "note": "㗎 adds confidence: you’re vouching for it."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "呢間",
+                "jyutping": "ni1 gaan1",
+                "english": "this (shop, place)"
+              },
+              {
+                "token": "cafe",
+                "jyutping": "cafe",
+                "english": "café"
+              },
+              {
+                "token": "好正",
+                "jyutping": "hou2 zeng3",
+                "english": "really great"
+              },
+              {
+                "token": "㗎",
+                "jyutping": "gaa3",
+                "english": "(you know, for sure)"
+              }
+            ],
+            "speakingPrompt": "Recommend your favourite café."
+          },
+          {
+            "topicKey": "roadmap_intermediate_02_the_particles",
+            "situation": "Your friend says they’ve never been. You’re surprised.",
+            "cantonese": "你未去過咩？",
+            "jyutping": "nei5 mei6 heoi3 gwo3 me1",
+            "translation": "You haven’t been? Really?",
+            "chunks": [
+              {
+                "cantonese": "你未去過",
+                "jyutping": "nei5 mei6 heoi3 gwo3",
+                "english": "you haven’t been",
+                "note": "未 means not yet, so there’s still hope."
+              },
+              {
+                "cantonese": "咩",
+                "jyutping": "me1",
+                "english": "really?",
+                "note": "咩 at the end turns it into a surprised question."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "未",
+                "jyutping": "mei6",
+                "english": "not yet"
+              },
+              {
+                "token": "去過",
+                "jyutping": "heoi3 gwo3",
+                "english": "have been"
+              },
+              {
+                "token": "咩",
+                "jyutping": "me1",
+                "english": "(really?, surprise)"
+              }
+            ],
+            "speakingPrompt": "Act surprised that your friend hasn’t been."
+          },
+          {
+            "topicKey": "roadmap_intermediate_02_the_particles",
+            "situation": "Suggest going together.",
+            "cantonese": "咁我哋一齊去啦。",
+            "jyutping": "gam2 ngo5 dei6 jat1 cai4 heoi3 laa1",
+            "translation": "Then let’s go together.",
+            "chunks": [
+              {
+                "cantonese": "咁我哋",
+                "jyutping": "gam2 ngo5 dei6",
+                "english": "then we",
+                "note": "咁 links your idea to what was just said."
+              },
+              {
+                "cantonese": "一齊去啦",
+                "jyutping": "jat1 cai4 heoi3 laa1",
+                "english": "go together",
+                "note": "啦 makes it a friendly suggestion, not an order."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "咁",
+                "jyutping": "gam2",
+                "english": "then / so"
+              },
+              {
+                "token": "我哋",
+                "jyutping": "ngo5 dei6",
+                "english": "we / us"
+              },
+              {
+                "token": "一齊",
+                "jyutping": "jat1 cai4",
+                "english": "together"
+              },
+              {
+                "token": "去",
+                "jyutping": "heoi3",
+                "english": "go"
+              },
+              {
+                "token": "啦",
+                "jyutping": "laa1",
+                "english": "(let’s, suggestion)"
+              }
+            ],
+            "speakingPrompt": "Suggest going to the café together.",
+            "responseExercise": {
+              "promptCantonese": "咁我哋一齊去啦。",
+              "promptJyutping": "gam2 ngo5 dei6 jat1 cai4 heoi3 laa1",
+              "promptTranslation": "Then let’s go together.",
+              "options": [
+                {
+                  "englishTranslation": "You haven’t been? Really?"
+                },
+                {
+                  "englishTranslation": "Let’s go tomorrow without them."
+                },
+                {
+                  "englishTranslation": "Then let’s go together."
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_02_the_particles",
+            "situation": "Pass on what you heard about their egg tarts.",
+            "cantonese": "佢哋啲蛋撻好好食喎。",
+            "jyutping": "keoi5 dei6 di1 daan6 taat1 hou2 hou2 sik6 wo3",
+            "translation": "Apparently their egg tarts are really good.",
+            "chunks": [
+              {
+                "cantonese": "佢哋啲蛋撻",
+                "jyutping": "keoi5 dei6 di1 daan6 taat1",
+                "english": "their egg tarts",
+                "note": "啲 works like the for plural things."
+              },
+              {
+                "cantonese": "好好食喎",
+                "jyutping": "hou2 hou2 sik6 wo3",
+                "english": "are really good, apparently",
+                "note": "喎 passes on something you heard or just noticed."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "佢哋",
+                "jyutping": "keoi5 dei6",
+                "english": "they / them"
+              },
+              {
+                "token": "啲",
+                "jyutping": "di1",
+                "english": "(the, plural)"
+              },
+              {
+                "token": "蛋撻",
+                "jyutping": "daan6 taat1",
+                "english": "egg tart"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "好食",
+                "jyutping": "hou2 sik6",
+                "english": "tasty"
+              },
+              {
+                "token": "喎",
+                "jyutping": "wo3",
+                "english": "(apparently, news)"
+              }
+            ],
+            "speakingPrompt": "Share what you heard about their egg tarts."
+          },
+          {
+            "topicKey": "roadmap_intermediate_02_the_particles",
+            "situation": "Wrap up the plan.",
+            "cantonese": "好啦，聽日見囉。",
+            "jyutping": "hou2 laa1 ting1 jat6 gin3 lo1",
+            "translation": "Alright, see you tomorrow then.",
+            "chunks": [
+              {
+                "cantonese": "好啦",
+                "jyutping": "hou2 laa1",
+                "english": "alright",
+                "note": "好啦 closes a discussion warmly."
+              },
+              {
+                "cantonese": "聽日見囉",
+                "jyutping": "ting1 jat6 gin3 lo1",
+                "english": "see you tomorrow then",
+                "note": "囉 means it’s settled, nothing more to say."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "好啦",
+                "jyutping": "hou2 laa1",
+                "english": "alright"
+              },
+              {
+                "token": "聽日",
+                "jyutping": "ting1 jat6",
+                "english": "tomorrow"
+              },
+              {
+                "token": "見",
+                "jyutping": "gin3",
+                "english": "see"
+              },
+              {
+                "token": "囉",
+                "jyutping": "lo1",
+                "english": "(then, as agreed)"
+              }
+            ],
+            "speakingPrompt": "Agree and say see you tomorrow.",
+            "responseExercise": {
+              "promptCantonese": "好啦，聽日見囉。",
+              "promptJyutping": "hou2 laa1 ting1 jat6 gin3 lo1",
+              "promptTranslation": "Alright, see you tomorrow then.",
+              "options": [
+                {
+                  "englishTranslation": "Alright, see you tomorrow then."
+                },
+                {
+                  "englishTranslation": "Apparently their egg tarts are really good."
+                },
+                {
+                  "englishTranslation": "Alright, see you next week then."
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "呢間",
+            "jyutping": "ni1 gaan1",
+            "english": "this (shop, place)",
+            "example": "呢間cafe好正㗎！",
+            "exampleJyutping": "ni1 gaan1 cafe hou2 zeng3 gaa3",
+            "exampleTranslation": "This café is really great, you know!"
+          },
+          {
+            "cantonese": "好正",
+            "jyutping": "hou2 zeng3",
+            "english": "really great",
+            "example": "呢間cafe好正㗎！",
+            "exampleJyutping": "ni1 gaan1 cafe hou2 zeng3 gaa3",
+            "exampleTranslation": "This café is really great, you know!"
+          },
+          {
+            "cantonese": "未",
+            "jyutping": "mei6",
+            "english": "not yet",
+            "example": "你未去過咩？",
+            "exampleJyutping": "nei5 mei6 heoi3 gwo3 me1",
+            "exampleTranslation": "You haven’t been? Really?"
+          },
+          {
+            "cantonese": "去過",
+            "jyutping": "heoi3 gwo3",
+            "english": "have been",
+            "example": "你未去過咩？",
+            "exampleJyutping": "nei5 mei6 heoi3 gwo3 me1",
+            "exampleTranslation": "You haven’t been? Really?"
+          },
+          {
+            "cantonese": "我哋",
+            "jyutping": "ngo5 dei6",
+            "english": "we / us",
+            "example": "咁我哋一齊去啦。",
+            "exampleJyutping": "gam2 ngo5 dei6 jat1 cai4 heoi3 laa1",
+            "exampleTranslation": "Then let’s go together."
+          },
+          {
+            "cantonese": "一齊",
+            "jyutping": "jat1 cai4",
+            "english": "together",
+            "example": "咁我哋一齊去啦。",
+            "exampleJyutping": "gam2 ngo5 dei6 jat1 cai4 heoi3 laa1",
+            "exampleTranslation": "Then let’s go together."
+          },
+          {
+            "cantonese": "蛋撻",
+            "jyutping": "daan6 taat1",
+            "english": "egg tart",
+            "example": "佢哋啲蛋撻好好食喎。",
+            "exampleJyutping": "keoi5 dei6 di1 daan6 taat1 hou2 hou2 sik6 wo3",
+            "exampleTranslation": "Apparently their egg tarts are really good."
+          },
+          {
+            "cantonese": "好食",
+            "jyutping": "hou2 sik6",
+            "english": "tasty",
+            "example": "佢哋啲蛋撻好好食喎。",
+            "exampleJyutping": "keoi5 dei6 di1 daan6 taat1 hou2 hou2 sik6 wo3",
+            "exampleTranslation": "Apparently their egg tarts are really good."
+          },
+          {
+            "cantonese": "聽日",
+            "jyutping": "ting1 jat6",
+            "english": "tomorrow",
+            "example": "好啦，聽日見囉。",
+            "exampleJyutping": "hou2 laa1 ting1 jat6 gin3 lo1",
+            "exampleTranslation": "Alright, see you tomorrow then."
+          },
+          {
+            "cantonese": "見",
+            "jyutping": "gin3",
+            "english": "see",
+            "example": "好啦，聽日見囉。",
+            "exampleJyutping": "hou2 laa1 ting1 jat6 gin3 lo1",
+            "exampleTranslation": "Alright, see you tomorrow then."
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000003",
+      "slug": "intermediate-03-your-weekend",
+      "summary": "Swap weekend stories on Monday: what you did, what you’re planning and what you’ve tried.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 3,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "talk-with-people-you-love",
+      "unitTitle": "Talk with people you love",
+      "unitOrder": 1,
+      "lessonOrder": 3,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.35,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "partner",
+        "lifeInHongKong"
+      ],
+      "content": {
+        "title": "Your weekend",
+        "scenarioKey": "roadmap_intermediate_03_your_weekend",
+        "scenario": "Swap weekend stories on Monday: what you did, what you’re planning and what you’ve tried.",
+        "minutes": 5,
+        "difficulty": 2.35,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_03_your_weekend",
+            "situation": "It’s Monday. Ask your friend about their weekend.",
+            "cantonese": "你週末做咗啲咩呀？",
+            "jyutping": "nei5 zau1 mut6 zou6 zo2 di1 me1 aa3",
+            "translation": "What did you do on the weekend?",
+            "chunks": [
+              {
+                "cantonese": "你週末",
+                "jyutping": "nei5 zau1 mut6",
+                "english": "you, on the weekend",
+                "note": "Time words go near the start."
+              },
+              {
+                "cantonese": "做咗啲咩呀",
+                "jyutping": "zou6 zo2 di1 me1 aa3",
+                "english": "what did you do",
+                "note": "咗 after a verb means it’s done."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "週末",
+                "jyutping": "zau1 mut6",
+                "english": "weekend"
+              },
+              {
+                "token": "做咗",
+                "jyutping": "zou6 zo2",
+                "english": "did"
+              },
+              {
+                "token": "啲咩",
+                "jyutping": "di1 me1",
+                "english": "what (things)"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask what your friend did on the weekend."
+          },
+          {
+            "topicKey": "roadmap_intermediate_03_your_weekend",
+            "situation": "They ask you back. Tell them about your Sunday.",
+            "cantonese": "我去咗行山。",
+            "jyutping": "ngo5 heoi3 zo2 haang4 saan1",
+            "translation": "I went hiking.",
+            "chunks": [
+              {
+                "cantonese": "我去咗",
+                "jyutping": "ngo5 heoi3 zo2",
+                "english": "I went",
+                "note": "Same 咗: the trip is finished."
+              },
+              {
+                "cantonese": "行山",
+                "jyutping": "haang4 saan1",
+                "english": "hiking",
+                "note": "Literally walk the mountain. A Hong Kong weekend favourite."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "去咗",
+                "jyutping": "heoi3 zo2",
+                "english": "went"
+              },
+              {
+                "token": "行山",
+                "jyutping": "haang4 saan1",
+                "english": "go hiking"
+              }
+            ],
+            "speakingPrompt": "Say you went hiking."
+          },
+          {
+            "topicKey": "roadmap_intermediate_03_your_weekend",
+            "situation": "Ask if they know the famous trail you did.",
+            "cantonese": "你行過龍脊未呀？",
+            "jyutping": "nei5 haang4 gwo3 lung4 zek3 mei6 aa3",
+            "translation": "Have you ever hiked Dragon’s Back?",
+            "chunks": [
+              {
+                "cantonese": "你行過",
+                "jyutping": "nei5 haang4 gwo3",
+                "english": "have you hiked",
+                "note": "過 after a verb means ever done it."
+              },
+              {
+                "cantonese": "龍脊未呀",
+                "jyutping": "lung4 zek3 mei6 aa3",
+                "english": "Dragon’s Back yet",
+                "note": "Verb + 過 … 未 asks have you ever?"
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "行過",
+                "jyutping": "haang4 gwo3",
+                "english": "have hiked"
+              },
+              {
+                "token": "龍脊",
+                "jyutping": "lung4 zek3",
+                "english": "Dragon’s Back"
+              },
+              {
+                "token": "未",
+                "jyutping": "mei6",
+                "english": "yet?"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask if your friend has ever hiked Dragon’s Back.",
+            "responseExercise": {
+              "promptCantonese": "你行過龍脊未呀？",
+              "promptJyutping": "nei5 haang4 gwo3 lung4 zek3 mei6 aa3",
+              "promptTranslation": "Have you ever hiked Dragon’s Back?",
+              "options": [
+                {
+                  "englishTranslation": "I went hiking."
+                },
+                {
+                  "englishTranslation": "Do you want to hike Dragon’s Back today?"
+                },
+                {
+                  "englishTranslation": "Have you ever hiked Dragon’s Back?"
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_03_your_weekend",
+            "situation": "They haven’t. Share your next plan.",
+            "cantonese": "我諗緊下個禮拜再去。",
+            "jyutping": "ngo5 nam2 gan2 haa6 go3 lai5 baai3 zoi3 heoi3",
+            "translation": "I’m thinking of going again next week.",
+            "chunks": [
+              {
+                "cantonese": "我諗緊",
+                "jyutping": "ngo5 nam2 gan2",
+                "english": "I’m thinking",
+                "note": "緊 after a verb means it’s happening right now."
+              },
+              {
+                "cantonese": "下個禮拜再去",
+                "jyutping": "haa6 go3 lai5 baai3 zoi3 heoi3",
+                "english": "of going again next week",
+                "note": "再 means again."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "諗緊",
+                "jyutping": "nam2 gan2",
+                "english": "am thinking"
+              },
+              {
+                "token": "下個禮拜",
+                "jyutping": "haa6 go3 lai5 baai3",
+                "english": "next week"
+              },
+              {
+                "token": "再",
+                "jyutping": "zoi3",
+                "english": "again"
+              },
+              {
+                "token": "去",
+                "jyutping": "heoi3",
+                "english": "go"
+              }
+            ],
+            "speakingPrompt": "Say you’re thinking of going again next week."
+          },
+          {
+            "topicKey": "roadmap_intermediate_03_your_weekend",
+            "situation": "Convince your friend to come along.",
+            "cantonese": "你未行過，一定要試下。",
+            "jyutping": "nei5 mei6 haang4 gwo3 jat1 ding6 jiu3 si3 haa5",
+            "translation": "If you’ve never done it, you have to try it.",
+            "chunks": [
+              {
+                "cantonese": "你未行過",
+                "jyutping": "nei5 mei6 haang4 gwo3",
+                "english": "you’ve never done it",
+                "note": "未 + verb + 過: never done it so far."
+              },
+              {
+                "cantonese": "一定要試下",
+                "jyutping": "jat1 ding6 jiu3 si3 haa5",
+                "english": "you have to try it",
+                "note": "下 after a verb makes it casual: just give it a go."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "未",
+                "jyutping": "mei6",
+                "english": "not yet"
+              },
+              {
+                "token": "行過",
+                "jyutping": "haang4 gwo3",
+                "english": "have hiked"
+              },
+              {
+                "token": "一定要",
+                "jyutping": "jat1 ding6 jiu3",
+                "english": "must / have to"
+              },
+              {
+                "token": "試下",
+                "jyutping": "si3 haa5",
+                "english": "give it a try"
+              }
+            ],
+            "speakingPrompt": "Tell your friend they have to try the hike.",
+            "responseExercise": {
+              "promptCantonese": "你未行過，一定要試下。",
+              "promptJyutping": "nei5 mei6 haang4 gwo3 jat1 ding6 jiu3 si3 haa5",
+              "promptTranslation": "If you’ve never done it, you have to try it.",
+              "options": [
+                {
+                  "englishTranslation": "If you’ve never done it, you have to try it."
+                },
+                {
+                  "englishTranslation": "I’m thinking of going again next week."
+                },
+                {
+                  "englishTranslation": "You’ve done it already, no need to go again."
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "週末",
+            "jyutping": "zau1 mut6",
+            "english": "weekend",
+            "example": "你週末做咗啲咩呀？",
+            "exampleJyutping": "nei5 zau1 mut6 zou6 zo2 di1 me1 aa3",
+            "exampleTranslation": "What did you do on the weekend?"
+          },
+          {
+            "cantonese": "做咗",
+            "jyutping": "zou6 zo2",
+            "english": "did",
+            "example": "你週末做咗啲咩呀？",
+            "exampleJyutping": "nei5 zau1 mut6 zou6 zo2 di1 me1 aa3",
+            "exampleTranslation": "What did you do on the weekend?"
+          },
+          {
+            "cantonese": "去咗",
+            "jyutping": "heoi3 zo2",
+            "english": "went",
+            "example": "我去咗行山。",
+            "exampleJyutping": "ngo5 heoi3 zo2 haang4 saan1",
+            "exampleTranslation": "I went hiking."
+          },
+          {
+            "cantonese": "行山",
+            "jyutping": "haang4 saan1",
+            "english": "go hiking",
+            "example": "我去咗行山。",
+            "exampleJyutping": "ngo5 heoi3 zo2 haang4 saan1",
+            "exampleTranslation": "I went hiking."
+          },
+          {
+            "cantonese": "行過",
+            "jyutping": "haang4 gwo3",
+            "english": "have hiked",
+            "example": "你行過龍脊未呀？",
+            "exampleJyutping": "nei5 haang4 gwo3 lung4 zek3 mei6 aa3",
+            "exampleTranslation": "Have you ever hiked Dragon’s Back?"
+          },
+          {
+            "cantonese": "龍脊",
+            "jyutping": "lung4 zek3",
+            "english": "Dragon’s Back (a famous trail)",
+            "example": "你行過龍脊未呀？",
+            "exampleJyutping": "nei5 haang4 gwo3 lung4 zek3 mei6 aa3",
+            "exampleTranslation": "Have you ever hiked Dragon’s Back?"
+          },
+          {
+            "cantonese": "諗緊",
+            "jyutping": "nam2 gan2",
+            "english": "am thinking",
+            "example": "我諗緊下個禮拜再去。",
+            "exampleJyutping": "ngo5 nam2 gan2 haa6 go3 lai5 baai3 zoi3 heoi3",
+            "exampleTranslation": "I’m thinking of going again next week."
+          },
+          {
+            "cantonese": "下個禮拜",
+            "jyutping": "haa6 go3 lai5 baai3",
+            "english": "next week",
+            "example": "我諗緊下個禮拜再去。",
+            "exampleJyutping": "ngo5 nam2 gan2 haa6 go3 lai5 baai3 zoi3 heoi3",
+            "exampleTranslation": "I’m thinking of going again next week."
+          },
+          {
+            "cantonese": "一定要",
+            "jyutping": "jat1 ding6 jiu3",
+            "english": "must / have to",
+            "example": "你未行過，一定要試下。",
+            "exampleJyutping": "nei5 mei6 haang4 gwo3 jat1 ding6 jiu3 si3 haa5",
+            "exampleTranslation": "If you’ve never done it, you have to try it."
+          },
+          {
+            "cantonese": "試下",
+            "jyutping": "si3 haa5",
+            "english": "give it a try",
+            "example": "你未行過，一定要試下。",
+            "exampleJyutping": "nei5 mei6 haang4 gwo3 jat1 ding6 jiu3 si3 haa5",
+            "exampleTranslation": "If you’ve never done it, you have to try it."
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000004",
+      "slug": "intermediate-04-making-plans",
+      "summary": "Ask someone out to a movie, set the time and place, and book the tickets.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 4,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "plans-and-practicalities",
+      "unitTitle": "Plans and practicalities",
+      "unitOrder": 2,
+      "lessonOrder": 1,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.45,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "partner",
+        "lifeInHongKong"
+      ],
+      "content": {
+        "title": "Making plans",
+        "scenarioKey": "roadmap_intermediate_04_making_plans",
+        "scenario": "Ask someone out to a movie, set the time and place, and book the tickets.",
+        "minutes": 5,
+        "difficulty": 2.45,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_04_making_plans",
+            "situation": "Ask your date if they’re free this weekend.",
+            "cantonese": "你今個禮拜六得唔得閒呀？",
+            "jyutping": "nei5 gam1 go3 lai5 baai3 luk6 dak1 m4 dak1 haan4 aa3",
+            "translation": "Are you free this Saturday?",
+            "chunks": [
+              {
+                "cantonese": "你今個禮拜六",
+                "jyutping": "nei5 gam1 go3 lai5 baai3 luk6",
+                "english": "you, this Saturday",
+                "note": "禮拜 + number gives the weekday. 六 is Saturday."
+              },
+              {
+                "cantonese": "得唔得閒呀",
+                "jyutping": "dak1 m4 dak1 haan4 aa3",
+                "english": "are you free",
+                "note": "得閒 means free; 得唔得閒 asks it as yes or no."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "今個",
+                "jyutping": "gam1 go3",
+                "english": "this (week, month)"
+              },
+              {
+                "token": "禮拜六",
+                "jyutping": "lai5 baai3 luk6",
+                "english": "Saturday"
+              },
+              {
+                "token": "得唔得閒",
+                "jyutping": "dak1 m4 dak1 haan4",
+                "english": "are you free?"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask if they’re free this Saturday."
+          },
+          {
+            "topicKey": "roadmap_intermediate_04_making_plans",
+            "situation": "They are! Say what you have in mind.",
+            "cantonese": "我想約你去睇戲。",
+            "jyutping": "ngo5 soeng2 joek3 nei5 heoi3 tai2 hei3",
+            "translation": "I’d like to take you to a movie.",
+            "chunks": [
+              {
+                "cantonese": "我想約你",
+                "jyutping": "ngo5 soeng2 joek3 nei5",
+                "english": "I’d like to ask you out",
+                "note": "約 is to make a date with someone."
+              },
+              {
+                "cantonese": "去睇戲",
+                "jyutping": "heoi3 tai2 hei3",
+                "english": "to a movie",
+                "note": "睇戲 literally means watch a show."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "想",
+                "jyutping": "soeng2",
+                "english": "would like to"
+              },
+              {
+                "token": "約",
+                "jyutping": "joek3",
+                "english": "ask out / arrange to meet"
+              },
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "去",
+                "jyutping": "heoi3",
+                "english": "go"
+              },
+              {
+                "token": "睇戲",
+                "jyutping": "tai2 hei3",
+                "english": "watch a movie"
+              }
+            ],
+            "speakingPrompt": "Invite them to a movie."
+          },
+          {
+            "topicKey": "roadmap_intermediate_04_making_plans",
+            "situation": "Set the time and the meeting point.",
+            "cantonese": "七點半喺旺角等啦。",
+            "jyutping": "cat1 dim2 bun3 hai2 wong6 gok3 dang2 laa1",
+            "translation": "Let’s meet in Mong Kok at 7:30.",
+            "chunks": [
+              {
+                "cantonese": "七點半",
+                "jyutping": "cat1 dim2 bun3",
+                "english": "at 7:30",
+                "note": "點 is o’clock, 半 is half."
+              },
+              {
+                "cantonese": "喺旺角等啦",
+                "jyutping": "hai2 wong6 gok3 dang2 laa1",
+                "english": "meet in Mong Kok",
+                "note": "Hong Kongers say wait for, not meet."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "七點半",
+                "jyutping": "cat1 dim2 bun3",
+                "english": "half past seven"
+              },
+              {
+                "token": "喺",
+                "jyutping": "hai2",
+                "english": "at / in"
+              },
+              {
+                "token": "旺角",
+                "jyutping": "wong6 gok3",
+                "english": "Mong Kok"
+              },
+              {
+                "token": "等",
+                "jyutping": "dang2",
+                "english": "wait / meet"
+              },
+              {
+                "token": "啦",
+                "jyutping": "laa1",
+                "english": "(let’s, suggestion)"
+              }
+            ],
+            "speakingPrompt": "Suggest a time and place to meet.",
+            "responseExercise": {
+              "promptCantonese": "七點半喺旺角等啦。",
+              "promptJyutping": "cat1 dim2 bun3 hai2 wong6 gok3 dang2 laa1",
+              "promptTranslation": "Let’s meet in Mong Kok at 7:30.",
+              "options": [
+                {
+                  "englishTranslation": "Let’s meet in Mong Kok at 7:30."
+                },
+                {
+                  "englishTranslation": "Let’s meet in Central at 8:30."
+                },
+                {
+                  "englishTranslation": "I’d like to take you to a movie."
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_04_making_plans",
+            "situation": "Let them know the tickets are sorted.",
+            "cantonese": "我book咗戲飛喇。",
+            "jyutping": "ngo5 book zo2 hei3 fei1 laa3",
+            "translation": "I’ve booked the tickets.",
+            "chunks": [
+              {
+                "cantonese": "我book咗",
+                "jyutping": "ngo5 book zo2",
+                "english": "I’ve booked",
+                "note": "Locals mix in English verbs like book, then add 咗."
+              },
+              {
+                "cantonese": "戲飛喇",
+                "jyutping": "hei3 fei1 laa3",
+                "english": "the movie tickets",
+                "note": "飛 is the everyday word for ticket."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "book咗",
+                "jyutping": "book zo2",
+                "english": "booked"
+              },
+              {
+                "token": "戲飛",
+                "jyutping": "hei3 fei1",
+                "english": "movie tickets"
+              },
+              {
+                "token": "喇",
+                "jyutping": "laa3",
+                "english": "(done now)"
+              }
+            ],
+            "speakingPrompt": "Say you’ve already booked the tickets."
+          },
+          {
+            "topicKey": "roadmap_intermediate_04_making_plans",
+            "situation": "One last thing before you hang up.",
+            "cantonese": "遲到嘅話記得send個message畀我。",
+            "jyutping": "ci4 dou3 ge3 waa2 gei3 dak1 send go3 message bei2 ngo5",
+            "translation": "If you’re running late, remember to send me a message.",
+            "chunks": [
+              {
+                "cantonese": "遲到嘅話",
+                "jyutping": "ci4 dou3 ge3 waa2",
+                "english": "if you’re running late",
+                "note": "嘅話 at the end of a clause means if."
+              },
+              {
+                "cantonese": "記得send個message畀我",
+                "jyutping": "gei3 dak1 send go3 message bei2 ngo5",
+                "english": "remember to send me a message",
+                "note": "畀我 at the end means to me."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "遲到",
+                "jyutping": "ci4 dou3",
+                "english": "be late"
+              },
+              {
+                "token": "嘅話",
+                "jyutping": "ge3 waa2",
+                "english": "if"
+              },
+              {
+                "token": "記得",
+                "jyutping": "gei3 dak1",
+                "english": "remember to"
+              },
+              {
+                "token": "send",
+                "jyutping": "send",
+                "english": "send"
+              },
+              {
+                "token": "個",
+                "jyutping": "go3",
+                "english": "a (counter)"
+              },
+              {
+                "token": "message",
+                "jyutping": "message",
+                "english": "message"
+              },
+              {
+                "token": "畀我",
+                "jyutping": "bei2 ngo5",
+                "english": "to me"
+              }
+            ],
+            "speakingPrompt": "Ask them to message you if they’re late.",
+            "responseExercise": {
+              "promptCantonese": "遲到嘅話記得send個message畀我。",
+              "promptJyutping": "ci4 dou3 ge3 waa2 gei3 dak1 send go3 message bei2 ngo5",
+              "promptTranslation": "If you’re running late, remember to send me a message.",
+              "options": [
+                {
+                  "englishTranslation": "I’ve booked the tickets."
+                },
+                {
+                  "englishTranslation": "If you’re running late, remember to send me a message."
+                },
+                {
+                  "englishTranslation": "If you’re running late, just go in without me."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "得唔得閒",
+            "jyutping": "dak1 m4 dak1 haan4",
+            "english": "are you free?",
+            "example": "你今個禮拜六得唔得閒呀？",
+            "exampleJyutping": "nei5 gam1 go3 lai5 baai3 luk6 dak1 m4 dak1 haan4 aa3",
+            "exampleTranslation": "Are you free this Saturday?"
+          },
+          {
+            "cantonese": "禮拜六",
+            "jyutping": "lai5 baai3 luk6",
+            "english": "Saturday",
+            "example": "你今個禮拜六得唔得閒呀？",
+            "exampleJyutping": "nei5 gam1 go3 lai5 baai3 luk6 dak1 m4 dak1 haan4 aa3",
+            "exampleTranslation": "Are you free this Saturday?"
+          },
+          {
+            "cantonese": "約",
+            "jyutping": "joek3",
+            "english": "ask out / arrange to meet",
+            "example": "我想約你去睇戲。",
+            "exampleJyutping": "ngo5 soeng2 joek3 nei5 heoi3 tai2 hei3",
+            "exampleTranslation": "I’d like to take you to a movie."
+          },
+          {
+            "cantonese": "睇戲",
+            "jyutping": "tai2 hei3",
+            "english": "watch a movie",
+            "example": "我想約你去睇戲。",
+            "exampleJyutping": "ngo5 soeng2 joek3 nei5 heoi3 tai2 hei3",
+            "exampleTranslation": "I’d like to take you to a movie."
+          },
+          {
+            "cantonese": "七點半",
+            "jyutping": "cat1 dim2 bun3",
+            "english": "half past seven",
+            "example": "七點半喺旺角等啦。",
+            "exampleJyutping": "cat1 dim2 bun3 hai2 wong6 gok3 dang2 laa1",
+            "exampleTranslation": "Let’s meet in Mong Kok at 7:30."
+          },
+          {
+            "cantonese": "喺",
+            "jyutping": "hai2",
+            "english": "at / in",
+            "example": "七點半喺旺角等啦。",
+            "exampleJyutping": "cat1 dim2 bun3 hai2 wong6 gok3 dang2 laa1",
+            "exampleTranslation": "Let’s meet in Mong Kok at 7:30."
+          },
+          {
+            "cantonese": "戲飛",
+            "jyutping": "hei3 fei1",
+            "english": "movie tickets",
+            "example": "我book咗戲飛喇。",
+            "exampleJyutping": "ngo5 book zo2 hei3 fei1 laa3",
+            "exampleTranslation": "I’ve booked the tickets."
+          },
+          {
+            "cantonese": "book咗",
+            "jyutping": "book zo2",
+            "english": "booked",
+            "example": "我book咗戲飛喇。",
+            "exampleJyutping": "ngo5 book zo2 hei3 fei1 laa3",
+            "exampleTranslation": "I’ve booked the tickets."
+          },
+          {
+            "cantonese": "遲到",
+            "jyutping": "ci4 dou3",
+            "english": "be late",
+            "example": "遲到嘅話記得send個message畀我。",
+            "exampleJyutping": "ci4 dou3 ge3 waa2 gei3 dak1 send go3 message bei2 ngo5",
+            "exampleTranslation": "If you’re running late, remember to send me a message."
+          },
+          {
+            "cantonese": "記得",
+            "jyutping": "gei3 dak1",
+            "english": "remember to",
+            "example": "遲到嘅話記得send個message畀我。",
+            "exampleJyutping": "ci4 dou3 ge3 waa2 gei3 dak1 send go3 message bei2 ngo5",
+            "exampleTranslation": "If you’re running late, remember to send me a message."
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000005",
+      "slug": "intermediate-05-phone-and-voice-messages",
+      "summary": "Handle a bad phone line, then leave a voice message asking a friend to call back.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 5,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "plans-and-practicalities",
+      "unitTitle": "Plans and practicalities",
+      "unitOrder": 2,
+      "lessonOrder": 2,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.5,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "lifeInHongKong",
+        "work"
+      ],
+      "content": {
+        "title": "Phone and voice messages",
+        "scenarioKey": "roadmap_intermediate_05_phone_and_voice_messages",
+        "scenario": "Handle a bad phone line, then leave a voice message asking a friend to call back.",
+        "minutes": 5,
+        "difficulty": 2.5,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_05_phone_and_voice_messages",
+            "situation": "You call your friend Ming. Someone picks up.",
+            "cantonese": "喂，係咪阿明呀？",
+            "jyutping": "wai2 hai6 mai6 aa3 ming4 aa3",
+            "translation": "Hello, is that Ming?",
+            "chunks": [
+              {
+                "cantonese": "喂",
+                "jyutping": "wai2",
+                "english": "hello",
+                "note": "喂 is only for the phone or calling someone over."
+              },
+              {
+                "cantonese": "係咪阿明呀",
+                "jyutping": "hai6 mai6 aa3 ming4 aa3",
+                "english": "is that Ming?",
+                "note": "阿 before a name sounds friendly."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "喂",
+                "jyutping": "wai2",
+                "english": "hello (on the phone)"
+              },
+              {
+                "token": "係咪",
+                "jyutping": "hai6 mai6",
+                "english": "is it…?"
+              },
+              {
+                "token": "阿明",
+                "jyutping": "aa3 ming4",
+                "english": "Ming"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Answer the call and check it’s Ming."
+          },
+          {
+            "topicKey": "roadmap_intermediate_05_phone_and_voice_messages",
+            "situation": "The line is crackly.",
+            "cantonese": "我聽唔清楚，你講大聲啲。",
+            "jyutping": "ngo5 teng1 m4 cing1 co2 nei5 gong2 daai6 seng1 di1",
+            "translation": "I can’t hear you clearly, speak up a bit.",
+            "chunks": [
+              {
+                "cantonese": "我聽唔清楚",
+                "jyutping": "ngo5 teng1 m4 cing1 co2",
+                "english": "I can’t hear you clearly",
+                "note": "Verb + 唔 + result: tried but couldn’t."
+              },
+              {
+                "cantonese": "你講大聲啲",
+                "jyutping": "nei5 gong2 daai6 seng1 di1",
+                "english": "speak up a bit",
+                "note": "啲 after an adjective means a bit more."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "聽唔清楚",
+                "jyutping": "teng1 m4 cing1 co2",
+                "english": "can’t hear clearly"
+              },
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "講",
+                "jyutping": "gong2",
+                "english": "speak"
+              },
+              {
+                "token": "大聲啲",
+                "jyutping": "daai6 seng1 di1",
+                "english": "a bit louder"
+              }
+            ],
+            "speakingPrompt": "Tell Ming you can’t hear and ask them to speak up."
+          },
+          {
+            "topicKey": "roadmap_intermediate_05_phone_and_voice_messages",
+            "situation": "It’s no use. Say you’ll call back.",
+            "cantonese": "訊號唔好，我打返畀你。",
+            "jyutping": "seon3 hou6 m4 hou2 ngo5 daa2 faan1 bei2 nei5",
+            "translation": "The signal’s bad, I’ll call you back.",
+            "chunks": [
+              {
+                "cantonese": "訊號唔好",
+                "jyutping": "seon3 hou6 m4 hou2",
+                "english": "the signal’s bad",
+                "note": "A perfect excuse in the MTR."
+              },
+              {
+                "cantonese": "我打返畀你",
+                "jyutping": "ngo5 daa2 faan1 bei2 nei5",
+                "english": "I’ll call you back",
+                "note": "返 means back: 打返 is call back."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "訊號",
+                "jyutping": "seon3 hou6",
+                "english": "signal"
+              },
+              {
+                "token": "唔好",
+                "jyutping": "m4 hou2",
+                "english": "not good"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "打返畀你",
+                "jyutping": "daa2 faan1 bei2 nei5",
+                "english": "call you back"
+              }
+            ],
+            "speakingPrompt": "Blame the signal and say you’ll call back.",
+            "responseExercise": {
+              "promptCantonese": "訊號唔好，我打返畀你。",
+              "promptJyutping": "seon3 hou6 m4 hou2 ngo5 daa2 faan1 bei2 nei5",
+              "promptTranslation": "The signal’s bad, I’ll call you back.",
+              "options": [
+                {
+                  "englishTranslation": "The signal’s bad, I’ll call you back."
+                },
+                {
+                  "englishTranslation": "The signal’s good, let’s keep talking."
+                },
+                {
+                  "englishTranslation": "Hello, is that Ming?"
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_05_phone_and_voice_messages",
+            "situation": "You call back but nobody answers. Leave a voice message.",
+            "cantonese": "頭先打畀你冇人聽。",
+            "jyutping": "tau4 sin1 daa2 bei2 nei5 mou5 jan4 teng1",
+            "translation": "I called you just now but nobody picked up.",
+            "chunks": [
+              {
+                "cantonese": "頭先打畀你",
+                "jyutping": "tau4 sin1 daa2 bei2 nei5",
+                "english": "I called you just now",
+                "note": "頭先 means a moment ago."
+              },
+              {
+                "cantonese": "冇人聽",
+                "jyutping": "mou5 jan4 teng1",
+                "english": "nobody picked up",
+                "note": "Answering the phone is 聽電話: listen to the phone."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "頭先",
+                "jyutping": "tau4 sin1",
+                "english": "just now"
+              },
+              {
+                "token": "打畀你",
+                "jyutping": "daa2 bei2 nei5",
+                "english": "called you"
+              },
+              {
+                "token": "冇人",
+                "jyutping": "mou5 jan4",
+                "english": "nobody"
+              },
+              {
+                "token": "聽",
+                "jyutping": "teng1",
+                "english": "answer (the phone)"
+              }
+            ],
+            "speakingPrompt": "Start your voice message."
+          },
+          {
+            "topicKey": "roadmap_intermediate_05_phone_and_voice_messages",
+            "situation": "Finish the voice message.",
+            "cantonese": "得閒覆我電話啦。",
+            "jyutping": "dak1 haan4 fuk1 ngo5 din6 waa2 laa1",
+            "translation": "Call me back when you’re free.",
+            "chunks": [
+              {
+                "cantonese": "得閒",
+                "jyutping": "dak1 haan4",
+                "english": "when you’re free",
+                "note": "得閒 at the start means whenever you have time."
+              },
+              {
+                "cantonese": "覆我電話啦",
+                "jyutping": "fuk1 ngo5 din6 waa2 laa1",
+                "english": "call me back",
+                "note": "覆電話 means return a call. 啦 keeps it friendly."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "得閒",
+                "jyutping": "dak1 haan4",
+                "english": "when free"
+              },
+              {
+                "token": "覆",
+                "jyutping": "fuk1",
+                "english": "reply / return"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "電話",
+                "jyutping": "din6 waa2",
+                "english": "phone call"
+              },
+              {
+                "token": "啦",
+                "jyutping": "laa1",
+                "english": "(friendly request)"
+              }
+            ],
+            "speakingPrompt": "Ask Ming to call you back when free.",
+            "responseExercise": {
+              "promptCantonese": "得閒覆我電話啦。",
+              "promptJyutping": "dak1 haan4 fuk1 ngo5 din6 waa2 laa1",
+              "promptTranslation": "Call me back when you’re free.",
+              "options": [
+                {
+                  "englishTranslation": "I’ll call you back when I’m free."
+                },
+                {
+                  "englishTranslation": "I called you just now but nobody picked up."
+                },
+                {
+                  "englishTranslation": "Call me back when you’re free."
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "喂",
+            "jyutping": "wai2",
+            "english": "hello (on the phone)",
+            "example": "喂，係咪阿明呀？",
+            "exampleJyutping": "wai2 hai6 mai6 aa3 ming4 aa3",
+            "exampleTranslation": "Hello, is that Ming?"
+          },
+          {
+            "cantonese": "係咪",
+            "jyutping": "hai6 mai6",
+            "english": "is it…?",
+            "example": "喂，係咪阿明呀？",
+            "exampleJyutping": "wai2 hai6 mai6 aa3 ming4 aa3",
+            "exampleTranslation": "Hello, is that Ming?"
+          },
+          {
+            "cantonese": "聽唔清楚",
+            "jyutping": "teng1 m4 cing1 co2",
+            "english": "can’t hear clearly",
+            "example": "我聽唔清楚，你講大聲啲。",
+            "exampleJyutping": "ngo5 teng1 m4 cing1 co2 nei5 gong2 daai6 seng1 di1",
+            "exampleTranslation": "I can’t hear you clearly, speak up a bit."
+          },
+          {
+            "cantonese": "大聲啲",
+            "jyutping": "daai6 seng1 di1",
+            "english": "a bit louder",
+            "example": "我聽唔清楚，你講大聲啲。",
+            "exampleJyutping": "ngo5 teng1 m4 cing1 co2 nei5 gong2 daai6 seng1 di1",
+            "exampleTranslation": "I can’t hear you clearly, speak up a bit."
+          },
+          {
+            "cantonese": "訊號",
+            "jyutping": "seon3 hou6",
+            "english": "signal",
+            "example": "訊號唔好，我打返畀你。",
+            "exampleJyutping": "seon3 hou6 m4 hou2 ngo5 daa2 faan1 bei2 nei5",
+            "exampleTranslation": "The signal’s bad, I’ll call you back."
+          },
+          {
+            "cantonese": "打返畀你",
+            "jyutping": "daa2 faan1 bei2 nei5",
+            "english": "call you back",
+            "example": "訊號唔好，我打返畀你。",
+            "exampleJyutping": "seon3 hou6 m4 hou2 ngo5 daa2 faan1 bei2 nei5",
+            "exampleTranslation": "The signal’s bad, I’ll call you back."
+          },
+          {
+            "cantonese": "頭先",
+            "jyutping": "tau4 sin1",
+            "english": "just now",
+            "example": "頭先打畀你冇人聽。",
+            "exampleJyutping": "tau4 sin1 daa2 bei2 nei5 mou5 jan4 teng1",
+            "exampleTranslation": "I called you just now but nobody picked up."
+          },
+          {
+            "cantonese": "冇人",
+            "jyutping": "mou5 jan4",
+            "english": "nobody",
+            "example": "頭先打畀你冇人聽。",
+            "exampleJyutping": "tau4 sin1 daa2 bei2 nei5 mou5 jan4 teng1",
+            "exampleTranslation": "I called you just now but nobody picked up."
+          },
+          {
+            "cantonese": "得閒",
+            "jyutping": "dak1 haan4",
+            "english": "when free",
+            "example": "得閒覆我電話啦。",
+            "exampleJyutping": "dak1 haan4 fuk1 ngo5 din6 waa2 laa1",
+            "exampleTranslation": "Call me back when you’re free."
+          },
+          {
+            "cantonese": "電話",
+            "jyutping": "din6 waa2",
+            "english": "phone call",
+            "example": "得閒覆我電話啦。",
+            "exampleJyutping": "dak1 haan4 fuk1 ngo5 din6 waa2 laa1",
+            "exampleTranslation": "Call me back when you’re free."
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000006",
+      "slug": "intermediate-06-at-the-doctor",
+      "summary": "Describe your symptoms to a doctor and walk out with medicine and a sick note.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 6,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "plans-and-practicalities",
+      "unitTitle": "Plans and practicalities",
+      "unitOrder": 2,
+      "lessonOrder": 3,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.6,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "lifeInHongKong",
+        "travel"
+      ],
+      "content": {
+        "title": "At the doctor",
+        "scenarioKey": "roadmap_intermediate_06_at_the_doctor",
+        "scenario": "Describe your symptoms to a doctor and walk out with medicine and a sick note.",
+        "minutes": 5,
+        "difficulty": 2.6,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_06_at_the_doctor",
+            "situation": "You sit down with the doctor.",
+            "cantonese": "醫生，我唔舒服兩日喇。",
+            "jyutping": "ji1 sang1 ngo5 m4 syu1 fuk6 loeng5 jat6 laa3",
+            "translation": "Doctor, I’ve been feeling unwell for two days.",
+            "chunks": [
+              {
+                "cantonese": "醫生",
+                "jyutping": "ji1 sang1",
+                "english": "doctor",
+                "note": "You can address the doctor simply as 醫生."
+              },
+              {
+                "cantonese": "我唔舒服兩日喇",
+                "jyutping": "ngo5 m4 syu1 fuk6 loeng5 jat6 laa3",
+                "english": "I’ve been unwell for two days",
+                "note": "Duration goes after the state; 喇 means so far."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "醫生",
+                "jyutping": "ji1 sang1",
+                "english": "doctor"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "唔舒服",
+                "jyutping": "m4 syu1 fuk6",
+                "english": "unwell"
+              },
+              {
+                "token": "兩日",
+                "jyutping": "loeng5 jat6",
+                "english": "two days"
+              },
+              {
+                "token": "喇",
+                "jyutping": "laa3",
+                "english": "(already, so far)"
+              }
+            ],
+            "speakingPrompt": "Tell the doctor how long you’ve been unwell."
+          },
+          {
+            "topicKey": "roadmap_intermediate_06_at_the_doctor",
+            "situation": "Describe your symptoms.",
+            "cantonese": "我頭痛，又有啲發燒。",
+            "jyutping": "ngo5 tau4 tung3 jau6 jau5 di1 faat3 siu1",
+            "translation": "I have a headache and a bit of a fever.",
+            "chunks": [
+              {
+                "cantonese": "我頭痛",
+                "jyutping": "ngo5 tau4 tung3",
+                "english": "I have a headache",
+                "note": "Body part + 痛 = that part hurts."
+              },
+              {
+                "cantonese": "又有啲發燒",
+                "jyutping": "jau6 jau5 di1 faat3 siu1",
+                "english": "and a bit of a fever",
+                "note": "有啲 softens it: a bit."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "頭痛",
+                "jyutping": "tau4 tung3",
+                "english": "headache"
+              },
+              {
+                "token": "又",
+                "jyutping": "jau6",
+                "english": "also"
+              },
+              {
+                "token": "有啲",
+                "jyutping": "jau5 di1",
+                "english": "a bit"
+              },
+              {
+                "token": "發燒",
+                "jyutping": "faat3 siu1",
+                "english": "have a fever"
+              }
+            ],
+            "speakingPrompt": "Describe your headache and fever."
+          },
+          {
+            "topicKey": "roadmap_intermediate_06_at_the_doctor",
+            "situation": "There’s one more thing bothering you.",
+            "cantonese": "喉嚨都好痛，食嘢好辛苦。",
+            "jyutping": "hau4 lung4 dou1 hou2 tung3 sik6 je5 hou2 san1 fu2",
+            "translation": "My throat really hurts too, eating is hard.",
+            "chunks": [
+              {
+                "cantonese": "喉嚨都好痛",
+                "jyutping": "hau4 lung4 dou1 hou2 tung3",
+                "english": "my throat really hurts too",
+                "note": "都 means too, also."
+              },
+              {
+                "cantonese": "食嘢好辛苦",
+                "jyutping": "sik6 je5 hou2 san1 fu2",
+                "english": "eating is hard",
+                "note": "辛苦 is the go-to word for anything tough."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "喉嚨",
+                "jyutping": "hau4 lung4",
+                "english": "throat"
+              },
+              {
+                "token": "都",
+                "jyutping": "dou1",
+                "english": "also"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "痛",
+                "jyutping": "tung3",
+                "english": "hurt"
+              },
+              {
+                "token": "食嘢",
+                "jyutping": "sik6 je5",
+                "english": "eat (things)"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "辛苦",
+                "jyutping": "san1 fu2",
+                "english": "hard / painful"
+              }
+            ],
+            "speakingPrompt": "Say your throat hurts and eating is hard.",
+            "responseExercise": {
+              "promptCantonese": "喉嚨都好痛，食嘢好辛苦。",
+              "promptJyutping": "hau4 lung4 dou1 hou2 tung3 sik6 je5 hou2 san1 fu2",
+              "promptTranslation": "My throat really hurts too, eating is hard.",
+              "options": [
+                {
+                  "englishTranslation": "I have a headache and a bit of a fever."
+                },
+                {
+                  "englishTranslation": "My throat really hurts too, eating is hard."
+                },
+                {
+                  "englishTranslation": "My throat is fine, but my back hurts."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_06_at_the_doctor",
+            "situation": "The doctor hands you medicine. Check how to take it.",
+            "cantonese": "呢啲藥一日食幾多次呀？",
+            "jyutping": "ni1 di1 joek6 jat1 jat6 sik6 gei2 do1 ci3 aa3",
+            "translation": "How many times a day do I take this medicine?",
+            "chunks": [
+              {
+                "cantonese": "呢啲藥",
+                "jyutping": "ni1 di1 joek6",
+                "english": "this medicine",
+                "note": "呢啲 means these."
+              },
+              {
+                "cantonese": "一日食幾多次呀",
+                "jyutping": "jat1 jat6 sik6 gei2 do1 ci3 aa3",
+                "english": "how many times a day",
+                "note": "In Cantonese you eat medicine: 食藥."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "呢啲",
+                "jyutping": "ni1 di1",
+                "english": "these"
+              },
+              {
+                "token": "藥",
+                "jyutping": "joek6",
+                "english": "medicine"
+              },
+              {
+                "token": "一日",
+                "jyutping": "jat1 jat6",
+                "english": "a day"
+              },
+              {
+                "token": "食",
+                "jyutping": "sik6",
+                "english": "take (eat)"
+              },
+              {
+                "token": "幾多次",
+                "jyutping": "gei2 do1 ci3",
+                "english": "how many times"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask how often to take the medicine."
+          },
+          {
+            "topicKey": "roadmap_intermediate_06_at_the_doctor",
+            "situation": "You need to miss work tomorrow.",
+            "cantonese": "可唔可以畀張病假紙我？",
+            "jyutping": "ho2 m4 ho2 ji5 bei2 zoeng1 beng6 gaa3 zi2 ngo5",
+            "translation": "Could you give me a sick note?",
+            "chunks": [
+              {
+                "cantonese": "可唔可以",
+                "jyutping": "ho2 m4 ho2 ji5",
+                "english": "could you",
+                "note": "The polite way to ask for anything."
+              },
+              {
+                "cantonese": "畀張病假紙我",
+                "jyutping": "bei2 zoeng1 beng6 gaa3 zi2 ngo5",
+                "english": "give me a sick note",
+                "note": "In Hong Kong your boss will ask for one."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "可唔可以",
+                "jyutping": "ho2 m4 ho2 ji5",
+                "english": "could you…?"
+              },
+              {
+                "token": "畀",
+                "jyutping": "bei2",
+                "english": "give"
+              },
+              {
+                "token": "張",
+                "jyutping": "zoeng1",
+                "english": "(counter for paper)"
+              },
+              {
+                "token": "病假紙",
+                "jyutping": "beng6 gaa3 zi2",
+                "english": "sick note"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "me"
+              }
+            ],
+            "speakingPrompt": "Ask the doctor for a sick note.",
+            "responseExercise": {
+              "promptCantonese": "可唔可以畀張病假紙我？",
+              "promptJyutping": "ho2 m4 ho2 ji5 bei2 zoeng1 beng6 gaa3 zi2 ngo5",
+              "promptTranslation": "Could you give me a sick note?",
+              "options": [
+                {
+                  "englishTranslation": "Could you give me a sick note?"
+                },
+                {
+                  "englishTranslation": "Could you give me some more medicine?"
+                },
+                {
+                  "englishTranslation": "How many times a day do I take this medicine?"
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "醫生",
+            "jyutping": "ji1 sang1",
+            "english": "doctor",
+            "example": "醫生，我唔舒服兩日喇。",
+            "exampleJyutping": "ji1 sang1 ngo5 m4 syu1 fuk6 loeng5 jat6 laa3",
+            "exampleTranslation": "Doctor, I’ve been feeling unwell for two days."
+          },
+          {
+            "cantonese": "唔舒服",
+            "jyutping": "m4 syu1 fuk6",
+            "english": "unwell",
+            "example": "醫生，我唔舒服兩日喇。",
+            "exampleJyutping": "ji1 sang1 ngo5 m4 syu1 fuk6 loeng5 jat6 laa3",
+            "exampleTranslation": "Doctor, I’ve been feeling unwell for two days."
+          },
+          {
+            "cantonese": "頭痛",
+            "jyutping": "tau4 tung3",
+            "english": "headache",
+            "example": "我頭痛，又有啲發燒。",
+            "exampleJyutping": "ngo5 tau4 tung3 jau6 jau5 di1 faat3 siu1",
+            "exampleTranslation": "I have a headache and a bit of a fever."
+          },
+          {
+            "cantonese": "發燒",
+            "jyutping": "faat3 siu1",
+            "english": "have a fever",
+            "example": "我頭痛，又有啲發燒。",
+            "exampleJyutping": "ngo5 tau4 tung3 jau6 jau5 di1 faat3 siu1",
+            "exampleTranslation": "I have a headache and a bit of a fever."
+          },
+          {
+            "cantonese": "喉嚨",
+            "jyutping": "hau4 lung4",
+            "english": "throat",
+            "example": "喉嚨都好痛，食嘢好辛苦。",
+            "exampleJyutping": "hau4 lung4 dou1 hou2 tung3 sik6 je5 hou2 san1 fu2",
+            "exampleTranslation": "My throat really hurts too, eating is hard."
+          },
+          {
+            "cantonese": "辛苦",
+            "jyutping": "san1 fu2",
+            "english": "hard / painful",
+            "example": "喉嚨都好痛，食嘢好辛苦。",
+            "exampleJyutping": "hau4 lung4 dou1 hou2 tung3 sik6 je5 hou2 san1 fu2",
+            "exampleTranslation": "My throat really hurts too, eating is hard."
+          },
+          {
+            "cantonese": "藥",
+            "jyutping": "joek6",
+            "english": "medicine",
+            "example": "呢啲藥一日食幾多次呀？",
+            "exampleJyutping": "ni1 di1 joek6 jat1 jat6 sik6 gei2 do1 ci3 aa3",
+            "exampleTranslation": "How many times a day do I take this medicine?"
+          },
+          {
+            "cantonese": "幾多次",
+            "jyutping": "gei2 do1 ci3",
+            "english": "how many times",
+            "example": "呢啲藥一日食幾多次呀？",
+            "exampleJyutping": "ni1 di1 joek6 jat1 jat6 sik6 gei2 do1 ci3 aa3",
+            "exampleTranslation": "How many times a day do I take this medicine?"
+          },
+          {
+            "cantonese": "可唔可以",
+            "jyutping": "ho2 m4 ho2 ji5",
+            "english": "could you…?",
+            "example": "可唔可以畀張病假紙我？",
+            "exampleJyutping": "ho2 m4 ho2 ji5 bei2 zoeng1 beng6 gaa3 zi2 ngo5",
+            "exampleTranslation": "Could you give me a sick note?"
+          },
+          {
+            "cantonese": "病假紙",
+            "jyutping": "beng6 gaa3 zi2",
+            "english": "sick note",
+            "example": "可唔可以畀張病假紙我？",
+            "exampleJyutping": "ho2 m4 ho2 ji5 bei2 zoeng1 beng6 gaa3 zi2 ngo5",
+            "exampleTranslation": "Could you give me a sick note?"
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000007",
+      "slug": "intermediate-07-renting-a-flat",
+      "summary": "View a flat with an agent, ask the right questions and negotiate the rent.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 7,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "plans-and-practicalities",
+      "unitTitle": "Plans and practicalities",
+      "unitOrder": 2,
+      "lessonOrder": 4,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.65,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "lifeInHongKong"
+      ],
+      "content": {
+        "title": "Renting a flat",
+        "scenarioKey": "roadmap_intermediate_07_renting_a_flat",
+        "scenario": "View a flat with an agent, ask the right questions and negotiate the rent.",
+        "minutes": 5,
+        "difficulty": 2.65,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_07_renting_a_flat",
+            "situation": "The agent shows you a flat. Ask the rent.",
+            "cantonese": "呢個單位幾多錢一個月？",
+            "jyutping": "ni1 go3 daan1 wai2 gei2 do1 cin2 jat1 go3 jyut6",
+            "translation": "How much is this flat per month?",
+            "chunks": [
+              {
+                "cantonese": "呢個單位",
+                "jyutping": "ni1 go3 daan1 wai2",
+                "english": "this flat",
+                "note": "Hong Kongers call a flat a 單位, a unit."
+              },
+              {
+                "cantonese": "幾多錢一個月",
+                "jyutping": "gei2 do1 cin2 jat1 go3 jyut6",
+                "english": "how much per month",
+                "note": "Price first, then the time period."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "呢個",
+                "jyutping": "ni1 go3",
+                "english": "this"
+              },
+              {
+                "token": "單位",
+                "jyutping": "daan1 wai2",
+                "english": "flat / unit"
+              },
+              {
+                "token": "幾多錢",
+                "jyutping": "gei2 do1 cin2",
+                "english": "how much"
+              },
+              {
+                "token": "一個月",
+                "jyutping": "jat1 go3 jyut6",
+                "english": "a month"
+              }
+            ],
+            "speakingPrompt": "Ask how much the rent is per month."
+          },
+          {
+            "topicKey": "roadmap_intermediate_07_renting_a_flat",
+            "situation": "Check for hidden costs.",
+            "cantonese": "包唔包管理費㗎？",
+            "jyutping": "baau1 m4 baau1 gun2 lei5 fai3 gaa3",
+            "translation": "Does it include the management fee?",
+            "chunks": [
+              {
+                "cantonese": "包唔包",
+                "jyutping": "baau1 m4 baau1",
+                "english": "does it include",
+                "note": "Verb + 唔 + verb makes a yes or no question."
+              },
+              {
+                "cantonese": "管理費㗎",
+                "jyutping": "gun2 lei5 fai3 gaa3",
+                "english": "the management fee",
+                "note": "㗎 in a question asks for the facts."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "包唔包",
+                "jyutping": "baau1 m4 baau1",
+                "english": "does it include?"
+              },
+              {
+                "token": "管理費",
+                "jyutping": "gun2 lei5 fai3",
+                "english": "management fee"
+              },
+              {
+                "token": "㗎",
+                "jyutping": "gaa3",
+                "english": "(asking for the facts)"
+              }
+            ],
+            "speakingPrompt": "Ask whether the management fee is included."
+          },
+          {
+            "topicKey": "roadmap_intermediate_07_renting_a_flat",
+            "situation": "Give your honest opinion of the room.",
+            "cantonese": "間房細咗啲，不過好光猛。",
+            "jyutping": "gaan1 fong2 sai3 zo2 di1 bat1 gwo3 hou2 gwong1 maang5",
+            "translation": "The room is a bit small, but it’s nice and bright.",
+            "chunks": [
+              {
+                "cantonese": "間房細咗啲",
+                "jyutping": "gaan1 fong2 sai3 zo2 di1",
+                "english": "the room is a bit small",
+                "note": "Adjective + 咗啲 means a bit too much."
+              },
+              {
+                "cantonese": "不過好光猛",
+                "jyutping": "bat1 gwo3 hou2 gwong1 maang5",
+                "english": "but it’s nice and bright",
+                "note": "光猛 is high praise for a Hong Kong flat."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "間房",
+                "jyutping": "gaan1 fong2",
+                "english": "the room"
+              },
+              {
+                "token": "細咗啲",
+                "jyutping": "sai3 zo2 di1",
+                "english": "a bit too small"
+              },
+              {
+                "token": "不過",
+                "jyutping": "bat1 gwo3",
+                "english": "but"
+              },
+              {
+                "token": "好",
+                "jyutping": "hou2",
+                "english": "very"
+              },
+              {
+                "token": "光猛",
+                "jyutping": "gwong1 maang5",
+                "english": "bright"
+              }
+            ],
+            "speakingPrompt": "Give a balanced opinion of the room.",
+            "responseExercise": {
+              "promptCantonese": "間房細咗啲，不過好光猛。",
+              "promptJyutping": "gaan1 fong2 sai3 zo2 di1 bat1 gwo3 hou2 gwong1 maang5",
+              "promptTranslation": "The room is a bit small, but it’s nice and bright.",
+              "options": [
+                {
+                  "englishTranslation": "The room is big, but it’s quite dark."
+                },
+                {
+                  "englishTranslation": "How much is this flat per month?"
+                },
+                {
+                  "englishTranslation": "The room is a bit small, but it’s nice and bright."
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_07_renting_a_flat",
+            "situation": "Time to negotiate.",
+            "cantonese": "業主可唔可以平啲呀？",
+            "jyutping": "jip6 zyu2 ho2 m4 ho2 ji5 peng4 di1 aa3",
+            "translation": "Could the landlord make it a bit cheaper?",
+            "chunks": [
+              {
+                "cantonese": "業主",
+                "jyutping": "jip6 zyu2",
+                "english": "the landlord",
+                "note": "業主 is the owner; the agent passes your offer on."
+              },
+              {
+                "cantonese": "可唔可以平啲呀",
+                "jyutping": "ho2 m4 ho2 ji5 peng4 di1 aa3",
+                "english": "could it be a bit cheaper",
+                "note": "Always ask. Rent is often negotiable."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "業主",
+                "jyutping": "jip6 zyu2",
+                "english": "landlord"
+              },
+              {
+                "token": "可唔可以",
+                "jyutping": "ho2 m4 ho2 ji5",
+                "english": "could…?"
+              },
+              {
+                "token": "平啲",
+                "jyutping": "peng4 di1",
+                "english": "a bit cheaper"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask if the landlord can lower the rent."
+          },
+          {
+            "topicKey": "roadmap_intermediate_07_renting_a_flat",
+            "situation": "Make your offer.",
+            "cantonese": "如果平五百蚊，我即刻簽約。",
+            "jyutping": "jyu4 gwo2 peng4 ng5 baak3 man1 ngo5 zik1 hak1 cim1 joek3",
+            "translation": "If it’s 500 dollars cheaper, I’ll sign right away.",
+            "chunks": [
+              {
+                "cantonese": "如果平五百蚊",
+                "jyutping": "jyu4 gwo2 peng4 ng5 baak3 man1",
+                "english": "if it’s 500 dollars cheaper",
+                "note": "蚊 is the everyday word for dollars."
+              },
+              {
+                "cantonese": "我即刻簽約",
+                "jyutping": "ngo5 zik1 hak1 cim1 joek3",
+                "english": "I’ll sign right away",
+                "note": "即刻 means immediately. Agents love hearing it."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "如果",
+                "jyutping": "jyu4 gwo2",
+                "english": "if"
+              },
+              {
+                "token": "平",
+                "jyutping": "peng4",
+                "english": "cheaper"
+              },
+              {
+                "token": "五百蚊",
+                "jyutping": "ng5 baak3 man1",
+                "english": "500 dollars"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "即刻",
+                "jyutping": "zik1 hak1",
+                "english": "right away"
+              },
+              {
+                "token": "簽約",
+                "jyutping": "cim1 joek3",
+                "english": "sign the lease"
+              }
+            ],
+            "speakingPrompt": "Offer to sign today for a lower rent.",
+            "responseExercise": {
+              "promptCantonese": "如果平五百蚊，我即刻簽約。",
+              "promptJyutping": "jyu4 gwo2 peng4 ng5 baak3 man1 ngo5 zik1 hak1 cim1 joek3",
+              "promptTranslation": "If it’s 500 dollars cheaper, I’ll sign right away.",
+              "options": [
+                {
+                  "englishTranslation": "Could the landlord make it a bit cheaper?"
+                },
+                {
+                  "englishTranslation": "If it’s 500 dollars more, I won’t sign."
+                },
+                {
+                  "englishTranslation": "If it’s 500 dollars cheaper, I’ll sign right away."
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "單位",
+            "jyutping": "daan1 wai2",
+            "english": "flat / unit",
+            "example": "呢個單位幾多錢一個月？",
+            "exampleJyutping": "ni1 go3 daan1 wai2 gei2 do1 cin2 jat1 go3 jyut6",
+            "exampleTranslation": "How much is this flat per month?"
+          },
+          {
+            "cantonese": "一個月",
+            "jyutping": "jat1 go3 jyut6",
+            "english": "a month",
+            "example": "呢個單位幾多錢一個月？",
+            "exampleJyutping": "ni1 go3 daan1 wai2 gei2 do1 cin2 jat1 go3 jyut6",
+            "exampleTranslation": "How much is this flat per month?"
+          },
+          {
+            "cantonese": "管理費",
+            "jyutping": "gun2 lei5 fai3",
+            "english": "management fee",
+            "example": "包唔包管理費㗎？",
+            "exampleJyutping": "baau1 m4 baau1 gun2 lei5 fai3 gaa3",
+            "exampleTranslation": "Does it include the management fee?"
+          },
+          {
+            "cantonese": "包唔包",
+            "jyutping": "baau1 m4 baau1",
+            "english": "does it include?",
+            "example": "包唔包管理費㗎？",
+            "exampleJyutping": "baau1 m4 baau1 gun2 lei5 fai3 gaa3",
+            "exampleTranslation": "Does it include the management fee?"
+          },
+          {
+            "cantonese": "光猛",
+            "jyutping": "gwong1 maang5",
+            "english": "bright",
+            "example": "間房細咗啲，不過好光猛。",
+            "exampleJyutping": "gaan1 fong2 sai3 zo2 di1 bat1 gwo3 hou2 gwong1 maang5",
+            "exampleTranslation": "The room is a bit small, but it’s nice and bright."
+          },
+          {
+            "cantonese": "不過",
+            "jyutping": "bat1 gwo3",
+            "english": "but",
+            "example": "間房細咗啲，不過好光猛。",
+            "exampleJyutping": "gaan1 fong2 sai3 zo2 di1 bat1 gwo3 hou2 gwong1 maang5",
+            "exampleTranslation": "The room is a bit small, but it’s nice and bright."
+          },
+          {
+            "cantonese": "業主",
+            "jyutping": "jip6 zyu2",
+            "english": "landlord",
+            "example": "業主可唔可以平啲呀？",
+            "exampleJyutping": "jip6 zyu2 ho2 m4 ho2 ji5 peng4 di1 aa3",
+            "exampleTranslation": "Could the landlord make it a bit cheaper?"
+          },
+          {
+            "cantonese": "平啲",
+            "jyutping": "peng4 di1",
+            "english": "a bit cheaper",
+            "example": "業主可唔可以平啲呀？",
+            "exampleJyutping": "jip6 zyu2 ho2 m4 ho2 ji5 peng4 di1 aa3",
+            "exampleTranslation": "Could the landlord make it a bit cheaper?"
+          },
+          {
+            "cantonese": "即刻",
+            "jyutping": "zik1 hak1",
+            "english": "right away",
+            "example": "如果平五百蚊，我即刻簽約。",
+            "exampleJyutping": "jyu4 gwo2 peng4 ng5 baak3 man1 ngo5 zik1 hak1 cim1 joek3",
+            "exampleTranslation": "If it’s 500 dollars cheaper, I’ll sign right away."
+          },
+          {
+            "cantonese": "簽約",
+            "jyutping": "cim1 joek3",
+            "english": "sign the lease",
+            "example": "如果平五百蚊，我即刻簽約。",
+            "exampleJyutping": "jyu4 gwo2 peng4 ng5 baak3 man1 ngo5 zik1 hak1 cim1 joek3",
+            "exampleTranslation": "If it’s 500 dollars cheaper, I’ll sign right away."
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000008",
+      "slug": "intermediate-08-office-small-talk",
+      "summary": "Make small talk with a colleague and mix English into Cantonese like locals do.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 8,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "work-festivals-and-fixes",
+      "unitTitle": "Work, festivals and fixes",
+      "unitOrder": 3,
+      "lessonOrder": 1,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.75,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "work",
+        "lifeInHongKong"
+      ],
+      "content": {
+        "title": "Office small talk",
+        "scenarioKey": "roadmap_intermediate_08_office_small_talk",
+        "scenario": "Make small talk with a colleague and mix English into Cantonese like locals do.",
+        "minutes": 5,
+        "difficulty": 2.75,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_08_office_small_talk",
+            "situation": "You arrive at the office and see your colleague.",
+            "cantonese": "早晨！你食咗早餐未呀？",
+            "jyutping": "zou2 san4 nei5 sik6 zo2 zou2 caan1 mei6 aa3",
+            "translation": "Morning! Have you had breakfast?",
+            "chunks": [
+              {
+                "cantonese": "早晨",
+                "jyutping": "zou2 san4",
+                "english": "morning",
+                "note": "The standard greeting until about noon."
+              },
+              {
+                "cantonese": "你食咗早餐未呀",
+                "jyutping": "nei5 sik6 zo2 zou2 caan1 mei6 aa3",
+                "english": "have you had breakfast",
+                "note": "Asking about food is a caring hello."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "早晨",
+                "jyutping": "zou2 san4",
+                "english": "good morning"
+              },
+              {
+                "token": "你",
+                "jyutping": "nei5",
+                "english": "you"
+              },
+              {
+                "token": "食咗",
+                "jyutping": "sik6 zo2",
+                "english": "have eaten"
+              },
+              {
+                "token": "早餐",
+                "jyutping": "zou2 caan1",
+                "english": "breakfast"
+              },
+              {
+                "token": "未",
+                "jyutping": "mei6",
+                "english": "yet?"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Greet your colleague and ask about breakfast."
+          },
+          {
+            "topicKey": "roadmap_intermediate_08_office_small_talk",
+            "situation": "They ask you back. Your morning was chaos.",
+            "cantonese": "我今朝趕住返工，冇得食。",
+            "jyutping": "ngo5 gam1 ziu1 gon2 zyu6 faan1 gung1 mou5 dak1 sik6",
+            "translation": "I was rushing to work this morning, didn’t get to eat.",
+            "chunks": [
+              {
+                "cantonese": "我今朝趕住返工",
+                "jyutping": "ngo5 gam1 ziu1 gon2 zyu6 faan1 gung1",
+                "english": "I was rushing to work this morning",
+                "note": "返工 means go to work; 放工 means finish work."
+              },
+              {
+                "cantonese": "冇得食",
+                "jyutping": "mou5 dak1 sik6",
+                "english": "didn’t get to eat",
+                "note": "冇得 + verb: no chance to do it."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "今朝",
+                "jyutping": "gam1 ziu1",
+                "english": "this morning"
+              },
+              {
+                "token": "趕住",
+                "jyutping": "gon2 zyu6",
+                "english": "rushing"
+              },
+              {
+                "token": "返工",
+                "jyutping": "faan1 gung1",
+                "english": "go to work"
+              },
+              {
+                "token": "冇得食",
+                "jyutping": "mou5 dak1 sik6",
+                "english": "didn’t get to eat"
+              }
+            ],
+            "speakingPrompt": "Explain why you skipped breakfast."
+          },
+          {
+            "topicKey": "roadmap_intermediate_08_office_small_talk",
+            "situation": "Check the schedule.",
+            "cantonese": "陣間個meeting幾點開始？",
+            "jyutping": "zan6 gaan1 go3 meeting gei2 dim2 hoi1 ci2",
+            "translation": "What time does the meeting start later?",
+            "chunks": [
+              {
+                "cantonese": "陣間個meeting",
+                "jyutping": "zan6 gaan1 go3 meeting",
+                "english": "the meeting later",
+                "note": "Office Cantonese is full of English nouns."
+              },
+              {
+                "cantonese": "幾點開始",
+                "jyutping": "gei2 dim2 hoi1 ci2",
+                "english": "what time does it start",
+                "note": "幾點 asks the hour."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "陣間",
+                "jyutping": "zan6 gaan1",
+                "english": "later"
+              },
+              {
+                "token": "個",
+                "jyutping": "go3",
+                "english": "the (counter)"
+              },
+              {
+                "token": "meeting",
+                "jyutping": "meeting",
+                "english": "meeting"
+              },
+              {
+                "token": "幾點",
+                "jyutping": "gei2 dim2",
+                "english": "what time"
+              },
+              {
+                "token": "開始",
+                "jyutping": "hoi1 ci2",
+                "english": "start"
+              }
+            ],
+            "speakingPrompt": "Ask what time the meeting starts.",
+            "responseExercise": {
+              "promptCantonese": "陣間個meeting幾點開始？",
+              "promptJyutping": "zan6 gaan1 go3 meeting gei2 dim2 hoi1 ci2",
+              "promptTranslation": "What time does the meeting start later?",
+              "options": [
+                {
+                  "englishTranslation": "What time does the meeting end?"
+                },
+                {
+                  "englishTranslation": "Morning! Have you had breakfast?"
+                },
+                {
+                  "englishTranslation": "What time does the meeting start later?"
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_08_office_small_talk",
+            "situation": "You need a minute before chatting more.",
+            "cantonese": "我check下email先，等陣再傾。",
+            "jyutping": "ngo5 check haa5 email sin1 dang2 zan6 zoi3 king1",
+            "translation": "Let me check my email first, we’ll talk in a bit.",
+            "chunks": [
+              {
+                "cantonese": "我check下email先",
+                "jyutping": "ngo5 check haa5 email sin1",
+                "english": "let me check my email first",
+                "note": "先 at the end means first, before anything else."
+              },
+              {
+                "cantonese": "等陣再傾",
+                "jyutping": "dang2 zan6 zoi3 king1",
+                "english": "we’ll talk in a bit",
+                "note": "傾 means chat. 傾偈 is a good long chat."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "check下",
+                "jyutping": "check haa5",
+                "english": "have a quick check"
+              },
+              {
+                "token": "email",
+                "jyutping": "email",
+                "english": "email"
+              },
+              {
+                "token": "先",
+                "jyutping": "sin1",
+                "english": "first"
+              },
+              {
+                "token": "等陣",
+                "jyutping": "dang2 zan6",
+                "english": "in a bit"
+              },
+              {
+                "token": "再",
+                "jyutping": "zoi3",
+                "english": "then / again"
+              },
+              {
+                "token": "傾",
+                "jyutping": "king1",
+                "english": "chat"
+              }
+            ],
+            "speakingPrompt": "Excuse yourself to check email."
+          },
+          {
+            "topicKey": "roadmap_intermediate_08_office_small_talk",
+            "situation": "End of the day. Suggest unwinding together.",
+            "cantonese": "放工一齊去飲杯嘢啦！",
+            "jyutping": "fong3 gung1 jat1 cai4 heoi3 jam2 bui1 je5 laa1",
+            "translation": "Let’s grab a drink together after work!",
+            "chunks": [
+              {
+                "cantonese": "放工",
+                "jyutping": "fong3 gung1",
+                "english": "after work",
+                "note": "放工 is the best word of the day."
+              },
+              {
+                "cantonese": "一齊去飲杯嘢啦",
+                "jyutping": "jat1 cai4 heoi3 jam2 bui1 je5 laa1",
+                "english": "let’s grab a drink together",
+                "note": "飲杯嘢 can be tea, coffee or a beer."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "放工",
+                "jyutping": "fong3 gung1",
+                "english": "after work"
+              },
+              {
+                "token": "一齊",
+                "jyutping": "jat1 cai4",
+                "english": "together"
+              },
+              {
+                "token": "去",
+                "jyutping": "heoi3",
+                "english": "go"
+              },
+              {
+                "token": "飲杯嘢",
+                "jyutping": "jam2 bui1 je5",
+                "english": "grab a drink"
+              },
+              {
+                "token": "啦",
+                "jyutping": "laa1",
+                "english": "(let’s, suggestion)"
+              }
+            ],
+            "speakingPrompt": "Invite your colleague for a drink after work.",
+            "responseExercise": {
+              "promptCantonese": "放工一齊去飲杯嘢啦！",
+              "promptJyutping": "fong3 gung1 jat1 cai4 heoi3 jam2 bui1 je5 laa1",
+              "promptTranslation": "Let’s grab a drink together after work!",
+              "options": [
+                {
+                  "englishTranslation": "Let me check my email first, we’ll talk in a bit."
+                },
+                {
+                  "englishTranslation": "Let’s grab a drink together after work!"
+                },
+                {
+                  "englishTranslation": "Let’s have lunch together tomorrow!"
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "早晨",
+            "jyutping": "zou2 san4",
+            "english": "good morning",
+            "example": "早晨！你食咗早餐未呀？",
+            "exampleJyutping": "zou2 san4 nei5 sik6 zo2 zou2 caan1 mei6 aa3",
+            "exampleTranslation": "Morning! Have you had breakfast?"
+          },
+          {
+            "cantonese": "早餐",
+            "jyutping": "zou2 caan1",
+            "english": "breakfast",
+            "example": "早晨！你食咗早餐未呀？",
+            "exampleJyutping": "zou2 san4 nei5 sik6 zo2 zou2 caan1 mei6 aa3",
+            "exampleTranslation": "Morning! Have you had breakfast?"
+          },
+          {
+            "cantonese": "今朝",
+            "jyutping": "gam1 ziu1",
+            "english": "this morning",
+            "example": "我今朝趕住返工，冇得食。",
+            "exampleJyutping": "ngo5 gam1 ziu1 gon2 zyu6 faan1 gung1 mou5 dak1 sik6",
+            "exampleTranslation": "I was rushing to work this morning, didn’t get to eat."
+          },
+          {
+            "cantonese": "返工",
+            "jyutping": "faan1 gung1",
+            "english": "go to work",
+            "example": "我今朝趕住返工，冇得食。",
+            "exampleJyutping": "ngo5 gam1 ziu1 gon2 zyu6 faan1 gung1 mou5 dak1 sik6",
+            "exampleTranslation": "I was rushing to work this morning, didn’t get to eat."
+          },
+          {
+            "cantonese": "陣間",
+            "jyutping": "zan6 gaan1",
+            "english": "later",
+            "example": "陣間個meeting幾點開始？",
+            "exampleJyutping": "zan6 gaan1 go3 meeting gei2 dim2 hoi1 ci2",
+            "exampleTranslation": "What time does the meeting start later?"
+          },
+          {
+            "cantonese": "開始",
+            "jyutping": "hoi1 ci2",
+            "english": "start",
+            "example": "陣間個meeting幾點開始？",
+            "exampleJyutping": "zan6 gaan1 go3 meeting gei2 dim2 hoi1 ci2",
+            "exampleTranslation": "What time does the meeting start later?"
+          },
+          {
+            "cantonese": "先",
+            "jyutping": "sin1",
+            "english": "first",
+            "example": "我check下email先，等陣再傾。",
+            "exampleJyutping": "ngo5 check haa5 email sin1 dang2 zan6 zoi3 king1",
+            "exampleTranslation": "Let me check my email first, we’ll talk in a bit."
+          },
+          {
+            "cantonese": "傾",
+            "jyutping": "king1",
+            "english": "chat",
+            "example": "我check下email先，等陣再傾。",
+            "exampleJyutping": "ngo5 check haa5 email sin1 dang2 zan6 zoi3 king1",
+            "exampleTranslation": "Let me check my email first, we’ll talk in a bit."
+          },
+          {
+            "cantonese": "放工",
+            "jyutping": "fong3 gung1",
+            "english": "after work",
+            "example": "放工一齊去飲杯嘢啦！",
+            "exampleJyutping": "fong3 gung1 jat1 cai4 heoi3 jam2 bui1 je5 laa1",
+            "exampleTranslation": "Let’s grab a drink together after work!"
+          },
+          {
+            "cantonese": "飲杯嘢",
+            "jyutping": "jam2 bui1 je5",
+            "english": "grab a drink",
+            "example": "放工一齊去飲杯嘢啦！",
+            "exampleJyutping": "fong3 gung1 jat1 cai4 heoi3 jam2 bui1 je5 laa1",
+            "exampleTranslation": "Let’s grab a drink together after work!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000009",
+      "slug": "intermediate-09-lunar-new-year",
+      "summary": "Visit relatives for Lunar New Year: greetings, red packets and a lucky pun.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 9,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "work-festivals-and-fixes",
+      "unitTitle": "Work, festivals and fixes",
+      "unitOrder": 3,
+      "lessonOrder": 2,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.85,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "family",
+        "culture"
+      ],
+      "content": {
+        "title": "Lunar New Year",
+        "scenarioKey": "roadmap_intermediate_09_lunar_new_year",
+        "scenario": "Visit relatives for Lunar New Year: greetings, red packets and a lucky pun.",
+        "minutes": 5,
+        "difficulty": 2.85,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_09_lunar_new_year",
+            "situation": "You arrive at your auntie’s place for New Year.",
+            "cantonese": "恭喜發財，身體健康！",
+            "jyutping": "gung1 hei2 faat3 coi4 san1 tai2 gin6 hong1",
+            "translation": "Happy New Year, and good health!",
+            "chunks": [
+              {
+                "cantonese": "恭喜發財",
+                "jyutping": "gung1 hei2 faat3 coi4",
+                "english": "Happy New Year",
+                "note": "Literally may you get rich. Say it to everyone."
+              },
+              {
+                "cantonese": "身體健康",
+                "jyutping": "san1 tai2 gin6 hong1",
+                "english": "good health",
+                "note": "The perfect add-on for older relatives."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "恭喜發財",
+                "jyutping": "gung1 hei2 faat3 coi4",
+                "english": "Happy New Year (may you prosper)"
+              },
+              {
+                "token": "身體健康",
+                "jyutping": "san1 tai2 gin6 hong1",
+                "english": "good health"
+              }
+            ],
+            "speakingPrompt": "Greet your auntie for the New Year."
+          },
+          {
+            "topicKey": "roadmap_intermediate_09_lunar_new_year",
+            "situation": "Your auntie hands you a red packet.",
+            "cantonese": "多謝姑媽嘅利是！",
+            "jyutping": "do1 ze6 gu1 maa1 ge3 lai6 si6",
+            "translation": "Thanks for the red packet, Auntie!",
+            "chunks": [
+              {
+                "cantonese": "多謝姑媽",
+                "jyutping": "do1 ze6 gu1 maa1",
+                "english": "thank you, Auntie",
+                "note": "Use 多謝 for gifts, 唔該 for services."
+              },
+              {
+                "cantonese": "嘅利是",
+                "jyutping": "ge3 lai6 si6",
+                "english": "for the red packet",
+                "note": "Take it with both hands."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "多謝",
+                "jyutping": "do1 ze6",
+                "english": "thank you (for a gift)"
+              },
+              {
+                "token": "姑媽",
+                "jyutping": "gu1 maa1",
+                "english": "auntie (father’s older sister)"
+              },
+              {
+                "token": "嘅",
+                "jyutping": "ge3",
+                "english": "’s"
+              },
+              {
+                "token": "利是",
+                "jyutping": "lai6 si6",
+                "english": "red packet"
+              }
+            ],
+            "speakingPrompt": "Thank your auntie for the red packet."
+          },
+          {
+            "topicKey": "roadmap_intermediate_09_lunar_new_year",
+            "situation": "Your auntie teases you about getting married.",
+            "cantonese": "今年我都要派利是喇。",
+            "jyutping": "gam1 nin2 ngo5 dou1 jiu3 paai3 lai6 si6 laa3",
+            "translation": "This year I have to give out red packets too.",
+            "chunks": [
+              {
+                "cantonese": "今年我都要",
+                "jyutping": "gam1 nin2 ngo5 dou1 jiu3",
+                "english": "this year I also have to",
+                "note": "Once you’re married, you give instead of receive."
+              },
+              {
+                "cantonese": "派利是喇",
+                "jyutping": "paai3 lai6 si6 laa3",
+                "english": "give out red packets",
+                "note": "喇 marks the sad change of status."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "今年",
+                "jyutping": "gam1 nin2",
+                "english": "this year"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "都",
+                "jyutping": "dou1",
+                "english": "also"
+              },
+              {
+                "token": "要",
+                "jyutping": "jiu3",
+                "english": "have to"
+              },
+              {
+                "token": "派利是",
+                "jyutping": "paai3 lai6 si6",
+                "english": "give out red packets"
+              },
+              {
+                "token": "喇",
+                "jyutping": "laa3",
+                "english": "(now, a change)"
+              }
+            ],
+            "speakingPrompt": "Joke that you have to give red packets now.",
+            "responseExercise": {
+              "promptCantonese": "今年我都要派利是喇。",
+              "promptJyutping": "gam1 nin2 ngo5 dou1 jiu3 paai3 lai6 si6 laa3",
+              "promptTranslation": "This year I have to give out red packets too.",
+              "options": [
+                {
+                  "englishTranslation": "This year I have to give out red packets too."
+                },
+                {
+                  "englishTranslation": "Thanks for the red packet, Auntie!"
+                },
+                {
+                  "englishTranslation": "This year I can collect lots of red packets."
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_09_lunar_new_year",
+            "situation": "Tell your auntie your plans for the holiday.",
+            "cantonese": "初二我哋返婆婆屋企拜年。",
+            "jyutping": "co1 ji6 ngo5 dei6 faan1 po4 po2 uk1 kei2 baai3 nin4",
+            "translation": "On the second day, we’re visiting Grandma’s for New Year.",
+            "chunks": [
+              {
+                "cantonese": "初二我哋返婆婆屋企",
+                "jyutping": "co1 ji6 ngo5 dei6 faan1 po4 po2 uk1 kei2",
+                "english": "on day two we go back to Grandma’s home",
+                "note": "Day two is traditionally for visiting mum’s side."
+              },
+              {
+                "cantonese": "拜年",
+                "jyutping": "baai3 nin4",
+                "english": "for a New Year visit",
+                "note": "拜年 means visiting relatives with greetings."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "初二",
+                "jyutping": "co1 ji6",
+                "english": "the second day (of New Year)"
+              },
+              {
+                "token": "我哋",
+                "jyutping": "ngo5 dei6",
+                "english": "we / us"
+              },
+              {
+                "token": "返",
+                "jyutping": "faan1",
+                "english": "go back to"
+              },
+              {
+                "token": "婆婆",
+                "jyutping": "po4 po2",
+                "english": "grandma (mother’s mother)"
+              },
+              {
+                "token": "屋企",
+                "jyutping": "uk1 kei2",
+                "english": "home"
+              },
+              {
+                "token": "拜年",
+                "jyutping": "baai3 nin4",
+                "english": "pay a New Year visit"
+              }
+            ],
+            "speakingPrompt": "Say where you’ll visit on the second day."
+          },
+          {
+            "topicKey": "roadmap_intermediate_09_lunar_new_year",
+            "situation": "Offer your auntie some New Year cake with a lucky pun.",
+            "cantonese": "食多件年糕，步步高升！",
+            "jyutping": "sik6 do1 gin6 nin4 gou1 bou6 bou6 gou1 sing1",
+            "translation": "Have another piece of New Year cake, and keep rising higher!",
+            "chunks": [
+              {
+                "cantonese": "食多件年糕",
+                "jyutping": "sik6 do1 gin6 nin4 gou1",
+                "english": "have another piece of New Year cake",
+                "note": "糕 sounds like 高, high. That’s the joke."
+              },
+              {
+                "cantonese": "步步高升",
+                "jyutping": "bou6 bou6 gou1 sing1",
+                "english": "keep rising higher",
+                "note": "A wish for promotions and success."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "食多件",
+                "jyutping": "sik6 do1 gin6",
+                "english": "have another piece"
+              },
+              {
+                "token": "年糕",
+                "jyutping": "nin4 gou1",
+                "english": "New Year cake"
+              },
+              {
+                "token": "步步高升",
+                "jyutping": "bou6 bou6 gou1 sing1",
+                "english": "rise step by step"
+              }
+            ],
+            "speakingPrompt": "Offer New Year cake with the lucky wish.",
+            "responseExercise": {
+              "promptCantonese": "食多件年糕，步步高升！",
+              "promptJyutping": "sik6 do1 gin6 nin4 gou1 bou6 bou6 gou1 sing1",
+              "promptTranslation": "Have another piece of New Year cake, and keep rising higher!",
+              "options": [
+                {
+                  "englishTranslation": "On the second day, we’re visiting Grandma’s for New Year."
+                },
+                {
+                  "englishTranslation": "Happy New Year, and good health!"
+                },
+                {
+                  "englishTranslation": "Have another piece of New Year cake, and keep rising higher!"
+                }
+              ],
+              "correctOptionIndex": 2
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "恭喜發財",
+            "jyutping": "gung1 hei2 faat3 coi4",
+            "english": "Happy New Year (may you prosper)",
+            "example": "恭喜發財，身體健康！",
+            "exampleJyutping": "gung1 hei2 faat3 coi4 san1 tai2 gin6 hong1",
+            "exampleTranslation": "Happy New Year, and good health!"
+          },
+          {
+            "cantonese": "身體健康",
+            "jyutping": "san1 tai2 gin6 hong1",
+            "english": "good health",
+            "example": "恭喜發財，身體健康！",
+            "exampleJyutping": "gung1 hei2 faat3 coi4 san1 tai2 gin6 hong1",
+            "exampleTranslation": "Happy New Year, and good health!"
+          },
+          {
+            "cantonese": "姑媽",
+            "jyutping": "gu1 maa1",
+            "english": "auntie (father’s older sister)",
+            "example": "多謝姑媽嘅利是！",
+            "exampleJyutping": "do1 ze6 gu1 maa1 ge3 lai6 si6",
+            "exampleTranslation": "Thanks for the red packet, Auntie!"
+          },
+          {
+            "cantonese": "利是",
+            "jyutping": "lai6 si6",
+            "english": "red packet",
+            "example": "多謝姑媽嘅利是！",
+            "exampleJyutping": "do1 ze6 gu1 maa1 ge3 lai6 si6",
+            "exampleTranslation": "Thanks for the red packet, Auntie!"
+          },
+          {
+            "cantonese": "今年",
+            "jyutping": "gam1 nin2",
+            "english": "this year",
+            "example": "今年我都要派利是喇。",
+            "exampleJyutping": "gam1 nin2 ngo5 dou1 jiu3 paai3 lai6 si6 laa3",
+            "exampleTranslation": "This year I have to give out red packets too."
+          },
+          {
+            "cantonese": "派利是",
+            "jyutping": "paai3 lai6 si6",
+            "english": "give out red packets",
+            "example": "今年我都要派利是喇。",
+            "exampleJyutping": "gam1 nin2 ngo5 dou1 jiu3 paai3 lai6 si6 laa3",
+            "exampleTranslation": "This year I have to give out red packets too."
+          },
+          {
+            "cantonese": "屋企",
+            "jyutping": "uk1 kei2",
+            "english": "home",
+            "example": "初二我哋返婆婆屋企拜年。",
+            "exampleJyutping": "co1 ji6 ngo5 dei6 faan1 po4 po2 uk1 kei2 baai3 nin4",
+            "exampleTranslation": "On the second day, we’re visiting Grandma’s for New Year."
+          },
+          {
+            "cantonese": "拜年",
+            "jyutping": "baai3 nin4",
+            "english": "pay a New Year visit",
+            "example": "初二我哋返婆婆屋企拜年。",
+            "exampleJyutping": "co1 ji6 ngo5 dei6 faan1 po4 po2 uk1 kei2 baai3 nin4",
+            "exampleTranslation": "On the second day, we’re visiting Grandma’s for New Year."
+          },
+          {
+            "cantonese": "年糕",
+            "jyutping": "nin4 gou1",
+            "english": "New Year cake",
+            "example": "食多件年糕，步步高升！",
+            "exampleJyutping": "sik6 do1 gin6 nin4 gou1 bou6 bou6 gou1 sing1",
+            "exampleTranslation": "Have another piece of New Year cake, and keep rising higher!"
+          },
+          {
+            "cantonese": "步步高升",
+            "jyutping": "bou6 bou6 gou1 sing1",
+            "english": "rise step by step",
+            "example": "食多件年糕，步步高升！",
+            "exampleJyutping": "sik6 do1 gin6 nin4 gou1 bou6 bou6 gou1 sing1",
+            "exampleTranslation": "Have another piece of New Year cake, and keep rising higher!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "43000000-0000-4000-8102-000000000010",
+      "slug": "intermediate-10-something-went-wrong",
+      "summary": "Sort out a wrong order at a restaurant, politely but firmly.",
+      "level": "intermediate",
+      "estimatedMinutes": 5,
+      "sortOrder": 10,
+      "contentVersion": 1,
+      "roadmapVersion": "intermediate-cantonese-v1",
+      "unitSlug": "work-festivals-and-fixes",
+      "unitTitle": "Work, festivals and fixes",
+      "unitOrder": 3,
+      "lessonOrder": 3,
+      "schemaVersion": 1,
+      "promptVersion": 1,
+      "difficulty": 2.9,
+      "contentSource": "authored_roadmap",
+      "reviewStatus": "native_speaker_review_required",
+      "goalTags": [
+        "travel",
+        "lifeInHongKong"
+      ],
+      "content": {
+        "title": "Something went wrong",
+        "scenarioKey": "roadmap_intermediate_10_something_went_wrong",
+        "scenario": "Sort out a wrong order at a restaurant, politely but firmly.",
+        "minutes": 5,
+        "difficulty": 2.9,
+        "rounds": [
+          {
+            "topicKey": "roadmap_intermediate_10_something_went_wrong",
+            "situation": "The waiter puts down a dish you didn’t order.",
+            "cantonese": "唔好意思，我冇叫呢碟嘢喎。",
+            "jyutping": "m4 hou2 ji3 si1 ngo5 mou5 giu3 ni1 dip6 je5 wo3",
+            "translation": "Sorry, I didn’t order this dish.",
+            "chunks": [
+              {
+                "cantonese": "唔好意思",
+                "jyutping": "m4 hou2 ji3 si1",
+                "english": "sorry",
+                "note": "A soft sorry to open a complaint politely."
+              },
+              {
+                "cantonese": "我冇叫呢碟嘢喎",
+                "jyutping": "ngo5 mou5 giu3 ni1 dip6 je5 wo3",
+                "english": "I didn’t order this dish",
+                "note": "喎 gently points out something they missed."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "唔好意思",
+                "jyutping": "m4 hou2 ji3 si1",
+                "english": "sorry / excuse me"
+              },
+              {
+                "token": "我",
+                "jyutping": "ngo5",
+                "english": "I / me"
+              },
+              {
+                "token": "冇叫",
+                "jyutping": "mou5 giu3",
+                "english": "didn’t order"
+              },
+              {
+                "token": "呢碟嘢",
+                "jyutping": "ni1 dip6 je5",
+                "english": "this dish"
+              },
+              {
+                "token": "喎",
+                "jyutping": "wo3",
+                "english": "(pointing something out)"
+              }
+            ],
+            "speakingPrompt": "Politely say this isn’t your dish."
+          },
+          {
+            "topicKey": "roadmap_intermediate_10_something_went_wrong",
+            "situation": "Say what you actually ordered.",
+            "cantonese": "我叫嘅係乾炒牛河。",
+            "jyutping": "ngo5 giu3 ge3 hai6 gon1 caau2 ngau4 ho2",
+            "translation": "What I ordered was beef chow fun.",
+            "chunks": [
+              {
+                "cantonese": "我叫嘅",
+                "jyutping": "ngo5 giu3 ge3",
+                "english": "what I ordered",
+                "note": "Verb + 嘅 makes the thing I ordered."
+              },
+              {
+                "cantonese": "係乾炒牛河",
+                "jyutping": "hai6 gon1 caau2 ngau4 ho2",
+                "english": "was beef chow fun",
+                "note": "A Cantonese classic. Worth fighting for."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "我叫嘅",
+                "jyutping": "ngo5 giu3 ge3",
+                "english": "what I ordered"
+              },
+              {
+                "token": "係",
+                "jyutping": "hai6",
+                "english": "is / was"
+              },
+              {
+                "token": "乾炒牛河",
+                "jyutping": "gon1 caau2 ngau4 ho2",
+                "english": "dry-fried beef rice noodles"
+              }
+            ],
+            "speakingPrompt": "Tell the waiter what you ordered."
+          },
+          {
+            "topicKey": "roadmap_intermediate_10_something_went_wrong",
+            "situation": "Ask if there’s been a mix-up.",
+            "cantonese": "係咪搞錯咗呀？",
+            "jyutping": "hai6 mai6 gaau2 co3 zo2 aa3",
+            "translation": "Has there been a mix-up?",
+            "chunks": [
+              {
+                "cantonese": "係咪",
+                "jyutping": "hai6 mai6",
+                "english": "could it be",
+                "note": "係咪 makes it a question without blaming anyone."
+              },
+              {
+                "cantonese": "搞錯咗呀",
+                "jyutping": "gaau2 co3 zo2 aa3",
+                "english": "a mix-up",
+                "note": "搞錯 is a mistake. Very handy."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "係咪",
+                "jyutping": "hai6 mai6",
+                "english": "is it that…?"
+              },
+              {
+                "token": "搞錯咗",
+                "jyutping": "gaau2 co3 zo2",
+                "english": "got it wrong"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Ask whether there’s been a mix-up.",
+            "responseExercise": {
+              "promptCantonese": "係咪搞錯咗呀？",
+              "promptJyutping": "hai6 mai6 gaau2 co3 zo2 aa3",
+              "promptTranslation": "Has there been a mix-up?",
+              "options": [
+                {
+                  "englishTranslation": "Has the food arrived yet?"
+                },
+                {
+                  "englishTranslation": "Has there been a mix-up?"
+                },
+                {
+                  "englishTranslation": "Sorry, I didn’t order this dish."
+                }
+              ],
+              "correctOptionIndex": 1
+            }
+          },
+          {
+            "topicKey": "roadmap_intermediate_10_something_went_wrong",
+            "situation": "Twenty minutes later, still no noodles.",
+            "cantonese": "等咗廿分鐘，可唔可以快啲呀？",
+            "jyutping": "dang2 zo2 jaa6 fan1 zung1 ho2 m4 ho2 ji5 faai3 di1 aa3",
+            "translation": "We’ve waited twenty minutes, could it be a bit faster?",
+            "chunks": [
+              {
+                "cantonese": "等咗廿分鐘",
+                "jyutping": "dang2 zo2 jaa6 fan1 zung1",
+                "english": "we’ve waited twenty minutes",
+                "note": "廿 is the spoken way to say twenty."
+              },
+              {
+                "cantonese": "可唔可以快啲呀",
+                "jyutping": "ho2 m4 ho2 ji5 faai3 di1 aa3",
+                "english": "could it be a bit faster",
+                "note": "Firm but polite. 呀 keeps it friendly."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "等咗",
+                "jyutping": "dang2 zo2",
+                "english": "have waited"
+              },
+              {
+                "token": "廿分鐘",
+                "jyutping": "jaa6 fan1 zung1",
+                "english": "twenty minutes"
+              },
+              {
+                "token": "可唔可以",
+                "jyutping": "ho2 m4 ho2 ji5",
+                "english": "could…?"
+              },
+              {
+                "token": "快啲",
+                "jyutping": "faai3 di1",
+                "english": "a bit faster"
+              },
+              {
+                "token": "呀",
+                "jyutping": "aa3",
+                "english": "(softens the question)"
+              }
+            ],
+            "speakingPrompt": "Politely ask them to hurry."
+          },
+          {
+            "topicKey": "roadmap_intermediate_10_something_went_wrong",
+            "situation": "The right dish finally arrives with an apology.",
+            "cantonese": "唔緊要，唔該晒！",
+            "jyutping": "m4 gan2 jiu3 m4 goi1 saai3",
+            "translation": "No worries, thanks so much!",
+            "chunks": [
+              {
+                "cantonese": "唔緊要",
+                "jyutping": "m4 gan2 jiu3",
+                "english": "no worries",
+                "note": "The kindest way to accept an apology."
+              },
+              {
+                "cantonese": "唔該晒",
+                "jyutping": "m4 goi1 saai3",
+                "english": "thanks so much",
+                "note": "晒 makes 唔該 extra warm."
+              }
+            ],
+            "wordGlosses": [
+              {
+                "token": "唔緊要",
+                "jyutping": "m4 gan2 jiu3",
+                "english": "no worries"
+              },
+              {
+                "token": "唔該晒",
+                "jyutping": "m4 goi1 saai3",
+                "english": "thanks so much"
+              }
+            ],
+            "speakingPrompt": "Accept the apology and thank the waiter.",
+            "responseExercise": {
+              "promptCantonese": "唔緊要，唔該晒！",
+              "promptJyutping": "m4 gan2 jiu3 m4 goi1 saai3",
+              "promptTranslation": "No worries, thanks so much!",
+              "options": [
+                {
+                  "englishTranslation": "No worries, thanks so much!"
+                },
+                {
+                  "englishTranslation": "We’ve waited twenty minutes, could it be a bit faster?"
+                },
+                {
+                  "englishTranslation": "Never mind, I’ll eat somewhere else!"
+                }
+              ],
+              "correctOptionIndex": 0
+            }
+          }
+        ],
+        "vocabulary": [
+          {
+            "cantonese": "唔好意思",
+            "jyutping": "m4 hou2 ji3 si1",
+            "english": "sorry / excuse me",
+            "example": "唔好意思，我冇叫呢碟嘢喎。",
+            "exampleJyutping": "m4 hou2 ji3 si1 ngo5 mou5 giu3 ni1 dip6 je5 wo3",
+            "exampleTranslation": "Sorry, I didn’t order this dish."
+          },
+          {
+            "cantonese": "呢碟嘢",
+            "jyutping": "ni1 dip6 je5",
+            "english": "this dish",
+            "example": "唔好意思，我冇叫呢碟嘢喎。",
+            "exampleJyutping": "m4 hou2 ji3 si1 ngo5 mou5 giu3 ni1 dip6 je5 wo3",
+            "exampleTranslation": "Sorry, I didn’t order this dish."
+          },
+          {
+            "cantonese": "乾炒牛河",
+            "jyutping": "gon1 caau2 ngau4 ho2",
+            "english": "beef chow fun",
+            "example": "我叫嘅係乾炒牛河。",
+            "exampleJyutping": "ngo5 giu3 ge3 hai6 gon1 caau2 ngau4 ho2",
+            "exampleTranslation": "What I ordered was beef chow fun."
+          },
+          {
+            "cantonese": "係",
+            "jyutping": "hai6",
+            "english": "is / was",
+            "example": "我叫嘅係乾炒牛河。",
+            "exampleJyutping": "ngo5 giu3 ge3 hai6 gon1 caau2 ngau4 ho2",
+            "exampleTranslation": "What I ordered was beef chow fun."
+          },
+          {
+            "cantonese": "搞錯",
+            "jyutping": "gaau2 co3",
+            "english": "make a mistake",
+            "example": "係咪搞錯咗呀？",
+            "exampleJyutping": "hai6 mai6 gaau2 co3 zo2 aa3",
+            "exampleTranslation": "Has there been a mix-up?"
+          },
+          {
+            "cantonese": "係咪",
+            "jyutping": "hai6 mai6",
+            "english": "is it that…?",
+            "example": "係咪搞錯咗呀？",
+            "exampleJyutping": "hai6 mai6 gaau2 co3 zo2 aa3",
+            "exampleTranslation": "Has there been a mix-up?"
+          },
+          {
+            "cantonese": "廿分鐘",
+            "jyutping": "jaa6 fan1 zung1",
+            "english": "twenty minutes",
+            "example": "等咗廿分鐘，可唔可以快啲呀？",
+            "exampleJyutping": "dang2 zo2 jaa6 fan1 zung1 ho2 m4 ho2 ji5 faai3 di1 aa3",
+            "exampleTranslation": "We’ve waited twenty minutes, could it be a bit faster?"
+          },
+          {
+            "cantonese": "快啲",
+            "jyutping": "faai3 di1",
+            "english": "a bit faster",
+            "example": "等咗廿分鐘，可唔可以快啲呀？",
+            "exampleJyutping": "dang2 zo2 jaa6 fan1 zung1 ho2 m4 ho2 ji5 faai3 di1 aa3",
+            "exampleTranslation": "We’ve waited twenty minutes, could it be a bit faster?"
+          },
+          {
+            "cantonese": "唔緊要",
+            "jyutping": "m4 gan2 jiu3",
+            "english": "no worries",
+            "example": "唔緊要，唔該晒！",
+            "exampleJyutping": "m4 gan2 jiu3 m4 goi1 saai3",
+            "exampleTranslation": "No worries, thanks so much!"
+          },
+          {
+            "cantonese": "唔該晒",
+            "jyutping": "m4 goi1 saai3",
+            "english": "thanks so much",
+            "example": "唔緊要，唔該晒！",
+            "exampleJyutping": "m4 gan2 jiu3 m4 goi1 saai3",
+            "exampleTranslation": "No worries, thanks so much!"
+          }
+        ]
+      }
+    }
+  ]
+}
