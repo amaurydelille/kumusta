@@ -1,0 +1,8 @@
+#include "Base.xcconfig"
+#include "Secrets.xcconfig"
+#include "../Pods/Target Support Files/Pods-Kumusta/Pods-Kumusta.debug.xcconfig"
+OTHER_LDFLAGS = $(inherited) -ObjC -lc++
+SUPABASE_PROJECT_URL = https:/$()/vpitjvtfzpqfnqgzcpla.supabase.co
+SUPABASE_PUBLISHABLE_KEY = sb_publishable_roavy0TdUeTkmgRFUpvn8A_2wSoJRFT
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+OTHER_SWIFT_FLAGS = $(inherited) -D DEBUG

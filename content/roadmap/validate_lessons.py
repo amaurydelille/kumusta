@@ -1,4 +1,4 @@
-"""Validate NeiHou Cantonese roadmap lesson files.
+"""Validate Kumusta Cantonese roadmap lesson files.
 
 Usage: venv/bin/python validate_lessons.py FILE [FILE ...]
 Errors are structural and must be fixed. Warnings are Jyutping readings that

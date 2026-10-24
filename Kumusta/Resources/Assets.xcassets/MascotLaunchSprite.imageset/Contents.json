@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "mascot-launch-sprite@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "codex",
+    "version" : 1
+  }
+}

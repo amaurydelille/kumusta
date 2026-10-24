@@ -1,0 +1,133 @@
+{
+  "id": "onboarding-familiar-v1",
+  "version": 1,
+  "level": "familiar",
+  "mode": "onboarding",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0102",
+  "replayTitle": "Order a coffee like a local",
+  "estimatedMinutes": 2,
+  "intro": {
+    "hook": "Chào em, em uống gì?",
+    "hookTranslation": "Hi! What would you like to drink?",
+    "title": "From words to real replies",
+    "subtitle": "In about 2 minutes, you’ll be able to:",
+    "goals": [
+      { "vietnamese": { "southern": "Cho em một ly cà phê sữa đá", "northern": "Cho em một cốc nâu đá" }, "meaning": "Order an iced milk coffee" },
+      { "vietnamese": { "southern": "Ít đường nha", "northern": "Ít đường nhé" }, "meaning": "Ask for less sugar" },
+      { "vietnamese": { "southern": "Hai lăm ngàn", "northern": "Hai lăm nghìn" }, "meaning": "Understand the price" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-em",
+      "symbol": "person.2.fill",
+      "eyebrow": "WHO’S WHO",
+      "title": "At the counter, you are “em”",
+      "body": "Vietnamese uses family words for “I” and “you”. With a vendor a little older than you, you call yourself em, and you call her chị.",
+      "samples": [
+        { "text": "em", "meaning": "me (younger)", "contour": "level" },
+        { "text": "chị", "meaning": "you (older woman)", "contour": "heavy" }
+      ],
+      "footnote": "For an older man, use anh instead of chị. Getting this right instantly sounds friendly and polite."
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-uong-gi",
+      "audio": "Em uống gì?",
+      "answer": "What will you drink?",
+      "options": ["What will you drink?", "Where are you going?", "How much is it?"]
+    },
+    {
+      "kind": "newPhrase",
+      "id": "new-order",
+      "vietnamese": { "southern": "Cho em một ly cà phê sữa đá", "northern": "Cho em một cốc nâu đá" },
+      "translation": "One iced milk coffee, please",
+      "chunks": [
+        { "vietnamese": "cho em", "meaning": "give me" },
+        { "vietnamese": { "southern": "một ly", "northern": "một cốc" }, "meaning": "one glass" },
+        { "vietnamese": { "southern": "cà phê sữa đá", "northern": "nâu đá" }, "meaning": "iced milk coffee" }
+      ],
+      "tip": { "southern": "In the South, coffee with condensed milk over ice is cà phê sữa đá, and a glass is a ly.", "northern": "In Hanoi, iced milk coffee is simply nâu đá (“brown, iced”), and a glass is a cốc." }
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-price",
+      "prompt": "How much is it?",
+      "audio": { "southern": "Của em hai lăm ngàn.", "northern": "Của em hai lăm nghìn." },
+      "answer": "25.000đ",
+      "options": ["25.000đ", "35.000đ", "52.000đ"],
+      "note": "After twenty, five becomes lăm: hai mươi lăm, shortened to hai lăm."
+    },
+    {
+      "kind": "build",
+      "id": "build-sugar",
+      "english": "Less sugar, please.",
+      "answer": [
+        { "text": "Ít", "gloss": "a little" },
+        { "text": "đường", "gloss": "sugar" },
+        { "text": { "southern": "nha", "northern": "nhé" }, "gloss": "okay?" }
+      ],
+      "distractors": [
+        { "text": "nhiều", "gloss": "a lot" },
+        { "text": "sữa", "gloss": "milk" }
+      ]
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "BÉ TRÂU RUNS THE CAFÉ",
+      "title": "Order your coffee",
+      "turns": [
+        {
+          "buddy": "Chào em, em uống gì?",
+          "buddyTranslation": "Hi! What would you like?",
+          "reply": { "southern": "Cho em một ly cà phê sữa đá.", "northern": "Cho em một cốc nâu đá." },
+          "replyTranslation": "One iced milk coffee, please.",
+          "target": { "southern": "Cho em một ly cà phê sữa đá", "northern": "Cho em một cốc nâu đá" },
+          "accepted": [
+            { "southern": "Cho em ly cà phê sữa đá", "northern": "Cho em cốc nâu đá" }
+          ]
+        },
+        {
+          "buddy": "Ít đường hay nhiều đường?",
+          "buddyTranslation": "Less sugar or more sugar?",
+          "reply": { "southern": "Ít đường nha.", "northern": "Ít đường nhé." },
+          "replyTranslation": "Less sugar, please.",
+          "target": { "southern": "Ít đường nha", "northern": "Ít đường nhé" },
+          "accepted": [
+            { "southern": "Ít đường nhé", "northern": "Ít đường nha" }
+          ]
+        },
+        {
+          "buddy": { "southern": "Của em hai lăm ngàn nha.", "northern": "Của em hai lăm nghìn nhé." },
+          "buddyTranslation": "That’s 25,000 dong.",
+          "reply": { "southern": "Dạ, em cảm ơn chị.", "northern": "Vâng, em cảm ơn chị." },
+          "replyTranslation": "Thank you!",
+          "target": "Em cảm ơn chị",
+          "accepted": ["Cảm ơn chị", "Em cám ơn chị", "Cám ơn chị"]
+        }
+      ],
+      "closing": {
+        "text": { "southern": "Có liền nha em!", "northern": "Có ngay nhé em!" },
+        "translation": "Coming right up!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "Coffee ordered!",
+    "subtitle": "You ordered, chose your sugar, and understood the price.",
+    "phrases": [
+      { "vietnamese": { "southern": "Cho em một ly cà phê sữa đá", "northern": "Cho em một cốc nâu đá" }, "meaning": "One iced milk coffee, please" },
+      { "vietnamese": { "southern": "Ít đường nha", "northern": "Ít đường nhé" }, "meaning": "Less sugar, please" },
+      { "vietnamese": "Em cảm ơn chị", "meaning": "Thank you" }
+    ],
+    "words": [
+      { "vietnamese": { "southern": "ly", "northern": "cốc" }, "meaning": "glass" },
+      { "vietnamese": "đường", "meaning": "sugar" },
+      { "vietnamese": "ít", "meaning": "a little" },
+      { "vietnamese": "nhiều", "meaning": "a lot" },
+      { "vietnamese": "lăm", "meaning": "five (after twenty and up)" }
+    ]
+  }
+}

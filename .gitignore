@@ -1,0 +1,26 @@
+# Secrets — never commit
+Config/Secrets.xcconfig
+.env
+.env.*
+!.env.example
+supabase/.env
+supabase/.env.local
+*.p8
+
+# Generated / local build output
+build/
+DerivedData/
+Pods/
+*.xcuserstate
+xcuserdata/
+.build/
+.DS_Store
+supabase/.temp/
+supabase/.branches/
+
+# Website
+website/node_modules/
+website/.next/
+website/dist/
+website/.vinext/
+website/.wrangler/

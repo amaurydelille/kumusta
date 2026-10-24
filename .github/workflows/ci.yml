@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  backend:
+    name: Edge Functions and contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno fmt --check supabase/functions
+      - run: deno lint supabase/functions
+      - run: deno check supabase/functions/*/index.ts
+      - run: deno test --allow-env --allow-read supabase/functions
+      - run: python3 scripts/check_analytics_catalog.py
+      - run: python3 scripts/check-app-strings.py
+
+  ios:
+    name: iOS build and unit tests
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Project must match project.yml
+        run: |
+          xcodegen generate
+          git diff --exit-code -- kumusta.xcodeproj
+      - name: Client config
+        run: cp Config/Secrets.xcconfig.example Config/Secrets.xcconfig
+      - run: pod install
+      - name: Unit tests
+        run: |
+          xcodebuild -workspace kumusta.xcworkspace -scheme Kumusta -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+            -only-testing:KumustaTests test

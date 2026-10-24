@@ -1,0 +1,7 @@
+#include "Base.xcconfig"
+#include "Secrets.xcconfig"
+#include "../Pods/Target Support Files/Pods-Kumusta/Pods-Kumusta.release.xcconfig"
+OTHER_LDFLAGS = $(inherited) -ObjC -lc++
+ENABLE_TESTABILITY = NO
+SWIFT_COMPILATION_MODE = wholemodule
+VALIDATE_PRODUCT = YES

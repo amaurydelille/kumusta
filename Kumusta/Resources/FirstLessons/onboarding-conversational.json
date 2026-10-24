@@ -1,0 +1,141 @@
+{
+  "id": "onboarding-conversational-v1",
+  "version": 1,
+  "level": "conversational",
+  "mode": "onboarding",
+  "sourceID": "6F1C2A0E-4B7D-4E59-9A1F-0F1E57EB0103",
+  "replayTitle": "Make plans like a local",
+  "estimatedMinutes": 2,
+  "intro": {
+    "hook": { "southern": "Ê, tối nay rảnh hông?", "northern": "Này, tối nay cậu rảnh không?" },
+    "hookTranslation": "Hey, are you free tonight?",
+    "title": "Sound natural, not textbook",
+    "subtitle": "In about 2 minutes, you’ll learn to:",
+    "goals": [
+      { "vietnamese": { "southern": "nha · nè · vậy", "northern": "nhé · này · thế" }, "meaning": "Use the little words natives add" },
+      { "vietnamese": "Chắc ở nhà nghỉ thôi.", "meaning": "Answer like a friend, not a textbook" },
+      { "vietnamese": "Đi chứ! Mấy giờ?", "meaning": "Make plans on the fly" }
+    ]
+  },
+  "steps": [
+    {
+      "kind": "teach",
+      "id": "teach-particles",
+      "symbol": "text.bubble.fill",
+      "eyebrow": "THE LITTLE WORDS",
+      "title": "Tiny endings, big difference",
+      "body": "Natives soften and color sentences with tiny words at the end. Textbooks skip them, which is why textbook Vietnamese sounds stiff.",
+      "samples": [
+        { "text": { "southern": "nha", "northern": "nhé" }, "meaning": "okay? (soft)", "contour": { "southern": "level", "northern": "rising" } },
+        { "text": { "southern": "nè", "northern": "này" }, "meaning": "hey / here", "contour": "falling" }
+      ],
+      "footnote": { "southern": "Vậy works like “so?”: Sao vậy? means “What’s up?”. And hông is the casual không at the end of a question.", "northern": "Thế works like “so?”: Sao thế? means “What’s up?”" }
+    },
+    {
+      "kind": "meaningPick",
+      "id": "meaning-ranh",
+      "prompt": "What does your friend mean?",
+      "audio": { "southern": "Rảnh nè, sao vậy?", "northern": "Rảnh, sao thế?" },
+      "answer": "I’m free, why?",
+      "options": ["I’m free, why?", "I’m busy tonight.", "Where are we going?"],
+      "note": { "southern": "Nè and vậy make it casual and warm.", "northern": "Sao thế? is the everyday “why?” between friends." }
+    },
+    {
+      "kind": "naturalPick",
+      "id": "natural-weekend",
+      "prompt": "Which reply sounds most natural?",
+      "context": "Cuối tuần này làm gì?",
+      "contextTranslation": "What are you doing this weekend?",
+      "options": [
+        {
+          "text": "Tôi sẽ ở nhà và nghỉ ngơi.",
+          "translation": "I will stay at home and rest.",
+          "verdict": "Textbook",
+          "explanation": "Correct, but stiff with a friend: tôi and sẽ sound like a form letter."
+        },
+        {
+          "text": "Chắc ở nhà nghỉ thôi.",
+          "translation": "Probably just resting at home.",
+          "verdict": "Natural",
+          "explanation": "Chắc (probably) and thôi (just) make it relaxed. This is how friends answer.",
+          "isBest": true
+        },
+        {
+          "text": "Ở nhà.",
+          "translation": "At home.",
+          "verdict": "Too short",
+          "explanation": "Fine grammar, but it sounds like you don’t want to talk."
+        }
+      ]
+    },
+    {
+      "kind": "speak",
+      "id": "speak-natural",
+      "title": "Say it like a local",
+      "display": "Chắc ở nhà nghỉ thôi.",
+      "translation": "Probably just resting at home.",
+      "target": "Chắc ở nhà nghỉ thôi"
+    },
+    {
+      "kind": "build",
+      "id": "build-di-chu",
+      "english": "Sure! What time?",
+      "answer": [
+        { "text": "Đi", "gloss": "go" },
+        { "text": "chứ", "gloss": "of course" },
+        { "text": "Mấy", "gloss": "how many" },
+        { "text": "giờ", "gloss": "hours" }
+      ],
+      "distractors": [
+        { "text": "không", "gloss": "no" },
+        { "text": "đâu", "gloss": "where" }
+      ]
+    },
+    {
+      "kind": "conversation",
+      "id": "conversation",
+      "eyebrow": "MAKING PLANS",
+      "title": "Text your friend back, out loud",
+      "turns": [
+        {
+          "buddy": { "southern": "Ê, tối nay rảnh hông?", "northern": "Này, tối nay cậu rảnh không?" },
+          "buddyTranslation": "Hey, are you free tonight?",
+          "reply": { "southern": "Rảnh nè, sao vậy?", "northern": "Rảnh, sao thế?" },
+          "replyTranslation": "I’m free, why?",
+          "target": { "southern": "Rảnh nè sao vậy", "northern": "Rảnh sao thế" },
+          "accepted": [
+            { "southern": "Rảnh sao vậy", "northern": "Rảnh này sao thế" },
+            { "southern": "Rảnh nè sao thế", "northern": "Rảnh sao vậy" }
+          ]
+        },
+        {
+          "buddy": { "southern": "Đi ăn lẩu hông?", "northern": "Đi ăn lẩu không?" },
+          "buddyTranslation": "Want to go eat hotpot?",
+          "reply": "Đi chứ! Mấy giờ?",
+          "replyTranslation": "Sure! What time?",
+          "target": "Đi chứ mấy giờ"
+        }
+      ],
+      "closing": {
+        "text": { "southern": "Bảy giờ nha. Gặp ở quán quen!", "northern": "Bảy giờ nhé. Gặp ở quán quen!" },
+        "translation": "Seven o’clock. See you at our usual spot!"
+      }
+    }
+  ],
+  "completion": {
+    "title": "That’s how friends talk!",
+    "subtitle": "You picked the natural reply and made plans at native speed.",
+    "phrases": [
+      { "vietnamese": "Chắc ở nhà nghỉ thôi.", "meaning": "Probably just resting at home." },
+      { "vietnamese": { "southern": "Rảnh nè, sao vậy?", "northern": "Rảnh, sao thế?" }, "meaning": "I’m free, why?" },
+      { "vietnamese": "Đi chứ! Mấy giờ?", "meaning": "Sure! What time?" }
+    ],
+    "words": [
+      { "vietnamese": "chắc", "meaning": "probably" },
+      { "vietnamese": "thôi", "meaning": "just / that’s all" },
+      { "vietnamese": "chứ", "meaning": "of course" },
+      { "vietnamese": "mấy giờ", "meaning": "what time" },
+      { "vietnamese": { "southern": "nha", "northern": "nhé" }, "meaning": "okay? (soft ending)" }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+project_id = "kumusta"
+
+[functions.kumusta-live-pipeline]
+verify_jwt = false
+
+# Each function owns authentication at the handler boundary. The provider
+# functions validate the refreshed Supabase bearer through Auth and then check
+# the entitlement mirror plus atomic quota RPC. The RevenueCat webhook uses its
+# own authorization and optional raw-body HMAC verification.
+[functions.kumusta-elevenlabs-tts]
+verify_jwt = false
+
+[functions.kumusta-elevenlabs-stt]
+verify_jwt = false
+
+[functions.kumusta-elevenlabs-stt-token]
+verify_jwt = false
+
+[functions.kumusta-lessons]
+verify_jwt = false
+
+[functions.kumusta-revenuecat-webhook]
+verify_jwt = false
+
+[functions.kumusta-email-worker]
+verify_jwt = false
+
+[functions.kumusta-revenuecat-webhook-admin]
+verify_jwt = false
+
+# Destructive account operations retain the gateway JWT check and repeat
+# registered-user validation inside the handler.
+[functions.kumusta-account-data]
+verify_jwt = true
+
+# XP awards authenticate inside the handler, then use a service-role-only
+# database function so clients can never submit arbitrary XP amounts.
+[functions.kumusta-award-xp]
+verify_jwt = false
+
+# Operations-only: callable with the service-role credential.
+[functions.kumusta-curriculum-admin]
+verify_jwt = true

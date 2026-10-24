@@ -1,7 +1,7 @@
 # Cantonese roadmap v1 (authored lessons)
 
 30 hand-authored lessons, 10 per level, ready to integrate into the app and the
-`neihou_lessons` catalog. Status: **`native_speaker_review_required`** on every
+`kumusta_lessons` catalog. Status: **`native_speaker_review_required`** on every
 lesson — do not publish before a native Hong Kong speaker signs off.
 
 | File | Level | Difficulty | Units |
@@ -17,7 +17,7 @@ Three levels: beginner / intermediate / advanced (owner decision,
 
 ## Shape
 
-Same as VietBuddy's bundled roadmap seeds (`NeiHou/Resources/Seed/*-vietnamese-v1.json`,
+Same as VietBuddy's bundled roadmap seeds (`Kumusta/Resources/Seed/*-vietnamese-v1.json`,
 camelCase), with these changes:
 
 - No `accent` field (CLAUDE.md: just Cantonese).

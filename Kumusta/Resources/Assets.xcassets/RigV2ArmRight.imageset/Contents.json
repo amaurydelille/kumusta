@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "RigV2ArmRight.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

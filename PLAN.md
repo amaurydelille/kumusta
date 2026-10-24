@@ -1,4 +1,4 @@
-# NeiHou — Cantonese clone of VietBuddy: execution plan
+# Kumusta — Cantonese clone of VietBuddy: execution plan
 
 _Written 2026-10-24 from an analysis of `../viet-buddy` (iOS app, Supabase backend, content pipeline, website, docs). Implementation has not started._
 
@@ -30,14 +30,14 @@ About 70% of the code does not depend on the language. Six areas are deeply Viet
 1. **The written form.** There are no spaces between words, the script is Han characters, and learners need a romanization (Jyutping). Every validator, tokenizer, gloss rule, tile bank and matcher that does `split(/\s+/)` or checks diacritics breaks.
 2. **Tones.** Cantonese has 6 tones (9 with checked tones), not 6 diacritic tones. Tone look-alike distractors, the teaching contours, pronunciation coaching and accepted "sound variants" (懶音, lazy sounds) all need new rules.
 3. **Spoken vs written.** Lessons must be written colloquial Cantonese (佢 / 唔 / 嘅 / 咗 / 喺 / 冇), never Standard Written Chinese (他 / 不 / 的 / 了 / 在 / 沒有), and never Simplified characters.
-4. **The accent axis.** Southern/Northern goes away **completely**. NeiHou teaches one Cantonese (Hong Kong). No accent is offered or mentioned anywhere: not in onboarding, Profile, lessons, live practice, or the API (owner decision, 2026-10-24).
+4. **The accent axis.** Southern/Northern goes away **completely**. Kumusta teaches one Cantonese (Hong Kong). No accent is offered or mentioned anywhere: not in onboarding, Profile, lessons, live practice, or the API (owner decision, 2026-10-24).
 5. **Speech providers.** Cantonese STT and TTS quality varies far more between vendors than Vietnamese. A provider bake-off is the first real task.
 6. **Content.** All curricula, first lessons, the First Steps basics course, the flashcard seed, prompts and personalities are rewritten.
 
 **Strategy:**
 - Fork VietBuddy into this repo.
 - Strip the dead code, the dialogue feature, Android, the legacy live paths and Mistral.
-- Rename `vietbuddy` → `neihou` everywhere.
+- Rename `vietbuddy` → `kumusta` everywhere.
 - Put the language behind a small `Cantonese` domain layer on the client and the server.
 - Rebuild the content pipeline for Cantonese.
 - Squash the 67 migrations into one clean baseline in a new Supabase project.
@@ -48,12 +48,12 @@ About 70% of the code does not depend on the language. Six areas are deeply Viet
 
 | # | Decision | Recommendation |
 |---|---|---|
-| D1 ⛔ | Product name, bundle ID, domain | Working name **NeiHou** (你好, nei5 hou2). Bundle `com.neihou.app`; entitlement `neihou_pro` |
+| D1 ⛔ | Product name, bundle ID, domain | Working name **Kumusta** (你好, nei5 hou2). Bundle `com.kumusta.app`; entitlement `kumusta_pro` |
 | D2 ✅ | Variant / script | **Decided: just Cantonese, no accent choice anywhere.** Hong Kong Cantonese, **Traditional characters (HK standard)**, **Jyutping** romanization. The accent dimension is removed from the data model, not hidden |
 | D3 ⛔ | Mascot character | Pick an HK-native character: e.g. a **milk-tea cup** (奶茶), a **har gow / dim sum** buddy, a **lion-dance cub** (醒獅), or a **Chinese white dolphin**. The rig pipeline is the same whichever you pick (§9) |
 | D4 ⛔ | STT provider | Decided by the bake-off (§3). Soniox is already integrated in the live pipeline and is the first candidate |
 | D5 ⛔ | TTS provider and voice(s) | Decided by the bake-off (§3). ElevenLabs is preferred for code reuse, but only if its Cantonese is genuinely Cantonese (not Mandarin-accented) |
-| D6 | Live LLM | **Claude Opus 5.5** (`claude-opus-5-5`) as you asked. Keep `NEIHOU_LIVE_LLM_MODEL` as an env switch. Measure first-token latency against the current Haiku 5.5 baseline (§10) |
+| D6 | Live LLM | **Claude Opus 5.5** (`claude-opus-5-5`) as you asked. Keep `KUMUSTA_LIVE_LLM_MODEL` as an env switch. Measure first-token latency against the current Haiku 5.5 baseline (§10) |
 | D7 ✅ | UI language | **Decided: English only, no French version** (owner, 2026-10-24). French UI, French content overlays, the language picker and the translation tooling were removed in Phase 1; only the English `L()` string catalog remains |
 | D8 | Jyutping display default | Show Jyutping above the characters by default, with a Profile toggle: Always / On tap / Never. Beginners need it; heritage learners may hide it |
 | D9 | Markets / ICP | Diaspora: US, Canada, UK, Australia. Heritage learners plus partners of Cantonese speakers. This mirrors the VietBuddy "Partner" ICP |
@@ -77,7 +77,7 @@ About 70% of the code does not depend on the language. Six areas are deeply Viet
   - `LivePracticeSession.swift` (the `VIETBUDDY_LIVE_AGENT` flag).
   - The `elevenlabs-swift-sdk` and LiveKit dependencies, once the audio meter no longer needs LiveKit.
   - `vietbuddy_live_reserve` and the 5-minute allowance RPCs, if the pipeline's own session logic replaces them (§10).
-- **Mistral:** `vietbuddy-mistral-lessons` becomes `neihou-lessons` (Qwen only), along with `vietbuddy-qwen-lessons` (the preview shim), the dead `alignment.ts` / `glosses.ts`, and `MISTRAL_*` env.
+- **Mistral:** `vietbuddy-mistral-lessons` becomes `kumusta-lessons` (Qwen only), along with `vietbuddy-qwen-lessons` (the preview shim), the dead `alignment.ts` / `glosses.ts`, and `MISTRAL_*` env.
 - **Dead client code:**
   - `ColdListenDemoScreen`, `OnboardingPhraseDecode/Build/FirstWin` screens, the custom `PaywallView`, `ReviewSessionView`.
   - `WordDetailView`, `ContextPracticeView`, `WordsViewModel`, `QuickRepViews`, `DailyGoalRing`, the legacy `curriculum-v1.json` / `SampleContent` fallback, the legacy `PracticeScheduler`.
@@ -178,7 +178,7 @@ Each candidate needs **low-latency streaming PCM** for live, plus high-quality M
 
 ### 3.5 Accounts and infra to create
 - New Supabase project for dev, and a separate one for prod.
-- RevenueCat project (entitlement `neihou_pro`, default + `Fallback` offerings, weekly / annual products).
+- RevenueCat project (entitlement `kumusta_pro`, default + `Fallback` offerings, weekly / annual products).
 - App Store Connect app and IAPs.
 - AppsFlyer, TikTok, Meta and PostHog apps.
 - Resend domain.
@@ -191,7 +191,7 @@ Each candidate needs **low-latency streaming PCM** for live, plus high-quality M
 
 ## 4. Phase 1 — Repo bootstrap
 
-1. Copy into `neihou/`:
+1. Copy into `kumusta/`:
    - `VB/` → `ios/` (app, tests, `project.yml`, Podfile, Config examples, scripts, docs).
    - `S/` → `supabase/`.
    - `website/` → `website/`.
@@ -200,8 +200,8 @@ Each candidate needs **low-latency streaming PCM** for live, plus high-quality M
    - Copy only source files: no `build/`, `Pods/`, `.next/`, `dist/` or `.wrangler/`.
 2. Apply every drop in §2.1 **before** renaming, so the diff stays reviewable.
 3. Rename everywhere:
-   - Prefixes: `vietbuddy_`, `vietbuddy-`, `VIETBUDDY_`, `VietBuddy` → `neihou_`, `neihou-`, `NEIHOU_`, `NeiHou`.
-   - Headers: `x-vietbuddy-*` → `x-neihou-*`.
+   - Prefixes: `vietbuddy_`, `vietbuddy-`, `VIETBUDDY_`, `VietBuddy` → `kumusta_`, `kumusta-`, `KUMUSTA_`, `Kumusta`.
+   - Headers: `x-vietbuddy-*` → `x-kumusta-*`.
    - Bucket names, JSON-schema names, the `Symbol.for(...)` key, the cron job, the Vault secret, AppStorage / UserDefaults keys, the bundle ID, test target IDs, `Info.plist` keys, the entitlement ID.
    - Email sender, support email, legal URLs.
 4. Neutralize language-bound field names in contracts and models:
@@ -330,14 +330,14 @@ These replace `boundedVietnamese`, `containsVietnameseOrthography`, diacritic ch
 ## 6. Phase 3 — Backend port (Supabase)
 
 ### 6.1 Baseline schema (`0001_baseline.sql`)
-All tables are renamed `neihou_*`. The RLS init-plan pattern, `security definer` RPCs granted to `service_role`, and `touch_updated_at` triggers are preserved.
+All tables are renamed `kumusta_*`. The RLS init-plan pattern, `security definer` RPCs granted to `service_role`, and `touch_updated_at` triggers are preserved.
 
 | Area | Tables / objects |
 |---|---|
 | Core | profiles (+avatar_seed), onboarding_responses, learning_preferences (goal, level, daily_minutes {5,7,10,15}, target_level, challenge_preference, **`jyutping_display`**), lessons (roadmap), vocabulary, user_vocabulary, learning_sessions, review_events, daily_progress, entitlements, revenuecat_events, analytics_events, api_rate_limits, project_api_rate_limits |
 | Adaptive | learner_states, lesson_generation_jobs, generated_lessons, user_lesson_queue (+priority), difficulty_feedback, generated_vocabulary_progress / _review_events, lesson_generation_quota_overrides; all composite owner FKs |
 | State | user_state (2 MB jsonb blob), subscription_cancellation_feedback |
-| Audio | tts_cache plus the bucket `neihou-tts` (lease RPCs). Make `voice_id` / `model_id` checks follow the Phase 0 allowlist |
+| Audio | tts_cache plus the bucket `kumusta-tts` (lease RPCs). Make `voice_id` / `model_id` checks follow the Phase 0 allowlist |
 | First Steps | foundation_courses / _units / _items / _item_variants / _course_progress / _item_progress (content rewritten, §7.4) |
 | XP | xp_rules, xp_events, user_xp_totals, xp_period_totals, xp_leaderboard_signal (+realtime publication), view `xp_leaderboard` |
 | Telemetry | app_sessions, flashcard_sessions, analytics columns, views customer_learning_activity / customer_lesson_usage |
@@ -356,20 +356,20 @@ All tables are renamed `neihou_*`. The RLS init-plan pattern, `security definer`
 | Function | Action |
 |---|---|
 | `_shared/http.ts`, `_shared/auth.ts`, `_shared/speech_gate.ts` | Rename; keep the logic. Update the quota scope enums (`tts`, `stt`, `lessons`, …), made provider-neutral |
-| `neihou-lessons` (from `mistral-lessons`) | Qwen only. New Cantonese prompt (§7.1), new contract v1 with `jyutping` fields, the validators from §5.4, segmentation-based gloss repair, server-side Jyutping verification against the lexicon. Queue, lease, quota and topic-preference logic unchanged |
-| `neihou-curriculum-admin` | Same operations flow. Cantonese syllabus `plan.ts`; the editorial review prompt becomes a Cantonese spoken-language editor that checks colloquial vs 書面語, Jyutping, register, naturalness, level and translations. Beginner length rule becomes ≤ N characters (≈ 10–12) instead of ≤ 9 whitespace tokens |
-| `neihou-tts` (from `elevenlabs-tts`) | Provider adapter from Phase 0. `language_code` → `yue` (or the provider's equivalent). A single server-side teacher-voice constant (no accent input). Cache key covers provider, model, voice, settings version, text and speed. The lowercase / punctuation normalization for vocabulary text becomes NFC + strip CJK punctuation. Rewrite the fixed onboarding lines (`greeting`, `ask_name`, `reply_name`, …) in Cantonese (e.g. 你好！ / 你叫咩名呀？ / 我叫{name}。) |
-| `neihou-stt` (batch) + `neihou-stt-token` (realtime) | Provider adapter. Language `yue`; drop the `languageCode == "vie"` assertions. Sanitize to Traditional (s→t). Keep the byte limits, the onboarding 3-take allowance and the quotas |
-| `neihou-live-pipeline` | See §10 |
-| `neihou-evaluate` | Only if D10 says keep. Rewrite on Qwen with the Cantonese matcher short-circuit |
-| `neihou-award-xp` | Remove the `conversation_completed` branch |
-| `neihou-account-data` | Full table list (see §6.1) |
-| `neihou-revenuecat-webhook` (+admin) | Rename; parameterize the project ref / webhook URL by env |
-| `neihou-email-worker` | New copy and sender; Resend domain |
+| `kumusta-lessons` (from `mistral-lessons`) | Qwen only. New Cantonese prompt (§7.1), new contract v1 with `jyutping` fields, the validators from §5.4, segmentation-based gloss repair, server-side Jyutping verification against the lexicon. Queue, lease, quota and topic-preference logic unchanged |
+| `kumusta-curriculum-admin` | Same operations flow. Cantonese syllabus `plan.ts`; the editorial review prompt becomes a Cantonese spoken-language editor that checks colloquial vs 書面語, Jyutping, register, naturalness, level and translations. Beginner length rule becomes ≤ N characters (≈ 10–12) instead of ≤ 9 whitespace tokens |
+| `kumusta-tts` (from `elevenlabs-tts`) | Provider adapter from Phase 0. `language_code` → `yue` (or the provider's equivalent). A single server-side teacher-voice constant (no accent input). Cache key covers provider, model, voice, settings version, text and speed. The lowercase / punctuation normalization for vocabulary text becomes NFC + strip CJK punctuation. Rewrite the fixed onboarding lines (`greeting`, `ask_name`, `reply_name`, …) in Cantonese (e.g. 你好！ / 你叫咩名呀？ / 我叫{name}。) |
+| `kumusta-stt` (batch) + `kumusta-stt-token` (realtime) | Provider adapter. Language `yue`; drop the `languageCode == "vie"` assertions. Sanitize to Traditional (s→t). Keep the byte limits, the onboarding 3-take allowance and the quotas |
+| `kumusta-live-pipeline` | See §10 |
+| `kumusta-evaluate` | Only if D10 says keep. Rewrite on Qwen with the Cantonese matcher short-circuit |
+| `kumusta-award-xp` | Remove the `conversation_completed` branch |
+| `kumusta-account-data` | Full table list (see §6.1) |
+| `kumusta-revenuecat-webhook` (+admin) | Rename; parameterize the project ref / webhook URL by env |
+| `kumusta-email-worker` | New copy and sender; Resend domain |
 
 **Config and env:**
 - `config.toml`: same `verify_jwt` pattern. Give `curriculum-admin` an explicit entry.
-- `.env.example`: `DASHSCOPE_API_KEY`, `QWEN_LESSON_MODEL`, `ANTHROPIC_API_KEY` (+`ANTHROPIC_WORKSPACE_ID`), `NEIHOU_LIVE_LLM_MODEL=claude-opus-5-5`, the STT / TTS provider keys and `NEIHOU_*_PROVIDER` switches, the RevenueCat secrets, `RESEND_API_KEY`, `EMAIL_*`, `NEIHOU_ENTITLEMENT_ID`, quota limits, `NEIHOU_ENVIRONMENT`, `NEIHOU_DEVELOPMENT_BYPASS_ENTITLEMENT`.
+- `.env.example`: `DASHSCOPE_API_KEY`, `QWEN_LESSON_MODEL`, `ANTHROPIC_API_KEY` (+`ANTHROPIC_WORKSPACE_ID`), `KUMUSTA_LIVE_LLM_MODEL=claude-opus-5-5`, the STT / TTS provider keys and `KUMUSTA_*_PROVIDER` switches, the RevenueCat secrets, `RESEND_API_KEY`, `EMAIL_*`, `KUMUSTA_ENTITLEMENT_ID`, quota limits, `KUMUSTA_ENVIRONMENT`, `KUMUSTA_DEVELOPMENT_BYPASS_ENTITLEMENT`.
 
 **Tests:**
 - Port every `*_test.ts`.
@@ -381,7 +381,7 @@ All tables are renamed `neihou_*`. The RLS init-plan pattern, `security definer`
 
 ## 7. Phase 4 — Content pipeline (Qwen + TTS)
 
-### 7.1 Lesson generation prompt (`neihou-lessons/prompt.ts`)
+### 7.1 Lesson generation prompt (`kumusta-lessons/prompt.ts`)
 Rewrite `systemPrompt` / `userPrompt` and keep the structure (role, level ceiling, connected mini-story, rounds, chunks, hear-and-respond, vocabulary grounding, topic preference as untrusted data, safety, JSON only). Cantonese-specific rules:
 
 **Script and register:**
@@ -407,7 +407,7 @@ Rewrite `systemPrompt` / `userPrompt` and keep the structure (role, level ceilin
 
 **Shape:** `schema_version` 1, `prompt_version` 1 for the new product. Same JSON shape plus the `jyutping` fields, with snake_case on the wire and camelCase in storage.
 
-### 7.2 Roadmap catalogs (bundled + `neihou_lessons`)
+### 7.2 Roadmap catalogs (bundled + `kumusta_lessons`)
 - Rebuild `supabase/catalog/<level>-cantonese-v1/` for beginner, intermediate and advanced, 10 lessons each to start (v1 authored in `content/roadmap/`). No accent duplication.
   - Example unit arc for "beginner": Greet and introduce yourself (你好 / 我叫 / 早晨) → Order at a 茶餐廳 → Get around (MTR, 小巴, 的士) → Shop and pay (幾多錢, 八達通) → Talk about family and life → Stay in control (唔該講慢啲, 聽唔明).
 - Authoring:
@@ -748,7 +748,7 @@ Ported from `RELEASE_READINESS.md`, plus the Cantonese-specific gates:
 
 **Secrets and environment**
 - [ ] No secrets in git or the bundle.
-- [ ] `NEIHOU_ENVIRONMENT=production`; bypass off; separate dev and prod projects.
+- [ ] `KUMUSTA_ENVIRONMENT=production`; bypass off; separate dev and prod projects.
 
 **Store**
 - [ ] Privacy manifest and App Store privacy answers match the SDKs.

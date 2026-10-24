@@ -1,0 +1,4169 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ %@" : {
+      "extractionState" : "manual"
+    },
+    "%@ %@. Introductory offer: %@. Payment is charged to your Apple ID. The subscription renews automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in App Store settings." : {
+      "extractionState" : "manual"
+    },
+    "%@ %@. Payment is charged to your Apple ID. The subscription renews automatically unless canceled at least 24 hours before the end of the current period. Manage or cancel in App Store settings." : {
+      "extractionState" : "manual"
+    },
+    "%@ and %@ are ready to talk" : {
+      "extractionState" : "manual"
+    },
+    "%@ badge earned. %@ %lld XP." : {
+      "extractionState" : "manual"
+    },
+    "%@ each day" : {
+      "extractionState" : "manual"
+    },
+    "%@ for %@" : {
+      "extractionState" : "manual"
+    },
+    "%@ free" : {
+      "extractionState" : "manual"
+    },
+    "%@ is speaking with %@" : {
+      "extractionState" : "manual"
+    },
+    "%@ is speaking…" : {
+      "extractionState" : "manual"
+    },
+    "%@ of Vietnamese · nice work" : {
+      "extractionState" : "manual"
+    },
+    "%@ speed" : {
+      "extractionState" : "manual"
+    },
+    "%@ · %lld min · Northern" : {
+      "extractionState" : "manual"
+    },
+    "%@ · %lld min · Southern" : {
+      "extractionState" : "manual"
+    },
+    "%@ · Lesson %lld of %lld" : {
+      "extractionState" : "manual"
+    },
+    "%@, %@" : {
+      "extractionState" : "manual"
+    },
+    "%@, %@ %@" : {
+      "extractionState" : "manual"
+    },
+    "%@, piece %lld" : {
+      "extractionState" : "manual"
+    },
+    "%@, rank %lld, %@, %lld XP" : {
+      "extractionState" : "manual"
+    },
+    "%lld / %lld STEPS" : {
+      "extractionState" : "manual"
+    },
+    "%lld IN A ROW!" : {
+      "extractionState" : "manual"
+    },
+    "%lld LISTEN" : {
+      "extractionState" : "manual"
+    },
+    "%lld LISTENS" : {
+      "extractionState" : "manual"
+    },
+    "%lld STEPS COMPLETE" : {
+      "extractionState" : "manual"
+    },
+    "%lld TO GO" : {
+      "extractionState" : "manual"
+    },
+    "%lld XP" : {
+      "extractionState" : "manual"
+    },
+    "%lld XP earned" : {
+      "extractionState" : "manual"
+    },
+    "%lld XP to reach #%lld" : {
+      "extractionState" : "manual"
+    },
+    "%lld answer streak" : {
+      "extractionState" : "manual"
+    },
+    "%lld chunk decoded" : {
+      "extractionState" : "manual"
+    },
+    "%lld chunks decoded" : {
+      "extractionState" : "manual"
+    },
+    "%lld correct answer in a row" : {
+      "extractionState" : "manual"
+    },
+    "%lld correct answers in a row" : {
+      "extractionState" : "manual"
+    },
+    "%lld day" : {
+      "extractionState" : "manual"
+    },
+    "%lld day streak" : {
+      "extractionState" : "manual"
+    },
+    "%lld days" : {
+      "extractionState" : "manual"
+    },
+    "%lld days and counting" : {
+      "extractionState" : "manual"
+    },
+    "%lld down. Nice." : {
+      "extractionState" : "manual"
+    },
+    "%lld experience point" : {
+      "extractionState" : "manual"
+    },
+    "%lld experience points" : {
+      "extractionState" : "manual"
+    },
+    "%lld focused minute" : {
+      "extractionState" : "manual"
+    },
+    "%lld focused minutes" : {
+      "extractionState" : "manual"
+    },
+    "%lld in a row" : {
+      "extractionState" : "manual"
+    },
+    "%lld learner" : {
+      "extractionState" : "manual"
+    },
+    "%lld learners" : {
+      "extractionState" : "manual"
+    },
+    "%lld min/day" : {
+      "extractionState" : "manual"
+    },
+    "%lld minute" : {
+      "extractionState" : "manual"
+    },
+    "%lld minute a day" : {
+      "extractionState" : "manual"
+    },
+    "%lld minute completed" : {
+      "extractionState" : "manual"
+    },
+    "%lld minutes" : {
+      "extractionState" : "manual"
+    },
+    "%lld minutes a day" : {
+      "extractionState" : "manual"
+    },
+    "%lld minutes completed" : {
+      "extractionState" : "manual"
+    },
+    "%lld month" : {
+      "extractionState" : "manual"
+    },
+    "%lld months" : {
+      "extractionState" : "manual"
+    },
+    "%lld more XP to move up" : {
+      "extractionState" : "manual"
+    },
+    "%lld more phrase to refresh" : {
+      "extractionState" : "manual"
+    },
+    "%lld more phrases to refresh" : {
+      "extractionState" : "manual"
+    },
+    "%lld more waiting in the wings" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld earned" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld lessons" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld lessons complete" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld parts ready" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld phrases" : {
+      "extractionState" : "manual"
+    },
+    "%lld of %lld syllables right" : {
+      "extractionState" : "manual"
+    },
+    "%lld percent" : {
+      "extractionState" : "manual"
+    },
+    "%lld percent remembered" : {
+      "extractionState" : "manual"
+    },
+    "%lld period" : {
+      "extractionState" : "manual"
+    },
+    "%lld periods" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrase" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrase in your memory" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrase is fading" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrase reviewed" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrases" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrases are fading" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrases in your memory" : {
+      "extractionState" : "manual"
+    },
+    "%lld phrases reviewed" : {
+      "extractionState" : "manual"
+    },
+    "%lld second" : {
+      "extractionState" : "manual"
+    },
+    "%lld seconds" : {
+      "extractionState" : "manual"
+    },
+    "%lld situation" : {
+      "extractionState" : "manual"
+    },
+    "%lld situations" : {
+      "extractionState" : "manual"
+    },
+    "%lld steps to today’s win" : {
+      "extractionState" : "manual"
+    },
+    "%lld week" : {
+      "extractionState" : "manual"
+    },
+    "%lld weeks" : {
+      "extractionState" : "manual"
+    },
+    "%lld word" : {
+      "extractionState" : "manual"
+    },
+    "%lld words" : {
+      "extractionState" : "manual"
+    },
+    "%lld year" : {
+      "extractionState" : "manual"
+    },
+    "%lld years" : {
+      "extractionState" : "manual"
+    },
+    "%lld%%" : {
+      "extractionState" : "manual"
+    },
+    "%lld-day streak" : {
+      "extractionState" : "manual"
+    },
+    "**%@** has no tone mark: keep it flat and steady. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@** takes the huyền tone: start low and let it fall gently. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@** takes the hỏi tone: dip down, then come back up. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@** takes the ngã tone: rise with a little catch in the throat. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@** takes the nặng tone: drop low and cut it short. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@** takes the sắc tone: start mid, then rise sharply. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "**%@**: đ is a firm “d”, while d sounds like “z” (north) or “y” (south). It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "+%lld XP" : {
+      "extractionState" : "manual"
+    },
+    "+10 XP · back in your phrase bank" : {
+      "extractionState" : "manual"
+    },
+    "1 phrase" : {
+      "extractionState" : "manual"
+    },
+    "1,000+ students" : {
+      "extractionState" : "manual"
+    },
+    "10 words" : {
+      "extractionState" : "manual"
+    },
+    "12:00 PM" : {
+      "extractionState" : "manual"
+    },
+    "20 lessons" : {
+      "extractionState" : "manual"
+    },
+    "3 pieces" : {
+      "extractionState" : "manual"
+    },
+    "30 seconds" : {
+      "extractionState" : "manual"
+    },
+    "3–5 MIN" : {
+      "extractionState" : "manual"
+    },
+    "4 SEC" : {
+      "extractionState" : "manual"
+    },
+    "4 choices" : {
+      "extractionState" : "manual"
+    },
+    "4 days" : {
+      "extractionState" : "manual"
+    },
+    "5 MIN" : {
+      "extractionState" : "manual"
+    },
+    "5 lessons" : {
+      "extractionState" : "manual"
+    },
+    "5 out of 5 stars" : {
+      "extractionState" : "manual"
+    },
+    "50 words" : {
+      "extractionState" : "manual"
+    },
+    "7:00 PM" : {
+      "extractionState" : "manual"
+    },
+    "9:00 AM" : {
+      "extractionState" : "manual"
+    },
+    "A 6-minute first lesson: say hello, your name, and thank you." : {
+      "extractionState" : "manual"
+    },
+    "A Southern pronunciation example." : {
+      "extractionState" : "manual"
+    },
+    "A bottle of water, please." : {
+      "extractionState" : "manual"
+    },
+    "A complete daily practice" : {
+      "extractionState" : "manual"
+    },
+    "A deeper lesson and review" : {
+      "extractionState" : "manual"
+    },
+    "A demanding teacher. Every mistake gets fixed." : {
+      "extractionState" : "manual"
+    },
+    "A few minutes of Vietnamese listening keeps your streak alive." : {
+      "extractionState" : "manual"
+    },
+    "A few minutes of speaking every day keeps building. Studying on your own tends to stall." : {
+      "extractionState" : "manual"
+    },
+    "A first name or nickname is perfect." : {
+      "extractionState" : "manual"
+    },
+    "A full month. You're building a habit." : {
+      "extractionState" : "manual"
+    },
+    "A little Vietnamese.\nA real conversation." : {
+      "extractionState" : "manual"
+    },
+    "A little practice.\nA little higher." : {
+      "extractionState" : "manual"
+    },
+    "A pace you can keep" : {
+      "extractionState" : "manual"
+    },
+    "A plan unlocks the listening, speaking, and review loop built around your life in Vietnam." : {
+      "extractionState" : "manual"
+    },
+    "A quick lesson now keeps your %lld-day streak going." : {
+      "extractionState" : "manual"
+    },
+    "A real conversation, start to finish." : {
+      "extractionState" : "manual"
+    },
+    "A secure Apple sign-in request could not be created." : {
+      "extractionState" : "manual"
+    },
+    "A short note is enough. Your feedback helps us improve Kumusta." : {
+      "extractionState" : "manual"
+    },
+    "A whole month of listening is now part of your rhythm." : {
+      "extractionState" : "manual"
+    },
+    "ACCURACY" : {
+      "extractionState" : "manual"
+    },
+    "ADD WORDS TO START" : {
+      "extractionState" : "manual"
+    },
+    "About %lld min · locks in what you learned" : {
+      "extractionState" : "manual"
+    },
+    "About 6 minutes · 3 phrases · 1 real conversation" : {
+      "extractionState" : "manual"
+    },
+    "Accent" : {
+      "extractionState" : "manual"
+    },
+    "Account deletion could not be verified." : {
+      "extractionState" : "manual"
+    },
+    "Account deletion is temporarily unavailable. Please try again when you’re connected to the internet." : {
+      "extractionState" : "manual"
+    },
+    "Active flashcard" : {
+      "extractionState" : "manual"
+    },
+    "Add a lesson topic" : {
+      "extractionState" : "manual"
+    },
+    "Add a little more detail, or leave this blank." : {
+      "extractionState" : "manual"
+    },
+    "Add to Vocabulary" : {
+      "extractionState" : "manual"
+    },
+    "Added to Vocabulary" : {
+      "extractionState" : "manual"
+    },
+    "Adds this word to flashcards" : {
+      "extractionState" : "manual"
+    },
+    "Adds this word to your answer" : {
+      "extractionState" : "manual"
+    },
+    "Adds this word to your sentence" : {
+      "extractionState" : "manual"
+    },
+    "Advanced" : {
+      "extractionState" : "manual"
+    },
+    "After you confirm your email, this account will let you keep your learning history on another device." : {
+      "extractionState" : "manual"
+    },
+    "Again" : {
+      "extractionState" : "manual"
+    },
+    "Alert at 8 PM if you haven't practiced" : {
+      "extractionState" : "manual"
+    },
+    "All" : {
+      "extractionState" : "manual"
+    },
+    "All-time XP" : {
+      "extractionState" : "manual"
+    },
+    "All-time XP · Every session counts" : {
+      "extractionState" : "manual"
+    },
+    "Allow microphone access in Settings to talk with your buddy." : {
+      "extractionState" : "manual"
+    },
+    "Almost" : {
+      "extractionState" : "manual"
+    },
+    "Almost got it" : {
+      "extractionState" : "manual"
+    },
+    "Almost! Check the vowel in **%@**. It sounded like **%@**." : {
+      "extractionState" : "manual"
+    },
+    "Already have an account? Sign in" : {
+      "extractionState" : "manual"
+    },
+    "Alternate slow and natural speed. Listen for the words that become lighter." : {
+      "extractionState" : "manual"
+    },
+    "Alternate slow and natural speed. Notice how your saved word changes in the sentence." : {
+      "extractionState" : "manual"
+    },
+    "Always uses dark mode, whatever your device setting." : {
+      "extractionState" : "manual"
+    },
+    "Always uses light mode, whatever your device setting." : {
+      "extractionState" : "manual"
+    },
+    "Amazing!" : {
+      "extractionState" : "manual"
+    },
+    "An iced milk coffee, please." : {
+      "extractionState" : "manual"
+    },
+    "Answer grandma in her own words" : {
+      "extractionState" : "manual"
+    },
+    "Answer, not just understand" : {
+      "extractionState" : "manual"
+    },
+    "App Store reviews" : {
+      "extractionState" : "manual"
+    },
+    "Appearance" : {
+      "extractionState" : "manual"
+    },
+    "Apple did not provide a valid sign-in credential." : {
+      "extractionState" : "manual"
+    },
+    "Apps teach you “the apple is red”" : {
+      "extractionState" : "manual"
+    },
+    "Ask the price and understand it" : {
+      "extractionState" : "manual"
+    },
+    "At least 8 characters" : {
+      "extractionState" : "manual"
+    },
+    "At natural speed they become lighter, but the order and the sweetness change stay prominent." : {
+      "extractionState" : "manual"
+    },
+    "At natural speed, notice the saved word’s shape and where it sits in the sentence." : {
+      "extractionState" : "manual"
+    },
+    "Audio is taking a break. Try again in a moment." : {
+      "extractionState" : "manual"
+    },
+    "Audio is taking a quick break." : {
+      "extractionState" : "manual"
+    },
+    "Audio is unavailable right now. Check your connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "Audio unavailable" : {
+      "extractionState" : "manual"
+    },
+    "Automatic" : {
+      "extractionState" : "manual"
+    },
+    "Available" : {
+      "extractionState" : "manual"
+    },
+    "A–Z" : {
+      "extractionState" : "manual"
+    },
+    "BADGE EARNED" : {
+      "extractionState" : "manual"
+    },
+    "BADGE UNLOCKED" : {
+      "extractionState" : "manual"
+    },
+    "BASICS CHEAT SHEET" : {
+      "extractionState" : "manual"
+    },
+    "BEFORE YOU GO" : {
+      "extractionState" : "manual"
+    },
+    "BEGIN THE QUEST" : {
+      "extractionState" : "manual"
+    },
+    "BEST COMBO" : {
+      "extractionState" : "manual"
+    },
+    "BETWEEN THE LINES" : {
+      "extractionState" : "manual"
+    },
+    "BIG PICTURE" : {
+      "extractionState" : "manual"
+    },
+    "Back" : {
+      "extractionState" : "manual"
+    },
+    "Back to conversations" : {
+      "extractionState" : "manual"
+    },
+    "Back to my phrase bank" : {
+      "extractionState" : "manual"
+    },
+    "Back to phrases" : {
+      "extractionState" : "manual"
+    },
+    "Back to practice" : {
+      "extractionState" : "manual"
+    },
+    "Back to practice and end conversation" : {
+      "extractionState" : "manual"
+    },
+    "Badge earned: %@" : {
+      "extractionState" : "manual"
+    },
+    "Badges" : {
+      "extractionState" : "manual"
+    },
+    "Balanced" : {
+      "extractionState" : "manual"
+    },
+    "Balancing listening, speaking and review" : {
+      "extractionState" : "manual"
+    },
+    "Based on your keyboard and device language" : {
+      "extractionState" : "manual"
+    },
+    "Be the first on the board" : {
+      "extractionState" : "manual"
+    },
+    "Beginner" : {
+      "extractionState" : "manual"
+    },
+    "Best combo %lld" : {
+      "extractionState" : "manual"
+    },
+    "Best value" : {
+      "extractionState" : "manual"
+    },
+    "Bring passive Vietnamese back into your voice" : {
+      "extractionState" : "manual"
+    },
+    "Bring these back to your ear today" : {
+      "extractionState" : "manual"
+    },
+    "Bronze medal" : {
+      "extractionState" : "manual"
+    },
+    "Buddy is listening…" : {
+      "extractionState" : "manual"
+    },
+    "Buddy is talking…" : {
+      "extractionState" : "manual"
+    },
+    "Buddy says hi. Pick your reply, then say the next one out loud." : {
+      "extractionState" : "manual"
+    },
+    "Build it in Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Build my learning plan" : {
+      "extractionState" : "manual"
+    },
+    "Build practical Vietnamese you can use right away." : {
+      "extractionState" : "manual"
+    },
+    "Build real rapport with colleagues" : {
+      "extractionState" : "manual"
+    },
+    "Build the meaning from useful chunks." : {
+      "extractionState" : "manual"
+    },
+    "Build what you heard" : {
+      "extractionState" : "manual"
+    },
+    "Build your ear from the first phrase" : {
+      "extractionState" : "manual"
+    },
+    "Building your daily path…" : {
+      "extractionState" : "manual"
+    },
+    "Building your plan…" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu celebrates the correct answer" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu celebrates your learning streak" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu couldn’t answer. Try saying that again." : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu encourages another try" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is building the next lesson" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is curious" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is listening" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is listening back…" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is reviewing your recording" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is talking" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is thinking…" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu is typing" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu understood every word." : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu waves hello" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu welcomes you to Kumusta" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu will check every word once your plan starts." : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu's mood" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu, the Kumusta mascot" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu, your conversation buddy" : {
+      "extractionState" : "manual"
+    },
+    "Bé Trâu: %@" : {
+      "extractionState" : "manual"
+    },
+    "CAN’T SPEAK NOW" : {
+      "extractionState" : "manual"
+    },
+    "CAUGHT" : {
+      "extractionState" : "manual"
+    },
+    "CHECK" : {
+      "extractionState" : "manual"
+    },
+    "CHUNKS" : {
+      "extractionState" : "manual"
+    },
+    "COLD LISTEN" : {
+      "extractionState" : "manual"
+    },
+    "CONTINUE" : {
+      "extractionState" : "manual"
+    },
+    "CONTINUE ANYWAY" : {
+      "extractionState" : "manual"
+    },
+    "CONTINUE WITHOUT FEEDBACK" : {
+      "extractionState" : "manual"
+    },
+    "Can I have the bill?" : {
+      "extractionState" : "manual"
+    },
+    "Can you catch the meaning?" : {
+      "extractionState" : "manual"
+    },
+    "Cancel" : {
+      "extractionState" : "manual"
+    },
+    "Cancel subscription" : {
+      "extractionState" : "manual"
+    },
+    "Cancellation reason" : {
+      "extractionState" : "manual"
+    },
+    "Can’t speak now" : {
+      "extractionState" : "manual"
+    },
+    "Catch that? Play it again." : {
+      "extractionState" : "manual"
+    },
+    "Catch the tones" : {
+      "extractionState" : "manual"
+    },
+    "Century mark" : {
+      "extractionState" : "manual"
+    },
+    "Challenge" : {
+      "extractionState" : "manual"
+    },
+    "Chart: with Kumusta, your speaking confidence keeps rising over 30 days. On your own, it levels off." : {
+      "extractionState" : "manual"
+    },
+    "Chat" : {
+      "extractionState" : "manual"
+    },
+    "Check" : {
+      "extractionState" : "manual"
+    },
+    "Check again" : {
+      "extractionState" : "manual"
+    },
+    "Check my phrase" : {
+      "extractionState" : "manual"
+    },
+    "Check your connection and try again. We will stay on this phrase until it is safely recorded." : {
+      "extractionState" : "manual"
+    },
+    "Check your inbox." : {
+      "extractionState" : "manual"
+    },
+    "Checking purchases…" : {
+      "extractionState" : "manual"
+    },
+    "Checking your Vietnamese…" : {
+      "extractionState" : "manual"
+    },
+    "Checking your take…" : {
+      "extractionState" : "manual"
+    },
+    "Choose a plan" : {
+      "extractionState" : "manual"
+    },
+    "Choose how new audio behaves." : {
+      "extractionState" : "manual"
+    },
+    "Choose one answer in each section. Your feedback saves automatically." : {
+      "extractionState" : "manual"
+    },
+    "Choose the Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Choose the answer to keep your streak alive" : {
+      "extractionState" : "manual"
+    },
+    "Choose the lesson level to save your feedback." : {
+      "extractionState" : "manual"
+    },
+    "Choose the voice pace to save your feedback." : {
+      "extractionState" : "manual"
+    },
+    "Choose your Vietnamese accent" : {
+      "extractionState" : "manual"
+    },
+    "Choose your move" : {
+      "extractionState" : "manual"
+    },
+    "Choose your recall" : {
+      "extractionState" : "manual"
+    },
+    "Close" : {
+      "extractionState" : "manual"
+    },
+    "Close flashcards" : {
+      "extractionState" : "manual"
+    },
+    "Close lesson" : {
+      "extractionState" : "manual"
+    },
+    "Close one. Listen and try again." : {
+      "extractionState" : "manual"
+    },
+    "Close plans" : {
+      "extractionState" : "manual"
+    },
+    "Close practice" : {
+      "extractionState" : "manual"
+    },
+    "Close review" : {
+      "extractionState" : "manual"
+    },
+    "Close the lips at the end instead of letting the word fade." : {
+      "extractionState" : "manual"
+    },
+    "Close this practice and try the phrase again." : {
+      "extractionState" : "manual"
+    },
+    "Close this screen and come back when your next phrases are due." : {
+      "extractionState" : "manual"
+    },
+    "Close word card" : {
+      "extractionState" : "manual"
+    },
+    "Close, but not quite natural" : {
+      "extractionState" : "manual"
+    },
+    "Cold listen" : {
+      "extractionState" : "manual"
+    },
+    "Collapsed" : {
+      "extractionState" : "manual"
+    },
+    "Common letter combinations" : {
+      "extractionState" : "manual"
+    },
+    "Compare, then keep moving" : {
+      "extractionState" : "manual"
+    },
+    "Complete" : {
+      "extractionState" : "manual"
+    },
+    "Complete a lesson and it will be saved here." : {
+      "extractionState" : "manual"
+    },
+    "Complete a lesson and useful phrases will collect here with their real context." : {
+      "extractionState" : "manual"
+    },
+    "Complete a session to appear" : {
+      "extractionState" : "manual"
+    },
+    "Complete a session to earn XP and appear on the leaderboard." : {
+      "extractionState" : "manual"
+    },
+    "Complete each lesson to reach the flag." : {
+      "extractionState" : "manual"
+    },
+    "Complete the previous lesson to unlock this one" : {
+      "extractionState" : "manual"
+    },
+    "Complete the thought aloud" : {
+      "extractionState" : "manual"
+    },
+    "Completed" : {
+      "extractionState" : "manual"
+    },
+    "Completed %@" : {
+      "extractionState" : "manual"
+    },
+    "Confirm password" : {
+      "extractionState" : "manual"
+    },
+    "Confirming with App Store…" : {
+      "extractionState" : "manual"
+    },
+    "Connect Kumusta to its speech service, then try again." : {
+      "extractionState" : "manual"
+    },
+    "Connect with my partner" : {
+      "extractionState" : "manual"
+    },
+    "Connection lost. Your microphone is off. Retry when you’re ready." : {
+      "extractionState" : "manual"
+    },
+    "Contact support" : {
+      "extractionState" : "manual"
+    },
+    "Context practice" : {
+      "extractionState" : "manual"
+    },
+    "Continue" : {
+      "extractionState" : "manual"
+    },
+    "Continue to App Store settings" : {
+      "extractionState" : "manual"
+    },
+    "Continue to my plan" : {
+      "extractionState" : "manual"
+    },
+    "Continue to round %lld" : {
+      "extractionState" : "manual"
+    },
+    "Continue with %@" : {
+      "extractionState" : "manual"
+    },
+    "Continue without feedback" : {
+      "extractionState" : "manual"
+    },
+    "Continuing in the background" : {
+      "extractionState" : "manual"
+    },
+    "Conversation ended · try again when ready" : {
+      "extractionState" : "manual"
+    },
+    "Conversation practice needs a connection. Please try again when you’re online." : {
+      "extractionState" : "manual"
+    },
+    "Conversations" : {
+      "extractionState" : "manual"
+    },
+    "Conversations completed" : {
+      "extractionState" : "manual"
+    },
+    "Conversations couldn’t load" : {
+      "extractionState" : "manual"
+    },
+    "Correct" : {
+      "extractionState" : "manual"
+    },
+    "Correct answer" : {
+      "extractionState" : "manual"
+    },
+    "Correct answer:" : {
+      "extractionState" : "manual"
+    },
+    "Correct ear" : {
+      "extractionState" : "manual"
+    },
+    "Correct meaning" : {
+      "extractionState" : "manual"
+    },
+    "Correct!" : {
+      "extractionState" : "manual"
+    },
+    "Couldn't check that take, but you're doing great." : {
+      "extractionState" : "manual"
+    },
+    "Couldn’t check that take" : {
+      "extractionState" : "manual"
+    },
+    "Couldn’t connect to live practice. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "Couldn’t load Kumusta" : {
+      "extractionState" : "manual"
+    },
+    "Couldn’t load your daily time. Check your connection and retry." : {
+      "extractionState" : "manual"
+    },
+    "Counting your XP" : {
+      "extractionState" : "manual"
+    },
+    "Create account and continue" : {
+      "extractionState" : "manual"
+    },
+    "DAILY REVIEW" : {
+      "extractionState" : "manual"
+    },
+    "DONE!" : {
+      "extractionState" : "manual"
+    },
+    "Daily lesson limit reached" : {
+      "extractionState" : "manual"
+    },
+    "Daily pace" : {
+      "extractionState" : "manual"
+    },
+    "Daily practice reminder" : {
+      "extractionState" : "manual"
+    },
+    "Daily quest. %lld day streak. %lld of %lld steps completed." : {
+      "extractionState" : "manual"
+    },
+    "Daily rhythm" : {
+      "extractionState" : "manual"
+    },
+    "Dark" : {
+      "extractionState" : "manual"
+    },
+    "Day 30" : {
+      "extractionState" : "manual"
+    },
+    "Deck cleared" : {
+      "extractionState" : "manual"
+    },
+    "Decode" : {
+      "extractionState" : "manual"
+    },
+    "Decode the sentence" : {
+      "extractionState" : "manual"
+    },
+    "Default speed" : {
+      "extractionState" : "manual"
+    },
+    "Delete account" : {
+      "extractionState" : "manual"
+    },
+    "Delete account permanently" : {
+      "extractionState" : "manual"
+    },
+    "Delete your Kumusta account?" : {
+      "extractionState" : "manual"
+    },
+    "Deleting account…" : {
+      "extractionState" : "manual"
+    },
+    "Deleting your account permanently removes your Kumusta data. You can always return to plans before then." : {
+      "extractionState" : "manual"
+    },
+    "Describe a real-life situation, not instructions for the lesson generator." : {
+      "extractionState" : "manual"
+    },
+    "Desired level" : {
+      "extractionState" : "manual"
+    },
+    "Did your version carry the same meaning? Small pronunciation slips are okay." : {
+      "extractionState" : "manual"
+    },
+    "Didn’t catch that" : {
+      "extractionState" : "manual"
+    },
+    "Different marks create different vowel sounds." : {
+      "extractionState" : "manual"
+    },
+    "Dismiss message" : {
+      "extractionState" : "manual"
+    },
+    "Do you want to cancel?" : {
+      "extractionState" : "manual"
+    },
+    "Don't lose your streak" : {
+      "extractionState" : "manual"
+    },
+    "Done" : {
+      "extractionState" : "manual"
+    },
+    "Done for today" : {
+      "extractionState" : "manual"
+    },
+    "Done — fancy another lap?" : {
+      "extractionState" : "manual"
+    },
+    "Don’t skip **%@**." : {
+      "extractionState" : "manual"
+    },
+    "Due" : {
+      "extractionState" : "manual"
+    },
+    "Due now" : {
+      "extractionState" : "manual"
+    },
+    "END LESSON" : {
+      "extractionState" : "manual"
+    },
+    "Earn XP and your place will be ready here." : {
+      "extractionState" : "manual"
+    },
+    "Edit learning plan" : {
+      "extractionState" : "manual"
+    },
+    "Edit profile" : {
+      "extractionState" : "manual"
+    },
+    "Edit your plan" : {
+      "extractionState" : "manual"
+    },
+    "Elementary" : {
+      "extractionState" : "manual"
+    },
+    "Email address" : {
+      "extractionState" : "manual"
+    },
+    "Email contact@kumusta.app" : {
+      "extractionState" : "manual"
+    },
+    "End" : {
+      "extractionState" : "manual"
+    },
+    "English becomes your ceiling" : {
+      "extractionState" : "manual"
+    },
+    "Enter DELETE MY ACCOUNT to confirm account deletion." : {
+      "extractionState" : "manual"
+    },
+    "Erase app data" : {
+      "extractionState" : "manual"
+    },
+    "Erase app data?" : {
+      "extractionState" : "manual"
+    },
+    "Erase data" : {
+      "extractionState" : "manual"
+    },
+    "Evening" : {
+      "extractionState" : "manual"
+    },
+    "Every detail landed" : {
+      "extractionState" : "manual"
+    },
+    "Every lesson stays open for practice." : {
+      "extractionState" : "manual"
+    },
+    "Everyday errands feel like an exam" : {
+      "extractionState" : "manual"
+    },
+    "Excellent!" : {
+      "extractionState" : "manual"
+    },
+    "Expanded" : {
+      "extractionState" : "manual"
+    },
+    "Explore plans for daily listening, speaking and review." : {
+      "extractionState" : "manual"
+    },
+    "Explore the leaderboard" : {
+      "extractionState" : "manual"
+    },
+    "Extra" : {
+      "extractionState" : "manual"
+    },
+    "FOUNDATION QUEST" : {
+      "extractionState" : "manual"
+    },
+    "Familiar" : {
+      "extractionState" : "manual"
+    },
+    "Family" : {
+      "extractionState" : "manual"
+    },
+    "Faster" : {
+      "extractionState" : "manual"
+    },
+    "Feedback saves automatically after both questions are answered" : {
+      "extractionState" : "manual"
+    },
+    "Feeling solid" : {
+      "extractionState" : "manual"
+    },
+    "Female Northern and Southern voices" : {
+      "extractionState" : "manual"
+    },
+    "Fifty words in your sound map. Your ear is getting stronger." : {
+      "extractionState" : "manual"
+    },
+    "Fill the useful gap" : {
+      "extractionState" : "manual"
+    },
+    "Final sounds" : {
+      "extractionState" : "manual"
+    },
+    "Find the rhythm" : {
+      "extractionState" : "manual"
+    },
+    "Find your voice" : {
+      "extractionState" : "manual"
+    },
+    "Finding the right lessons for you" : {
+      "extractionState" : "manual"
+    },
+    "Finding your conversation buddy…" : {
+      "extractionState" : "manual"
+    },
+    "Finish a practice session to earn XP and join the board." : {
+      "extractionState" : "manual"
+    },
+    "Finish a practice session to earn your first XP." : {
+      "extractionState" : "manual"
+    },
+    "Finish at the front for n; let ng finish further back." : {
+      "extractionState" : "manual"
+    },
+    "Finish practice" : {
+      "extractionState" : "manual"
+    },
+    "Finish the previous conversation to unlock this one" : {
+      "extractionState" : "manual"
+    },
+    "Finish today’s session" : {
+      "extractionState" : "manual"
+    },
+    "Finish without feedback" : {
+      "extractionState" : "manual"
+    },
+    "Finish your first lesson: three phrases and a mini-conversation." : {
+      "extractionState" : "manual"
+    },
+    "Finished lessons will be saved here for listening and reading again." : {
+      "extractionState" : "manual"
+    },
+    "Finishing your practice…" : {
+      "extractionState" : "manual"
+    },
+    "First Steps lesson · %lld min" : {
+      "extractionState" : "manual"
+    },
+    "First conversations" : {
+      "extractionState" : "manual"
+    },
+    "First lesson completed" : {
+      "extractionState" : "manual"
+    },
+    "First name (optional)" : {
+      "extractionState" : "manual"
+    },
+    "First name or nickname" : {
+      "extractionState" : "manual"
+    },
+    "First name, optional" : {
+      "extractionState" : "manual"
+    },
+    "Five focused lessons completed. You are finding your pace." : {
+      "extractionState" : "manual"
+    },
+    "Fix or clear the optional topic above to save." : {
+      "extractionState" : "manual"
+    },
+    "Follow the meeting" : {
+      "extractionState" : "manual"
+    },
+    "Follow the rhythm" : {
+      "extractionState" : "manual"
+    },
+    "Follows your device’s appearance automatically." : {
+      "extractionState" : "manual"
+    },
+    "For example: Renewing my papers" : {
+      "extractionState" : "manual"
+    },
+    "Found your voice" : {
+      "extractionState" : "manual"
+    },
+    "Free conversation, role-play, and instant feedback." : {
+      "extractionState" : "manual"
+    },
+    "Friendly" : {
+      "extractionState" : "manual"
+    },
+    "Full week" : {
+      "extractionState" : "manual"
+    },
+    "Future you has this." : {
+      "extractionState" : "manual"
+    },
+    "GOT IT" : {
+      "extractionState" : "manual"
+    },
+    "Gentle" : {
+      "extractionState" : "manual"
+    },
+    "Get a smile and a real chat" : {
+      "extractionState" : "manual"
+    },
+    "Getting quicker every time" : {
+      "extractionState" : "manual"
+    },
+    "Getting there" : {
+      "extractionState" : "manual"
+    },
+    "Give your ear the first guess." : {
+      "extractionState" : "manual"
+    },
+    "Go back 5 seconds" : {
+      "extractionState" : "manual"
+    },
+    "Go back to the previous lesson step" : {
+      "extractionState" : "manual"
+    },
+    "Goal" : {
+      "extractionState" : "manual"
+    },
+    "Gold medal" : {
+      "extractionState" : "manual"
+    },
+    "Good try! You'll practise this sound in your lessons." : {
+      "extractionState" : "manual"
+    },
+    "Goodbye!" : {
+      "extractionState" : "manual"
+    },
+    "Got it" : {
+      "extractionState" : "manual"
+    },
+    "Got there!" : {
+      "extractionState" : "manual"
+    },
+    "Grandma talks about you, not to you" : {
+      "extractionState" : "manual"
+    },
+    "Great job!" : {
+      "extractionState" : "manual"
+    },
+    "Grumpy" : {
+      "extractionState" : "manual"
+    },
+    "Guide the next lesson" : {
+      "extractionState" : "manual"
+    },
+    "HINT" : {
+      "extractionState" : "manual"
+    },
+    "Handle everyday life" : {
+      "extractionState" : "manual"
+    },
+    "Handle real conversations" : {
+      "extractionState" : "manual"
+    },
+    "Handle the market and the landlord" : {
+      "extractionState" : "manual"
+    },
+    "Hanoi and the North" : {
+      "extractionState" : "manual"
+    },
+    "He Lô %@!" : {
+      "extractionState" : "manual"
+    },
+    "Headphones on. Main-character mode." : {
+      "extractionState" : "manual"
+    },
+    "Headphones recommended. Courage optional." : {
+      "extractionState" : "manual"
+    },
+    "Hear" : {
+      "extractionState" : "manual"
+    },
+    "Hear %@" : {
+      "extractionState" : "manual"
+    },
+    "Hear & match" : {
+      "extractionState" : "manual"
+    },
+    "Hear each part" : {
+      "extractionState" : "manual"
+    },
+    "Hear it doing real work" : {
+      "extractionState" : "manual"
+    },
+    "Hear it in context" : {
+      "extractionState" : "manual"
+    },
+    "Hear it, then begin speaking a beat behind the model." : {
+      "extractionState" : "manual"
+    },
+    "Hear it. Say it. Use it." : {
+      "extractionState" : "manual"
+    },
+    "Hear my take" : {
+      "extractionState" : "manual"
+    },
+    "Hear the context slowly" : {
+      "extractionState" : "manual"
+    },
+    "Hear the full context" : {
+      "extractionState" : "manual"
+    },
+    "Hear the phrase" : {
+      "extractionState" : "manual"
+    },
+    "Hear the shape" : {
+      "extractionState" : "manual"
+    },
+    "Hear the situation first" : {
+      "extractionState" : "manual"
+    },
+    "Hear the tones, learn three phrases, then use them in a real mini-conversation with Bé Trâu." : {
+      "extractionState" : "manual"
+    },
+    "Hear this phrase" : {
+      "extractionState" : "manual"
+    },
+    "Here’s how to say it" : {
+      "extractionState" : "manual"
+    },
+    "Here’s how your café order fits together." : {
+      "extractionState" : "manual"
+    },
+    "Here’s what a few minutes a day changes, %@." : {
+      "extractionState" : "manual"
+    },
+    "Here’s what a few minutes a day changes." : {
+      "extractionState" : "manual"
+    },
+    "Hi %@!" : {
+      "extractionState" : "manual"
+    },
+    "Hi there!" : {
+      "extractionState" : "manual"
+    },
+    "Hi there! I’m Bé Trâu." : {
+      "extractionState" : "manual"
+    },
+    "Hi!" : {
+      "extractionState" : "manual"
+    },
+    "Hide lesson topic" : {
+      "extractionState" : "manual"
+    },
+    "Hide listening note" : {
+      "extractionState" : "manual"
+    },
+    "Hide text" : {
+      "extractionState" : "manual"
+    },
+    "Hide transcript" : {
+      "extractionState" : "manual"
+    },
+    "Hint" : {
+      "extractionState" : "manual"
+    },
+    "Ho Chi Minh City and the South" : {
+      "extractionState" : "manual"
+    },
+    "How Kumusta protects your data" : {
+      "extractionState" : "manual"
+    },
+    "How are you?" : {
+      "extractionState" : "manual"
+    },
+    "How close were you?" : {
+      "extractionState" : "manual"
+    },
+    "How much should lessons stretch you?" : {
+      "extractionState" : "manual"
+    },
+    "How was the level?" : {
+      "extractionState" : "manual"
+    },
+    "How was the voice pace?" : {
+      "extractionState" : "manual"
+    },
+    "I can handle basics" : {
+      "extractionState" : "manual"
+    },
+    "I can’t wait to meet you!" : {
+      "extractionState" : "manual"
+    },
+    "I caught the phrase" : {
+      "extractionState" : "manual"
+    },
+    "I confirmed my email" : {
+      "extractionState" : "manual"
+    },
+    "I couldn’t hear a phrase yet. Move a little closer and try again." : {
+      "extractionState" : "manual"
+    },
+    "I don’t remember" : {
+      "extractionState" : "manual"
+    },
+    "I grew up around Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "I hear you" : {
+      "extractionState" : "manual"
+    },
+    "I know some words" : {
+      "extractionState" : "manual"
+    },
+    "I said it" : {
+      "extractionState" : "manual"
+    },
+    "I'm good, thank you!" : {
+      "extractionState" : "manual"
+    },
+    "I'm learning Vietnamese with Kumusta — %lld day streak, %lld words. kumusta.app" : {
+      "extractionState" : "manual"
+    },
+    "IN REAL LIFE" : {
+      "extractionState" : "manual"
+    },
+    "IN THIS SENTENCE" : {
+      "extractionState" : "manual"
+    },
+    "Idle" : {
+      "extractionState" : "manual"
+    },
+    "In progress" : {
+      "extractionState" : "manual"
+    },
+    "In real life" : {
+      "extractionState" : "manual"
+    },
+    "In review" : {
+      "extractionState" : "manual"
+    },
+    "Intermediate" : {
+      "extractionState" : "manual"
+    },
+    "Introductory offer: %@" : {
+      "extractionState" : "manual"
+    },
+    "It needs a little longer. You can leave this screen or check again now." : {
+      "extractionState" : "manual"
+    },
+    "It sounded like **%@** instead of **%@**." : {
+      "extractionState" : "manual"
+    },
+    "It will leave today’s due list, but we’ll still bring it back for a later check." : {
+      "extractionState" : "manual"
+    },
+    "I’d like" : {
+      "extractionState" : "manual"
+    },
+    "I’ll be your Vietnamese buddy." : {
+      "extractionState" : "manual"
+    },
+    "I’ll keep it friendly." : {
+      "extractionState" : "manual"
+    },
+    "I’m canceling because…" : {
+      "extractionState" : "manual"
+    },
+    "I’m ready for the questions" : {
+      "extractionState" : "manual"
+    },
+    "JUMP BACK IN" : {
+      "extractionState" : "manual"
+    },
+    "Join a community of" : {
+      "extractionState" : "manual"
+    },
+    "Join the conversation at dinner" : {
+      "extractionState" : "manual"
+    },
+    "Journey complete!" : {
+      "extractionState" : "manual"
+    },
+    "Just right" : {
+      "extractionState" : "manual"
+    },
+    "KEEP LEARNING" : {
+      "extractionState" : "manual"
+    },
+    "Keep going" : {
+      "extractionState" : "manual"
+    },
+    "Keep going, you’re already on your way." : {
+      "extractionState" : "manual"
+    },
+    "Keep learning" : {
+      "extractionState" : "manual"
+    },
+    "Keep my account" : {
+      "extractionState" : "manual"
+    },
+    "Keep my subscription" : {
+      "extractionState" : "manual"
+    },
+    "Keep practicing this one" : {
+      "extractionState" : "manual"
+    },
+    "Keep real Vietnamese\nwithin reach." : {
+      "extractionState" : "manual"
+    },
+    "Keep real Vietnamese within reach" : {
+      "extractionState" : "manual"
+    },
+    "Keep showing up. Every listen adds up." : {
+      "extractionState" : "manual"
+    },
+    "Keep that feeling going." : {
+      "extractionState" : "manual"
+    },
+    "Keep the momentum. Get a little practice in." : {
+      "extractionState" : "manual"
+    },
+    "Keep the sentence moving" : {
+      "extractionState" : "manual"
+    },
+    "Keep the streak going" : {
+      "extractionState" : "manual"
+    },
+    "Keep the text hidden. Let your ears lead." : {
+      "extractionState" : "manual"
+    },
+    "Keep the topic under %lld characters." : {
+      "extractionState" : "manual"
+    },
+    "Keep the words that matter" : {
+      "extractionState" : "manual"
+    },
+    "Keep these letters together when you hear and say them." : {
+      "extractionState" : "manual"
+    },
+    "Know your neighbors by name" : {
+      "extractionState" : "manual"
+    },
+    "LEARN" : {
+      "extractionState" : "manual"
+    },
+    "LET’S GO" : {
+      "extractionState" : "manual"
+    },
+    "LISTEN FIRST" : {
+      "extractionState" : "manual"
+    },
+    "LISTEN FOR THE DETAIL" : {
+      "extractionState" : "manual"
+    },
+    "LISTEN · TRUST YOUR INSTINCT" : {
+      "extractionState" : "manual"
+    },
+    "LISTENING" : {
+      "extractionState" : "manual"
+    },
+    "LISTENING QUEST" : {
+      "extractionState" : "manual"
+    },
+    "LIVE" : {
+      "extractionState" : "manual"
+    },
+    "Language" : {
+      "extractionState" : "manual"
+    },
+    "Laugh at the joke the first time" : {
+      "extractionState" : "manual"
+    },
+    "Leaderboard" : {
+      "extractionState" : "manual"
+    },
+    "Learning" : {
+      "extractionState" : "manual"
+    },
+    "Learning path complete" : {
+      "extractionState" : "manual"
+    },
+    "Learning plan" : {
+      "extractionState" : "manual"
+    },
+    "Learning plan progress" : {
+      "extractionState" : "manual"
+    },
+    "Learning status" : {
+      "extractionState" : "manual"
+    },
+    "Lesson %lld is ready" : {
+      "extractionState" : "manual"
+    },
+    "Lesson %lld, %@, completed" : {
+      "extractionState" : "manual"
+    },
+    "Lesson %lld, %@, locked" : {
+      "extractionState" : "manual"
+    },
+    "Lesson complete!" : {
+      "extractionState" : "manual"
+    },
+    "Lesson history" : {
+      "extractionState" : "manual"
+    },
+    "Lesson progress" : {
+      "extractionState" : "manual"
+    },
+    "Lesson unavailable" : {
+      "extractionState" : "manual"
+    },
+    "Let Kumusta choose, or add one real-life situation." : {
+      "extractionState" : "manual"
+    },
+    "Let’s hear their story" : {
+      "extractionState" : "manual"
+    },
+    "Let’s play" : {
+      "extractionState" : "manual"
+    },
+    "Let’s try that again" : {
+      "extractionState" : "manual"
+    },
+    "Level" : {
+      "extractionState" : "manual"
+    },
+    "Life in Vietnam" : {
+      "extractionState" : "manual"
+    },
+    "Light" : {
+      "extractionState" : "manual"
+    },
+    "Like an old friend. Casual words, lots of teasing." : {
+      "extractionState" : "manual"
+    },
+    "Listen" : {
+      "extractionState" : "manual"
+    },
+    "Listen & learn" : {
+      "extractionState" : "manual"
+    },
+    "Listen & recall" : {
+      "extractionState" : "manual"
+    },
+    "Listen again" : {
+      "extractionState" : "manual"
+    },
+    "Listen again, read every line, and revisit useful chunks." : {
+      "extractionState" : "manual"
+    },
+    "Listen again. The red words don't match, often just the tone." : {
+      "extractionState" : "manual"
+    },
+    "Listen and choose the meaning you heard." : {
+      "extractionState" : "manual"
+    },
+    "Listen and learn with stories and roadmap exercises" : {
+      "extractionState" : "manual"
+    },
+    "Listen closely" : {
+      "extractionState" : "manual"
+    },
+    "Listen for the phrase inside it" : {
+      "extractionState" : "manual"
+    },
+    "Listen for the situation, not every word" : {
+      "extractionState" : "manual"
+    },
+    "Listen for “%@”" : {
+      "extractionState" : "manual"
+    },
+    "Listen for “một” and “%@”" : {
+      "extractionState" : "manual"
+    },
+    "Listen naturally first. Slow it down only when your ear needs another clue." : {
+      "extractionState" : "manual"
+    },
+    "Listen once more, then pick again." : {
+      "extractionState" : "manual"
+    },
+    "Listen once. What is happening in this situation?" : {
+      "extractionState" : "manual"
+    },
+    "Listen to %@ and %@. Then put your ears to the test!" : {
+      "extractionState" : "manual"
+    },
+    "Listen to everyday Vietnamese, one scene at a time." : {
+      "extractionState" : "manual"
+    },
+    "Listen to example" : {
+      "extractionState" : "manual"
+    },
+    "Listen to the clue" : {
+      "extractionState" : "manual"
+    },
+    "Listen to the sentence at least once before revealing it." : {
+      "extractionState" : "manual"
+    },
+    "Listen to your saved word inside the sentence where you found it." : {
+      "extractionState" : "manual"
+    },
+    "Listening" : {
+      "extractionState" : "manual"
+    },
+    "Listening, speaking, and review features will lock after your access ends." : {
+      "extractionState" : "manual"
+    },
+    "Listening-first lessons for real situations" : {
+      "extractionState" : "manual"
+    },
+    "Listening…" : {
+      "extractionState" : "manual"
+    },
+    "Live in Vietnam" : {
+      "extractionState" : "manual"
+    },
+    "Live practice is being set up. Please check back shortly." : {
+      "extractionState" : "manual"
+    },
+    "Live practice needs a connected account." : {
+      "extractionState" : "manual"
+    },
+    "Loading App Store plans…" : {
+      "extractionState" : "manual"
+    },
+    "Loading conversations" : {
+      "extractionState" : "manual"
+    },
+    "Loading leaderboard" : {
+      "extractionState" : "manual"
+    },
+    "Loading subscription plans…" : {
+      "extractionState" : "manual"
+    },
+    "Loading your lesson" : {
+      "extractionState" : "manual"
+    },
+    "Loading your lesson path" : {
+      "extractionState" : "manual"
+    },
+    "Loading…" : {
+      "extractionState" : "manual"
+    },
+    "Locals switch to English" : {
+      "extractionState" : "manual"
+    },
+    "Lock in my guess" : {
+      "extractionState" : "manual"
+    },
+    "Locked" : {
+      "extractionState" : "manual"
+    },
+    "Locked in" : {
+      "extractionState" : "manual"
+    },
+    "Locked, but not forever." : {
+      "extractionState" : "manual"
+    },
+    "Look at you go" : {
+      "extractionState" : "manual"
+    },
+    "Lunch break" : {
+      "extractionState" : "manual"
+    },
+    "MINUTES" : {
+      "extractionState" : "manual"
+    },
+    "Make Vietnamese part of your career" : {
+      "extractionState" : "manual"
+    },
+    "Make Vietnamese your own voice" : {
+      "extractionState" : "manual"
+    },
+    "Make daily life feel like home" : {
+      "extractionState" : "manual"
+    },
+    "Make it your own" : {
+      "extractionState" : "manual"
+    },
+    "Make room for tomorrow." : {
+      "extractionState" : "manual"
+    },
+    "Make your first move" : {
+      "extractionState" : "manual"
+    },
+    "Make your progress\ntravel with you." : {
+      "extractionState" : "manual"
+    },
+    "Making this yours" : {
+      "extractionState" : "manual"
+    },
+    "Mark as known" : {
+      "extractionState" : "manual"
+    },
+    "Mark this phrase as known?" : {
+      "extractionState" : "manual"
+    },
+    "Marked as known. We’ll bring it back later." : {
+      "extractionState" : "manual"
+    },
+    "Meetings happen around you" : {
+      "extractionState" : "manual"
+    },
+    "Membership" : {
+      "extractionState" : "manual"
+    },
+    "Memory refreshed!" : {
+      "extractionState" : "manual"
+    },
+    "Microphone access is off. You can enable it in Settings." : {
+      "extractionState" : "manual"
+    },
+    "Microphone level" : {
+      "extractionState" : "manual"
+    },
+    "Microphone muted · time is still running" : {
+      "extractionState" : "manual"
+    },
+    "Missing" : {
+      "extractionState" : "manual"
+    },
+    "Monthly rhythm" : {
+      "extractionState" : "manual"
+    },
+    "Morning" : {
+      "extractionState" : "manual"
+    },
+    "Mute" : {
+      "extractionState" : "manual"
+    },
+    "My Kumusta progress" : {
+      "extractionState" : "manual"
+    },
+    "My name is %@." : {
+      "extractionState" : "manual"
+    },
+    "NATURAL SPEED" : {
+      "extractionState" : "manual"
+    },
+    "NEW WORDS" : {
+      "extractionState" : "manual"
+    },
+    "Nailed it. Bé Trâu heard the full phrase." : {
+      "extractionState" : "manual"
+    },
+    "Natural" : {
+      "extractionState" : "manual"
+    },
+    "Needs attention" : {
+      "extractionState" : "manual"
+    },
+    "Needs practice" : {
+      "extractionState" : "manual"
+    },
+    "New phrase" : {
+      "extractionState" : "manual"
+    },
+    "New roadmap unlocked" : {
+      "extractionState" : "manual"
+    },
+    "New to Kumusta? Create an account" : {
+      "extractionState" : "manual"
+    },
+    "New to Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Next check" : {
+      "extractionState" : "manual"
+    },
+    "Next lesson" : {
+      "extractionState" : "manual"
+    },
+    "Next question" : {
+      "extractionState" : "manual"
+    },
+    "Next review in %lld day" : {
+      "extractionState" : "manual"
+    },
+    "Next review in %lld days" : {
+      "extractionState" : "manual"
+    },
+    "Next review tomorrow" : {
+      "extractionState" : "manual"
+    },
+    "Next stop: #%lld" : {
+      "extractionState" : "manual"
+    },
+    "Next up: “%@”. We’re matching the vocabulary, listening rounds, and speaking practice to it." : {
+      "extractionState" : "manual"
+    },
+    "Next word" : {
+      "extractionState" : "manual"
+    },
+    "Nice to meet you!" : {
+      "extractionState" : "manual"
+    },
+    "Nice to meet you, %@!" : {
+      "extractionState" : "manual"
+    },
+    "Nice work" : {
+      "extractionState" : "manual"
+    },
+    "Nice work!" : {
+      "extractionState" : "manual"
+    },
+    "Nice!" : {
+      "extractionState" : "manual"
+    },
+    "Nice! Buddy understood you." : {
+      "extractionState" : "manual"
+    },
+    "Nice! That's the right reply." : {
+      "extractionState" : "manual"
+    },
+    "Nice, you said it!" : {
+      "extractionState" : "manual"
+    },
+    "No Vietnamese came through. Hold the phone a little closer and speak up." : {
+      "extractionState" : "manual"
+    },
+    "No active purchase was found for this Apple ID." : {
+      "extractionState" : "manual"
+    },
+    "No active subscription was found for this Apple ID." : {
+      "extractionState" : "manual"
+    },
+    "No completed lessons yet" : {
+      "extractionState" : "manual"
+    },
+    "No microphone input is available right now. Check your headset connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "No more premium lessons" : {
+      "extractionState" : "manual"
+    },
+    "No phrases" : {
+      "extractionState" : "manual"
+    },
+    "No phrases here yet" : {
+      "extractionState" : "manual"
+    },
+    "No phrases in this round" : {
+      "extractionState" : "manual"
+    },
+    "No saved phrases yet" : {
+      "extractionState" : "manual"
+    },
+    "No session" : {
+      "extractionState" : "manual"
+    },
+    "No subscription plans are available right now. Please try again shortly." : {
+      "extractionState" : "manual"
+    },
+    "No translation first. Listen the way you would at a real café." : {
+      "extractionState" : "manual"
+    },
+    "Northern" : {
+      "extractionState" : "manual"
+    },
+    "Northern + Southern accents" : {
+      "extractionState" : "manual"
+    },
+    "Northern Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Northern voice" : {
+      "extractionState" : "manual"
+    },
+    "Not now" : {
+      "extractionState" : "manual"
+    },
+    "Not quite" : {
+      "extractionState" : "manual"
+    },
+    "Not quite. Replay it and listen for “cà phê sữa đá.”" : {
+      "extractionState" : "manual"
+    },
+    "Not selected" : {
+      "extractionState" : "manual"
+    },
+    "Not sure? Just reveal it" : {
+      "extractionState" : "manual"
+    },
+    "Not that one, replay the scene and follow the context." : {
+      "extractionState" : "manual"
+    },
+    "Not the right answer" : {
+      "extractionState" : "manual"
+    },
+    "Not the right meaning" : {
+      "extractionState" : "manual"
+    },
+    "Not yet, practice it again" : {
+      "extractionState" : "manual"
+    },
+    "Nothing needs a nudge" : {
+      "extractionState" : "manual"
+    },
+    "Nothing saved yet" : {
+      "extractionState" : "manual"
+    },
+    "Notifications" : {
+      "extractionState" : "manual"
+    },
+    "Now put it together yourself." : {
+      "extractionState" : "manual"
+    },
+    "Now say it out loud" : {
+      "extractionState" : "manual"
+    },
+    "Number one looks good on you" : {
+      "extractionState" : "manual"
+    },
+    "Numbers" : {
+      "extractionState" : "manual"
+    },
+    "Numbers become useful when you order, buy, and ask how much." : {
+      "extractionState" : "manual"
+    },
+    "OK" : {
+      "extractionState" : "manual"
+    },
+    "ON YOUR OWN" : {
+      "extractionState" : "manual"
+    },
+    "ONE LAST QUESTION" : {
+      "extractionState" : "manual"
+    },
+    "ONE LAST TAP" : {
+      "extractionState" : "manual"
+    },
+    "OPEN CHEAT SHEET" : {
+      "extractionState" : "manual"
+    },
+    "OPTIONAL" : {
+      "extractionState" : "manual"
+    },
+    "Off" : {
+      "extractionState" : "manual"
+    },
+    "Off keeps lessons quieter in public." : {
+      "extractionState" : "manual"
+    },
+    "On your own" : {
+      "extractionState" : "manual"
+    },
+    "On your own: %@" : {
+      "extractionState" : "manual"
+    },
+    "Onboarding progress" : {
+      "extractionState" : "manual"
+    },
+    "One complete thought" : {
+      "extractionState" : "manual"
+    },
+    "One focused listening round" : {
+      "extractionState" : "manual"
+    },
+    "One hundred days. This is who you are now." : {
+      "extractionState" : "manual"
+    },
+    "One hundred days. You built a real Vietnamese habit." : {
+      "extractionState" : "manual"
+    },
+    "One more listen will help" : {
+      "extractionState" : "manual"
+    },
+    "One more rep" : {
+      "extractionState" : "manual"
+    },
+    "One natural conversation. No subtitles first." : {
+      "extractionState" : "manual"
+    },
+    "One opening sound made from a familiar letter pair." : {
+      "extractionState" : "manual"
+    },
+    "One small step in Vietnamese. That’s today’s win." : {
+      "extractionState" : "manual"
+    },
+    "One step to today’s win" : {
+      "extractionState" : "manual"
+    },
+    "One tiny win away." : {
+      "extractionState" : "manual"
+    },
+    "One week strong" : {
+      "extractionState" : "manual"
+    },
+    "One year. Chúc mừng." : {
+      "extractionState" : "manual"
+    },
+    "One-minute rep" : {
+      "extractionState" : "manual"
+    },
+    "Only completed sessions count here." : {
+      "extractionState" : "manual"
+    },
+    "Open Settings" : {
+      "extractionState" : "manual"
+    },
+    "Open all leaderboard positions" : {
+      "extractionState" : "manual"
+    },
+    "Open the First Steps course" : {
+      "extractionState" : "manual"
+    },
+    "Open this completed conversation again" : {
+      "extractionState" : "manual"
+    },
+    "Opens the basics cheat sheet and lesson replays" : {
+      "extractionState" : "manual"
+    },
+    "Opens the next lesson on your path" : {
+      "extractionState" : "manual"
+    },
+    "Opens the saved phrase context" : {
+      "extractionState" : "manual"
+    },
+    "Optional next lesson topic" : {
+      "extractionState" : "manual"
+    },
+    "Optional. Name one real-life situation and we’ll make it your very next lesson." : {
+      "extractionState" : "manual"
+    },
+    "Order like a local" : {
+      "extractionState" : "manual"
+    },
+    "PERSONALIZING YOUR KUMUSTA" : {
+      "extractionState" : "manual"
+    },
+    "PHRASE QUEST" : {
+      "extractionState" : "manual"
+    },
+    "PRACTICE" : {
+      "extractionState" : "manual"
+    },
+    "PROFILE" : {
+      "extractionState" : "manual"
+    },
+    "Partner" : {
+      "extractionState" : "manual"
+    },
+    "Password" : {
+      "extractionState" : "manual"
+    },
+    "Path complete · replay any lesson" : {
+      "extractionState" : "manual"
+    },
+    "Pause conversation" : {
+      "extractionState" : "manual"
+    },
+    "Pay the tourist price" : {
+      "extractionState" : "manual"
+    },
+    "Payment is pending" : {
+      "extractionState" : "manual"
+    },
+    "People words" : {
+      "extractionState" : "manual"
+    },
+    "Perfect!" : {
+      "extractionState" : "manual"
+    },
+    "Permanently remove your account and learning data" : {
+      "extractionState" : "manual"
+    },
+    "Phrase" : {
+      "extractionState" : "manual"
+    },
+    "Phrase unavailable" : {
+      "extractionState" : "manual"
+    },
+    "Pick up the phone with confidence" : {
+      "extractionState" : "manual"
+    },
+    "Pick up where\nyou left off." : {
+      "extractionState" : "manual"
+    },
+    "Pick your first scene" : {
+      "extractionState" : "manual"
+    },
+    "Pick your reply" : {
+      "extractionState" : "manual"
+    },
+    "Plans are taking a break" : {
+      "extractionState" : "manual"
+    },
+    "Play" : {
+      "extractionState" : "manual"
+    },
+    "Play %@ female voice sample" : {
+      "extractionState" : "manual"
+    },
+    "Play again" : {
+      "extractionState" : "manual"
+    },
+    "Play at %@ speed" : {
+      "extractionState" : "manual"
+    },
+    "Play audio automatically" : {
+      "extractionState" : "manual"
+    },
+    "Play conversation" : {
+      "extractionState" : "manual"
+    },
+    "Play faster" : {
+      "extractionState" : "manual"
+    },
+    "Play natural" : {
+      "extractionState" : "manual"
+    },
+    "Play phrase" : {
+      "extractionState" : "manual"
+    },
+    "Play phrase audio" : {
+      "extractionState" : "manual"
+    },
+    "Play round %lld" : {
+      "extractionState" : "manual"
+    },
+    "Play slower" : {
+      "extractionState" : "manual"
+    },
+    "Play slowly" : {
+      "extractionState" : "manual"
+    },
+    "Play the full example sentence" : {
+      "extractionState" : "manual"
+    },
+    "Play the phrase, then say the meaning out loud before you reveal it." : {
+      "extractionState" : "manual"
+    },
+    "Play the scene" : {
+      "extractionState" : "manual"
+    },
+    "Play the sentence once. Notice where your phrase begins and ends." : {
+      "extractionState" : "manual"
+    },
+    "Playing Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Playing phrase" : {
+      "extractionState" : "manual"
+    },
+    "Playing the scene…" : {
+      "extractionState" : "manual"
+    },
+    "Plays the Vietnamese example sentence" : {
+      "extractionState" : "manual"
+    },
+    "Plays the phrase" : {
+      "extractionState" : "manual"
+    },
+    "Plays the phrase again" : {
+      "extractionState" : "manual"
+    },
+    "Plays the phrase at faster speed" : {
+      "extractionState" : "manual"
+    },
+    "Plays the phrase at natural speed" : {
+      "extractionState" : "manual"
+    },
+    "Plays the phrase at slower speed" : {
+      "extractionState" : "manual"
+    },
+    "Plays the word" : {
+      "extractionState" : "manual"
+    },
+    "Plays the word and shows its meaning" : {
+      "extractionState" : "manual"
+    },
+    "Please choose a respectful name." : {
+      "extractionState" : "manual"
+    },
+    "Please enter a reason before continuing." : {
+      "extractionState" : "manual"
+    },
+    "Please pick a name that’s respectful — this one can’t be used." : {
+      "extractionState" : "manual"
+    },
+    "Please try again." : {
+      "extractionState" : "manual"
+    },
+    "Please update Kumusta and try again." : {
+      "extractionState" : "manual"
+    },
+    "Point at menus and hope" : {
+      "extractionState" : "manual"
+    },
+    "Pops, answer chimes and badges. Voices stay the same." : {
+      "extractionState" : "manual"
+    },
+    "Practice" : {
+      "extractionState" : "manual"
+    },
+    "Practice from this context" : {
+      "extractionState" : "manual"
+    },
+    "Practice plus a word review" : {
+      "extractionState" : "manual"
+    },
+    "Practice progress" : {
+      "extractionState" : "manual"
+    },
+    "Practice step %lld of %lld" : {
+      "extractionState" : "manual"
+    },
+    "Practice this lesson again" : {
+      "extractionState" : "manual"
+    },
+    "Practice what your family really says" : {
+      "extractionState" : "manual"
+    },
+    "Practice with a consistent Northern or Southern female voice." : {
+      "extractionState" : "manual"
+    },
+    "Practice your\nVietnamese words" : {
+      "extractionState" : "manual"
+    },
+    "Premium access is active." : {
+      "extractionState" : "manual"
+    },
+    "Preparing" : {
+      "extractionState" : "manual"
+    },
+    "Preparing the next lesson" : {
+      "extractionState" : "manual"
+    },
+    "Preparing your take…" : {
+      "extractionState" : "manual"
+    },
+    "Previous step" : {
+      "extractionState" : "manual"
+    },
+    "Privacy" : {
+      "extractionState" : "manual"
+    },
+    "Privacy policy" : {
+      "extractionState" : "manual"
+    },
+    "Profile" : {
+      "extractionState" : "manual"
+    },
+    "Purchases haven’t been configured for this build." : {
+      "extractionState" : "manual"
+    },
+    "Purchases the selected subscription through the App Store" : {
+      "extractionState" : "manual"
+    },
+    "Put back in flashcards" : {
+      "extractionState" : "manual"
+    },
+    "Quick tune-up" : {
+      "extractionState" : "manual"
+    },
+    "READ THE MOMENT" : {
+      "extractionState" : "manual"
+    },
+    "REAL-TIME CHAT" : {
+      "extractionState" : "manual"
+    },
+    "REMEMBERED" : {
+      "extractionState" : "manual"
+    },
+    "RESULT" : {
+      "extractionState" : "manual"
+    },
+    "REVIEWED" : {
+      "extractionState" : "manual"
+    },
+    "ROUND %lld" : {
+      "extractionState" : "manual"
+    },
+    "Rank %lld, %@, %lld XP" : {
+      "extractionState" : "manual"
+    },
+    "Rank %lld, %@, %lld XP, that’s you" : {
+      "extractionState" : "manual"
+    },
+    "Read the whole example, then choose the honest feeling." : {
+      "extractionState" : "manual"
+    },
+    "Ready" : {
+      "extractionState" : "manual"
+    },
+    "Ready for your first lesson" : {
+      "extractionState" : "manual"
+    },
+    "Ready when you are" : {
+      "extractionState" : "manual"
+    },
+    "Real northern Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Real pace" : {
+      "extractionState" : "manual"
+    },
+    "Real southern Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Recall" : {
+      "extractionState" : "manual"
+    },
+    "Recall strength" : {
+      "extractionState" : "manual"
+    },
+    "Recent" : {
+      "extractionState" : "manual"
+    },
+    "Reconnect with my roots" : {
+      "extractionState" : "manual"
+    },
+    "Record one shadowed take" : {
+      "extractionState" : "manual"
+    },
+    "Recording" : {
+      "extractionState" : "manual"
+    },
+    "Records your recall and continues to the next phrase" : {
+      "extractionState" : "manual"
+    },
+    "Remind me" : {
+      "extractionState" : "manual"
+    },
+    "Remove from flashcards" : {
+      "extractionState" : "manual"
+    },
+    "Remove from saved vocabulary" : {
+      "extractionState" : "manual"
+    },
+    "Remove this device’s profile and activity" : {
+      "extractionState" : "manual"
+    },
+    "Removed from saved phrases." : {
+      "extractionState" : "manual"
+    },
+    "Removes this word" : {
+      "extractionState" : "manual"
+    },
+    "Removes this word from flashcards" : {
+      "extractionState" : "manual"
+    },
+    "Replay" : {
+      "extractionState" : "manual"
+    },
+    "Replay any moment whenever you need" : {
+      "extractionState" : "manual"
+    },
+    "Replay as much as you like. You’ve got this." : {
+      "extractionState" : "manual"
+    },
+    "Replay faster" : {
+      "extractionState" : "manual"
+    },
+    "Replay natural" : {
+      "extractionState" : "manual"
+    },
+    "Replay slower" : {
+      "extractionState" : "manual"
+    },
+    "Replay the exact moment" : {
+      "extractionState" : "manual"
+    },
+    "Replay your lessons" : {
+      "extractionState" : "manual"
+    },
+    "Reset answer" : {
+      "extractionState" : "manual"
+    },
+    "Restore purchases" : {
+      "extractionState" : "manual"
+    },
+    "Restoring purchases…" : {
+      "extractionState" : "manual"
+    },
+    "Resume First Steps" : {
+      "extractionState" : "manual"
+    },
+    "Retry" : {
+      "extractionState" : "manual"
+    },
+    "Retry saving answer" : {
+      "extractionState" : "manual"
+    },
+    "Retry saving result" : {
+      "extractionState" : "manual"
+    },
+    "Return to your phrase bank and try opening it again." : {
+      "extractionState" : "manual"
+    },
+    "Reveal" : {
+      "extractionState" : "manual"
+    },
+    "Reveal the phrase" : {
+      "extractionState" : "manual"
+    },
+    "Reveal the situation" : {
+      "extractionState" : "manual"
+    },
+    "Reveal the spoken sentence and its meaning" : {
+      "extractionState" : "manual"
+    },
+    "RevenueCat isn’t configured" : {
+      "extractionState" : "manual"
+    },
+    "Review %lld more" : {
+      "extractionState" : "manual"
+    },
+    "Review First Steps" : {
+      "extractionState" : "manual"
+    },
+    "Review done · %lld of %lld remembered" : {
+      "extractionState" : "manual"
+    },
+    "Review in %lld day" : {
+      "extractionState" : "manual"
+    },
+    "Review in %lld days" : {
+      "extractionState" : "manual"
+    },
+    "Review lesson" : {
+      "extractionState" : "manual"
+    },
+    "Review progress" : {
+      "extractionState" : "manual"
+    },
+    "Review tomorrow" : {
+      "extractionState" : "manual"
+    },
+    "Roots" : {
+      "extractionState" : "manual"
+    },
+    "Round %lld of %lld, %@" : {
+      "extractionState" : "manual"
+    },
+    "Run them again any time. Bé Trâu checks every word." : {
+      "extractionState" : "manual"
+    },
+    "SCENE %@ · %@" : {
+      "extractionState" : "manual"
+    },
+    "SEE MY PLAN" : {
+      "extractionState" : "manual"
+    },
+    "SITUATIONS" : {
+      "extractionState" : "manual"
+    },
+    "SKIP THE LESSON" : {
+      "extractionState" : "manual"
+    },
+    "SORT" : {
+      "extractionState" : "manual"
+    },
+    "SOUND NATURAL" : {
+      "extractionState" : "manual"
+    },
+    "SPEAK" : {
+      "extractionState" : "manual"
+    },
+    "START" : {
+      "extractionState" : "manual"
+    },
+    "START +10 XP" : {
+      "extractionState" : "manual"
+    },
+    "START REVIEW" : {
+      "extractionState" : "manual"
+    },
+    "START YOUR KUMUSTA JOURNEY" : {
+      "extractionState" : "manual"
+    },
+    "STEP 1 · CATCH IT" : {
+      "extractionState" : "manual"
+    },
+    "STEP 2 · SAY IT" : {
+      "extractionState" : "manual"
+    },
+    "STEP 3 · CHECK IT" : {
+      "extractionState" : "manual"
+    },
+    "Save" : {
+      "extractionState" : "manual"
+    },
+    "Save a phrase. Hear it again. Make it yours." : {
+      "extractionState" : "manual"
+    },
+    "Save my plan" : {
+      "extractionState" : "manual"
+    },
+    "Saved" : {
+      "extractionState" : "manual"
+    },
+    "Saved only" : {
+      "extractionState" : "manual"
+    },
+    "Saved phrase" : {
+      "extractionState" : "manual"
+    },
+    "Saved to your Words for review" : {
+      "extractionState" : "manual"
+    },
+    "Saved to your phrase bank." : {
+      "extractionState" : "manual"
+    },
+    "Saved vocabulary" : {
+      "extractionState" : "manual"
+    },
+    "Saved · mastered" : {
+      "extractionState" : "manual"
+    },
+    "Saving your account…" : {
+      "extractionState" : "manual"
+    },
+    "Say it in Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Say it out loud" : {
+      "extractionState" : "manual"
+    },
+    "Say the missing phrase before you reveal it. Aim for rhythm, not perfection." : {
+      "extractionState" : "manual"
+    },
+    "Say the phrase that means “%@”." : {
+      "extractionState" : "manual"
+    },
+    "Say the sweet things in Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Say the whole request" : {
+      "extractionState" : "manual"
+    },
+    "Say your first words today." : {
+      "extractionState" : "manual"
+    },
+    "Scene %lld" : {
+      "extractionState" : "manual"
+    },
+    "Scene %lld, %@, %@" : {
+      "extractionState" : "manual"
+    },
+    "See all completed lessons" : {
+      "extractionState" : "manual"
+    },
+    "See my result" : {
+      "extractionState" : "manual"
+    },
+    "See plans again" : {
+      "extractionState" : "manual"
+    },
+    "Selected" : {
+      "extractionState" : "manual"
+    },
+    "Selects this meaning" : {
+      "extractionState" : "manual"
+    },
+    "Sets the first playback speed in lessons" : {
+      "extractionState" : "manual"
+    },
+    "Setting up…" : {
+      "extractionState" : "manual"
+    },
+    "Seven days of showing up. That is how fluency starts." : {
+      "extractionState" : "manual"
+    },
+    "Seven lessons in one week. You are in the groove." : {
+      "extractionState" : "manual"
+    },
+    "Shadow" : {
+      "extractionState" : "manual"
+    },
+    "Share more of your partner’s world" : {
+      "extractionState" : "manual"
+    },
+    "Share your streak" : {
+      "extractionState" : "manual"
+    },
+    "Sharp! Every phrase you got right now stays with you longer." : {
+      "extractionState" : "manual"
+    },
+    "She’s ordering a drink" : {
+      "extractionState" : "manual"
+    },
+    "Short final stops close the word cleanly." : {
+      "extractionState" : "manual"
+    },
+    "Short listening lessons that sound like life, not a textbook." : {
+      "extractionState" : "manual"
+    },
+    "Short-tempered market-stall energy. Keep up!" : {
+      "extractionState" : "manual"
+    },
+    "Show listening note" : {
+      "extractionState" : "manual"
+    },
+    "Show me the answer" : {
+      "extractionState" : "manual"
+    },
+    "Show text" : {
+      "extractionState" : "manual"
+    },
+    "Show transcript hint" : {
+      "extractionState" : "manual"
+    },
+    "Shows options to continue, sign out, or delete your account" : {
+      "extractionState" : "manual"
+    },
+    "Shows the Vietnamese phrase, meaning, and example" : {
+      "extractionState" : "manual"
+    },
+    "Shows the word card" : {
+      "extractionState" : "manual"
+    },
+    "Sign in and your completed practice will turn into a place on the board." : {
+      "extractionState" : "manual"
+    },
+    "Sign in to Kumusta" : {
+      "extractionState" : "manual"
+    },
+    "Sign in to an existing account" : {
+      "extractionState" : "manual"
+    },
+    "Sign in to join the board" : {
+      "extractionState" : "manual"
+    },
+    "Sign in to sync your Kumusta progress." : {
+      "extractionState" : "manual"
+    },
+    "Sign out" : {
+      "extractionState" : "manual"
+    },
+    "Sign out of Kumusta?" : {
+      "extractionState" : "manual"
+    },
+    "Sign out on this device. Your account stays available when you sign in again." : {
+      "extractionState" : "manual"
+    },
+    "Signing out…" : {
+      "extractionState" : "manual"
+    },
+    "Silver medal" : {
+      "extractionState" : "manual"
+    },
+    "Six tone paths. Start by hearing the movement before naming it." : {
+      "extractionState" : "manual"
+    },
+    "Skip for now" : {
+      "extractionState" : "manual"
+    },
+    "Skip speaking" : {
+      "extractionState" : "manual"
+    },
+    "Slow" : {
+      "extractionState" : "manual"
+    },
+    "Slower" : {
+      "extractionState" : "manual"
+    },
+    "Small talk ends after “xin chào”" : {
+      "extractionState" : "manual"
+    },
+    "Small, consistent listening beats a heroic weekend." : {
+      "extractionState" : "manual"
+    },
+    "Smile and nod at family dinners" : {
+      "extractionState" : "manual"
+    },
+    "So close!" : {
+      "extractionState" : "manual"
+    },
+    "Solid work. The tricky ones will come back sooner so they stick." : {
+      "extractionState" : "manual"
+    },
+    "Someone is asking for directions" : {
+      "extractionState" : "manual"
+    },
+    "Sort vocabulary" : {
+      "extractionState" : "manual"
+    },
+    "Sound effects" : {
+      "extractionState" : "manual"
+    },
+    "Sound effects volume" : {
+      "extractionState" : "manual"
+    },
+    "Sound more natural in real situations" : {
+      "extractionState" : "manual"
+    },
+    "Sound natural and flexible" : {
+      "extractionState" : "manual"
+    },
+    "Sounds, tones, people words, and a replay of your welcome lesson." : {
+      "extractionState" : "manual"
+    },
+    "Southern" : {
+      "extractionState" : "manual"
+    },
+    "Southern Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Southern voice" : {
+      "extractionState" : "manual"
+    },
+    "Speak" : {
+      "extractionState" : "manual"
+    },
+    "Speak naturally with family" : {
+      "extractionState" : "manual"
+    },
+    "Speak this sentence" : {
+      "extractionState" : "manual"
+    },
+    "Speak with confidence" : {
+      "extractionState" : "manual"
+    },
+    "Speak with cultural confidence" : {
+      "extractionState" : "manual"
+    },
+    "Speak with your family’s accent" : {
+      "extractionState" : "manual"
+    },
+    "Speaker 1" : {
+      "extractionState" : "manual"
+    },
+    "Speaker 2" : {
+      "extractionState" : "manual"
+    },
+    "Speaking" : {
+      "extractionState" : "manual"
+    },
+    "Speaking confidence" : {
+      "extractionState" : "manual"
+    },
+    "Speech feedback is taking a break. Please try again shortly." : {
+      "extractionState" : "manual"
+    },
+    "Speech feedback is temporarily unavailable." : {
+      "extractionState" : "manual"
+    },
+    "Speed contrast" : {
+      "extractionState" : "manual"
+    },
+    "Spot on!" : {
+      "extractionState" : "manual"
+    },
+    "Start First Steps" : {
+      "extractionState" : "manual"
+    },
+    "Start learning" : {
+      "extractionState" : "manual"
+    },
+    "Start listening" : {
+      "extractionState" : "manual"
+    },
+    "Start my first lesson" : {
+      "extractionState" : "manual"
+    },
+    "Start recording" : {
+      "extractionState" : "manual"
+    },
+    "Start talking" : {
+      "extractionState" : "manual"
+    },
+    "Start this conversation" : {
+      "extractionState" : "manual"
+    },
+    "Start today’s Vietnamese journey" : {
+      "extractionState" : "manual"
+    },
+    "Start today’s lesson: %@" : {
+      "extractionState" : "manual"
+    },
+    "Start with “Cho mình.” Tap a piece to move it." : {
+      "extractionState" : "manual"
+    },
+    "Starting fresh" : {
+      "extractionState" : "manual"
+    },
+    "Starting level" : {
+      "extractionState" : "manual"
+    },
+    "Starts a short listen and recall exercise" : {
+      "extractionState" : "manual"
+    },
+    "Starts a short review of the phrases you're closest to forgetting" : {
+      "extractionState" : "manual"
+    },
+    "Starts the lesson again" : {
+      "extractionState" : "manual"
+    },
+    "Starts your listening-first flashcard review session" : {
+      "extractionState" : "manual"
+    },
+    "Stay on track with gentle reminders" : {
+      "extractionState" : "manual"
+    },
+    "Still shaping your course" : {
+      "extractionState" : "manual"
+    },
+    "Still sounds good the second time." : {
+      "extractionState" : "manual"
+    },
+    "Still useful, now easier to reach" : {
+      "extractionState" : "manual"
+    },
+    "Stop" : {
+      "extractionState" : "manual"
+    },
+    "Stop Vietnamese phrase" : {
+      "extractionState" : "manual"
+    },
+    "Stop audio" : {
+      "extractionState" : "manual"
+    },
+    "Stop playback" : {
+      "extractionState" : "manual"
+    },
+    "Stop recording" : {
+      "extractionState" : "manual"
+    },
+    "Stop voice sample" : {
+      "extractionState" : "manual"
+    },
+    "Streak at risk warning" : {
+      "extractionState" : "manual"
+    },
+    "Stretch me" : {
+      "extractionState" : "manual"
+    },
+    "Strict" : {
+      "extractionState" : "manual"
+    },
+    "Subscription plans" : {
+      "extractionState" : "manual"
+    },
+    "Subscription plans unavailable" : {
+      "extractionState" : "manual"
+    },
+    "Subscriptions are billed through your Apple ID and renew automatically unless canceled at least 24 hours before the end of the current period." : {
+      "extractionState" : "manual"
+    },
+    "Swipe rows to add or remove them from flashcards." : {
+      "extractionState" : "manual"
+    },
+    "System" : {
+      "extractionState" : "manual"
+    },
+    "TAP TO BREAK IT DOWN" : {
+      "extractionState" : "manual"
+    },
+    "TAP TO FINISH" : {
+      "extractionState" : "manual"
+    },
+    "TAP TO SPEAK" : {
+      "extractionState" : "manual"
+    },
+    "TARGET" : {
+      "extractionState" : "manual"
+    },
+    "THE FRIENDLY COMPETITION" : {
+      "extractionState" : "manual"
+    },
+    "TIME" : {
+      "extractionState" : "manual"
+    },
+    "TOTAL XP" : {
+      "extractionState" : "manual"
+    },
+    "TRY AGAIN" : {
+      "extractionState" : "manual"
+    },
+    "Take a quick breather" : {
+      "extractionState" : "manual"
+    },
+    "Talk again" : {
+      "extractionState" : "manual"
+    },
+    "Talk to their parents yourself" : {
+      "extractionState" : "manual"
+    },
+    "Talk with Bé Trâu" : {
+      "extractionState" : "manual"
+    },
+    "Talk with Bé Trâu in real time for five minutes" : {
+      "extractionState" : "manual"
+    },
+    "Talk with family" : {
+      "extractionState" : "manual"
+    },
+    "Tap a selected piece to undo." : {
+      "extractionState" : "manual"
+    },
+    "Tap a word or phrase to see how it works" : {
+      "extractionState" : "manual"
+    },
+    "Tap a word or phrase to see how it works." : {
+      "extractionState" : "manual"
+    },
+    "Tap and speak" : {
+      "extractionState" : "manual"
+    },
+    "Tap any word or phrase for its meaning" : {
+      "extractionState" : "manual"
+    },
+    "Tap each word to hear it" : {
+      "extractionState" : "manual"
+    },
+    "Tap the bookmark on any phrase you want close at hand." : {
+      "extractionState" : "manual"
+    },
+    "Tap the pieces in order: an iced milk coffee, please." : {
+      "extractionState" : "manual"
+    },
+    "Tap the speaker to hear this phrase again" : {
+      "extractionState" : "manual"
+    },
+    "Tap the speaker whenever you want a replay" : {
+      "extractionState" : "manual"
+    },
+    "Tap to remove this piece" : {
+      "extractionState" : "manual"
+    },
+    "Tap to reveal and decode" : {
+      "extractionState" : "manual"
+    },
+    "Tap when you're done" : {
+      "extractionState" : "manual"
+    },
+    "Target phrase" : {
+      "extractionState" : "manual"
+    },
+    "Tell us why, then continue in App Store settings" : {
+      "extractionState" : "manual"
+    },
+    "Ten useful words are ready to come back when you need them." : {
+      "extractionState" : "manual"
+    },
+    "Terms" : {
+      "extractionState" : "manual"
+    },
+    "That bookmark didn’t stick. Please try once more." : {
+      "extractionState" : "manual"
+    },
+    "That didn’t work" : {
+      "extractionState" : "manual"
+    },
+    "That listening-first loop is the core of every Kumusta session." : {
+      "extractionState" : "manual"
+    },
+    "That phrase cannot be played." : {
+      "extractionState" : "manual"
+    },
+    "That phrase couldn’t play. Check your connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "That phrase is no longer available." : {
+      "extractionState" : "manual"
+    },
+    "That rating did not save" : {
+      "extractionState" : "manual"
+    },
+    "That recording is too short or too large. Try one short phrase." : {
+      "extractionState" : "manual"
+    },
+    "That sample could not play. Check your connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "That take couldn’t be saved. Please record it once more." : {
+      "extractionState" : "manual"
+    },
+    "That take isn’t available anymore. Please record it once more." : {
+      "extractionState" : "manual"
+    },
+    "That take was too short. Tap, say the whole line, then tap again." : {
+      "extractionState" : "manual"
+    },
+    "That update didn’t stick. Please try once more." : {
+      "extractionState" : "manual"
+    },
+    "That was a little too quick. Try the full phrase once more." : {
+      "extractionState" : "manual"
+    },
+    "That’s how natives say it!" : {
+      "extractionState" : "manual"
+    },
+    "The %@ sample is missing from this build." : {
+      "extractionState" : "manual"
+    },
+    "The App Store could not complete that request. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The App Store couldn’t check purchases right now. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The App Store couldn’t check right now. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The App Store couldn’t complete that purchase. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The App Store is still processing %@. Access will unlock after approval." : {
+      "extractionState" : "manual"
+    },
+    "The App Store plans aren’t available right now." : {
+      "extractionState" : "manual"
+    },
+    "The Supabase project URL is missing from this build." : {
+      "extractionState" : "manual"
+    },
+    "The Supabase publishable key is missing from this build." : {
+      "extractionState" : "manual"
+    },
+    "The Vietnamese voice could not be loaded." : {
+      "extractionState" : "manual"
+    },
+    "The Vietnamese voice is unavailable right now. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The analytics event contains a property that is not allowed." : {
+      "extractionState" : "manual"
+    },
+    "The analytics event is not valid." : {
+      "extractionState" : "manual"
+    },
+    "The audio did not load. Check your connection and tap play again." : {
+      "extractionState" : "manual"
+    },
+    "The board is out of reach" : {
+      "extractionState" : "manual"
+    },
+    "The board is unavailable" : {
+      "extractionState" : "manual"
+    },
+    "The bundled audio could not be played." : {
+      "extractionState" : "manual"
+    },
+    "The bundled example could not be played." : {
+      "extractionState" : "manual"
+    },
+    "The bundled example is missing from this build." : {
+      "extractionState" : "manual"
+    },
+    "The complete phrase" : {
+      "extractionState" : "manual"
+    },
+    "The conversation audio couldn’t be opened. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The conversation ended after 10 seconds of silence." : {
+      "extractionState" : "manual"
+    },
+    "The daily learning progress could not be synced." : {
+      "extractionState" : "manual"
+    },
+    "The language Kumusta uses to teach you." : {
+      "extractionState" : "manual"
+    },
+    "The leaderboard request is not valid." : {
+      "extractionState" : "manual"
+    },
+    "The learning session could not be synced." : {
+      "extractionState" : "manual"
+    },
+    "The lesson engine uses this as the destination, not as a test score." : {
+      "extractionState" : "manual"
+    },
+    "The marks change the vowel. They are part of the pronunciation." : {
+      "extractionState" : "manual"
+    },
+    "The melody stays active when tones meet other words." : {
+      "extractionState" : "manual"
+    },
+    "The microphone couldn’t be changed, so the conversation ended." : {
+      "extractionState" : "manual"
+    },
+    "The microphone couldn’t start. Check your audio route and try again." : {
+      "extractionState" : "manual"
+    },
+    "The onboarding answers could not be synced." : {
+      "extractionState" : "manual"
+    },
+    "The phrase couldn’t play. Try it once more." : {
+      "extractionState" : "manual"
+    },
+    "The plot thickens." : {
+      "extractionState" : "manual"
+    },
+    "The pre-paywall demo audio is missing from this build." : {
+      "extractionState" : "manual"
+    },
+    "The purchase finished, but access could not be verified." : {
+      "extractionState" : "manual"
+    },
+    "The recording stopped unexpectedly. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The red words don't match, often just the tone. Fix them and check again." : {
+      "extractionState" : "manual"
+    },
+    "The review result could not be synced." : {
+      "extractionState" : "manual"
+    },
+    "The same letters can become different words when the melody changes." : {
+      "extractionState" : "manual"
+    },
+    "The same sentence in a Northern pronunciation." : {
+      "extractionState" : "manual"
+    },
+    "The scene made sense" : {
+      "extractionState" : "manual"
+    },
+    "The speech result could not be read. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "The standings" : {
+      "extractionState" : "manual"
+    },
+    "The transcript is hiding" : {
+      "extractionState" : "manual"
+    },
+    "The voice audio could not be loaded." : {
+      "extractionState" : "manual"
+    },
+    "The whole path is yours." : {
+      "extractionState" : "manual"
+    },
+    "The words are there, the voice isn’t" : {
+      "extractionState" : "manual"
+    },
+    "The words stay the same. The musical fingerprint can change." : {
+      "extractionState" : "manual"
+    },
+    "Their parents stay polite strangers" : {
+      "extractionState" : "manual"
+    },
+    "There is no test and no judgment." : {
+      "extractionState" : "manual"
+    },
+    "They’re making a friendly complaint" : {
+      "extractionState" : "manual"
+    },
+    "This account must be upgraded before progress can be synced." : {
+      "extractionState" : "manual"
+    },
+    "This build is missing the RevenueCat public SDK key." : {
+      "extractionState" : "manual"
+    },
+    "This card's audio is still being prepared. Please try again shortly." : {
+      "extractionState" : "manual"
+    },
+    "This changes the approved ElevenLabs voice speed by one step." : {
+      "extractionState" : "manual"
+    },
+    "This conversation couldn’t continue." : {
+      "extractionState" : "manual"
+    },
+    "This conversation isn’t available right now." : {
+      "extractionState" : "manual"
+    },
+    "This learning path isn’t included in this build. Please update Kumusta." : {
+      "extractionState" : "manual"
+    },
+    "This permanently deletes your Kumusta account and learning data. This cannot be undone." : {
+      "extractionState" : "manual"
+    },
+    "This permanently removes your account, learning progress, and associated data. Your Apple subscription is managed separately and may continue to renew." : {
+      "extractionState" : "manual"
+    },
+    "This removes your profile and locally saved learning activity from this device. It cannot be undone." : {
+      "extractionState" : "manual"
+    },
+    "This sets your model voice throughout the app." : {
+      "extractionState" : "manual"
+    },
+    "This signs you out on this device and clears local learning activity. You can sign in again to access your account." : {
+      "extractionState" : "manual"
+    },
+    "Three pieces.\nOne real request." : {
+      "extractionState" : "manual"
+    },
+    "Time for your ear training" : {
+      "extractionState" : "manual"
+    },
+    "Tip: Don’t pause to fix one sound. Rhythm first; precision comes on later reps." : {
+      "extractionState" : "manual"
+    },
+    "Today" : {
+      "extractionState" : "manual"
+    },
+    "Today: %@" : {
+      "extractionState" : "manual"
+    },
+    "Tomorrow" : {
+      "extractionState" : "manual"
+    },
+    "Tone" : {
+      "extractionState" : "manual"
+    },
+    "Tone inside a sentence" : {
+      "extractionState" : "manual"
+    },
+    "Tone marks" : {
+      "extractionState" : "manual"
+    },
+    "Too easy" : {
+      "extractionState" : "manual"
+    },
+    "Too fast" : {
+      "extractionState" : "manual"
+    },
+    "Too hard" : {
+      "extractionState" : "manual"
+    },
+    "Too many checks in a short time. Please wait a moment and try again." : {
+      "extractionState" : "manual"
+    },
+    "Too slow" : {
+      "extractionState" : "manual"
+    },
+    "Tough set, and that’s how memory gets stronger. You’ll see the tricky ones again soon." : {
+      "extractionState" : "manual"
+    },
+    "Train your ear" : {
+      "extractionState" : "manual"
+    },
+    "Train your ear with stories and roadmap exercises." : {
+      "extractionState" : "manual"
+    },
+    "Transcript" : {
+      "extractionState" : "manual"
+    },
+    "Travel" : {
+      "extractionState" : "manual"
+    },
+    "Travel with confidence" : {
+      "extractionState" : "manual"
+    },
+    "Try again" : {
+      "extractionState" : "manual"
+    },
+    "Try audio again" : {
+      "extractionState" : "manual"
+    },
+    "Try loading plans again" : {
+      "extractionState" : "manual"
+    },
+    "Try one more take" : {
+      "extractionState" : "manual"
+    },
+    "Try saving again" : {
+      "extractionState" : "manual"
+    },
+    "Try speaking again" : {
+      "extractionState" : "manual"
+    },
+    "Tune in. What’s the story?" : {
+      "extractionState" : "manual"
+    },
+    "Tune your next lesson" : {
+      "extractionState" : "manual"
+    },
+    "Tuning practice to your level" : {
+      "extractionState" : "manual"
+    },
+    "Turn %lld of %lld" : {
+      "extractionState" : "manual"
+    },
+    "Turn vocabulary into quick responses" : {
+      "extractionState" : "manual"
+    },
+    "Turn words into conversation" : {
+      "extractionState" : "manual"
+    },
+    "Twenty lessons down. That is serious listening mileage." : {
+      "extractionState" : "manual"
+    },
+    "Two common openings to recognize in everyday words." : {
+      "extractionState" : "manual"
+    },
+    "Two months. Real progress." : {
+      "extractionState" : "manual"
+    },
+    "Two weeks of ear training" : {
+      "extractionState" : "manual"
+    },
+    "Type it once more" : {
+      "extractionState" : "manual"
+    },
+    "UNIT %lld" : {
+      "extractionState" : "manual"
+    },
+    "Understand real situations" : {
+      "extractionState" : "manual"
+    },
+    "Unlock every listening lesson, unlimited word reviews, and both Vietnamese accents." : {
+      "extractionState" : "manual"
+    },
+    "Unmute" : {
+      "extractionState" : "manual"
+    },
+    "Use Vietnamese at work" : {
+      "extractionState" : "manual"
+    },
+    "Use a different email" : {
+      "extractionState" : "manual"
+    },
+    "Use a simple topic, without code or special formatting." : {
+      "extractionState" : "manual"
+    },
+    "Use an email you can access. It lets you keep your progress across devices." : {
+      "extractionState" : "manual"
+    },
+    "Use the email and password linked to your Kumusta account." : {
+      "extractionState" : "manual"
+    },
+    "Use the rhythm as a clue" : {
+      "extractionState" : "manual"
+    },
+    "Use the transcript only if you get stuck" : {
+      "extractionState" : "manual"
+    },
+    "Use this accent" : {
+      "extractionState" : "manual"
+    },
+    "Use this when the phrase comes to mind quickly in a real sentence." : {
+      "extractionState" : "manual"
+    },
+    "Using your device’s Vietnamese voice for this replay." : {
+      "extractionState" : "manual"
+    },
+    "Victory lap? Your ears are warmed up." : {
+      "extractionState" : "manual"
+    },
+    "Kumusta could not initialize the App Store subscription service. Please try again later." : {
+      "extractionState" : "manual"
+    },
+    "Kumusta is loading" : {
+      "extractionState" : "manual"
+    },
+    "Vietnamese basics, at a glance" : {
+      "extractionState" : "manual"
+    },
+    "Vietnamese endings can be short, but they still carry meaning." : {
+      "extractionState" : "manual"
+    },
+    "Vietnamese learner" : {
+      "extractionState" : "manual"
+    },
+    "Vietnamese pronouns describe the relationship between people." : {
+      "extractionState" : "manual"
+    },
+    "Vocabulary reviews return when your memory needs them." : {
+      "extractionState" : "manual"
+    },
+    "Vocabulary reviews timed to your memory" : {
+      "extractionState" : "manual"
+    },
+    "Voice speed" : {
+      "extractionState" : "manual"
+    },
+    "Voice unavailable" : {
+      "extractionState" : "manual"
+    },
+    "Vowel sounds + diacritics" : {
+      "extractionState" : "manual"
+    },
+    "WELCOME BACK" : {
+      "extractionState" : "manual"
+    },
+    "WHAT CHANGED?" : {
+      "extractionState" : "manual"
+    },
+    "WITH KUMUSTA" : {
+      "extractionState" : "manual"
+    },
+    "Wait, don’t go!" : {
+      "extractionState" : "manual"
+    },
+    "Waiting patiently. Mostly." : {
+      "extractionState" : "manual"
+    },
+    "Warm and patient. Cheers you on." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t delete your account" : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t find an active Kumusta subscription for this Apple ID." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t generate that lesson" : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t load a ready lesson just now." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t load the latest rankings. Your XP is safe." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t load your account yet. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t load your phrases just now. Your learning progress is safe." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t prepare that lesson correctly. Tap Try again to retry it." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t prepare that lesson request. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t prepare this request. Your completed lesson is safe, tap Try again to reconnect." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t prepare your lesson just now." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t prepare your lesson. Check your connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t save your feedback. Please try again while signed in." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t save your feedback. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "We couldn’t secure your account just now. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "We sent a confirmation link to %@. Confirm it, then sign in here to start your course." : {
+      "extractionState" : "manual"
+    },
+    "We use this only as a topic, not as instructions." : {
+      "extractionState" : "manual"
+    },
+    "We use this to prioritize situations and vocabulary." : {
+      "extractionState" : "manual"
+    },
+    "We’ll nudge future words and situations up or down." : {
+      "extractionState" : "manual"
+    },
+    "We’re building your next lesson" : {
+      "extractionState" : "manual"
+    },
+    "We’re using your level and pace feedback to prepare a fresh session." : {
+      "extractionState" : "manual"
+    },
+    "What can you repeat most days?" : {
+      "extractionState" : "manual"
+    },
+    "What did you catch?" : {
+      "extractionState" : "manual"
+    },
+    "What did you hear?" : {
+      "extractionState" : "manual"
+    },
+    "What does it mean?" : {
+      "extractionState" : "manual"
+    },
+    "What does this mean?" : {
+      "extractionState" : "manual"
+    },
+    "What gets swallowed?" : {
+      "extractionState" : "manual"
+    },
+    "What made you decide to cancel?" : {
+      "extractionState" : "manual"
+    },
+    "What matters most?" : {
+      "extractionState" : "manual"
+    },
+    "What should I call you?" : {
+      "extractionState" : "manual"
+    },
+    "What should we call you?" : {
+      "extractionState" : "manual"
+    },
+    "What you said" : {
+      "extractionState" : "manual"
+    },
+    "What's your name?" : {
+      "extractionState" : "manual"
+    },
+    "What’s happening?" : {
+      "extractionState" : "manual"
+    },
+    "When a phrase feels useful, tap Save in a lesson. It will appear here with its real context." : {
+      "extractionState" : "manual"
+    },
+    "When would a little nudge help?" : {
+      "extractionState" : "manual"
+    },
+    "Where are you starting?" : {
+      "extractionState" : "manual"
+    },
+    "Where do you want to get?" : {
+      "extractionState" : "manual"
+    },
+    "Where is your Vietnamese today?" : {
+      "extractionState" : "manual"
+    },
+    "Which accent do you want to learn?" : {
+      "extractionState" : "manual"
+    },
+    "Which accent?" : {
+      "extractionState" : "manual"
+    },
+    "Why do you want to learn Vietnamese ?" : {
+      "extractionState" : "manual"
+    },
+    "With Kumusta: %@" : {
+      "extractionState" : "manual"
+    },
+    "Words" : {
+      "extractionState" : "manual"
+    },
+    "Work" : {
+      "extractionState" : "manual"
+    },
+    "Write this in Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "Wrong" : {
+      "extractionState" : "manual"
+    },
+    "YOU" : {
+      "extractionState" : "manual"
+    },
+    "YOU CAN NOW SAY" : {
+      "extractionState" : "manual"
+    },
+    "YOU SAID" : {
+      "extractionState" : "manual"
+    },
+    "YOUR COURSE IS READY" : {
+      "extractionState" : "manual"
+    },
+    "YOUR FIRST LESSON" : {
+      "extractionState" : "manual"
+    },
+    "YOUR NEXT 30 DAYS" : {
+      "extractionState" : "manual"
+    },
+    "YOUR PLAN" : {
+      "extractionState" : "manual"
+    },
+    "YOUR TURN · SAY" : {
+      "extractionState" : "manual"
+    },
+    "Yes, continue to cancel" : {
+      "extractionState" : "manual"
+    },
+    "You" : {
+      "extractionState" : "manual"
+    },
+    "You are caught up. A phrase will return when it is useful to review again." : {
+      "extractionState" : "manual"
+    },
+    "You built it. Nicely done." : {
+      "extractionState" : "manual"
+    },
+    "You can change this later." : {
+      "extractionState" : "manual"
+    },
+    "You caught it" : {
+      "extractionState" : "manual"
+    },
+    "You completed this path. %@ is now your active level." : {
+      "extractionState" : "manual"
+    },
+    "You earned %lld XP and moved %@ out of the active deck." : {
+      "extractionState" : "manual"
+    },
+    "You feel like an outsider at home" : {
+      "extractionState" : "manual"
+    },
+    "You freeze when the driver calls" : {
+      "extractionState" : "manual"
+    },
+    "You generated too many lessons, wait for tomorrow." : {
+      "extractionState" : "manual"
+    },
+    "You got it!" : {
+      "extractionState" : "manual"
+    },
+    "You handled %lld real-life situation in Vietnamese." : {
+      "extractionState" : "manual"
+    },
+    "You handled %lld real-life situations in Vietnamese." : {
+      "extractionState" : "manual"
+    },
+    "You have %lld streak freezes. Complete a lesson before midnight to keep your flame." : {
+      "extractionState" : "manual"
+    },
+    "You heard it!" : {
+      "extractionState" : "manual"
+    },
+    "You just answered grandma in Vietnamese." : {
+      "extractionState" : "manual"
+    },
+    "You just had your first conversation in Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "You just made plans like a local." : {
+      "extractionState" : "manual"
+    },
+    "You just ordered a coffee in Vietnamese." : {
+      "extractionState" : "manual"
+    },
+    "You just spoke Vietnamese!" : {
+      "extractionState" : "manual"
+    },
+    "You just spoke your first Vietnamese words." : {
+      "extractionState" : "manual"
+    },
+    "You made today’s Vietnamese count." : {
+      "extractionState" : "manual"
+    },
+    "You miss the jokes" : {
+      "extractionState" : "manual"
+    },
+    "You put Vietnamese into your own voice." : {
+      "extractionState" : "manual"
+    },
+    "You recalled %lld phrase. They will return when your memory needs them." : {
+      "extractionState" : "manual"
+    },
+    "You recalled %lld phrases. They will return when your memory needs them." : {
+      "extractionState" : "manual"
+    },
+    "You remembered it!" : {
+      "extractionState" : "manual"
+    },
+    "You stayed with natural Vietnamese from beginning to end. That’s how real listening confidence grows." : {
+      "extractionState" : "manual"
+    },
+    "You understand, but can’t answer" : {
+      "extractionState" : "manual"
+    },
+    "You understood a real café order.\nThen you built it yourself." : {
+      "extractionState" : "manual"
+    },
+    "You understood real Vietnamese" : {
+      "extractionState" : "manual"
+    },
+    "You used the transcript and finished the full scene. Replay it once more without the hint when you’re ready." : {
+      "extractionState" : "manual"
+    },
+    "You've reached a new milestone. Check your profile." : {
+      "extractionState" : "manual"
+    },
+    "You: %@" : {
+      "extractionState" : "manual"
+    },
+    "Your %lld-day streak is at risk" : {
+      "extractionState" : "manual"
+    },
+    "Your %lld-minute plan has %lld complete rounds." : {
+      "extractionState" : "manual"
+    },
+    "Your Kumusta Pro access needs to be restored before speech checking." : {
+      "extractionState" : "manual"
+    },
+    "Your Kumusta Pro subscription will stop renewing. You will keep premium access until the end of your current billing period." : {
+      "extractionState" : "manual"
+    },
+    "Your Vietnamese conversation buddies" : {
+      "extractionState" : "manual"
+    },
+    "Your Vietnamese is warming up" : {
+      "extractionState" : "manual"
+    },
+    "Your Vietnamese journey is officially underway." : {
+      "extractionState" : "manual"
+    },
+    "Your XP is safe. Try loading the rankings again." : {
+      "extractionState" : "manual"
+    },
+    "Your account and saved learning progress will remain available if you return." : {
+      "extractionState" : "manual"
+    },
+    "Your account export could not be verified." : {
+      "extractionState" : "manual"
+    },
+    "Your account export is too large for an in-app download. Contact contact@kumusta.app." : {
+      "extractionState" : "manual"
+    },
+    "Your account is almost ready." : {
+      "extractionState" : "manual"
+    },
+    "Your answer" : {
+      "extractionState" : "manual"
+    },
+    "Your answer hasn’t synced yet. Check your connection before continuing." : {
+      "extractionState" : "manual"
+    },
+    "Your answer is required to continue." : {
+      "extractionState" : "manual"
+    },
+    "Your answers so far are saved" : {
+      "extractionState" : "manual"
+    },
+    "Your basics cheat sheet" : {
+      "extractionState" : "manual"
+    },
+    "Your basics cheat sheet is unlocked. Replay your lessons anytime." : {
+      "extractionState" : "manual"
+    },
+    "Your board is waiting" : {
+      "extractionState" : "manual"
+    },
+    "Your buddy couldn’t join. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "Your cancellation feedback could not be saved." : {
+      "extractionState" : "manual"
+    },
+    "Your changes couldn’t be saved. Please try again." : {
+      "extractionState" : "manual"
+    },
+    "Your choices save as soon as both questions are answered." : {
+      "extractionState" : "manual"
+    },
+    "Your climb starts here" : {
+      "extractionState" : "manual"
+    },
+    "Your completed lesson is already saved in Profile." : {
+      "extractionState" : "manual"
+    },
+    "Your completed lessons will become a personal review library." : {
+      "extractionState" : "manual"
+    },
+    "Your completed practice will show here." : {
+      "extractionState" : "manual"
+    },
+    "Your conversation appears here" : {
+      "extractionState" : "manual"
+    },
+    "Your data & help" : {
+      "extractionState" : "manual"
+    },
+    "Your ear is locking in" : {
+      "extractionState" : "manual"
+    },
+    "Your ears are getting suspiciously good." : {
+      "extractionState" : "manual"
+    },
+    "Your ears got sharper" : {
+      "extractionState" : "manual"
+    },
+    "Your first conversation" : {
+      "extractionState" : "manual"
+    },
+    "Your first little win." : {
+      "extractionState" : "manual"
+    },
+    "Your first real exchange in Vietnamese is about %lld minute away." : {
+      "extractionState" : "manual"
+    },
+    "Your first real exchange in Vietnamese is about %lld minutes away." : {
+      "extractionState" : "manual"
+    },
+    "Your last 7 days" : {
+      "extractionState" : "manual"
+    },
+    "Your learning path" : {
+      "extractionState" : "manual"
+    },
+    "Your learning plan is ready" : {
+      "extractionState" : "manual"
+    },
+    "Your lesson couldn’t open" : {
+      "extractionState" : "manual"
+    },
+    "Your lesson hit a snag" : {
+      "extractionState" : "manual"
+    },
+    "Your microphone is only used while you speak." : {
+      "extractionState" : "manual"
+    },
+    "Your name" : {
+      "extractionState" : "manual"
+    },
+    "Your name must be 60 characters or fewer." : {
+      "extractionState" : "manual"
+    },
+    "Your name only appears inside Kumusta." : {
+      "extractionState" : "manual"
+    },
+    "Your neighbors stay strangers" : {
+      "extractionState" : "manual"
+    },
+    "Your next Vietnamese milestone" : {
+      "extractionState" : "manual"
+    },
+    "Your next listen is taking shape." : {
+      "extractionState" : "manual"
+    },
+    "Your next milestone" : {
+      "extractionState" : "manual"
+    },
+    "Your partner translates everything" : {
+      "extractionState" : "manual"
+    },
+    "Your password" : {
+      "extractionState" : "manual"
+    },
+    "Your path couldn’t open" : {
+      "extractionState" : "manual"
+    },
+    "Your personalized lesson is still warming up." : {
+      "extractionState" : "manual"
+    },
+    "Your personalized path couldn’t load. Check your connection and try again." : {
+      "extractionState" : "manual"
+    },
+    "Your phrase goes here" : {
+      "extractionState" : "manual"
+    },
+    "Your plan builds on this, one real situation at a time." : {
+      "extractionState" : "manual"
+    },
+    "Your progress stays safe" : {
+      "extractionState" : "manual"
+    },
+    "Your purchase is handled securely by the App Store." : {
+      "extractionState" : "manual"
+    },
+    "Your quick post-session answers will keep tuning this automatically." : {
+      "extractionState" : "manual"
+    },
+    "Your reason" : {
+      "extractionState" : "manual"
+    },
+    "Your recording couldn’t be played back. Try one more time." : {
+      "extractionState" : "manual"
+    },
+    "Your recording is checked automatically when you finish" : {
+      "extractionState" : "manual"
+    },
+    "Your reference for sounds, tones, people words, and numbers. Tap any example to hear it." : {
+      "extractionState" : "manual"
+    },
+    "Your result couldn’t sync. Your answers are still saved, so you can try again shortly." : {
+      "extractionState" : "manual"
+    },
+    "Your saved review progress will be kept" : {
+      "extractionState" : "manual"
+    },
+    "Your sentence" : {
+      "extractionState" : "manual"
+    },
+    "Your session expired. Sign in again to check your speech." : {
+      "extractionState" : "manual"
+    },
+    "Your space, your light." : {
+      "extractionState" : "manual"
+    },
+    "Your turn to order." : {
+      "extractionState" : "manual"
+    },
+    "Your welcome lesson · %lld min" : {
+      "extractionState" : "manual"
+    },
+    "Your “%@” lesson needs a little longer. You can leave this screen or check again now." : {
+      "extractionState" : "manual"
+    },
+    "You’ll complete %lld round. Every round starts with audio, then asks you to decode the meaning before you say the line." : {
+      "extractionState" : "manual"
+    },
+    "You’ll complete %lld rounds. Every round starts with audio, then asks you to decode the meaning before you say the line." : {
+      "extractionState" : "manual"
+    },
+    "You’re a few minutes away from your first conversation." : {
+      "extractionState" : "manual"
+    },
+    "You’re creating lessons quickly. Wait one minute, then try again." : {
+      "extractionState" : "manual"
+    },
+    "You’re leading the way!" : {
+      "extractionState" : "manual"
+    },
+    "You’re one step from completing today’s lesson." : {
+      "extractionState" : "manual"
+    },
+    "You’re one step from speaking Vietnamese." : {
+      "extractionState" : "manual"
+    },
+    "You’re up" : {
+      "extractionState" : "manual"
+    },
+    "a friendly introduction" : {
+      "extractionState" : "manual"
+    },
+    "a friendly, polite ending" : {
+      "extractionState" : "manual"
+    },
+    "again" : {
+      "extractionState" : "manual"
+    },
+    "almost" : {
+      "extractionState" : "manual"
+    },
+    "an iced milk coffee" : {
+      "extractionState" : "manual"
+    },
+    "day streak" : {
+      "extractionState" : "manual"
+    },
+    "day streak (singular)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "day streak"
+          }
+        }
+      }
+    },
+    "every 2 months" : {
+      "extractionState" : "manual"
+    },
+    "every 3 months" : {
+      "extractionState" : "manual"
+    },
+    "every 6 months" : {
+      "extractionState" : "manual"
+    },
+    "got it" : {
+      "extractionState" : "manual"
+    },
+    "minutes" : {
+      "extractionState" : "manual"
+    },
+    "per month" : {
+      "extractionState" : "manual"
+    },
+    "per week" : {
+      "extractionState" : "manual"
+    },
+    "per year" : {
+      "extractionState" : "manual"
+    },
+    "session" : {
+      "extractionState" : "manual"
+    },
+    "sessions" : {
+      "extractionState" : "manual"
+    },
+    "you@example.com" : {
+      "extractionState" : "manual"
+    },
+    "your purchase" : {
+      "extractionState" : "manual"
+    },
+    "“%@” means “%@” Try the other reply." : {
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.0"
+}
