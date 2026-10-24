@@ -123,7 +123,7 @@ def main() -> None:
     streak = load(source_dir / "streak.png")
 
     assets = output / "Kumusta/Resources/Assets.xcassets"
-    static_dir = assets / "BeTrauBuddy.imageset"
+    static_dir = assets / "TukoBuddy.imageset"
     write_static(static_dir / "be-trau-buddy@3x.png", master, (1024, 1150))
     write_static(static_dir / "be-trau-buddy@2x.png", master, (342, 384))
     write_static(static_dir / "be-trau-buddy@1x.png", master, (171, 192))

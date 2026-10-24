@@ -18,12 +18,12 @@ struct PracticeSessionChooser: View {
                     modeCard(
                         eyebrow: L("REAL-TIME CHAT"),
                         badge: L("5 MIN"),
-                        title: L("Talk with Kalabaw"),
+                        title: L("Talk with Tuko"),
                         subtitle: L("Free conversation, role-play, and instant feedback."),
                         symbol: "mic.fill",
                         color: KumustaColors.focusFill,
                         shadowColor: KumustaColors.lessonAccentShadow,
-                        accessibilityLabel: L("Talk with Kalabaw in real time for five minutes"),
+                        accessibilityLabel: L("Talk with Tuko in real time for five minutes"),
                         action: onRealtime
                     ) {
                         RealtimePracticeMascots(height: 83)

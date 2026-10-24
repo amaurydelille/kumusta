@@ -16,8 +16,8 @@ app to Kumusta and switched it to Tagalog on 2026-10-24.
 | D2 | Language: everyday Metro Manila Tagalog, standard spelling, no stress marks, po/opo, natural Taglish only | Decided (CLAUDE.md) |
 | D3 | No accent, dialect or other Philippine language anywhere | Decided; the accent axis is removed from the data model |
 | D4 | Levels: beginner / intermediate / advanced | Decided |
-| D5 | Mascot: the existing carabao, named "Kalabaw" for now | Name to confirm |
-| D6 | TTS voice: one server-side voice (`KUMUSTA_TTS_VOICE_ID`, default ElevenLabs "Sarah") | Pick a native Filipino voice |
+| D5 | Mascot: Tuko, a gecko (*tuko* in Tagalog); the static buddy image is done | Animated rig, sprites, conversation mascots and app icon still show the buffalo and need gecko art |
+| D6 | TTS voice: ElevenLabs `qZLi51uuzx5jdu6q0ayz` for lessons and live conversation (`KUMUSTA_TTS_VOICE_ID` overrides) | Decided |
 | D7 | Spelling house style: standard forms (puwede, huwag, saka) vs common Manila forms (pwede, wag, tsaka) | Open; lessons use standard, grading accepts both |
 
 ## Done

@@ -51,10 +51,11 @@ Continuous animation stops when the relevant screen disappears.
 
 ## Mascot
 
-The primary buddy is Bé Trâu, a hand-drawn baby water buffalo with warm ink,
-watercolor texture, oversized expressive eyes, and a red scarf. Bé Trâu is a
-teaching companion, not a decorative sticker. Its pose or motion responds to
-idle, listening, and success states. The generated source prompt and integration
+The primary buddy is Tuko, a friendly green gecko (*tuko* in Tagalog) with big
+brown eyes, rosy cheeks and a red neckerchief. Tuko is a teaching companion,
+not a decorative sticker. Its pose or motion responds to idle, listening, and
+success states. The animated rig, state sprites, conversation mascots and app
+icon still show VietBuddy's buffalo and are being redrawn as Tuko. Integration
 details are tracked in `ASSET_PROVENANCE.md`.
 
 ## Interaction rules

@@ -509,7 +509,7 @@ struct PracticeHomeView: View {
     }
 
     private var voiceLabel: String {
-        "KALABAW · MANILA"
+        "TUKO · MANILA"
     }
 
     private func barHeight(_ index: Int) -> CGFloat {

@@ -439,7 +439,7 @@ private struct FollowCurve: ViewModifier, Animatable {
 
 /// The copy behind the comparison screen. Every benefit describes what the
 /// app actually does: spoken feedback, everyday Manila Tagalog, real-life
-/// situations, conversations with Kalabaw, and word review.
+/// situations, conversations with Tuko, and word review.
 enum OnboardingComparison {
     static func headline(level: ProficiencyLevel, didFinishLesson: Bool) -> String {
         guard didFinishLesson else { return L("You’re one step from speaking Tagalog.") }

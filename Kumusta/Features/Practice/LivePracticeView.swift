@@ -43,7 +43,7 @@ struct LivePracticeView: View {
                     // Gives way to the mood picker on short screens.
                     mascot.frame(minHeight: 150, maxHeight: 250)
                 }
-                Text("Kalabaw")
+                Text("Tuko")
                     .scaledFont(compactHeader ? 19 : 23, weight: .bold, design: .rounded)
                     .foregroundStyle(KumustaColors.ink)
                     .padding(.top, compactHeader ? 5 : 10)
@@ -180,7 +180,7 @@ struct LivePracticeView: View {
         session.isOpen || !session.captions.isEmpty
     }
 
-    /// With the transcript hidden, Kalabaw grows and takes the center.
+    /// With the transcript hidden, Tuko grows and takes the center.
     private var focusesMascot: Bool {
         hasConversation && !showsTranscript
     }
@@ -234,7 +234,7 @@ struct LivePracticeView: View {
             reduceMotion: reduceMotion
         )
         .accessibilityElement()
-        .accessibilityLabel(L("Kalabaw, your conversation buddy"))
+        .accessibilityLabel(L("Tuko, your conversation buddy"))
         .task {
             try? await Task.sleep(for: .seconds(3.6))
             guard !Task.isCancelled else { return }
@@ -267,7 +267,7 @@ struct LivePracticeView: View {
                                     caption.isUser ? KumustaColors.accent : KumustaColors.surface,
                                     in: RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 )
-                                .accessibilityLabel(caption.isUser ? L("You: %@", caption.text) : L("Kalabaw: %@", caption.text))
+                                .accessibilityLabel(caption.isUser ? L("You: %@", caption.text) : L("Tuko: %@", caption.text))
                             if !caption.isUser { Spacer(minLength: 44) }
                         }
                         .id(caption.id)
@@ -505,7 +505,7 @@ private struct LivePersonalityPicker: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Text(L("Kalabaw's mood"))
+            Text(L("Tuko's mood"))
                 .scaledFont(13, weight: .bold, design: .rounded)
                 .foregroundStyle(KumustaColors.muted)
                 .textCase(.uppercase)

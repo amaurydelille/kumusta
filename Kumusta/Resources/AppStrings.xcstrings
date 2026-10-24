@@ -670,64 +670,64 @@
     "Building your plan…" : {
       "extractionState" : "manual"
     },
-    "Kalabaw celebrates the correct answer" : {
+    "Tuko celebrates the correct answer" : {
       "extractionState" : "manual"
     },
-    "Kalabaw celebrates your learning streak" : {
+    "Tuko celebrates your learning streak" : {
       "extractionState" : "manual"
     },
-    "Kalabaw couldn’t answer. Try saying that again." : {
+    "Tuko couldn’t answer. Try saying that again." : {
       "extractionState" : "manual"
     },
-    "Kalabaw encourages another try" : {
+    "Tuko encourages another try" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is building the next lesson" : {
+    "Tuko is building the next lesson" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is curious" : {
+    "Tuko is curious" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is listening" : {
+    "Tuko is listening" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is listening back…" : {
+    "Tuko is listening back…" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is reviewing your recording" : {
+    "Tuko is reviewing your recording" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is talking" : {
+    "Tuko is talking" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is thinking…" : {
+    "Tuko is thinking…" : {
       "extractionState" : "manual"
     },
-    "Kalabaw is typing" : {
+    "Tuko is typing" : {
       "extractionState" : "manual"
     },
-    "Kalabaw understood every word." : {
+    "Tuko understood every word." : {
       "extractionState" : "manual"
     },
-    "Kalabaw waves hello" : {
+    "Tuko waves hello" : {
       "extractionState" : "manual"
     },
-    "Kalabaw welcomes you to Kumusta" : {
+    "Tuko welcomes you to Kumusta" : {
       "extractionState" : "manual"
     },
-    "Kalabaw will check every word once your plan starts." : {
+    "Tuko will check every word once your plan starts." : {
       "extractionState" : "manual"
     },
-    "Kalabaw's mood" : {
+    "Tuko's mood" : {
       "extractionState" : "manual"
     },
-    "Kalabaw, the Kumusta mascot" : {
+    "Tuko, the Kumusta mascot" : {
       "extractionState" : "manual"
     },
-    "Kalabaw, your conversation buddy" : {
+    "Tuko, your conversation buddy" : {
       "extractionState" : "manual"
     },
-    "Kalabaw: %@" : {
+    "Tuko: %@" : {
       "extractionState" : "manual"
     },
     "CAN’T SPEAK NOW" : {
@@ -1426,7 +1426,7 @@
     "Hear the situation first" : {
       "extractionState" : "manual"
     },
-    "Hear the sounds, learn three phrases, then use them in a real mini-conversation with Kalabaw." : {
+    "Hear the sounds, learn three phrases, then use them in a real mini-conversation with Tuko." : {
       "extractionState" : "manual"
     },
     "Hear this phrase" : {
@@ -1450,7 +1450,7 @@
     "Hi there!" : {
       "extractionState" : "manual"
     },
-    "Hi there! I’m Kalabaw." : {
+    "Hi there! I’m Tuko." : {
       "extractionState" : "manual"
     },
     "Hi!" : {
@@ -1948,7 +1948,7 @@
     "NEW WORDS" : {
       "extractionState" : "manual"
     },
-    "Nailed it. Kalabaw heard the full phrase." : {
+    "Nailed it. Tuko heard the full phrase." : {
       "extractionState" : "manual"
     },
     "Natural" : {
@@ -2641,7 +2641,7 @@
     "Round %lld of %lld, %@" : {
       "extractionState" : "manual"
     },
-    "Run them again any time. Kalabaw checks every word." : {
+    "Run them again any time. Tuko checks every word." : {
       "extractionState" : "manual"
     },
     "SCENE %@ · %@" : {
@@ -3085,10 +3085,10 @@
     "Talk to their parents yourself" : {
       "extractionState" : "manual"
     },
-    "Talk with Kalabaw" : {
+    "Talk with Tuko" : {
       "extractionState" : "manual"
     },
-    "Talk with Kalabaw in real time for five minutes" : {
+    "Talk with Tuko in real time for five minutes" : {
       "extractionState" : "manual"
     },
     "Talk with family" : {

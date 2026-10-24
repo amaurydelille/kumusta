@@ -70,7 +70,7 @@ Deno.test("topic selection prefers explicit choice then latest completed lesson"
   assertThrows(() => contextFrom({ client_session_id: "not-a-uuid" }));
   assert(coachingPrompt().includes("Do not greet again"));
   assert(firstMessage().includes(TUTOR_NAME));
-  assert(TUTOR_NAME === "Kalabaw");
+  assert(TUTOR_NAME === "Tuko");
 });
 
 Deno.test("untrusted lesson and topic context stays bounded", () => {
@@ -132,7 +132,7 @@ Deno.test("personality is optional and unknown values keep the original session"
   assert(contextFrom({ ...base, personality: 42 }).personality === null);
   assert(personalityFrom("toString") === null);
   assert(!agentPrompt(plain).includes("Personality for this session"));
-  assert(firstMessage() === "Kumusta! Ako si Kalabaw. Kumusta ang araw mo?");
+  assert(firstMessage() === "Kumusta! Ako si Tuko. Kumusta ang araw mo?");
   assert(firstMessage(null) === firstMessage());
 });
 

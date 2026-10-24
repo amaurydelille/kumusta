@@ -1705,7 +1705,7 @@ private struct SpeakStep: View {
 
                 if feedbackState.hasResult {
                     Label(
-                        matchedTarget ? L("Nailed it. Kalabaw heard the full phrase.") : L("Close one. Listen and try again."),
+                        matchedTarget ? L("Nailed it. Tuko heard the full phrase.") : L("Close one. Listen and try again."),
                         systemImage: matchedTarget ? "checkmark.seal.fill" : "arrow.counterclockwise"
                     )
                         .font(KumustaTypography.bodyStrong)

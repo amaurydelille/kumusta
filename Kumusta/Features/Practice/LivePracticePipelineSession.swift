@@ -130,7 +130,7 @@ extension LivePracticeGateway {
                         case "error":
                             throw LivePracticeGatewayError(
                                 code: line.code ?? "reply_failed",
-                                message: L("Kalabaw couldn’t answer. Try saying that again."))
+                                message: L("Tuko couldn’t answer. Try saying that again."))
                         default:
                             break
                         }
@@ -153,7 +153,7 @@ extension LivePracticeGateway {
 /// reply plays through the audio engine. The same function opens and settles
 /// the session; unlike the agent there is no daily time limit.
 ///
-/// Turns are half-duplex: while Kalabaw answers, the microphone sends
+/// Turns are half-duplex: while Tuko answers, the microphone sends
 /// silence, so the reply cannot be transcribed back as the learner.
 @MainActor @Observable
 final class LivePracticeSession {
@@ -197,11 +197,11 @@ final class LivePracticeSession {
     private var replySpoken = ""
     private var replyAudible = false
     private var replyAudibleAt: Double?
-    /// What Kalabaw said last and when she stopped, to recognize her own
+    /// What Tuko said last and when she stopped, to recognize her own
     /// voice picked up again just after.
     private var lastSpoken = ""
     private var lastSpokenEndedAt: Double?
-    /// Cutting in this soon after Kalabaw started means the learner had not
+    /// Cutting in this soon after Tuko started means the learner had not
     /// finished: her answer is dropped and their sentence continues.
     static let continuationWindow: TimeInterval = 3
     /// The learner's turn that was cut short by a pause: it is completed by
@@ -223,7 +223,7 @@ final class LivePracticeSession {
     private var roundStartingRemaining = 300
     private static let logger = Logger(subsystem: "com.kumusta.app", category: "LivePractice")
     /// The conversation ends after this long without the learner saying
-    /// anything on their turn. Kalabaw thinking or talking pauses the clock.
+    /// anything on their turn. Tuko thinking or talking pauses the clock.
     static let inactivityLimit: TimeInterval = 10
     private var lastActivity = ProcessInfo.processInfo.systemUptime
 
@@ -239,8 +239,8 @@ final class LivePracticeSession {
         if phase == .ended { return elapsed > 0 ? L("Nice work") : L("Ready when you are") }
         if phase == .idle { return L("Ready when you are") }
         if muted { return L("Microphone muted · time is still running") }
-        if assistantSpeaking { return L("Kalabaw is talking") }
-        if thinking { return L("Kalabaw is thinking…") }
+        if assistantSpeaking { return L("Tuko is talking") }
+        if thinking { return L("Tuko is thinking…") }
         return userSpeaking ? L("I hear you") : L("Listening…")
     }
 
@@ -401,9 +401,9 @@ final class LivePracticeSession {
         // Recognized words, not the microphone level, so background noise
         // cannot keep a silent conversation open.
         lastActivity = ProcessInfo.processInfo.systemUptime
-        // Kalabaw's own voice coming back through the microphone.
+        // Tuko's own voice coming back through the microphone.
         if let reference = echoReference(), Self.isEcho(text, of: reference) { return }
-        // The learner has the priority: speaking while Kalabaw prepares or
+        // The learner has the priority: speaking while Tuko prepares or
         // gives an answer takes the turn back.
         if currentTurn != nil { interruptReply() }
         let shown = unfinishedTurn.map { "\($0.text) \(text)" } ?? text
@@ -443,13 +443,13 @@ final class LivePracticeSession {
         userFragments = captions.filter(\.isUser).count
         history.append(.init(speaker: "user", text: text, captionID: captionID))
         committedAt = .now
-        // A turn that lands while Kalabaw is answering is answered next.
+        // A turn that lands while Tuko is answering is answered next.
         if currentTurn == nil { respond(current: current) } else { waitingTurn = true }
     }
 
     /// Stops the reply in flight because the learner is talking. Before any
     /// of it was heard, the learner had only paused: their previous turn is
-    /// reopened and completed by what they say now. Once Kalabaw was audible,
+    /// reopened and completed by what they say now. Once Tuko was audible,
     /// what she said so far stays in the conversation.
     private func interruptReply() {
         guard currentTurn != nil else { return }
@@ -478,7 +478,7 @@ final class LivePracticeSession {
         audio?.capturing = true
     }
 
-    /// Only while Kalabaw is audible or just after: a learner repeating her
+    /// Only while Tuko is audible or just after: a learner repeating her
     /// sentence on their own turn ("repeat after me") is not an echo.
     private func echoReference() -> String? {
         if replyAudible { return replySpoken }
@@ -487,7 +487,7 @@ final class LivePracticeSession {
         return lastSpoken
     }
 
-    /// True when most recognized words are words Kalabaw is saying: residual
+    /// True when most recognized words are words Tuko is saying: residual
     /// echo the canceller let through, not the learner.
     static func isEcho(_ heard: String, of spoken: String) -> Bool {
         func words(_ text: String) -> [String] {
@@ -503,7 +503,7 @@ final class LivePracticeSession {
         return Double(matches) / Double(heardWords.count) >= 0.7
     }
 
-    /// Kalabaw can be interrupted mid-sentence when her voice cannot reach
+    /// Tuko can be interrupted mid-sentence when her voice cannot reach
     /// the microphone: echo cancellation is on, or she plays in headphones.
     private func allowsBargeIn(_ audio: LivePipelineAudio) -> Bool {
         audio.echoCancelled || Self.outputIsPrivate
@@ -575,7 +575,7 @@ final class LivePracticeSession {
                     return
                 }
                 Self.logger.error("Live reply failed: \(String(describing: error), privacy: .public)")
-                self.message = L("Kalabaw couldn’t answer. Try saying that again.")
+                self.message = L("Tuko couldn’t answer. Try saying that again.")
             }
             guard let self, self.generation == current, self.currentTurn == turn else { return }
             if !self.replySpoken.isEmpty { self.history.append(.init(speaker: "assistant", text: self.replySpoken)) }
@@ -1050,7 +1050,7 @@ final class LivePipelineSonioxTranscriber: LivePipelineTranscribing {
 
 /// The conversation's audio engine: microphone capture converted to 16 kHz
 /// PCM16 for the transcriber, and reply playback. Voice processing cancels
-/// Kalabaw's echo so the learner can interrupt her. While capture is paused or
+/// Tuko's echo so the learner can interrupt her. While capture is paused or
 /// muted, silence is sent so the realtime session stays alive.
 final class LivePipelineAudio: @unchecked Sendable {
     struct Failure: Error {}
@@ -1105,7 +1105,7 @@ final class LivePipelineAudio: @unchecked Sendable {
         }
         guard session.isInputAvailable else { throw Failure() }
 
-        // Echo cancellation lets the learner cut in while Kalabaw talks on the
+        // Echo cancellation lets the learner cut in while Tuko talks on the
         // speaker. Other audio is ducked as little as possible. The
         // simulator's voice processing unit captures and plays silence.
         #if !targetEnvironment(simulator)

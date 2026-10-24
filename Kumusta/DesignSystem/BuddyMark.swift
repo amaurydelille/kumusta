@@ -83,7 +83,7 @@ struct BuddyMark: View {
     @State private var isAlive = false
 
     var body: some View {
-        Image("BeTrauBuddy")
+        Image("TukoBuddy")
             .resizable()
             .scaledToFit()
             .scaleEffect(animatedScale)
@@ -91,7 +91,7 @@ struct BuddyMark: View {
             .offset(y: animatedOffset)
         .frame(width: size, height: size)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(L("Kalabaw, the Kumusta mascot"))
+        .accessibilityLabel(L("Tuko, the Kumusta mascot"))
         .onAppear {
             guard !reduceMotion else { return }
             withAnimation(KumustaMotion.breathe.repeatForever(autoreverses: true)) {
@@ -282,15 +282,15 @@ private struct SpriteSheetFrame: View {
 private extension BuddyMotion {
     var accessibilityLabel: String {
         switch self {
-        case .launch: L("Kalabaw welcomes you to Kumusta")
-        case .welcomeWave: L("Kalabaw waves hello")
-        case .listening: L("Kalabaw is listening")
-        case .curious: L("Kalabaw is curious")
-        case .reviewing: L("Kalabaw is reviewing your recording")
-        case .correct: L("Kalabaw celebrates the correct answer")
-        case .mistake: L("Kalabaw encourages another try")
-        case .generation: L("Kalabaw is building the next lesson")
-        case .streak: L("Kalabaw celebrates your learning streak")
+        case .launch: L("Tuko welcomes you to Kumusta")
+        case .welcomeWave: L("Tuko waves hello")
+        case .listening: L("Tuko is listening")
+        case .curious: L("Tuko is curious")
+        case .reviewing: L("Tuko is reviewing your recording")
+        case .correct: L("Tuko celebrates the correct answer")
+        case .mistake: L("Tuko encourages another try")
+        case .generation: L("Tuko is building the next lesson")
+        case .streak: L("Tuko celebrates your learning streak")
         }
     }
 }

@@ -27,7 +27,7 @@ final class KumustaLaunchTests: XCTestCase {
         app.launchArguments = ["-UITestScenario", "firstLaunch"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Hi there! I’m Kalabaw."].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Hi there! I’m Tuko."].waitForExistence(timeout: 5))
     }
 
     func testOnboardingBuildsPersonalizedPlanWithoutListeningDemo() {

@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// A friendly, comic-style prompt used throughout onboarding so every question
-/// feels like it comes from Kalabaw instead of reading like a form heading.
+/// feels like it comes from Tuko instead of reading like a form heading.
 struct OnboardingSpeechHeader: View {
     let title: String
     let subtitle: String?
@@ -205,7 +205,7 @@ struct OnboardingWelcomeScreen: View {
             Spacer(minLength: 20)
 
             OnboardingSpeechHeader(
-                title: L("Hi there! I’m Kalabaw."),
+                title: L("Hi there! I’m Tuko."),
                 subtitle: L("I’ll be your Tagalog buddy."),
                 typingStartDelay: .zero,
                 showsBuddy: false

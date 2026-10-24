@@ -3,7 +3,7 @@ import Testing
 
 @testable import Kumusta
 
-@Suite("Kalabaw performance continuity")
+@Suite("Tuko performance continuity")
 struct MascotPerformanceTests {
   @MainActor @Test("The compiled app contains every puppet part and its placement manifest")
   func packagedArtwork() {

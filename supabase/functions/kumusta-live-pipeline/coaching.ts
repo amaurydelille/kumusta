@@ -1,8 +1,8 @@
 export const TRANSCRIPT_TEXT_LIMIT = 4000;
 export const TRANSCRIPT_ENTRY_LIMIT = 400;
 
-/** The live tutor's name: the app's carabao mascot. */
-export const TUTOR_NAME = "Kalabaw";
+/** The live tutor's name: the app's gecko mascot. */
+export const TUTOR_NAME = "Tuko";
 
 export function contextFrom(value: unknown) {
   if (!value || typeof value !== "object") throw new Error("invalid_context");

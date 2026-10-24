@@ -1,13 +1,23 @@
 # Asset provenance
 
-## Bé Trâu mascot
+## Tuko mascot
+
+Source artwork supplied by the owner on 2026-10-25: `marketing/tuko-source.png`
+(1254 px square, white background). The static buddy image was cut out from it
+with an edge flood-fill matte and resized:
+
+- `Kumusta/Resources/Assets.xcassets/TukoBuddy.imageset/tuko-buddy@1x.png` (and `@2x`, `@3x`)
+
+Still to redraw as Tuko: the puppet rig (`Rig*`, `RigV2*`), the state sprites
+(`Mascot*Sprite`), the conversation mascots, the roadmap illustrations and the
+app icon, which all still show the buffalo below.
+
+## Bé Trâu mascot (inherited from VietBuddy, being replaced)
 
 Generated specifically for Kumusta using OpenAI image generation on
 2026-07-31. Integrated files:
 
-- `Kumusta/Resources/Assets.xcassets/BeTrauBuddy.imageset/be-trau-buddy@1x.png`
-- `Kumusta/Resources/Assets.xcassets/BeTrauBuddy.imageset/be-trau-buddy@2x.png`
-- `Kumusta/Resources/Assets.xcassets/BeTrauBuddy.imageset/be-trau-buddy@3x.png`
+- The original static buddy image (now replaced by Tuko)
 - `Kumusta/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png`
 
 Anchor prompt:

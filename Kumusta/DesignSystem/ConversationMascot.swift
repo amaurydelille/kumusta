@@ -46,7 +46,7 @@ struct ConversationMascot: View {
     .onChange(of: previewGesture) { _, next in
       driver.preview(next, at: ProcessInfo.processInfo.systemUptime)
     }
-    .accessibilityLabel(L("Kalabaw, your conversation buddy"))
+    .accessibilityLabel(L("Tuko, your conversation buddy"))
     .accessibilityValue(activity.rawValue)
   }
 }
@@ -240,7 +240,7 @@ enum ConversationMascotRenderer {
             )
             .frame(height: 350)
             .accessibilityIdentifier("mascotReviewStage")
-            Text("Kalabaw").font(.system(size: 28, weight: .bold, design: .rounded))
+            Text("Tuko").font(.system(size: 28, weight: .bold, design: .rounded))
             Text(gesture?.title ?? activity.rawValue.capitalized).foregroundStyle(.secondary)
             Picker("Conversation state", selection: $activity) {
               ForEach(MascotActivity.allCases) { Text($0.rawValue.capitalized).tag($0) }
@@ -343,5 +343,5 @@ enum ConversationMascotRenderer {
     }
   }
 
-  #Preview("Kalabaw animation review") { MascotAnimationReview() }
+  #Preview("Tuko animation review") { MascotAnimationReview() }
 #endif

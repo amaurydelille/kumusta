@@ -15,7 +15,7 @@ Steps: intro, teach, listenPick, meaningPick, build, newPhrase, conversation
 (3 turns). 3 takes, about 2 minutes.
 
 - The teach and listenPick contrast **Kumusta** with **Kumusta po**, so the
-  first thing learned is po, not a tone. The footnote says Kalabaw is a friend,
+  first thing learned is po, not a tone. The footnote says Tuko is a friend,
   so the conversation itself has no po.
 - meaningPick: *Anong pangalan mo?*. Build: *Hi / ako / si* for "Hi! I'm…".
 - newPhrase: *Salamat po* (thank you). The tip says the stress falls on the last
@@ -108,7 +108,7 @@ about 6 minutes. This mirrors `first-lesson-new.json` step for step.
 1. Stress: *salamat* and *mabuti* stressed on the last syllable, as the tips
    say.
 2. Register: is *Ikinagagalak kitang makilala!* too formal for a friendly
-   carabao, and is *Salamat!* a natural reply to it?
+   gecko, and is *Salamat!* a natural reply to it?
 3. Spelling of the Spanish-derived numbers: *kwarenta* and *alas siyete*.
 4. Carinderia ordering: *Pabili po ng dalawang turon* and *Heto po ang bayad
    ko*, against more casual options (*…nga po*, *Eto po bayad*).

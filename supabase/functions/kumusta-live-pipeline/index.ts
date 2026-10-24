@@ -91,7 +91,7 @@ Deno.serve(async (req) => {
         const grant = provider === "soniox"
           ? await sonioxTranscriber(session.id)
           : await transcriber();
-        // iOS echo cancellation lets learners interrupt Bé Trâu on the
+        // iOS echo cancellation lets learners interrupt Tuko on the
         // speaker; off until verified on devices.
         const echoCancellation = Deno.env.get("KUMUSTA_LIVE_ECHO_CANCELLATION")?.trim() === "on";
         return jsonResponse(200, { ...grant, echoCancellation }, id);
@@ -488,7 +488,7 @@ function speech(apiKey: string, voiceID: string, text: string, previous: string)
     body: JSON.stringify({
       text,
       model_id: PIPELINE_TTS_MODEL,
-      // Bé Trâu also explains in English or French; each sentence is read
+      // Tuko also explains in English; each sentence is read
       // with its own language's pronunciation.
       ...(language ? { language_code: language } : {}),
       // Expressive enough for audio tags while keeping the approved voice.

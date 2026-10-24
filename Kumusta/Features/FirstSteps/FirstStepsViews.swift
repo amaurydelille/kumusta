@@ -29,7 +29,7 @@ struct FirstStepsOfferView: View {
                             .font(KumustaTypography.hero)
                             .foregroundStyle(KumustaColors.ink)
                             .fixedSize(horizontal: false, vertical: true)
-                        Text(L("Hear the sounds, learn three phrases, then use them in a real mini-conversation with Kalabaw."))
+                        Text(L("Hear the sounds, learn three phrases, then use them in a real mini-conversation with Tuko."))
                             .font(KumustaTypography.body)
                             .foregroundStyle(KumustaColors.muted)
                             .fixedSize(horizontal: false, vertical: true)
@@ -66,7 +66,7 @@ struct FirstStepsOfferView: View {
                     HStack(spacing: 10) {
                         offerFeature(symbol: "ear.fill", title: L("Hear"), detail: L("Catch the sounds"))
                         offerFeature(symbol: "mic.fill", title: L("Speak"), detail: L("Say it out loud"))
-                        offerFeature(symbol: "bubble.left.and.bubble.right.fill", title: L("Chat"), detail: L("Talk with Kalabaw"))
+                        offerFeature(symbol: "bubble.left.and.bubble.right.fill", title: L("Chat"), detail: L("Talk with Tuko"))
                     }
 
                     HStack(spacing: 10) {
@@ -424,7 +424,7 @@ private struct FirstStepsCheatSheetView: View {
                     Text(L("Replay your lessons"))
                         .font(KumustaTypography.title2)
                         .foregroundStyle(KumustaColors.ink)
-                    Text(L("Run them again any time. Kalabaw checks every word."))
+                    Text(L("Run them again any time. Tuko checks every word."))
                         .font(KumustaTypography.supporting)
                         .foregroundStyle(KumustaColors.muted)
                         .fixedSize(horizontal: false, vertical: true)

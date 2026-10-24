@@ -2,7 +2,7 @@ import SwiftUI
 
 /// A guided lesson played from a `FirstLessonScript`: hear, notice,
 /// recognize, and say a few phrases, then use them in a short conversation
-/// with Kalabaw. Missed answers come back at the end of the lesson, so every
+/// with Tuko. Missed answers come back at the end of the lesson, so every
 /// learner leaves having answered everything correctly at least once.
 ///
 /// The same view runs the in-app First Steps lesson and the short onboarding
@@ -657,7 +657,7 @@ private struct StepTitle: View {
     }
 }
 
-/// Kalabaw next to a speech bubble holding the step's content.
+/// Tuko next to a speech bubble holding the step's content.
 private struct BuddySays<Content: View>: View {
     let motion: BuddyMotion
     var mascotSize: CGFloat = 104
@@ -2008,7 +2008,7 @@ private struct SpeakFooter: View {
             if speech.feedbackState.isProcessing || speech.recorder.isFinishingRecording || speech.recorder.hasRecording {
                 HStack(spacing: 10) {
                     ProgressView().tint(.white)
-                    Text(L("Kalabaw is listening back…"))
+                    Text(L("Tuko is listening back…"))
                 }
                 .font(KumustaTypography.bodyStrong)
                 .foregroundStyle(.white)
@@ -2062,7 +2062,7 @@ private struct SpeakFooter: View {
 
 private enum UncheckedTake {
     static var headline: String { L("Nice, you said it!") }
-    static var detail: String { L("Kalabaw will check every word once your plan starts.") }
+    static var detail: String { L("Tuko will check every word once your plan starts.") }
 }
 
 private struct FirstLessonSpeakStep: View {
@@ -2172,7 +2172,7 @@ private struct FirstLessonSpeakStep: View {
                 switch outcome {
                 case .matched:
                     track("speech_matched")
-                    result = .correct(headline: Praise.random(), detail: L("Kalabaw understood every word."))
+                    result = .correct(headline: Praise.random(), detail: L("Tuko understood every word."))
                 case .unchecked:
                     track("speech_unchecked")
                     result = .neutral(headline: UncheckedTake.headline, detail: UncheckedTake.detail)
@@ -2425,7 +2425,7 @@ private struct FirstLessonConversationStep: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(message.fromBuddy ? "Kalabaw" : L("You")): \(message.text), \(message.translation)")
+        .accessibilityLabel("\(message.fromBuddy ? "Tuko" : L("You")): \(message.text), \(message.translation)")
     }
 
     private var typingIndicator: some View {
@@ -2449,7 +2449,7 @@ private struct FirstLessonConversationStep: View {
             .clipShape(Capsule())
             Spacer()
         }
-        .accessibilityLabel(L("Kalabaw is typing"))
+        .accessibilityLabel(L("Tuko is typing"))
     }
 
     private func replyPrompt(_ turn: FirstLessonScript.Turn) -> some View {
@@ -2476,7 +2476,7 @@ private struct FirstLessonConversationStep: View {
         .accessibilityElement(children: .combine)
     }
 
-    /// Kalabaw types, then says a line out loud.
+    /// Tuko types, then says a line out loud.
     @MainActor
     private func say(_ text: String, translation: String) async {
         withAnimation { isBuddyTyping = true }
