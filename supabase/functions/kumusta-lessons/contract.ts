@@ -22,19 +22,17 @@ export function legacyHearRespondRoundIndexes(roundCount: number): number[] {
   return [2];
 }
 
-export type Accent = "southern" | "northern";
 export type Goal =
   | "family"
-  | "lifeInVietnam"
+  | "lifeInThePhilippines"
   | "travel"
   | "partner"
   | "work"
   | "culture";
 export type SelfAssessedLevel =
-  | "new"
-  | "familiar"
-  | "conversational"
-  | "rusty";
+  | "beginner"
+  | "intermediate"
+  | "advanced";
 export type ChallengePreference = "gentle" | "balanced" | "stretch";
 export type DifficultyRating = "too_easy" | "just_right" | "too_hard";
 export type PaceRating = "too_slow" | "pace_right" | "too_fast";
@@ -43,7 +41,6 @@ export type LessonStepKind = "coldListen" | "decode" | "hearRespond" | "speak";
 export type VocabularyReviewRating = "again" | "almost" | "got_it";
 
 export interface LearnerProfileInput {
-  accent: Accent;
   goal: Goal;
   selfAssessedLevel: SelfAssessedLevel;
   targetLevel: number;
@@ -111,7 +108,7 @@ export type LessonEngineRequest =
   };
 
 export interface GeneratedChunk {
-  vietnamese: string;
+  tagalog: string;
   english: string;
   note: string;
 }
@@ -119,7 +116,7 @@ export interface GeneratedChunk {
 export interface GeneratedStep {
   kind: LessonStepKind;
   prompt: string;
-  vietnamese: string;
+  tagalog: string;
   translation: string;
   chunks: GeneratedChunk[];
 }
@@ -127,7 +124,7 @@ export interface GeneratedStep {
 export interface GeneratedRound {
   topicKey: string;
   situation: string;
-  vietnamese: string;
+  tagalog: string;
   translation: string;
   chunks: GeneratedChunk[];
   wordGlosses: GeneratedWordGloss[];
@@ -140,7 +137,7 @@ export interface GeneratedHearRespondOption {
 }
 
 export interface GeneratedHearRespondExercise {
-  promptVietnamese: string;
+  promptTagalog: string;
   promptTranslation: string;
   options: GeneratedHearRespondOption[];
   correctOptionIndex: number;
@@ -152,7 +149,7 @@ export interface GeneratedWordGloss {
 }
 
 export interface GeneratedVocabulary {
-  vietnamese: string;
+  tagalog: string;
   english: string;
   example: string;
   exampleTranslation: string;
@@ -225,7 +222,7 @@ export const lessonBatchJSONSchema = {
               required: [
                 "topic_key",
                 "situation",
-                "vietnamese",
+                "tagalog",
                 "translation",
                 "chunks",
                 "word_glosses",
@@ -239,20 +236,20 @@ export const lessonBatchJSONSchema = {
                   maxLength: 80,
                 },
                 situation: { type: "string", minLength: 1, maxLength: 160 },
-                vietnamese: { type: "string", minLength: 1, maxLength: 280 },
+                tagalog: { type: "string", minLength: 1, maxLength: 280 },
                 translation: { type: "string", minLength: 1, maxLength: 280 },
                 speaking_prompt: { type: "string", minLength: 1, maxLength: 180 },
                 response_exercise: {
                   type: "object",
                   additionalProperties: false,
                   required: [
-                    "prompt_vietnamese",
+                    "prompt_tagalog",
                     "prompt_translation",
                     "options",
                     "correct_option_index",
                   ],
                   properties: {
-                    prompt_vietnamese: { type: "string", minLength: 1, maxLength: 280 },
+                    prompt_tagalog: { type: "string", minLength: 1, maxLength: 280 },
                     prompt_translation: { type: "string", minLength: 1, maxLength: 280 },
                     options: {
                       type: "array",
@@ -277,9 +274,9 @@ export const lessonBatchJSONSchema = {
                   items: {
                     type: "object",
                     additionalProperties: false,
-                    required: ["vietnamese", "english", "note"],
+                    required: ["tagalog", "english", "note"],
                     properties: {
-                      vietnamese: { type: "string", minLength: 1, maxLength: 100 },
+                      tagalog: { type: "string", minLength: 1, maxLength: 100 },
                       english: { type: "string", minLength: 1, maxLength: 140 },
                       note: { type: "string", minLength: 1, maxLength: 180 },
                     },
@@ -310,13 +307,13 @@ export const lessonBatchJSONSchema = {
               type: "object",
               additionalProperties: false,
               required: [
-                "vietnamese",
+                "tagalog",
                 "english",
                 "example",
                 "example_translation",
               ],
               properties: {
-                vietnamese: { type: "string", minLength: 1, maxLength: 100 },
+                tagalog: { type: "string", minLength: 1, maxLength: 100 },
                 english: { type: "string", minLength: 1, maxLength: 140 },
                 example: { type: "string", minLength: 1, maxLength: 240 },
                 example_translation: { type: "string", minLength: 1, maxLength: 240 },
@@ -558,7 +555,6 @@ export function parseTopicPreference(value: unknown): string | null {
 export function validateGeneratedBatch(
   value: unknown,
   expectedCount: number,
-  expectedAccent?: Accent,
   expectedMinutes?: number,
   expectedRounds?: number,
   requireHearRespond = false,
@@ -566,7 +562,6 @@ export function validateGeneratedBatch(
   return validateGeneratedBatchDetailed(
     value,
     expectedCount,
-    expectedAccent,
     expectedMinutes,
     expectedRounds,
     requireHearRespond,
@@ -576,7 +571,6 @@ export function validateGeneratedBatch(
 export function validateGeneratedBatchDetailed(
   value: unknown,
   expectedCount: number,
-  expectedAccent?: Accent,
   expectedMinutes?: number,
   expectedRounds?: number,
   requireHearRespond = false,
@@ -586,7 +580,6 @@ export function validateGeneratedBatchDetailed(
     value,
     expectedCount,
     validation,
-    expectedAccent,
     expectedMinutes,
     expectedRounds,
     requireHearRespond,
@@ -598,7 +591,6 @@ function validateGeneratedBatchInternal(
   value: unknown,
   expectedCount: number,
   validation: ValidationContext,
-  expectedAccent?: Accent,
   expectedMinutes?: number,
   expectedRounds?: number,
   requireHearRespond = false,
@@ -615,7 +607,6 @@ function validateGeneratedBatchInternal(
   for (const rawLesson of value.lessons) {
     const lesson = validateLesson(
       rawLesson,
-      expectedAccent,
       expectedMinutes,
       expectedRounds,
       requireHearRespond,
@@ -631,7 +622,6 @@ function validateGeneratedBatchInternal(
 
 function validateLesson(
   value: unknown,
-  expectedAccent?: Accent,
   expectedMinutes?: number,
   expectedRounds?: number,
   requireHearRespond = false,
@@ -646,7 +636,7 @@ function validateLesson(
     return reject(validation, "lesson_scenario_key");
   }
   if (!scenario) return reject(validation, "lesson_scenario");
-  if (containsVietnameseOrthography(title) || containsVietnameseOrthography(scenario)) {
+  if (containsTagalogSentence(title) || containsTagalogSentence(scenario)) {
     return reject(validation, "lesson_ui_language");
   }
   if (
@@ -665,13 +655,6 @@ function validateLesson(
     value.vocabulary.length > 18
   ) return reject(validation, "lesson_vocabulary_count");
 
-  const geographicCopy = `${title} ${scenario}`;
-  if (
-    (expectedAccent === "southern" && /\b(?:hanoi|hà nội|northern)\b/iu.test(geographicCopy)) ||
-    (expectedAccent === "northern" &&
-      /\b(?:saigon|sài gòn|ho chi minh|southern)\b/iu.test(geographicCopy))
-  ) return reject(validation, "accent_location_mismatch");
-
   const rounds: GeneratedRound[] = [];
   const seenPhrases = new Set<string>();
   const responseRoundIndexes = hearRespondRoundIndexes(
@@ -686,16 +669,16 @@ function validateLesson(
       validation,
     );
     if (!round) return null;
-    const normalizedPhrase = round.vietnamese.toLocaleLowerCase("vi");
+    const normalizedPhrase = round.tagalog.toLocaleLowerCase("fil");
     if (seenPhrases.has(normalizedPhrase)) return reject(validation, "duplicate_utterance");
     seenPhrases.add(normalizedPhrase);
     rounds.push(round);
   }
   if (
     rounds.some((round) =>
-      interfaceCopyRevealsUtterance(title, round.vietnamese) ||
-      interfaceCopyRevealsUtterance(scenario, round.vietnamese) ||
-      interfaceCopyRevealsUtterance(round.situation, round.vietnamese)
+      interfaceCopyRevealsUtterance(title, round.tagalog) ||
+      interfaceCopyRevealsUtterance(scenario, round.tagalog) ||
+      interfaceCopyRevealsUtterance(round.situation, round.tagalog)
     )
   ) return reject(validation, "answer_leakage");
   const safetyCopy = [
@@ -704,16 +687,16 @@ function validateLesson(
     ...rounds.flatMap((round) => [
       round.situation,
       round.speakingPrompt,
-      round.vietnamese,
+      round.tagalog,
       round.translation,
       ...(round.responseExercise
         ? [
-          round.responseExercise.promptVietnamese,
+          round.responseExercise.promptTagalog,
           round.responseExercise.promptTranslation,
           ...round.responseExercise.options.map((option) => option.englishTranslation),
         ]
         : []),
-      ...round.chunks.flatMap((chunk) => [chunk.vietnamese, chunk.english, chunk.note]),
+      ...round.chunks.flatMap((chunk) => [chunk.tagalog, chunk.english, chunk.note]),
       ...round.wordGlosses.flatMap((gloss) => [gloss.token, gloss.english]),
     ]),
   ].join(" ");
@@ -726,13 +709,13 @@ function validateLesson(
   for (const rawVocabulary of value.vocabulary) {
     const item = validateVocabulary(rawVocabulary, validation);
     if (!item) return null;
-    const normalizedTerm = item.vietnamese.toLocaleLowerCase("vi");
+    const normalizedTerm = item.tagalog.toLocaleLowerCase("fil");
     if (seenTerms.has(normalizedTerm)) return reject(validation, "duplicate_vocabulary");
     if (
-      !rounds.some((round) => normalizedIncludes(round.vietnamese, item.vietnamese)) ||
-      !normalizedIncludes(item.example, item.vietnamese) ||
+      !rounds.some((round) => normalizedIncludes(round.tagalog, item.tagalog)) ||
+      !normalizedIncludes(item.example, item.tagalog) ||
       containsProhibitedLessonSubject(
-        `${item.vietnamese} ${item.english} ${item.example} ${item.exampleTranslation}`,
+        `${item.tagalog} ${item.english} ${item.example} ${item.exampleTranslation}`,
       )
     ) return reject(validation, "vocabulary_not_grounded");
     seenTerms.add(normalizedTerm);
@@ -765,14 +748,14 @@ function validateRound(
   }
   const topicKey = boundedText(value.topic_key, 1, 80);
   const situation = boundedText(value.situation, 1, 160);
-  const vietnamese = boundedVietnamese(value.vietnamese, 1, 280);
+  const tagalog = boundedTagalog(value.tagalog, 1, 280);
   const translation = boundedText(value.translation, 1, 280);
   const speakingPrompt = boundedText(value.speaking_prompt, 1, 180);
   if (
     !topicKey || topicKey !== expectedTopicKey ||
-    !situation || !vietnamese || !translation || !speakingPrompt ||
-    containsVietnameseOrthography(situation) ||
-    hasLeadingSpeakerLabel(vietnamese) || hasLeadingSpeakerLabel(translation) ||
+    !situation || !tagalog || !translation || !speakingPrompt ||
+    containsTagalogSentence(situation) ||
+    hasLeadingSpeakerLabel(tagalog) || hasLeadingSpeakerLabel(translation) ||
     value.chunks.length < 2 || value.chunks.length > 5
   ) {
     return reject(validation, "round_fields");
@@ -780,19 +763,19 @@ function validateRound(
   const chunks: GeneratedChunk[] = [];
   for (const rawChunk of value.chunks) {
     if (!isPlainObject(rawChunk)) return reject(validation, "chunk_shape");
-    const chunkVietnamese = boundedText(rawChunk.vietnamese, 1, 100);
+    const chunkTagalog = boundedText(rawChunk.tagalog, 1, 100);
     const english = boundedText(rawChunk.english, 1, 140);
     const note = boundedText(rawChunk.note, 1, 180);
-    if (!chunkVietnamese || !english || !note) return reject(validation, "chunk_fields");
-    chunks.push({ vietnamese: chunkVietnamese, english, note });
+    if (!chunkTagalog || !english || !note) return reject(validation, "chunk_fields");
+    chunks.push({ tagalog: chunkTagalog, english, note });
   }
-  if (!chunksAppearInOrder(vietnamese, chunks.map((chunk) => chunk.vietnamese))) {
+  if (!chunksAppearInOrder(tagalog, chunks.map((chunk) => chunk.tagalog))) {
     return reject(validation, "chunks_not_ordered_substrings");
   }
 
   const responseExercise = value.response_exercise === undefined
     ? undefined
-    : validateHearRespondExercise(value.response_exercise, vietnamese, translation, validation);
+    : validateHearRespondExercise(value.response_exercise, tagalog, translation, validation);
   if (value.response_exercise !== undefined && !responseExercise) return null;
   if (requireHearRespond && shouldHaveHearRespond && !responseExercise) {
     return reject(validation, "missing_hear_respond_exercise");
@@ -801,7 +784,7 @@ function validateRound(
     return reject(validation, "unexpected_hear_respond_exercise");
   }
 
-  const expectedTokens = vietnamese.split(/\s+/u);
+  const expectedTokens = tagalog.split(/\s+/u);
   if (value.word_glosses.length < 1 || value.word_glosses.length > 40) {
     return reject(validation, "word_gloss_count");
   }
@@ -827,7 +810,7 @@ function validateRound(
     // The semantic value here is the contextual English gloss. Token identity
     // is deterministic from the already-validated utterance, so canonicalize
     // punctuation/casing instead of paying for another model generation when
-    // a provider returns `không` for the source token `không?`.
+    // a provider returns `po` for the source token `po?`.
     wordGlosses.push({
       token: expectedTokens.slice(tokenCursor, tokenCursor + glossTokens.length).join(" "),
       english,
@@ -840,7 +823,7 @@ function validateRound(
   return {
     topicKey,
     situation,
-    vietnamese,
+    tagalog,
     translation,
     chunks,
     wordGlosses,
@@ -851,21 +834,21 @@ function validateRound(
 
 function validateHearRespondExercise(
   value: unknown,
-  targetVietnamese: string,
+  targetTagalog: string,
   targetTranslation: string,
   validation: ValidationContext,
 ): GeneratedHearRespondExercise | null {
   if (!isPlainObject(value) || !Array.isArray(value.options)) {
     return reject(validation, "response_exercise_shape");
   }
-  const promptVietnamese = boundedVietnamese(value.prompt_vietnamese, 1, 280);
+  const promptTagalog = boundedTagalog(value.prompt_tagalog, 1, 280);
   const promptTranslation = boundedText(value.prompt_translation, 1, 280);
   const correctOptionIndex = value.correct_option_index;
   if (
-    !promptVietnamese || !promptTranslation ||
-    containsVietnameseOrthography(promptTranslation) ||
-    hasLeadingSpeakerLabel(promptVietnamese) ||
-    normalizeForGrounding(promptVietnamese) !== normalizeForGrounding(targetVietnamese) ||
+    !promptTagalog || !promptTranslation ||
+    containsTagalogSentence(promptTranslation) ||
+    hasLeadingSpeakerLabel(promptTagalog) ||
+    normalizeForGrounding(promptTagalog) !== normalizeForGrounding(targetTagalog) ||
     normalizeForGrounding(promptTranslation) !== normalizeForGrounding(targetTranslation) ||
     !Number.isInteger(correctOptionIndex) ||
     Number(correctOptionIndex) < 0 || Number(correctOptionIndex) > 2 ||
@@ -881,7 +864,7 @@ function validateHearRespondExercise(
     const englishTranslation = boundedText(rawOption.english_translation, 1, 280);
     if (
       !englishTranslation ||
-      containsVietnameseOrthography(englishTranslation) ||
+      containsTagalogSentence(englishTranslation) ||
       hasLeadingSpeakerLabel(englishTranslation)
     ) {
       return reject(validation, "response_option_fields");
@@ -905,7 +888,7 @@ function validateHearRespondExercise(
   }
 
   return {
-    promptVietnamese,
+    promptTagalog,
     promptTranslation,
     options,
     correctOptionIndex: Number(correctOptionIndex),
@@ -913,7 +896,7 @@ function validateHearRespondExercise(
 }
 
 function normalizeGlossToken(value: string): string {
-  return value.toLocaleLowerCase("vi").replace(/[\p{P}\p{S}]+/gu, "");
+  return value.toLocaleLowerCase("fil").replace(/[\p{P}\p{S}]+/gu, "");
 }
 
 function chunksAppearInOrder(phrase: string, chunks: string[]): boolean {
@@ -936,27 +919,62 @@ function normalizedIncludes(haystack: string, needle: string): boolean {
 }
 
 function normalizeForGrounding(value: string): string {
-  return value.normalize("NFC").toLocaleLowerCase("vi").replace(/\s+/gu, " ").trim();
+  return value.normalize("NFC").toLocaleLowerCase("fil").replace(/\s+/gu, " ").trim();
 }
 
 function hasLeadingSpeakerLabel(value: string): boolean {
   return /^[\p{L}\s·-]{1,60}[:：]\s*\S/u.test(value);
 }
 
-export function containsVietnameseOrthography(value: string): boolean {
-  // A contiguous Unicode range is incorrect here: it also contains ordinary
-  // French/English loanword characters such as the single "é" in "café".
-  // Detect Vietnamese-specific letters and tone combinations directly. Two
-  // shared Latin accents are also a strong signal, while one remains valid UI
-  // copy. Full utterance leakage is independently rejected below.
-  if (
-    /[ĂăÂâĐđÊêÔôƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỲỳỴỵỶỷỸỹ]/u
-      .test(
-        value,
-      )
-  ) return true;
-  return (value.match(/[ÀàÁáÃãÈèÉéÌìÍíÒòÓóÕõÙùÚúÝý]/gu)?.length ?? 0) >= 2;
+/**
+ * Tagalog shares the Latin alphabet with English, so interface copy is checked
+ * for Tagalog function words instead of letters. One word is allowed (a
+ * culture term such as "po" or "Lola" can be part of an English title); two
+ * distinct ones mean the copy is a Tagalog sentence. Full utterance leakage is
+ * independently rejected below.
+ */
+export function containsTagalogSentence(value: string): boolean {
+  const words = value.normalize("NFC").toLocaleLowerCase("fil").match(/\p{L}+/gu) ?? [];
+  const found = new Set(words.filter((word) => tagalogFunctionWords.has(word)));
+  return found.size >= 2;
 }
+
+// Common Tagalog words that never appear in English copy. Ambiguous ones such
+// as "na", "ba" and "din" are left out on purpose.
+const tagalogFunctionWords = new Set([
+  "ang",
+  "ng",
+  "mga",
+  "ako",
+  "ikaw",
+  "siya",
+  "kami",
+  "tayo",
+  "kayo",
+  "sila",
+  "hindi",
+  "opo",
+  "po",
+  "salamat",
+  "kumusta",
+  "ito",
+  "iyan",
+  "iyon",
+  "dito",
+  "doon",
+  "naman",
+  "lang",
+  "rin",
+  "yung",
+  "ninyo",
+  "natin",
+  "namin",
+  "akin",
+  "magkano",
+  "saan",
+  "ano",
+  "paano",
+]);
 
 function interfaceCopyRevealsUtterance(copy: string, utterance: string): boolean {
   const normalizedCopy = normalizeForAnswerLeakage(copy);
@@ -970,7 +988,6 @@ function normalizeForAnswerLeakage(value: string): string {
   return value
     .normalize("NFD")
     .replace(/\p{M}+/gu, "")
-    .replace(/[Đđ]/gu, "d")
     .toLocaleLowerCase("en")
     .replace(/[^a-z0-9]+/gu, " ")
     .trim()
@@ -978,7 +995,7 @@ function normalizeForAnswerLeakage(value: string): string {
 }
 
 function containsProhibitedLessonSubject(value: string): boolean {
-  return /\b(?:suicide|self[- ]?harm|murder|weapon|gun|bomb|cocaine|heroin|porn(?:ography)?|sexual|gambling|political campaign)\b|(?:tự sát|tự hại|giết người|vũ khí|súng|bom|ma túy|khiêu dâm|tình dục|cờ bạc)/iu
+  return /\b(?:suicide|self[- ]?harm|murder|weapon|gun|bomb|cocaine|heroin|porn(?:ography)?|sexual|gambling|political campaign)\b|\b(?:magpakamatay|pagpapakamatay|baril|bomba|droga|shabu|sugal|pornograpiya)\b/iu
     .test(value);
 }
 
@@ -987,13 +1004,13 @@ function validateVocabulary(
   validation: ValidationContext,
 ): GeneratedVocabulary | null {
   if (!isPlainObject(value)) return reject(validation, "vocabulary_shape");
-  const vietnamese = boundedText(value.vietnamese, 1, 100);
+  const tagalog = boundedText(value.tagalog, 1, 100);
   const english = boundedText(value.english, 1, 140);
-  const example = boundedVietnamese(value.example, 1, 240);
+  const example = boundedTagalog(value.example, 1, 240);
   const exampleTranslation = boundedText(value.example_translation, 1, 240);
-  const result = vietnamese && english && example && exampleTranslation &&
+  const result = tagalog && english && example && exampleTranslation &&
       !hasLeadingSpeakerLabel(example) && !hasLeadingSpeakerLabel(exampleTranslation)
-    ? { vietnamese, english, example, exampleTranslation }
+    ? { tagalog, english, example, exampleTranslation }
     : null;
   return result ?? reject(validation, "vocabulary_fields");
 }
@@ -1008,19 +1025,23 @@ function parseProfile(value: unknown): LearnerProfileInput {
     throw new HttpError(400, "invalid_profile", "A learner profile is required.");
   }
   assertExactKeys(value, [
-    "accent",
     "goal",
     "self_assessed_level",
     "target_level",
     "challenge_preference",
     "daily_minutes",
   ]);
-  const accents: Accent[] = ["southern", "northern"];
-  const goals: Goal[] = ["family", "lifeInVietnam", "travel", "partner", "work", "culture"];
-  const levels: SelfAssessedLevel[] = ["new", "familiar", "conversational", "rusty"];
+  const goals: Goal[] = [
+    "family",
+    "lifeInThePhilippines",
+    "travel",
+    "partner",
+    "work",
+    "culture",
+  ];
+  const levels: SelfAssessedLevel[] = ["beginner", "intermediate", "advanced"];
   const challenges: ChallengePreference[] = ["gentle", "balanced", "stretch"];
   if (
-    !accents.includes(value.accent as Accent) ||
     !goals.includes(value.goal as Goal) ||
     !levels.includes(value.self_assessed_level as SelfAssessedLevel) ||
     !challenges.includes(value.challenge_preference as ChallengePreference) ||
@@ -1032,7 +1053,6 @@ function parseProfile(value: unknown): LearnerProfileInput {
     throw new HttpError(400, "invalid_profile", "The learner profile is invalid.");
   }
   return {
-    accent: value.accent as Accent,
     goal: value.goal as Goal,
     selfAssessedLevel: value.self_assessed_level as SelfAssessedLevel,
     targetLevel: Number(value.target_level),
@@ -1080,9 +1100,15 @@ function parseUUID(value: unknown, field: string): string {
   throw new HttpError(400, "invalid_identifier", `The ${field} is invalid.`);
 }
 
-function boundedVietnamese(value: unknown, minimum: number, maximum: number): string | null {
+/** Tagalog is written in Latin letters (ñ and stress marks included); other scripts are rejected. */
+function boundedTagalog(value: unknown, minimum: number, maximum: number): string | null {
   const text = boundedText(value, minimum, maximum);
-  if (!text || !/[À-ỹĂăÂâĐđÊêÔôƠơƯư]/u.test(text)) return null;
+  if (
+    !text || !/\p{Script=Latin}/u.test(text) ||
+    /[^\p{Script=Latin}\p{M}\p{N}\p{P}\p{Zs}\p{S}]/u.test(text)
+  ) {
+    return null;
+  }
   return text;
 }
 

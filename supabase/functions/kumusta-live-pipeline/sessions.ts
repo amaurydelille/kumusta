@@ -80,7 +80,6 @@ export async function start(admin: Admin, userID: string, body: Record<string, u
     expires_at: new Date(now.getTime() + (SESSION_SECONDS + 20) * 1000).toISOString(),
     reserved_seconds: SESSION_SECONDS,
     charged_seconds: 0,
-    accent: context.accent,
     topic_source: context.source,
     topic: context.topic,
     latest_lesson: context.lesson,
@@ -117,7 +116,6 @@ async function dailyRound(
   const { data, error } = await admin.from("kumusta_live_rounds").insert({
     user_id: userID,
     usage_day: day,
-    accent: context.accent,
     topic_source: context.source,
     topic: context.topic,
     latest_lesson: context.lesson,

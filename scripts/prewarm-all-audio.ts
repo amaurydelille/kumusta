@@ -294,14 +294,14 @@ async function buildManifest(serviceKey: string): Promise<ManifestEntry[]> {
     for (const item of [...rounds, ...steps]) {
       if (!item || typeof item !== "object") continue;
       const record = item as Record<string, unknown>;
-      add(accent, "lesson", record.vietnamese, source);
+      add(accent, "lesson", record.tagalog, source);
     }
   };
 
   for (const name of ["new", "familiar", "rusty", "conversational"]) {
     const payload = JSON.parse(
       await Deno.readTextFile(
-        new URL(`../supabase/catalog/${name}-vietnamese-v1.json`, import.meta.url),
+        new URL(`../supabase/catalog/${name}-tagalog-v1.json`, import.meta.url),
       ),
     );
     for (const lesson of payload.lessons ?? []) {
@@ -403,7 +403,7 @@ async function buildManifest(serviceKey: string): Promise<ManifestEntry[]> {
   }
   return entries.sort((a, b) =>
     a.purpose.localeCompare(b.purpose) || a.accent.localeCompare(b.accent) ||
-    a.text.localeCompare(b.text, "vi")
+    a.text.localeCompare(b.text, "fil")
   );
 }
 

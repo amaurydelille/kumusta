@@ -4,66 +4,55 @@ function assert(condition: boolean, message: string): asserts condition {
   if (!condition) throw new Error(message);
 }
 
-const southernRequest = {
-  text: "Xin chào",
-  accent: "southern" as const,
+const lessonRequest = {
+  text: "Kumusta po kayo?",
   speed: "natural" as const,
   purpose: "lesson" as const,
-  honorRequestedAccent: false,
 };
 
-const northernRequest = {
-  ...southernRequest,
-  accent: "northern" as const,
-};
+const defaultVoiceID = "EXAVITQu4vr4xnSDxMaL";
+const overrideVoiceID = "AbCdEf0123456789xyz";
 
-Deno.test("TTS cache separates identical text by Vietnamese accent", async () => {
-  const southernKey = await ttsCacheKey(
-    southernRequest,
-    "6Xq32rHt6oAu98TBDKfr",
-    "eleven_v4",
-  );
-  const northernKey = await ttsCacheKey(
-    northernRequest,
-    "LD1UihCXvSlUL4h8DOmk",
-    "eleven_v4",
-  );
+Deno.test("TTS cache separates identical text by configured voice", async () => {
+  const defaultKey = await ttsCacheKey(lessonRequest, defaultVoiceID, "eleven_v4");
+  const overrideKey = await ttsCacheKey(lessonRequest, overrideVoiceID, "eleven_v4");
 
-  assert(southernKey !== northernKey, "Accent variants must not share a key");
-  assert(southernKey.length === 64, "Cache keys must be SHA-256 hex values");
+  assert(defaultKey !== overrideKey, "A voice change must not reuse old audio");
+  assert(defaultKey.length === 64, "Cache keys must be SHA-256 hex values");
   assert(
-    ttsObjectPath(southernKey, "lesson") !== ttsObjectPath(northernKey, "lesson"),
-    "Accent variants must not share a Storage object path",
+    ttsObjectPath(defaultKey, "lesson") !== ttsObjectPath(overrideKey, "lesson"),
+    "Voice variants must not share a Storage object path",
   );
 });
 
 Deno.test("Identical TTS requests reuse the same cache key", async () => {
-  const firstKey = await ttsCacheKey(
-    southernRequest,
-    "6Xq32rHt6oAu98TBDKfr",
-    "eleven_v4",
-  );
-  const secondKey = await ttsCacheKey(
-    southernRequest,
-    "6Xq32rHt6oAu98TBDKfr",
-    "eleven_v4",
-  );
+  const firstKey = await ttsCacheKey(lessonRequest, defaultVoiceID, "eleven_v4");
+  const secondKey = await ttsCacheKey({ ...lessonRequest }, defaultVoiceID, "eleven_v4");
 
   assert(firstKey === secondKey, "Identical requests must reuse their cache key");
 });
 
+Deno.test("TTS cache separates speeds and text", async () => {
+  const natural = await ttsCacheKey(lessonRequest, defaultVoiceID, "eleven_v4");
+  const fast = await ttsCacheKey(
+    { ...lessonRequest, speed: "fast" as const },
+    defaultVoiceID,
+    "eleven_v4",
+  );
+  const other = await ttsCacheKey(
+    { ...lessonRequest, text: "Salamat po." },
+    defaultVoiceID,
+    "eleven_v4",
+  );
+
+  assert(natural !== fast, "Speed variants must not share a key");
+  assert(natural !== other, "Different text must not share a key");
+});
+
 Deno.test("Vocabulary cache is isolated from lesson cache", async () => {
-  const vocabularyRequest = { ...southernRequest, purpose: "vocabulary" as const };
-  const lessonKey = await ttsCacheKey(
-    southernRequest,
-    "6Xq32rHt6oAu98TBDKfr",
-    "eleven_v4",
-  );
-  const vocabularyKey = await ttsCacheKey(
-    vocabularyRequest,
-    "6Xq32rHt6oAu98TBDKfr",
-    "eleven_v4",
-  );
+  const vocabularyRequest = { ...lessonRequest, purpose: "vocabulary" as const };
+  const lessonKey = await ttsCacheKey(lessonRequest, defaultVoiceID, "eleven_v4");
+  const vocabularyKey = await ttsCacheKey(vocabularyRequest, defaultVoiceID, "eleven_v4");
 
   assert(lessonKey !== vocabularyKey, "Lesson and vocabulary requests must not share a cache key");
   assert(
@@ -72,6 +61,6 @@ Deno.test("Vocabulary cache is isolated from lesson cache", async () => {
   );
   assert(
     ttsObjectPath(vocabularyKey, "vocabulary").startsWith("v2/"),
-    "Vocabulary v3 audio must use its new cache namespace",
+    "Vocabulary audio must use its own cache namespace",
   );
 });

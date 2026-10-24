@@ -1,9 +1,11 @@
 import {
+  containsTagalogSentence,
   hearRespondRoundIndexes,
   lessonBatchJSONSchemaForContext,
   lessonRoundCount,
   parseLessonEngineRequest,
   validateGeneratedBatch,
+  validateGeneratedBatchDetailed,
 } from "./contract.ts";
 
 function assert(condition: boolean, message: string): asserts condition {
@@ -11,9 +13,8 @@ function assert(condition: boolean, message: string): asserts condition {
 }
 
 const profile = {
-  accent: "southern",
-  goal: "lifeInVietnam",
-  self_assessed_level: "familiar",
+  goal: "lifeInThePhilippines",
+  self_assessed_level: "intermediate",
   target_level: 4,
   challenge_preference: "balanced",
   daily_minutes: 7,
@@ -55,7 +56,7 @@ Deno.test("preparation polling accepts stable authored lesson seed IDs", () => {
     profile,
     excluding_lesson_id: authoredLessonID,
     generated_after: "2026-09-06T21:14:34Z",
-    topic_preference: "Playing football in Vietnam",
+    topic_preference: "Playing basketball in Manila",
     client_max_prompt_version: 14,
   });
   assert(parsed.action === "retry_generation", "wrong action");
@@ -76,13 +77,13 @@ Deno.test("provider schema fixes lesson duration and round count before generati
 
 function makeValidLesson() {
   const phrases = [
-    "Cho mình một ly cà phê sữa đá nhé.",
-    "Cho mình ít đường thôi nhé.",
-    "Cho mình mang đi nhé.",
-    "Mình trả bằng thẻ được không?",
-    "Cho mình xin hóa đơn nhé.",
-    "Cho mình thêm một ống hút nhé.",
-    "Mình ngồi ở đây được không?",
+    "Isang kapeng barako nga po.",
+    "Konting asukal lang po.",
+    "Take out na lang po.",
+    "Puwede po bang magbayad gamit ang card?",
+    "Pahingi po ng resibo.",
+    "Pahingi pa po ng isang straw.",
+    "May nakaupo po ba dito?",
   ];
   return {
     title: "Coffee without pointing",
@@ -101,31 +102,31 @@ function makeValidLesson() {
         "Ask for one more straw.",
         "Check whether this seat is available.",
       ][index],
-      vietnamese: phrase,
+      tagalog: phrase,
       translation: [
-        "Please give me an iced milk coffee.",
-        "Please use only a little sugar.",
-        "Please make it to take away.",
+        "One barako coffee, please.",
+        "Just a little sugar, please.",
+        "I'll just take it to go, please.",
         "Can I pay by card?",
-        "Please give me the receipt.",
-        "Please give me one more straw.",
-        "Can I sit here?",
+        "May I have the receipt, please?",
+        "May I have one more straw, please?",
+        "Is anyone sitting here?",
       ][index],
       chunks: index === 0
         ? [
-          { vietnamese: "Cho mình", english: "Give me", note: "A natural request opener." },
-          { vietnamese: "một ly", english: "one glass", note: "Classifies the drink." },
-          { vietnamese: "cà phê sữa đá", english: "iced milk coffee", note: "The drink." },
-          { vietnamese: "nhé", english: "please", note: "Softens the request." },
+          { tagalog: "Isang", english: "One", note: "Isa plus the linker -ng." },
+          { tagalog: "kapeng barako", english: "barako coffee", note: "The drink." },
+          { tagalog: "nga", english: "please", note: "Turns the line into a request." },
+          { tagalog: "po", english: "(respect)", note: "Polite with staff you don't know." },
         ]
         : [
           {
-            vietnamese: phrase.split(" ").slice(0, 2).join(" "),
+            tagalog: phrase.split(" ").slice(0, 2).join(" "),
             english: "Useful opening",
             note: "Start with this chunk.",
           },
           {
-            vietnamese: phrase.split(" ").slice(2).join(" ").replace(/[.?]$/, ""),
+            tagalog: phrase.split(" ").slice(2).join(" ").replace(/[.?]$/, ""),
             english: "Useful ending",
             note: "Finish with this chunk.",
           },
@@ -137,18 +138,18 @@ function makeValidLesson() {
       speaking_prompt: "Say the complete line without reading the translation.",
     })),
     vocabulary: [
-      "Cho mình",
-      "một ly",
-      "cà phê sữa đá",
-      "ít đường",
-      "mang đi",
-      "bằng thẻ",
-      "hóa đơn",
-      "ống hút",
-    ].map((vietnamese) => {
-      const example = phrases.find((phrase) => phrase.includes(vietnamese))!;
+      "kapeng barako",
+      "Konting asukal",
+      "Take out",
+      "magbayad",
+      "gamit ang card",
+      "resibo",
+      "straw",
+      "nakaupo",
+    ].map((tagalog) => {
+      const example = phrases.find((phrase) => phrase.includes(tagalog))!;
       return {
-        vietnamese,
+        tagalog,
         english: "Useful chunk",
         example,
         example_translation: "A grounded example from the lesson.",
@@ -161,7 +162,6 @@ function validate(lesson: ReturnType<typeof makeValidLesson>) {
   return validateGeneratedBatch(
     { version: 1, lessons: [lesson] },
     1,
-    "southern",
     7,
     7,
   );
@@ -175,7 +175,7 @@ function addHearRespondExercise(
     const round = lesson.rounds[roundIndex];
     Object.assign(round, {
       response_exercise: {
-        prompt_vietnamese: round.vietnamese,
+        prompt_tagalog: round.tagalog,
         prompt_translation: round.translation,
         options: [
           {
@@ -358,7 +358,6 @@ Deno.test("lesson validator requires two grounded hear/respond rounds", () => {
   const valid = validateGeneratedBatch(
     { version: 1, lessons: [addHearRespondExercise(makeValidLesson())] },
     1,
-    "southern",
     7,
     7,
     true,
@@ -368,7 +367,6 @@ Deno.test("lesson validator requires two grounded hear/respond rounds", () => {
   const missing = validateGeneratedBatch(
     { version: 1, lessons: [makeValidLesson()] },
     1,
-    "southern",
     7,
     7,
     true,
@@ -378,7 +376,6 @@ Deno.test("lesson validator requires two grounded hear/respond rounds", () => {
   const wrongAnswerIndex = validateGeneratedBatch(
     { version: 1, lessons: [addHearRespondExercise(makeValidLesson(), 0)] },
     1,
-    "southern",
     7,
     7,
     true,
@@ -386,11 +383,18 @@ Deno.test("lesson validator requires two grounded hear/respond rounds", () => {
   assert(wrongAnswerIndex === null, "incorrect response key accepted");
 });
 
-Deno.test("lesson validator allows a single European accent in English UI copy", () => {
+Deno.test("lesson validator allows one Tagalog culture word in English UI copy", () => {
+  const lesson = makeValidLesson();
+  lesson.title = "Saying po at the coffee shop";
+  lesson.scenario = "Ordering politely for your Lola";
+  assert(validate(lesson) !== null, "a single culture word was mistaken for a Tagalog sentence");
+});
+
+Deno.test("lesson validator allows accented letters such as café in English UI copy", () => {
   const lesson = makeValidLesson();
   lesson.title = "Meeting someone at a café";
   lesson.scenario = "Starting a friendly conversation at a café";
-  assert(validate(lesson) !== null, "ordinary café copy was mistaken for Vietnamese answer text");
+  assert(validate(lesson) !== null, "ordinary café copy was mistaken for Tagalog answer text");
 });
 
 Deno.test("lesson validator enforces the selected duration and round count", () => {
@@ -405,7 +409,7 @@ Deno.test("lesson validator enforces the selected duration and round count", () 
 
 Deno.test("lesson validator rejects duplicate utterances", () => {
   const lesson = makeValidLesson();
-  lesson.rounds[1].vietnamese = lesson.rounds[0].vietnamese;
+  lesson.rounds[1].tagalog = lesson.rounds[0].tagalog;
   lesson.rounds[1].chunks = structuredClone(lesson.rounds[0].chunks);
   assert(validate(lesson) === null, "duplicate round accepted");
 });
@@ -422,53 +426,50 @@ Deno.test("lesson validator requires complete ordered word glosses", () => {
   assert(validate(missingGloss) === null, "incomplete word dictionary accepted");
 
   const changedToken = makeValidLesson();
-  changedToken.rounds[0].word_glosses[0].token = "Mình";
+  changedToken.rounds[0].word_glosses[0].token = "Dalawang";
   assert(validate(changedToken) === null, "word gloss for a different token accepted");
 });
 
-Deno.test("lesson validator accepts a Vietnamese lexical compound as one gloss", () => {
+Deno.test("lesson validator accepts a Tagalog lexical compound as one gloss", () => {
   const lesson = makeValidLesson();
   const round = lesson.rounds[0];
   round.word_glosses = [
+    round.word_glosses[0],
     {
-      token: "Cho mình",
-      english: "a natural request opener",
+      token: "kapeng barako",
+      english: "barako coffee",
     },
-    ...round.word_glosses.slice(2),
+    ...round.word_glosses.slice(3),
   ];
   const result = validate(lesson);
   assert(result !== null, "lexical compound gloss was rejected");
   assert(
-    result.lessons[0].rounds[0].wordGlosses[0].token === "Cho mình",
+    result.lessons[0].rounds[0].wordGlosses[1].token === "kapeng barako",
     "compound gloss was not preserved",
   );
 });
 
 Deno.test("lesson validator canonicalizes harmless gloss punctuation", () => {
   const lesson = makeValidLesson();
-  lesson.rounds[0].word_glosses[lesson.rounds[0].word_glosses.length - 1].token = "nhé";
+  lesson.rounds[0].word_glosses[lesson.rounds[0].word_glosses.length - 1].token = "po";
   const result = validate(lesson);
   assert(result !== null, "punctuation-only gloss normalization rejected the lesson");
   const glosses = result.lessons[0].rounds[0].wordGlosses;
-  assert(glosses[glosses.length - 1].token === "nhé.", "source punctuation was not restored");
-});
-
-Deno.test("lesson validator rejects cross-accent location leakage", () => {
-  const lesson = makeValidLesson();
-  lesson.title = "Coffee in Hanoi";
-  assert(validate(lesson) === null, "Southern lesson accepted Hanoi-specific copy");
+  assert(glosses[glosses.length - 1].token === "po.", "source punctuation was not restored");
 });
 
 Deno.test("lesson validator rejects speaker labels inside utterances", () => {
   const lesson = makeValidLesson();
-  lesson.rounds[0].vietnamese = `Barista: ${lesson.rounds[0].vietnamese}`;
+  lesson.rounds[0].tagalog = `Barista: ${lesson.rounds[0].tagalog}`;
   assert(validate(lesson) === null, "speaker-labeled utterance accepted");
 });
 
-Deno.test("lesson validator rejects Vietnamese in English choice metadata", () => {
+Deno.test("lesson validator rejects Tagalog in English choice metadata", () => {
   const lesson = makeValidLesson();
-  lesson.scenario = "Cho mình một ly cà phê sữa đá nhé.";
-  assert(validate(lesson) === null, "Vietnamese answer leaked into English metadata");
+  lesson.scenario = "Saan po ang banyo dito?";
+  const result = validateGeneratedBatchDetailed({ version: 1, lessons: [lesson] }, 1, 7, 7);
+  assert(result.batch === null, "Tagalog sentence leaked into English metadata");
+  assert(result.issue === "lesson_ui_language", `unexpected issue ${result.issue}`);
 });
 
 Deno.test("lesson validator rejects ungrounded and out-of-order curriculum", () => {
@@ -477,8 +478,8 @@ Deno.test("lesson validator rejects ungrounded and out-of-order curriculum", () 
   assert(validate(outOfOrder) === null, "out-of-order chunks accepted");
 
   const ungrounded = makeValidLesson();
-  ungrounded.vocabulary[0].vietnamese = "xe buýt";
-  ungrounded.vocabulary[0].example = "Tôi đi xe buýt.";
+  ungrounded.vocabulary[0].tagalog = "jeep";
+  ungrounded.vocabulary[0].example = "Sasakay ako ng jeep.";
   assert(validate(ungrounded) === null, "ungrounded vocabulary accepted");
 });
 
@@ -501,4 +502,32 @@ Deno.test("lesson request rejects unexpected prompt-shaped fields", () => {
     rejected = true;
   }
   assert(rejected, "unexpected request fields were accepted");
+});
+
+Deno.test("Tagalog sentence heuristic allows one culture word in English copy", () => {
+  for (
+    const copy of [
+      "Saying po to your elders",
+      "Kumusta: greetings at the office",
+      "Lola's merienda",
+      "Meeting someone at a café",
+      "Ask the barista for the card machine",
+    ]
+  ) {
+    assert(!containsTagalogSentence(copy), `English copy flagged as Tagalog: ${copy}`);
+  }
+});
+
+Deno.test("Tagalog sentence heuristic flags two distinct function words", () => {
+  for (
+    const copy of [
+      "Salamat po.",
+      "Magkano po ito?",
+      "Kumusta po kayo?",
+      "SAAN ANG banyo?",
+    ]
+  ) {
+    assert(containsTagalogSentence(copy), `Tagalog sentence was not flagged: ${copy}`);
+  }
+  assert(!containsTagalogSentence("po po po"), "a repeated word must count once");
 });

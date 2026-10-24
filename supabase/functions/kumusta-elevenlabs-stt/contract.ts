@@ -9,7 +9,7 @@ export interface TranscriptionWord {
 export interface TranscriptionResponse {
   version: 1;
   transcript: string;
-  languageCode: "vie";
+  languageCode: "fil";
   languageProbability: number | null;
   words: TranscriptionWord[];
 }
@@ -62,7 +62,7 @@ export function sanitizeProviderTranscription(value: unknown): TranscriptionResp
   return {
     version: 1,
     transcript,
-    languageCode: "vie",
+    languageCode: "fil",
     languageProbability,
     words,
   };

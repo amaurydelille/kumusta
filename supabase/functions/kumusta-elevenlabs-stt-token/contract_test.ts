@@ -11,7 +11,7 @@ Deno.test("Realtime session pins the server-owned configuration", () => {
   const url = new URL(session.url);
   assert(url.protocol === "wss:" && url.host === "api.elevenlabs.io", "Unexpected endpoint");
   assert(url.searchParams.get("model_id") === "scribe_v2_realtime", "Model not pinned");
-  assert(url.searchParams.get("language_code") === "vie", "Language not pinned");
+  assert(url.searchParams.get("language_code") === "fil", "Language not pinned");
   assert(url.searchParams.get("audio_format") === "pcm_16000", "Format not pinned");
   assert(url.searchParams.get("commit_strategy") === "manual", "Commit strategy not pinned");
   assert(url.searchParams.get("token") === "sutkn_1234567890", "Token missing");

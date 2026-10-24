@@ -35,7 +35,7 @@ for (const row of rows) {
   for (const [i, round] of row.content.rounds.entries()) {
     if (/\b(?:choose|select|correct.*meaning)\b/i.test(round.speakingPrompt)) issues.push(`${slot}: round ${i + 1} speaking prompt`);
     if (Boolean(round.responseExercise) !== [2,4].includes(i)) issues.push(`${slot}: round ${i + 1} exercise placement`);
-    if (row.stage === 1 && round.vietnamese.split(/\s+/u).length > 9) issues.push(`${slot}: beginner length`);
+    if (row.stage === 1 && round.tagalog.split(/\s+/u).length > 9) issues.push(`${slot}: beginner length`);
   }
   generationInput += row.usage.generation.prompt_tokens ?? 0;
   generationOutput += row.usage.generation.completion_tokens ?? 0;

@@ -19,18 +19,20 @@ Deno.test("STT accepts only the recorder's bounded media type", () => {
 
 Deno.test("STT strips provider payload to the public contract", () => {
   const output = sanitizeProviderTranscription({
-    language_code: "vie",
+    language_code: "fil",
     language_probability: 0.97,
-    text: "  Cho mình một cà phê sữa đá.  ",
+    text: "  Isang   kape nga po.  ",
     words: [
-      { text: "Cho", start: 0.1, end: 0.25, type: "word", logprob: -0.01 },
+      { text: "Isang", start: 0.1, end: 0.25, type: "word", logprob: -0.01 },
       { text: "[noise]", start: 0.25, end: 0.3, type: "audio_event" },
     ],
     provider_internal: "must not leak",
   });
   assert(output.version === 1, "Version changed");
-  assert(output.transcript === "Cho mình một cà phê sữa đá.", "Transcript not normalized");
-  assert(output.words.length === 1 && output.words[0].text === "Cho", "Words not sanitized");
+  assert(output.transcript === "Isang kape nga po.", "Transcript not normalized");
+  assert(output.words.length === 1 && output.words[0].text === "Isang", "Words not sanitized");
+  assert(output.languageCode === "fil", "Language code must be Filipino");
+  assert(output.languageProbability === 0.97, "Language probability was dropped");
   assert(!("provider_internal" in output), "Provider payload leaked");
 });
 

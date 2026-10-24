@@ -26,11 +26,11 @@ import {
 import {
   consistentVoiceSettings,
   deterministicSpeechSeed,
-  effectiveAccentForRequest,
   parseTTSRequest,
   sourceSpeechSpeed,
+  tagalogLanguageCode,
+  tagalogVoiceID,
   ttsModelIDForPurpose,
-  voiceIDForAccent,
 } from "./contract.ts";
 import {
   ttsCacheBucket,
@@ -87,14 +87,8 @@ Deno.serve(async (req: Request) => {
       userID !== null &&
       await hasIncompleteOnboarding(admin, userID);
     if (userID && !isPrePaywallOnboarding) await requireActiveEntitlement(admin, userID);
-    const storedAccent = userID ? await fetchStoredAccent(admin, userID) : null;
     const effectiveInput = {
       ...input,
-      accent: effectiveAccentForRequest(
-        input.accent,
-        storedAccent,
-        input.honorRequestedAccent,
-      ),
       speed: sourceSpeechSpeed(input.speed),
     };
     if (input.speed !== effectiveInput.speed) {
@@ -104,18 +98,7 @@ Deno.serve(async (req: Request) => {
         source_speed: effectiveInput.speed,
       });
     }
-    if (
-      storedAccent &&
-      storedAccent !== input.accent &&
-      !input.honorRequestedAccent
-    ) {
-      console.warn("tts_request_accent_corrected", {
-        request_id: id,
-        requested_accent: input.accent,
-        stored_accent: storedAccent,
-      });
-    }
-    const voiceID = voiceIDForAccent(effectiveInput.accent);
+    const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
     const modelID = ttsModelIDForPurpose(effectiveInput.purpose);
     const cacheKey = await ttsCacheKey(effectiveInput, voiceID, modelID);
     const objectPath = ttsObjectPath(cacheKey, effectiveInput.purpose);
@@ -138,7 +121,6 @@ Deno.serve(async (req: Request) => {
       if (cached) {
         console.info("tts_cache_hit", {
           request_id: id,
-          accent: effectiveInput.accent,
           requested_speed: input.speed,
           source_speed: effectiveInput.speed,
         });
@@ -233,7 +215,6 @@ Deno.serve(async (req: Request) => {
     console.info("tts_cache_miss_generated", {
       request_id: id,
       onboarding_line: effectiveInput.onboardingLine ?? null,
-      accent: effectiveInput.accent,
       speed: effectiveInput.speed,
     });
     return audioResponse(audio, id, "generated");
@@ -276,19 +257,6 @@ async function hasIncompleteOnboarding(
   return data?.onboarding_completed_at == null;
 }
 
-async function fetchStoredAccent(
-  admin: Parameters<typeof requireActiveEntitlement>[0],
-  userID: string,
-): Promise<"southern" | "northern" | null> {
-  const { data, error } = await admin
-    .from("kumusta_learning_preferences")
-    .select("accent")
-    .eq("user_id", userID)
-    .maybeSingle();
-  if (error) throw error;
-  return data?.accent === "northern" || data?.accent === "southern" ? data.accent : null;
-}
-
 async function generateTTSAudio(
   input: ReturnType<typeof parseTTSRequest>,
   voiceID: string,
@@ -296,7 +264,7 @@ async function generateTTSAudio(
   apiKey: string,
   requestID: string,
 ): Promise<Uint8Array> {
-  // Eleven occasionally renders a lone syllable (e.g. "chút") as an empty
+  // Eleven occasionally renders a lone short word (e.g. "po") as an empty
   // clip. The seed is deterministic, so retrying the same request repeats the
   // failure forever. Vary the seed, then end the text with a period, which
   // gives the model a complete utterance to render.
@@ -358,7 +326,7 @@ async function requestTTSAudio(
       body: JSON.stringify({
         text,
         model_id: modelID,
-        language_code: "vi",
+        language_code: tagalogLanguageCode,
         seed,
         apply_text_normalization: "auto",
         voice_settings: consistentVoiceSettings(input.speed),
@@ -431,7 +399,6 @@ async function claimTTSCache(
   const { data, error } = await admin.rpc("kumusta_claim_tts_cache", {
     p_cache_key: cacheKey,
     p_text_value: input.text,
-    p_accent: input.accent,
     p_speed: input.speed,
     p_voice_id: voiceID,
     p_model_id: modelID,

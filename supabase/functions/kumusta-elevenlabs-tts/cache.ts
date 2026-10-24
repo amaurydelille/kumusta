@@ -15,9 +15,8 @@ export function ttsSettingsVersionForPurpose(purpose: TTSPurpose): string {
   return purpose === "vocabulary" ? vocabularyTTSSettingsVersion : lessonTTSSettingsVersion;
 }
 
-/// The accent is deliberately included twice: as the requested regional
-/// variant and as the server-owned voice ID. This makes it impossible for a
-/// Southern and Northern request for identical text to share a cache row.
+/// The server-owned voice ID is part of the key, so changing the configured
+/// Tagalog voice never serves audio recorded with the previous one.
 export async function ttsCacheKey(
   input: TTSRequest,
   voiceID: string,
@@ -26,7 +25,6 @@ export async function ttsCacheKey(
   const cacheMaterial = [
     ttsCacheVersionForPurpose(input.purpose),
     input.text,
-    input.accent,
     input.speed,
     voiceID,
     modelID,

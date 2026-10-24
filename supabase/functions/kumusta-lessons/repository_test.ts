@@ -85,7 +85,7 @@ Deno.test("generated vocabulary membership accepts a presented deterministic ID"
 Deno.test("generated vocabulary response hydrates persisted due dates", () => {
   const vocabulary = [{
     id: "2902da82-252b-5794-a688-0e24b9153a51",
-    vietnamese: "được không",
+    tagalog: "salamat po",
   }];
   const dueAt = "2026-08-04T14:00:00.000Z";
   const hydrated = hydrateGeneratedVocabularyProgress(vocabulary, [{
@@ -127,25 +127,25 @@ Deno.test("lesson presentation negotiates legacy and latest client contracts", (
 Deno.test("familiar language extraction is recent-first, normalized, deduplicated, and bounded", () => {
   const contents = [{
     vocabulary: [
-      { vietnamese: "  cho em  " },
-      { vietnamese: "CHỊ" },
-      { vietnamese: "chị" },
+      { tagalog: "  salamat po  " },
+      { tagalog: "ATE" },
+      { tagalog: "ate" },
     ],
     rounds: [{
       chunks: [
-        { vietnamese: "chị   cho em xem" },
-        { vietnamese: "Chị cho em xem" },
+        { tagalog: "ate   pabili po" },
+        { tagalog: "Ate pabili po" },
       ],
     }],
   }];
   const familiar = extractFamiliarLanguage(contents);
 
   assert(
-    JSON.stringify(familiar.vocabulary) === JSON.stringify(["cho em", "CHỊ"]),
+    JSON.stringify(familiar.vocabulary) === JSON.stringify(["salamat po", "ATE"]),
     "vocabulary was not normalized and deduplicated",
   );
   assert(
-    JSON.stringify(familiar.chunks) === JSON.stringify(["chị cho em xem"]),
+    JSON.stringify(familiar.chunks) === JSON.stringify(["ate pabili po"]),
     "chunks were not normalized and deduplicated",
   );
 });

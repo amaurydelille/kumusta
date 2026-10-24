@@ -1,5 +1,5 @@
 // Generates the bundled clips for the first lessons (the onboarding welcome
-// lessons and the First Steps lesson) in both accents. Onboarding runs before
+// lessons and the First Steps lesson). Onboarding runs before
 // the paywall, where the TTS Edge Function only speaks fixed templates, so
 // every fixed line ships with the app. Lines with the learner's name still use
 // the server's `reply_name` template at runtime.
@@ -9,7 +9,8 @@
 // 64-bit FNV-1a hash of its normalized text, the same key the app computes in
 // `FirstLessonScript.audioKey(for:)`.
 //
-// Usage (from mobile-app/kumusta, with ELEVENLABS_API_KEY in .env):
+// Usage (from the repo root, with ELEVENLABS_API_KEY in the environment or .env;
+// set KUMUSTA_TTS_VOICE_ID to match the Edge Function secret if one is set):
 //   deno run --allow-read --allow-write --allow-net --allow-env \
 //     scripts/generate-first-lesson-audio.ts [--force] [--dry-run]
 import {
@@ -17,71 +18,75 @@ import {
   deterministicSpeechSeed,
   normalizedTTSText,
   type TTSRequest,
-  vietnameseTTSModelID,
-  voiceIDForAccent,
+  tagalogLanguageCode,
+  tagalogTTSModelID,
+  tagalogVoiceID,
 } from "../supabase/functions/kumusta-elevenlabs-tts/contract.ts";
 
-type Accent = "southern" | "northern";
-type AccentText = string | { southern: string; northern: string };
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
 const lessonsDirectory = "Kumusta/Resources/FirstLessons";
 const outputFormat = "mp3_44100_96";
-const accents: Accent[] = ["southern", "northern"];
+const lessonFiles = [
+  "onboarding-beginner.json",
+  "onboarding-intermediate.json",
+  "onboarding-advanced.json",
+  "first-lesson-beginner.json",
+];
 const force = Deno.args.includes("--force");
 const dryRun = Deno.args.includes("--dry-run");
 
-function resolve(value: AccentText | undefined, accent: Accent): string | null {
+function resolve(value: string | undefined): string | null {
   if (value === undefined || value === null) return null;
-  return typeof value === "string" ? value : value[accent];
+  return value;
 }
 
 /// Mirrors `FirstLessonScript.audioTexts`: every line the app can play.
 /// Lines holding `{name}` are personalized at runtime and skipped here.
-function spokenTexts(lesson: Json, accent: Accent): string[] {
-  const texts: (string | null)[] = [resolve(lesson.intro.hook, accent)];
+function spokenTexts(lesson: Json): string[] {
+  const texts: (string | null)[] = [resolve(lesson.intro.hook)];
   for (const step of lesson.steps) {
     switch (step.kind) {
       case "teach":
-        for (const sample of step.samples ?? []) texts.push(resolve(sample.text, accent));
+        for (const sample of step.samples ?? []) texts.push(resolve(sample.text));
         break;
       case "listenPick":
-        for (const option of step.options ?? []) texts.push(resolve(option.text, accent));
+        for (const option of step.options ?? []) texts.push(resolve(option.text));
         break;
       case "newPhrase":
-        texts.push(resolve(step.vietnamese, accent));
-        for (const chunk of step.chunks ?? []) texts.push(resolve(chunk.vietnamese, accent));
+        texts.push(resolve(step.tagalog));
+        for (const chunk of step.chunks ?? []) texts.push(resolve(chunk.tagalog));
         break;
       case "speak":
-        texts.push(resolve(step.target, accent));
-        texts.push(resolve(step.audio, accent));
+        texts.push(resolve(step.target));
+        texts.push(resolve(step.audio));
         break;
       case "meaningPick":
-        texts.push(resolve(step.audio, accent));
+        texts.push(resolve(step.audio));
         break;
       case "naturalPick":
-        texts.push(resolve(step.context, accent));
-        for (const option of step.options ?? []) texts.push(resolve(option.text, accent));
+        texts.push(resolve(step.context));
+        for (const option of step.options ?? []) texts.push(resolve(option.text));
         break;
       case "build": {
-        const answer = (step.answer ?? []).map((tile: Json) => resolve(tile.text, accent));
+        const answer = (step.answer ?? []).map((tile: Json) => resolve(tile.text));
         for (const tile of [...(step.answer ?? []), ...(step.distractors ?? [])]) {
-          texts.push(resolve(tile.text, accent));
+          texts.push(resolve(tile.text));
         }
         texts.push(answer.join(" "));
         break;
       }
       case "conversation":
-        for (const turn of step.turns ?? []) texts.push(resolve(turn.buddy, accent));
-        if (step.closing) texts.push(resolve(step.closing.text, accent));
+        for (const turn of step.turns ?? []) texts.push(resolve(turn.buddy));
+        if (step.closing) texts.push(resolve(step.closing.text));
         break;
       default:
         throw new Error(`Unknown step kind ${step.kind} in ${lesson.id}`);
     }
   }
   for (const phrase of lesson.completion.phrases ?? []) {
-    const text = resolve(phrase.vietnamese, accent);
+    const text = resolve(phrase.tagalog);
     texts.push(text ? text.replaceAll("…", "").trim() : null);
   }
   return texts.filter((text): text is string =>
@@ -113,15 +118,13 @@ async function apiKey(): Promise<string> {
   throw new Error("ELEVENLABS_API_KEY is required (environment or .env)");
 }
 
-async function synthesize(text: string, accent: Accent, key: string): Promise<Uint8Array> {
+async function synthesize(text: string, key: string): Promise<Uint8Array> {
   const request: TTSRequest = {
     text: normalizedTTSText(text, "lesson"),
-    accent,
     speed: "natural",
     purpose: "lesson",
-    honorRequestedAccent: true,
   };
-  const voiceID = voiceIDForAccent(accent);
+  const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
   const endpoint = new URL(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceID)}`);
   endpoint.searchParams.set("output_format", outputFormat);
   for (let attempt = 1; ; attempt += 1) {
@@ -130,8 +133,8 @@ async function synthesize(text: string, accent: Accent, key: string): Promise<Ui
       headers: { "Content-Type": "application/json", Accept: "audio/mpeg", "xi-api-key": key },
       body: JSON.stringify({
         text: request.text,
-        model_id: vietnameseTTSModelID,
-        language_code: "vi",
+        model_id: tagalogTTSModelID,
+        language_code: tagalogLanguageCode,
         seed: deterministicSpeechSeed(voiceID, request),
         apply_text_normalization: "auto",
         voice_settings: consistentVoiceSettings("natural"),
@@ -151,22 +154,20 @@ async function synthesize(text: string, accent: Accent, key: string): Promise<Ui
 }
 
 const lessons: Json[] = [];
-for await (const entry of Deno.readDir(lessonsDirectory)) {
-  if (entry.isFile && entry.name.endsWith(".json")) {
-    lessons.push(JSON.parse(await Deno.readTextFile(`${lessonsDirectory}/${entry.name}`)));
-  }
+for (const file of lessonFiles) {
+  lessons.push(JSON.parse(await Deno.readTextFile(`${lessonsDirectory}/${file}`)));
 }
 
 const key = dryRun ? "" : await apiKey();
 let generated = 0;
 let reused = 0;
 let characters = 0;
-for (const accent of accents) {
-  const directory = `${lessonsDirectory}/audio/${accent}`;
+{
+  const directory = `${lessonsDirectory}/audio`;
   await Deno.mkdir(directory, { recursive: true });
   const wanted = new Map<string, string>();
   for (const lesson of lessons) {
-    for (const text of spokenTexts(lesson, accent)) wanted.set(audioKey(text), text);
+    for (const text of spokenTexts(lesson)) wanted.set(audioKey(text), text);
   }
 
   // Remove clips no lesson uses any more.
@@ -174,7 +175,7 @@ for (const accent of accents) {
     const name = entry.name.replace(/\.mp3$/, "");
     if (entry.isFile && entry.name.endsWith(".mp3") && !wanted.has(name)) {
       if (!dryRun) await Deno.remove(`${directory}/${entry.name}`);
-      console.log(`removed ${accent} ${entry.name}`);
+      console.log(`removed ${entry.name}`);
     }
   }
 
@@ -190,12 +191,12 @@ for (const accent of accents) {
       }
       characters += normalizedAudioText(text).length;
       if (dryRun) {
-        console.log(`would generate ${accent.padEnd(8)} ${hash} ${text}`);
+        console.log(`would generate ${hash} ${text}`);
         continue;
       }
-      await Deno.writeFile(path, await synthesize(text, accent, key));
+      await Deno.writeFile(path, await synthesize(text, key));
       generated += 1;
-      console.log(`${accent.padEnd(8)} ${hash} ${text}`);
+      console.log(`${hash} ${text}`);
     }
   };
   await Promise.all([worker(), worker(), worker()]);

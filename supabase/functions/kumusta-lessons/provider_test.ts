@@ -30,25 +30,25 @@ Deno.test("grounded chunks are reordered deterministically before validation", (
       scenario_key: "order_coffee",
       rounds: [{
         topic_key: "wrong_key",
-        vietnamese: "Chị cho em một ly cà phê nhé.",
+        tagalog: "Pabili po ng kape, Ate.",
         chunks: [
-          { vietnamese: "một ly cà phê" },
-          { vietnamese: "Chị cho em" },
-          { vietnamese: "nhé." },
+          { tagalog: "ng kape" },
+          { tagalog: "Pabili po" },
+          { tagalog: "Ate." },
         ],
       }],
     }],
   }) as {
     lessons: Array<{
-      rounds: Array<{ topic_key: string; chunks: Array<{ vietnamese: string }> }>;
+      rounds: Array<{ topic_key: string; chunks: Array<{ tagalog: string }> }>;
     }>;
   };
   const round = repaired.lessons[0].rounds[0];
 
   assert(round.topic_key === "order_coffee", "topic key was not canonicalized");
   assert(
-    round.chunks.map((chunk) => chunk.vietnamese).join("|") ===
-      "Chị cho em|một ly cà phê|nhé.",
+    round.chunks.map((chunk) => chunk.tagalog).join("|") ===
+      "Pabili po|ng kape|Ate.",
     "grounded chunks remained out of utterance order",
   );
 });
@@ -59,13 +59,13 @@ Deno.test("multi-word model glosses remain one tappable lexical unit", () => {
       scenario_key: "order_coffee",
       rounds: [{
         topic_key: "order_coffee",
-        vietnamese: "Cho mình cà phê nhé.",
+        tagalog: "Pabili po ng kapeng barako.",
         chunks: [],
         word_glosses: [
-          { token: "Cho", english: "give" },
-          { token: "mình", english: "me" },
-          { token: "cà phê", english: "coffee" },
-          { token: "nhé", english: "please" },
+          { token: "Pabili", english: "may I buy" },
+          { token: "po", english: "(respect)" },
+          { token: "ng", english: "some" },
+          { token: "kapeng barako", english: "barako coffee" },
         ],
       }],
     }],
@@ -77,11 +77,11 @@ Deno.test("multi-word model glosses remain one tappable lexical unit", () => {
   const glosses = repaired.lessons[0].rounds[0].word_glosses;
 
   assert(
-    glosses.map((gloss) => gloss.token).join("|") === "Cho|mình|cà phê|nhé.",
+    glosses.map((gloss) => gloss.token).join("|") === "Pabili|po|ng|kapeng barako.",
     "compound glosses were not preserved as lexical units",
   );
   assert(
-    glosses[2].english === "coffee",
+    glosses[3].english === "barako coffee",
     "the compound's contextual meaning was not preserved",
   );
 });
@@ -91,11 +91,11 @@ Deno.test("missing model glosses are filled from the source phrase", () => {
     lessons: [{
       scenario_key: "order_coffee",
       rounds: [{
-        vietnamese: "Cho mình cà phê nhé.",
+        tagalog: "Pabili po ng kapeng barako.",
         word_glosses: [
-          { token: "Cho", english: "give" },
-          { token: "cà phê", english: "coffee" },
-          { token: "nhé.", english: "please" },
+          { token: "Pabili", english: "may I buy" },
+          { token: "ng", english: "some" },
+          { token: "kapeng barako.", english: "barako coffee" },
         ],
       }],
     }],
@@ -107,7 +107,7 @@ Deno.test("missing model glosses are filled from the source phrase", () => {
   const glosses = repaired.lessons[0].rounds[0].word_glosses;
 
   assert(
-    glosses.map((gloss) => gloss.token).join("|") === "Cho|mình|cà phê|nhé.",
+    glosses.map((gloss) => gloss.token).join("|") === "Pabili|po|ng|kapeng barako.",
     "missing source tokens were not restored in order",
   );
   assert(
@@ -121,17 +121,17 @@ Deno.test("missing hear/respond exercises are grounded in their round", () => {
     lessons: [{
       scenario_key: "order_coffee",
       rounds: Array.from({ length: 5 }, (_, index) => ({
-        vietnamese: `Câu nói ${index + 1}.`,
+        tagalog: `Linya ${index + 1} po.`,
         translation: `Meaning ${index + 1}.`,
       })),
     }],
   }) as {
     lessons: Array<{
       rounds: Array<{
-        vietnamese: string;
+        tagalog: string;
         translation: string;
         response_exercise?: {
-          prompt_vietnamese: string;
+          prompt_tagalog: string;
           prompt_translation: string;
           options: Array<{ english_translation: string }>;
           correct_option_index: number;
@@ -143,7 +143,7 @@ Deno.test("missing hear/respond exercises are grounded in their round", () => {
   const exercise = round.response_exercise;
 
   assert(exercise !== undefined, "the selected round did not receive an exercise");
-  assert(exercise.prompt_vietnamese === round.vietnamese, "exercise phrase was not grounded");
+  assert(exercise.prompt_tagalog === round.tagalog, "exercise phrase was not grounded");
   assert(
     exercise.prompt_translation === round.translation,
     "exercise translation was not grounded",

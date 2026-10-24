@@ -43,7 +43,7 @@ Deno.serve(async (req: Request) => {
       "speaking-attempt.m4a",
     );
     form.append("model_id", "scribe_v2");
-    form.append("language_code", "vie");
+    form.append("language_code", "fil");
     form.append("diarize", "false");
     form.append("tag_audio_events", "false");
 

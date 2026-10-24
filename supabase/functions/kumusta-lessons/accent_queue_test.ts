@@ -3,66 +3,75 @@ import { fetchCurrentLesson, readyQueueDepth } from "./repository.ts";
 
 // Exercise the actual PostgREST query serialization, including the explicit
 // ownership relationship (the queue has two foreign keys to generated lessons).
-for (const accent of ["northern", "southern"]) {
-  Deno.test(`queue selection and replenishment use only ${accent} lessons`, async () => {
-    let reads = 0;
-    const admin = createClient("https://example.supabase.co", "test-key", {
-      auth: { persistSession: false, autoRefreshToken: false },
-      global: {
-        fetch: (input, init) => {
-          const url = new URL(String(input));
-          if (url.searchParams.get("lesson.accent") !== `eq.${accent}`) {
-            throw new Error("Queue request omitted the selected accent");
+// There is one Tagalog lesson pool per learner, so no request may filter by
+// accent or any other variant column.
+Deno.test("queue selection and replenishment use the learner's whole queue", async () => {
+  let reads = 0;
+  const admin = createClient("https://example.supabase.co", "test-key", {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      fetch: (input, init) => {
+        const url = new URL(String(input));
+        for (const key of url.searchParams.keys()) {
+          if (key.includes("accent")) {
+            throw new Error(`Queue request still filters by accent: ${key}`);
           }
+        }
+        if (url.searchParams.get("select")?.includes("accent")) {
+          throw new Error("Queue request still selects an accent column");
+        }
+        if (url.searchParams.get("user_id") !== "eq.learner") {
+          throw new Error("Queue request lost user isolation");
+        }
+        if (url.searchParams.get("status") !== "in.(ready,started)") {
+          throw new Error("Queue request must only consider ready or started entries");
+        }
+        if (init?.method === "HEAD") {
           if (
             !url.searchParams.get("select")?.includes(
               "!kumusta_lesson_queue_lesson_owner_fk!inner",
             )
           ) {
-            throw new Error("Accent filtering must use an unambiguous inner join");
+            throw new Error("Lesson filtering must use an unambiguous inner join");
           }
-          if (url.searchParams.get("user_id") !== "eq.learner") {
-            throw new Error("Queue request lost user isolation");
-          }
-          if (init?.method === "HEAD") {
-            for (
-              const [key, expected] of Object.entries({
-                "lesson.status": "eq.ready",
-                "lesson.schema_version": "eq.3",
-                "lesson.prompt_version": "gte.14",
-                "status": "in.(ready,started)",
-              })
-            ) {
-              if (url.searchParams.get(key) !== expected) {
-                throw new Error(`Queue capacity counted unusable lessons: ${key}`);
-              }
-            }
-            if (!url.searchParams.has("lesson.expires_at")) {
-              throw new Error("Expired lessons filled the queue");
+          for (
+            const [key, expected] of Object.entries({
+              "lesson.status": "eq.ready",
+              "lesson.schema_version": "eq.3",
+            })
+          ) {
+            if (url.searchParams.get(key) !== expected) {
+              throw new Error(`Queue capacity counted unusable lessons: ${key}`);
             }
           }
-          if (init?.method !== "GET" && init?.method !== "HEAD") {
-            throw new Error("Other-accent lessons must remain untouched");
+          if (!url.searchParams.getAll("lesson.prompt_version").includes("gte.14")) {
+            throw new Error("Queue capacity counted outdated prompt versions");
           }
-          reads++;
-          return Promise.resolve(
-            new Response(init?.method === "HEAD" ? null : "[]", {
-              status: 200,
-              headers: { "content-type": "application/json", "content-range": "*/0" },
-            }),
-          );
-        },
+          if (!url.searchParams.has("lesson.expires_at")) {
+            throw new Error("Expired lessons filled the queue");
+          }
+        }
+        if (init?.method !== "GET" && init?.method !== "HEAD") {
+          throw new Error("An empty queue must not trigger writes");
+        }
+        reads++;
+        return Promise.resolve(
+          new Response(init?.method === "HEAD" ? null : "[]", {
+            status: 200,
+            headers: { "content-type": "application/json", "content-range": "*/0" },
+          }),
+        );
       },
-    });
-    if (await fetchCurrentLesson(admin, "learner", accent) !== null) {
-      throw new Error("An empty matching queue must not deliver a lesson");
-    }
-    if (await readyQueueDepth(admin, "learner", accent) !== 0) {
-      throw new Error("An empty matching queue must permit replenishment");
-    }
-    if (reads !== 2) throw new Error("Expected selection and depth queries");
+    },
   });
-}
+  if (await fetchCurrentLesson(admin, "learner") !== null) {
+    throw new Error("An empty queue must not deliver a lesson");
+  }
+  if (await readyQueueDepth(admin, "learner") !== 0) {
+    throw new Error("An empty queue must permit replenishment");
+  }
+  if (reads !== 2) throw new Error("Expected selection and depth queries");
+});
 
 Deno.test("fresh lesson polling excludes the displayed lesson and older queue entries", async () => {
   const boundary = "2026-09-06T08:00:00.000Z";
@@ -86,7 +95,7 @@ Deno.test("fresh lesson polling excludes the displayed lesson and older queue en
     },
   });
   if (
-    await fetchCurrentLesson(admin, "learner", "southern", excluded, boundary) !== null || !checked
+    await fetchCurrentLesson(admin, "learner", excluded, boundary) !== null || !checked
   ) {
     throw new Error("Unexpected fresh lesson result");
   }

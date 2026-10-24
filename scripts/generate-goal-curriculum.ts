@@ -9,7 +9,7 @@ const key = keys?.find((k: { name: string }) => k.name === "service_role")?.api_
 if (!key) throw new Error("No service role credential available");
 const limit = Number(Deno.args.find((a) => a.startsWith("--limit="))?.split("=")[1] ?? 320);
 const concurrency = Number(Deno.args.find((a) => a.startsWith("--concurrency="))?.split("=")[1] ?? 12);
-const jobs = ["lifeInVietnam", "family", "partner", "travel"].flatMap(goal =>
+const jobs = ["lifeInThePhilippines", "family", "partner", "travel"].flatMap(goal =>
   [1, 2, 3, 4].flatMap(stage => ["southern", "northern"].flatMap(accent =>
     Array.from({ length: 10 }, (_, i) => ({ goal, stage, accent, order: i + 1 }))))).slice(0, limit);
 let cursor = 0;

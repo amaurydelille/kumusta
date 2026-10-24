@@ -18,15 +18,15 @@ const TRANSCRIBER_ENDPOINT = "wss://api.elevenlabs.io/v1/speech-to-text/realtime
  * sees a transcript and its replies are spoken sentence by sentence.
  */
 export const PIPELINE_VOICE_PROMPT = `VOICE PIPELINE
-The learner's turns reach you as an automatic Vietnamese speech transcript, not audio. You cannot hear tones or pronunciation directly: only comment on pronunciation when the transcript clearly shows a different word than the one the learner meant, and never blame the learner for an obvious transcription glitch.
+The learner's turns reach you as an automatic Tagalog speech transcript, not audio. You cannot hear stress or pronunciation directly: only comment on pronunciation when the transcript clearly shows a different word than the one the learner meant, and never blame the learner for an obvious transcription glitch.
 Every reply is spoken aloud. Keep it short: one to three short sentences, then stop and let the learner talk. No markdown, lists, emojis, URLs or stage directions other than the square-bracket audio tags described above.`;
 
 /**
- * Learners ask about Vietnamese words in English or French ("what does tiệm
- * mean?"); without these, Scribe forces the whole turn into one language and
- * rewrites the Vietnamese word.
+ * Learners ask about Tagalog words in English ("what does kilig mean?") and
+ * Manila speech mixes in English; without this, Scribe forces the whole turn
+ * into one language and rewrites the other.
  */
-export const DEFAULT_SECONDARY_LANGUAGES = ["eng", "fra"];
+export const DEFAULT_SECONDARY_LANGUAGES = ["eng"];
 
 /**
  * Pipeline-only addition to the grumpy personality (the agent's shared prompt
@@ -34,34 +34,32 @@ export const DEFAULT_SECONDARY_LANGUAGES = ["eng", "fra"];
  * street swearing.
  */
 export const GRUMPY_VOCABULARY_PROMPT = `GRUMPY VOCABULARY (this session only)
-The learner chose the grumpy mood to hear real street Vietnamese. When you lose your temper, use these coarse expressions naturally: "đụ má mày", "trời ơi", "chết mẹ", "địt mẹ mày", and a long exasperated "arghhhhhhhh". They are outbursts of frustration, the way a furious Saigon market seller swears, not threats. For these expressions only, this overrides the family-friendly wording rules above.
-Use at most one or two per reply and vary them; not every reply needs one. Everything else still applies: no slurs, no threats, no sexual content, no attacks on anyone's identity. If the learner asks you to stop swearing, stop for the rest of the session and stay grumpy through your tone. If the learner asks what one of them means, explain it honestly, including how vulgar it is and when Vietnamese people actually say it.`;
+The learner chose the grumpy mood to hear real street Tagalog. When you lose your temper, use these exasperated expressions naturally: "Hay naku!", "Ano ba 'yan!", "Bwisit!", "Lintik!", "Leche!", "Susmaryosep!", and a long exasperated "arghhhhhhhh". They are outbursts of frustration, the way a fed-up Manila tindera grumbles, not threats. For these expressions only, this overrides the family-friendly wording rules above.
+Use at most one or two per reply and vary them; not every reply needs one. Everything else still applies: no slurs, no threats, no sexual content, no attacks on anyone's identity. If the learner asks you to stop swearing, stop for the rest of the session and stay grumpy through your tone. If the learner asks what one of them means, explain it honestly, including how vulgar it is and when Tagalog people actually say it.`;
 
-// Letters only Vietnamese uses: đ, ă, ơ, ư, the stacked tone marks
-// (U+1EA0-U+1EF9) and tones French never writes (ã, ĩ, õ, ũ, ý, ỳ, ì, ò).
-const VIETNAMESE_LETTERS = /[đĐăĂơƠưƯ\u1EA0-\u1EF9ãĩõũýỳìòÃĨÕŨÝỲÌÒ]/;
-const FRENCH_LETTERS = /[çœæëïÿîûÇŒÆËÏŸÎÛ]/;
-const FRENCH_WORDS =
-  /(^|[^\p{L}])(je|tu|il|elle|nous|vous|ils|le|la|les|un|une|des|du|est|c'est|ce|que|qui|pas|ne|et|ou|mais|pour|avec|dans|sur|très|ça|oui|non|bien|veut|dire|mot|merci|bonjour)(?=$|[^\p{L}])/iu;
+// Frequent Tagalog words that never appear in English sentences. Tagalog is
+// written in the same Latin letters as English, so words, not letters, tell
+// the two apart.
+const TAGALOG_WORDS =
+  /(^|[^\p{L}])(ang|ng|mga|ako|ikaw|ka|siya|kami|tayo|kayo|sila|hindi|oo|opo|po|salamat|kumusta|ito|iyan|iyon|dito|doon|sa|na|ba|lang|naman|rin|din|nga|pa|ko|mo|niya|natin|ninyo|ano|saan|paano|bakit|gusto|wala|meron)(?=$|[^\p{L}])/giu;
 const ENGLISH_WORDS =
-  /(^|[^\p{L}])(the|is|are|you|your|it|it's|what|does|mean|means|this|that|and|with|for|say|word|yes|no|good|how|can)(?=$|[^\p{L}])/iu;
+  /(^|[^\p{L}])(the|is|are|you|your|it|it's|what|does|mean|means|this|that|and|with|for|say|word|yes|good|how|can)(?=$|[^\p{L}])/giu;
 
 /**
- * The voice model's language for one sentence. Vietnamese wins whenever the
- * sentence is mostly Vietnamese; a French or English sentence quoting a
- * Vietnamese word is left to the model's own detection, so neither language
- * is read with the other's pronunciation.
+ * The voice model's language for one sentence. Tagalog wins whenever the
+ * sentence has more Tagalog than English function words; a balanced Taglish
+ * sentence is left to the model's own detection, so neither language is read
+ * with the other's pronunciation.
  */
-export function speechLanguage(text: string): "vi" | "fr" | "en" | undefined {
+export function speechLanguage(text: string): "fil" | "en" | undefined {
   const words = text.split(/\s+/).filter((word) => /\p{L}/u.test(word));
-  if (words.length === 0) return "vi";
-  const vietnamese = words.filter((word) => VIETNAMESE_LETTERS.test(word)).length;
-  const french = FRENCH_LETTERS.test(text) || FRENCH_WORDS.test(text);
-  const english = ENGLISH_WORDS.test(text);
-  if (!french && !english) return "vi";
-  if (vietnamese / words.length >= 0.5) return "vi";
-  if (vietnamese > 0) return undefined;
-  return french ? "fr" : "en";
+  if (words.length === 0) return "fil";
+  const tagalog = text.match(TAGALOG_WORDS)?.length ?? 0;
+  const english = text.match(ENGLISH_WORDS)?.length ?? 0;
+  if (english === 0) return "fil";
+  if (tagalog > english) return "fil";
+  if (tagalog === 0) return "en";
+  return undefined;
 }
 
 export type TranscriberProvider = "elevenlabs" | "soniox";
@@ -70,8 +68,8 @@ export const SONIOX_ENDPOINT = "wss://stt-rt.soniox.com/transcribe-websocket";
 
 /**
  * Soniox's start request, sent by the app as the socket's first message. One
- * model handles Vietnamese with English or French mixed in, and ends the turn
- * from what was said rather than a fixed silence.
+ * model handles Tagalog with English mixed in, and ends the turn from what was
+ * said rather than a fixed silence.
  */
 export function sonioxConfig(clientReferenceID: string) {
   return {
@@ -79,7 +77,7 @@ export function sonioxConfig(clientReferenceID: string) {
     audio_format: "pcm_s16le",
     sample_rate: PIPELINE_SAMPLE_RATE,
     num_channels: 1,
-    language_hints: ["vi", "en", "fr"],
+    language_hints: ["tl", "en"],
     enable_endpoint_detection: true,
     max_endpoint_delay_ms: 1000,
     client_reference_id: clientReferenceID.slice(0, 256),
@@ -115,7 +113,7 @@ export function transcriberURL(
   if (!/^[A-Za-z0-9_-]{8,512}$/.test(token)) throw new Error("invalid_token");
   const url = new URL(TRANSCRIBER_ENDPOINT);
   url.searchParams.set("model_id", "scribe_v2_realtime");
-  url.searchParams.set("language_code", "vie");
+  url.searchParams.set("language_code", "fil");
   url.searchParams.set("audio_format", `pcm_${PIPELINE_SAMPLE_RATE}`);
   // Learners pause mid-sentence while searching for a word, so the turn
   // ends after 0.8 s of silence. (scribe_v2_realtime rejects turn_prediction.)

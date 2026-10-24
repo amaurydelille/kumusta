@@ -2,7 +2,7 @@
 
 import { fetchWithTimeout, isPlainObject, readBoundedResponseBody } from "../_shared/http.ts";
 import {
-  containsVietnameseOrthography,
+  containsTagalogSentence,
   type GeneratedLessonBatch,
   hearRespondRoundIndexes,
   lessonBatchJSONSchemaForContext,
@@ -130,7 +130,6 @@ export async function generateLessonBatch(
       const validation = validateGeneratedBatchDetailed(
         parsedContent,
         context.count,
-        context.profile.accent,
         expectedMinutes,
         expectedRounds,
         true,
@@ -191,11 +190,11 @@ export function repairGeneratedBatchStructure(value: unknown): unknown {
       }
       round.topic_key = lesson.scenario_key;
       repairRoundWordGlosses(round);
-      if (typeof round.vietnamese !== "string" || !Array.isArray(round.chunks)) continue;
-      const phrase = normalizeGroundingText(round.vietnamese);
+      if (typeof round.tagalog !== "string" || !Array.isArray(round.chunks)) continue;
+      const phrase = normalizeGroundingText(round.tagalog);
       const indexedChunks = round.chunks.map((chunk, originalIndex) => {
-        if (!isPlainObject(chunk) || typeof chunk.vietnamese !== "string") return null;
-        const index = phrase.indexOf(normalizeGroundingText(chunk.vietnamese));
+        if (!isPlainObject(chunk) || typeof chunk.tagalog !== "string") return null;
+        const index = phrase.indexOf(normalizeGroundingText(chunk.tagalog));
         return index < 0 ? null : { chunk, index, originalIndex };
       });
       if (indexedChunks.some((item) => item === null)) continue;
@@ -222,7 +221,7 @@ function repairHearRespondExercises(lesson: Record<string, unknown>): void {
   for (const roundIndex of responseRoundIndexes) {
     const round = lesson.rounds[roundIndex];
     if (
-      !isPlainObject(round) || typeof round.vietnamese !== "string" ||
+      !isPlainObject(round) || typeof round.tagalog !== "string" ||
       typeof round.translation !== "string"
     ) continue;
 
@@ -234,7 +233,7 @@ function repairHearRespondExercises(lesson: Record<string, unknown>): void {
       if (typeof value !== "string") return;
       const candidate = value.trim();
       if (
-        candidate.length === 0 || containsVietnameseOrthography(candidate) ||
+        candidate.length === 0 || containsTagalogSentence(candidate) ||
         normalizeGroundingText(candidate) === normalizeGroundingText(targetTranslation) ||
         distractors.some((existing) =>
           normalizeGroundingText(existing) === normalizeGroundingText(candidate)
@@ -254,7 +253,7 @@ function repairHearRespondExercises(lesson: Record<string, unknown>): void {
 
     if (distractors.length < 2) continue;
     round.response_exercise = {
-      prompt_vietnamese: round.vietnamese,
+      prompt_tagalog: round.tagalog,
       prompt_translation: round.translation,
       options: [targetTranslation, ...distractors.slice(0, 2)].map((englishTranslation) => ({
         english_translation: englishTranslation,
@@ -265,9 +264,9 @@ function repairHearRespondExercises(lesson: Record<string, unknown>): void {
 }
 
 function repairRoundWordGlosses(round: Record<string, unknown>): void {
-  if (typeof round.vietnamese !== "string" || !Array.isArray(round.word_glosses)) return;
+  if (typeof round.tagalog !== "string" || !Array.isArray(round.word_glosses)) return;
 
-  const expectedTokens = round.vietnamese.split(/\s+/u);
+  const expectedTokens = round.tagalog.split(/\s+/u);
   const repaired: Array<{ token: string; english: string }> = [];
   let expectedIndex = 0;
   let preservedGlossCount = 0;
@@ -357,12 +356,12 @@ function glossFallback(token: string): string {
 function normalizeGlossAlignment(value: string): string {
   return value
     .normalize("NFC")
-    .toLocaleLowerCase("vi")
+    .toLocaleLowerCase("fil")
     .replace(/[\p{P}\p{S}\s]+/gu, "");
 }
 
 function normalizeGroundingText(value: string): string {
-  return value.normalize("NFC").toLocaleLowerCase("vi").replace(/\s+/gu, " ").trim();
+  return value.normalize("NFC").toLocaleLowerCase("fil").replace(/\s+/gu, " ").trim();
 }
 
 function extractContent(payload: unknown): string | null {

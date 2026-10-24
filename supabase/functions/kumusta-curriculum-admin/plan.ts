@@ -1,14 +1,14 @@
-export const goals = ["lifeInVietnam", "family", "partner", "travel"] as const;
+export const goals = ["lifeInThePhilippines", "family", "partner", "travel"] as const;
 export type Goal = typeof goals[number];
 export const goalTitles: Record<Goal, string> = {
-  lifeInVietnam: "Make daily life in Vietnam feel like home",
+  lifeInThePhilippines: "Make daily life in the Philippines feel like home",
   family: "Speak naturally with family",
   partner: "Share more of a partner’s world",
   travel: "Speak confidently while traveling",
 };
 // Each stage revisits the goal with new outcomes, not longer translations of beginner phrases.
 export const syllabus: Record<Goal, string[][]> = {
-  lifeInVietnam: [
+  lifeInThePhilippines: [
     [
       "Greet the neighbor",
       "Order your morning drink",
@@ -209,18 +209,17 @@ export const syllabus: Record<Goal, string[][]> = {
     ],
   ],
 };
-export function assignment(goal: Goal, stage: number, order: number, accent: string) {
+export function assignment(goal: Goal, stage: number, order: number) {
   const difficulty = [1.2, 2.2, 3.3, 4.4][stage - 1] + (order - 1) * 0.04;
   return {
     goal: goalTitles[goal],
     stage,
     difficulty,
-    accent,
     outcome: syllabus[goal][stage - 1][order - 1],
     prior_outcomes: syllabus[goal][stage - 1].slice(0, order - 1),
     chapter: order <= 5 ? "Find your voice" : "Make it your own",
     progression: [
-      "Total beginner: 3–7 syllables per utterance, maximum 9; concrete single clauses, at most one new core pattern per round. Scaffold speaking. Exactly 8 grounded vocabulary items.",
+      "Total beginner: 2–6 words per utterance, maximum 8; concrete single clauses, at most one new core pattern per round. Scaffold speaking. Exactly 8 grounded vocabulary items.",
       "Elementary: short everyday clauses, questions and simple reasons. Recycle core language, introduce modest variation. 8–10 grounded vocabulary items.",
       "Intermediate: natural one- or two-clause utterances, follow-up questions, repairs, controlled ellipsis and independent responses. 10–12 grounded vocabulary items.",
       "Advanced: natural adult conversation, pragmatic nuance, tact, implication and flexible responses. Avoid literary vocabulary and needless length. 10–12 grounded vocabulary items.",
@@ -229,7 +228,7 @@ export function assignment(goal: Goal, stage: number, order: number, accent: str
     exercise_design:
       "Exactly 5 rounds / 5 minutes. Each is played as cold listen, then decode (rounds 1,2,4) or hear-and-respond meaning choice (rounds 3,5), then speak. Only rounds 3 and 5 contain response_exercise. Progress speaking from supported imitation to contextual recall. This app's hear-and-respond exercise selects the meaning of the SAME utterance, not the next conversational reply.",
     naturalness:
-      "Write real-life SPOKEN Vietnamese a native adult would actually use. No academic, textbook, translated-English or stilted dialogue. Establish social roles and reciprocal address in English situation text; maintain that relationship. No mechanical tôi/bạn. Use region-appropriate everyday wording and particles sparingly. Keep all five turns one plausible connected scene.",
+      "Write real-life SPOKEN Tagalog a native adult would actually use. No academic, textbook, translated-English or stilted dialogue. Establish social roles in English situation text and keep the respect level consistent: po/opo and kayo with elders, strangers and service, casual ka with friends. Use everyday Metro Manila wording, natural Taglish only where locals switch, and particles sparingly. Keep all five turns one plausible connected scene.",
     continuity:
       "Reuse earlier core language in new meaningful contexts, with distinct new outcomes at each lesson. Do not repeat the same utterance to fill rounds.",
   };

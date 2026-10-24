@@ -13,13 +13,13 @@ interface Session {
 }
 interface CatalogLesson {
   accent: Accent;
-  content: { rounds: Array<{ vietnamese: string }> };
+  content: { rounds: Array<{ tagalog: string }> };
 }
 
 const command = Deno.args[0] ?? "generate";
 const statePath = Deno.args[1] ?? "/private/tmp/kumusta-roadmap-tts-sessions.json";
 const manifestPath = Deno.args[2] ?? "/private/tmp/kumusta-roadmap-tts-manifest.json";
-const catalogPath = Deno.args[3] ?? "supabase/catalog/new-vietnamese-v1.json";
+const catalogPath = Deno.args[3] ?? "supabase/catalog/new-tagalog-v1.json";
 const auditPath = Deno.args[4] ?? "/private/tmp/kumusta-roadmap-tts-audit.sql";
 const configuration = await Deno.readTextFile("Config/Secrets.xcconfig");
 const baseURL = setting("SUPABASE_PROJECT_URL");
@@ -68,7 +68,7 @@ let generated = 0;
 let hits = 0;
 const expectedTotal = new Set(
   catalog.lessons.flatMap((lesson) =>
-    lesson.content.rounds.map((round) => `${lesson.accent}:${round.vietnamese}`)
+    lesson.content.rounds.map((round) => `${lesson.accent}:${round.tagalog}`)
   ),
 ).size;
 
@@ -77,7 +77,7 @@ await Promise.all((["southern", "northern"] as const).map(async (accent) => {
     ...new Set(
       catalog.lessons
         .filter((lesson) => lesson.accent === accent)
-        .flatMap((lesson) => lesson.content.rounds.map((round) => round.vietnamese)),
+        .flatMap((lesson) => lesson.content.rounds.map((round) => round.tagalog)),
     ),
   ];
   const workers = sessions.filter((session) => session.accent === accent);

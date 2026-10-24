@@ -11,7 +11,7 @@ import {
   requestID,
   requiredEnv,
 } from "../_shared/http.ts";
-import { voiceIDForAccent } from "../kumusta-elevenlabs-tts/contract.ts";
+import { tagalogVoiceID } from "../kumusta-elevenlabs-tts/contract.ts";
 import * as sessions from "./sessions.ts";
 import { agentPrompt, contextFrom, firstMessage, sessionIDFrom } from "./coaching.ts";
 import {
@@ -226,7 +226,7 @@ async function labelSession(
 
 /**
  * Kill switch without a redeploy: set KUMUSTA_LIVE_STT_SECONDARY_LANGUAGES
- * to "none" to transcribe Vietnamese only, or to a comma-separated list.
+ * to "none" to transcribe Tagalog only, or to a comma-separated list.
  */
 function secondaryLanguages(): string[] | undefined {
   const value = Deno.env.get("KUMUSTA_LIVE_STT_SECONDARY_LANGUAGES")?.trim();
@@ -313,7 +313,7 @@ function reply(body: Record<string, unknown>, access: Promise<void>, id: string)
   }
   const anthropicKey = requiredEnv("ANTHROPIC_API_KEY");
   const elevenLabsKey = requiredEnv("ELEVENLABS_API_KEY");
-  const voiceID = voiceIDForAccent(context.accent === "northern" ? "northern" : "southern");
+  const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
 
   const begun = performance.now();
   const timing: Record<string, number> = {};
@@ -327,7 +327,7 @@ function reply(body: Record<string, unknown>, access: Promise<void>, id: string)
   const sentences: AsyncIterable<string> = generation
     ? generatedSentences(generation, mark, usage)
     : (async function* () {
-      yield firstMessage(context.accent, context.personality);
+      yield firstMessage(context.personality);
     })();
 
   // The app cancels a reply when the learner keeps talking; stop paying for

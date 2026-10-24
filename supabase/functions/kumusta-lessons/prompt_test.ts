@@ -6,12 +6,11 @@ function assert(condition: boolean, message: string): asserts condition {
 
 Deno.test("explicit topic remains verbatim and outranks the broad onboarding goal", () => {
   const requestedTopic =
-    "I want to feel confident dating Vietnamese women and learn how to ask someone out";
+    "I want to feel confident dating in Manila and learn how to ask someone out";
   const value = JSON.parse(userPrompt({
     profile: {
-      accent: "southern",
       goal: "family",
-      selfAssessedLevel: "familiar",
+      selfAssessedLevel: "intermediate",
       targetLevel: 4,
       challengePreference: "balanced",
       dailyMinutes: 7,
@@ -39,16 +38,24 @@ Deno.test("explicit topic remains verbatim and outranks the broad onboarding goa
   );
 });
 
-Deno.test("prompt enforces natural social address and one connected story", () => {
+Deno.test("prompt enforces natural respect and address and one connected story", () => {
   const prompt = systemPrompt();
-  assert(prompt.includes("Never mechanically translate"), "mechanical pronouns were not rejected");
-  assert(prompt.includes("relative age or generation"), "age hierarchy was not considered");
-  assert(prompt.includes("tôi/bạn"), "the common unnatural default was not named");
+  assert(prompt.includes("Respect is grammar in Tagalog"), "respect was not made explicit");
+  assert(prompt.includes("Use po and opo"), "po/opo were not required");
+  assert(prompt.includes("kayo instead of ka/ikaw"), "respectful pronouns were not required");
+  assert(prompt.includes("drop them between friends and peers"), "casual register was not allowed");
+  assert(prompt.includes("Kuya, Ate, Tita"), "natural address terms were not named");
+  assert(prompt.includes("Metro Manila"), "the target variety was not named");
+  assert(
+    prompt.includes("Never use Cebuano, Ilocano"),
+    "other Philippine languages were not excluded",
+  );
   assert(prompt.includes("connected mini-story"), "connected stories were not required");
   assert(prompt.includes("consequence of the previous round"), "round causality was not required");
-  assert(prompt.includes("điện thoại = phone"), "lexical compounds were not explained");
+  assert(prompt.includes("kumain = ate"), "verb aspect glossing was not explained");
+  assert(prompt.includes("salamat po or bahala na"), "fixed expressions were not explained");
   assert(
-    prompt.includes("Never merge three or more syllables"),
+    prompt.includes("Never merge three or more words"),
     "gloss group size was not bounded",
   );
 });
@@ -56,9 +63,8 @@ Deno.test("prompt enforces natural social address and one connected story", () =
 Deno.test("prompt asks for lexical gloss units instead of whitespace tokens", () => {
   const value = JSON.parse(userPrompt({
     profile: {
-      accent: "southern",
-      goal: "lifeInVietnam",
-      selfAssessedLevel: "new",
+      goal: "lifeInThePhilippines",
+      selfAssessedLevel: "beginner",
       targetLevel: 3,
       challengePreference: "gentle",
       dailyMinutes: 5,
@@ -72,21 +78,24 @@ Deno.test("prompt asks for lexical gloss units instead of whitespace tokens", ()
     count: 1,
   }));
   assert(
-    value.constraints.word_glosses.includes("Vietnamese lexical meaning"),
-    "word glosses were not made lexical",
+    value.constraints.word_glosses.includes("contextual English meaning"),
+    "word glosses were not made contextual",
   );
   assert(
-    value.constraints.word_glosses.includes("điện thoại = phone"),
-    "the compound example was not supplied",
+    value.constraints.word_glosses.includes("salamat po"),
+    "the fixed-expression example was not supplied",
+  );
+  assert(
+    value.constraints.word_glosses.includes("never join three or more"),
+    "gloss group size was not bounded",
   );
 });
 
-Deno.test("prompt treats a learner with no Vietnamese history as a total beginner", () => {
+Deno.test("prompt treats a learner with no Tagalog history as a total beginner", () => {
   const value = JSON.parse(userPrompt({
     profile: {
-      accent: "southern",
       goal: "partner",
-      selfAssessedLevel: "new",
+      selfAssessedLevel: "beginner",
       targetLevel: 5,
       challengePreference: "stretch",
       dailyMinutes: 5,
@@ -131,9 +140,8 @@ Deno.test("prompt treats a learner with no Vietnamese history as a total beginne
 Deno.test("prompt increases independence only for a demonstrated higher level", () => {
   const value = JSON.parse(userPrompt({
     profile: {
-      accent: "northern",
       goal: "work",
-      selfAssessedLevel: "conversational",
+      selfAssessedLevel: "advanced",
       targetLevel: 5,
       challengePreference: "balanced",
       dailyMinutes: 7,
@@ -142,7 +150,7 @@ Deno.test("prompt increases independence only for a demonstrated higher level", 
     challengeOffset: 0.25,
     skillMastery: { listening: 0.7 },
     recentScenarioKeys: [],
-    familiarLanguage: { vocabulary: ["dạ"], chunks: ["dạ được ạ"] },
+    familiarLanguage: { vocabulary: ["opo"], chunks: ["Opo, sige po."] },
     nextTopicPreference: null,
     count: 1,
   }));
@@ -160,9 +168,8 @@ Deno.test("prompt increases independence only for a demonstrated higher level", 
 Deno.test("prompt supplies familiar language and requests balanced reuse", () => {
   const value = JSON.parse(userPrompt({
     profile: {
-      accent: "northern",
-      goal: "lifeInVietnam",
-      selfAssessedLevel: "conversational",
+      goal: "lifeInThePhilippines",
+      selfAssessedLevel: "advanced",
       targetLevel: 4,
       challengePreference: "balanced",
       dailyMinutes: 10,
@@ -172,15 +179,15 @@ Deno.test("prompt supplies familiar language and requests balanced reuse", () =>
     skillMastery: {},
     recentScenarioKeys: [],
     familiarLanguage: {
-      vocabulary: ["chị", "cho em"],
-      chunks: ["chị cho em xem"],
+      vocabulary: ["Ate", "pahingi po"],
+      chunks: ["Ate, pahingi po ng tubig."],
     },
     nextTopicPreference: null,
     count: 1,
   }));
 
   assert(
-    value.learner.familiar_language_from_completed_lessons.vocabulary[0] === "chị",
+    value.learner.familiar_language_from_completed_lessons.vocabulary[0] === "Ate",
     "familiar vocabulary was not supplied",
   );
   assert(
@@ -188,7 +195,11 @@ Deno.test("prompt supplies familiar language and requests balanced reuse", () =>
     "the familiar/new balance was not requested",
   );
   assert(
-    value.constraints.vietnamese_social_address.includes("age hierarchy"),
+    value.constraints.tagalog_respect_and_address.includes("age, generation, relationship"),
     "social address hierarchy was not explicit",
+  );
+  assert(
+    value.constraints.tagalog_respect_and_address.includes("po/opo and kayo"),
+    "respectful register was not explicit",
   );
 });

@@ -12,7 +12,7 @@ export interface RealtimeSessionResponse {
 /// The session configuration stays server-owned: the client connects to the
 /// returned URL as-is and never chooses the model, language, or audio format.
 /// The target phrase is deliberately not sent as a key term, since biasing the
-/// recognizer towards it would hide the tone mistakes the lesson grades.
+/// recognizer towards it would hide the pronunciation mistakes the lesson grades.
 export function realtimeSession(providerPayload: unknown): RealtimeSessionResponse {
   if (
     !isPlainObject(providerPayload) ||
@@ -27,7 +27,7 @@ export function realtimeSession(providerPayload: unknown): RealtimeSessionRespon
   }
   const url = new URL(REALTIME_ENDPOINT);
   url.searchParams.set("model_id", "scribe_v2_realtime");
-  url.searchParams.set("language_code", "vie");
+  url.searchParams.set("language_code", "fil");
   url.searchParams.set("audio_format", `pcm_${REALTIME_SAMPLE_RATE}`);
   url.searchParams.set("commit_strategy", "manual");
   url.searchParams.set("token", providerPayload.token);

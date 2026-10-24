@@ -1,15 +1,12 @@
 import { HttpError } from "../_shared/http.ts";
 
-export type VietnameseAccent = "southern" | "northern";
 export type SpeechSpeed = "slow" | "natural" | "fast";
 export type TTSPurpose = "lesson" | "vocabulary";
 
 export interface TTSRequest {
   text: string;
-  accent: VietnameseAccent;
   speed: SpeechSpeed;
   purpose: TTSPurpose;
-  honorRequestedAccent: boolean;
   /// Set only for the pre-paywall first conversation. The text was built
   /// server-side from a fixed template, so it cannot be arbitrary speech.
   onboardingLine?: OnboardingConversationLine;
@@ -24,21 +21,21 @@ export type OnboardingConversationLine =
   | "reply_wellbeing"
   | "nice_to_meet";
 
-/// Personalized lines fall back to the generic "bạn" wording when no name is
+/// Personalized lines fall back to the generic wording when no name is
 /// supplied. The generic clips are shared across all learners in the cache.
 const onboardingTemplates: Record<
   OnboardingConversationLine,
   { named?: (name: string) => string; generic?: string }
 > = {
-  greeting: { named: (name) => `Chào ${name}!`, generic: "Chào bạn!" },
-  ask_name: { generic: "Bạn tên gì?" },
-  reply_hello: { generic: "Chào bạn!" },
-  reply_name: { named: (name) => `Mình tên là ${name}.` },
-  ask_wellbeing: { generic: "Bạn khỏe không?" },
-  reply_wellbeing: { generic: "Mình khỏe, cảm ơn bạn!" },
+  greeting: { named: (name) => `Kumusta, ${name}!`, generic: "Kumusta!" },
+  ask_name: { generic: "Anong pangalan mo?" },
+  reply_hello: { generic: "Hello, kumusta!" },
+  reply_name: { named: (name) => `Ako si ${name}.` },
+  ask_wellbeing: { generic: "Kumusta ka?" },
+  reply_wellbeing: { generic: "Mabuti naman, salamat!" },
   nice_to_meet: {
-    named: (name) => `Rất vui được gặp ${name}!`,
-    generic: "Rất vui được gặp bạn!",
+    named: (name) => `Ikinagagalak kitang makilala, ${name}!`,
+    generic: "Ikinagagalak kitang makilala!",
   },
 };
 
@@ -76,34 +73,28 @@ function parseOnboardingRequest(body: Record<string, unknown>): TTSRequest {
   if (typeof body.line !== "string" || !Object.hasOwn(onboardingTemplates, body.line)) {
     throw new HttpError(400, "invalid_line", "Choose a supported onboarding line.");
   }
-  if (body.accent !== "southern" && body.accent !== "northern") {
-    throw new HttpError(400, "invalid_accent", "Choose Southern or Northern.");
-  }
   const line = body.line as OnboardingConversationLine;
   const name = normalizedOnboardingName(body.name);
   return {
     text: onboardingConversationText(line, name),
-    accent: body.accent,
     speed: "natural",
     // Share the lesson cache: identical generic lines are generated once.
     purpose: "lesson",
-    // The learner picked this accent seconds ago; preferences may not exist yet.
-    honorRequestedAccent: true,
     onboardingLine: line,
   };
 }
 
-/// All Vietnamese speech uses the same expressive model so lesson, practice,
+/// All Tagalog speech uses the same expressive model so lesson, practice,
 /// history, and vocabulary playback have one consistent voice profile.
-export const vietnameseTTSModelID = "eleven_v4" as const;
+export const tagalogTTSModelID = "eleven_v4" as const;
 
 // Keep purpose-specific aliases for callers/tests that describe the audio
 // surface, while making it impossible for those surfaces to drift apart.
-export const vietnameseLessonTTSModelID = vietnameseTTSModelID;
-export const vietnameseVocabularyTTSModelID = vietnameseTTSModelID;
+export const tagalogLessonTTSModelID = tagalogTTSModelID;
+export const tagalogVocabularyTTSModelID = tagalogTTSModelID;
 
 export function ttsModelIDForPurpose(_purpose: TTSPurpose): string {
-  return vietnameseTTSModelID;
+  return tagalogTTSModelID;
 }
 
 export interface ConsistentVoiceSettings {
@@ -114,22 +105,29 @@ export interface ConsistentVoiceSettings {
   speed: number;
 }
 
-const approvedVoiceIDs: Record<VietnameseAccent, string> = {
-  southern: "6Xq32rHt6oAu98TBDKfr",
-  northern: "LD1UihCXvSlUL4h8DOmk",
-};
+/// Kumusta speaks with one Tagalog voice. `KUMUSTA_TTS_VOICE_ID` overrides
+/// the default so a native Filipino library voice can be swapped in without a
+/// deploy; the default is ElevenLabs' premade multilingual "Sarah".
+export const defaultTagalogVoiceID = "EXAVITQu4vr4xnSDxMaL";
+
+/// ElevenLabs' code for Filipino. Models that don't support it ignore it.
+export const tagalogLanguageCode = "fil";
+
+export function tagalogVoiceID(configured: string | undefined): string {
+  const value = configured?.trim();
+  return value && /^[A-Za-z0-9]{16,40}$/.test(value) ? value : defaultTagalogVoiceID;
+}
 
 export function parseTTSRequest(body: Record<string, unknown>): TTSRequest {
   if (body.purpose === "onboarding_conversation") return parseOnboardingRequest(body);
   if (
     typeof body.text !== "string" ||
-    typeof body.accent !== "string" ||
     typeof body.speed !== "string"
   ) {
     throw new HttpError(
       400,
       "invalid_request",
-      "Text, accent, and speed are required.",
+      "Text and speed are required.",
     );
   }
   const purpose = body.purpose === undefined ? "lesson" : body.purpose;
@@ -149,52 +147,26 @@ export function parseTTSRequest(body: Record<string, unknown>): TTSRequest {
       "Text must be between 1 and 500 characters.",
     );
   }
-  if (body.accent !== "southern" && body.accent !== "northern") {
-    throw new HttpError(400, "invalid_accent", "Choose Southern or Northern.");
-  }
   if (body.speed !== "natural" && body.speed !== "slow" && body.speed !== "fast") {
     throw new HttpError(400, "invalid_speed", "Choose slow, natural, or fast speed.");
   }
-  const honorRequestedAccent = body.honorRequestedAccent === undefined
-    ? false
-    : body.honorRequestedAccent;
-  if (typeof honorRequestedAccent !== "boolean") {
-    throw new HttpError(400, "invalid_request", "Accent comparison must be a boolean.");
-  }
-  return { text, accent: body.accent, speed: body.speed, purpose, honorRequestedAccent };
+  return { text, speed: body.speed, purpose };
 }
 
 /// The normalized text is both the cache-key input and the text sent to the
-/// provider. Vocabulary is a saved word or short chunk, so "Chút", "chút" and
-/// "chút." must share one cache entry. Lesson lines keep case and punctuation
+/// provider. Vocabulary is a saved word or short chunk, so "Salamat",
+/// "salamat" and "salamat." must share one cache entry. Lesson lines keep case and punctuation
 /// because a trailing "?" or "!" changes the delivered intonation.
 export function normalizedTTSText(raw: string, purpose: TTSPurpose): string {
   const text = raw.normalize("NFC").trim().replace(/\s+/gu, " ");
   if (purpose !== "vocabulary") return text;
   return text
-    .toLocaleLowerCase("vi")
+    .toLocaleLowerCase("fil")
     .replace(/^[\p{P}\p{S}\s]+|[\p{P}\p{S}\s]+$/gu, "");
 }
 
 function hasLeadingSpeakerLabel(value: string): boolean {
   return /^[\p{L}\s·-]{1,60}[:：]\s*\S/u.test(value);
-}
-
-export function voiceIDForAccent(accent: VietnameseAccent): string {
-  return approvedVoiceIDs[accent];
-}
-
-/**
- * Account preferences take precedence over a stale client accent. Invalid or
- * missing legacy values deliberately fall back to the validated request.
- */
-export function effectiveAccentForRequest(
-  requested: VietnameseAccent,
-  stored: unknown,
-  honorRequestedAccent = false,
-): VietnameseAccent {
-  if (honorRequestedAccent) return requested;
-  return stored === "northern" || stored === "southern" ? stored : requested;
 }
 
 export function numericSpeechSpeed(speed: SpeechSpeed): number {
@@ -216,7 +188,7 @@ export function sourceSpeechSpeed(speed: SpeechSpeed): SpeechSpeed {
 
 /// A deliberately conservative learning profile: high stability reduces
 /// sampling variance, style=0 avoids exaggerated delivery, and speaker boost
-/// preserves the approved regional female voice identity.
+/// preserves the approved voice identity.
 export function consistentVoiceSettings(speed: SpeechSpeed): ConsistentVoiceSettings {
   return {
     stability: 0.82,

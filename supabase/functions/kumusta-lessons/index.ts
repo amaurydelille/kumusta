@@ -75,13 +75,7 @@ Deno.serve(async (req: Request) => {
       );
     }
     let state = await ensureLearnerState(context.admin, context.userID, input.profile);
-    // The server-owned preference may differ from a stale client snapshot.
-    // Carry the effective accent through every queue and generation operation
-    // so lesson text and its later TTS request cannot drift apart.
-    const effectiveProfile = {
-      ...input.profile,
-      accent: state.accent as "southern" | "northern",
-    };
+    const effectiveProfile = input.profile;
 
     if (input.action === "review_word") {
       await assertGeneratedVocabularyMembership(
@@ -160,7 +154,7 @@ Deno.serve(async (req: Request) => {
       return jsonResponse(200, {
         version: lessonContractVersion,
         accepted: true,
-        queue_depth: await readyQueueDepth(context.admin, context.userID, effectiveProfile.accent),
+        queue_depth: await readyQueueDepth(context.admin, context.userID),
         generation_pending: true,
         learner_state: publicLearnerState(state),
       }, id);
@@ -235,7 +229,7 @@ Deno.serve(async (req: Request) => {
       return jsonResponse(200, {
         version: lessonContractVersion,
         accepted: true,
-        queue_depth: await readyQueueDepth(context.admin, context.userID, effectiveProfile.accent),
+        queue_depth: await readyQueueDepth(context.admin, context.userID),
         generation_pending: input.topicPreference !== null,
         learner_state: publicLearnerState(state),
       }, id);
@@ -308,7 +302,6 @@ Deno.serve(async (req: Request) => {
           queue_depth: await readyQueueDepth(
             context.admin,
             context.userID,
-            effectiveProfile.accent,
           ),
           generation_pending: true,
           requested_topic: pendingTopic,
@@ -323,14 +316,12 @@ Deno.serve(async (req: Request) => {
     const queued = await fetchCurrentLesson(
       context.admin,
       context.userID,
-      effectiveProfile.accent,
       input.excludingLessonID,
       input.generatedAfter,
     );
     const queueDepth = await readyQueueDepth(
       context.admin,
       context.userID,
-      effectiveProfile.accent,
     );
     const needsFreshLesson = !queued &&
       (input.generatedAfter !== null || input.action === "retry_generation");
@@ -432,7 +423,7 @@ async function replenishQueue(
   nextTopicPreference: string | null,
   forceGeneration = false,
 ): Promise<void> {
-  const currentDepth = await readyQueueDepth(admin, userID, profile.accent);
+  const currentDepth = await readyQueueDepth(admin, userID);
   const missingLessons = Math.max(0, targetQueueDepth - currentDepth);
   // Generate one complete long-form session per job. The unique active-job
   // lease prevents concurrent Today/Practice requests from duplicating work.
@@ -510,7 +501,6 @@ async function replenishQueue(
       admin,
       userID,
       jobID,
-      profile.accent,
       generation.model,
       generation.batch.lessons,
       // A manual refresh is an explicit request even when the learner leaves

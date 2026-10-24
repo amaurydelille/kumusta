@@ -1,6 +1,5 @@
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.57.4";
 import {
-  type Accent,
   type GeneratedLessonDraft,
   hearRespondRoundIndexes,
   type LearnerProfileInput,
@@ -14,7 +13,6 @@ import type { FamiliarLanguageInput } from "./prompt.ts";
 
 export interface LearnerState {
   user_id: string;
-  accent: string;
   goal: string;
   self_assessed_level: string;
   estimated_level: number;
@@ -41,7 +39,6 @@ interface GeneratedLessonRow {
   schema_version: number;
   prompt_version: number;
   model: string;
-  accent: string;
   difficulty: number;
   content: GeneratedLessonDraft;
 }
@@ -63,15 +60,9 @@ export async function ensureLearnerState(
     .maybeSingle();
   if (readError) throw readError;
 
-  // Learning preferences are the durable account-level source of truth for
-  // the regional voice. The client profile is retained as a fallback for
-  // anonymous/legacy accounts that predate the preferences row.
-  const storedAccent = await fetchStoredAccent(admin, userID);
-  const accent = storedAccent ?? profile.accent;
   const baseLevel = initialEstimatedLevel(profile.selfAssessedLevel);
   const mutation = existing
     ? {
-      accent,
       goal: profile.goal,
       self_assessed_level: profile.selfAssessedLevel,
       target_level: Math.max(profile.targetLevel, Math.ceil(Number(existing.estimated_level))),
@@ -79,7 +70,6 @@ export async function ensureLearnerState(
     }
     : {
       user_id: userID,
-      accent,
       goal: profile.goal,
       self_assessed_level: profile.selfAssessedLevel,
       estimated_level: baseLevel,
@@ -95,23 +85,9 @@ export async function ensureLearnerState(
   return normalizeState(data);
 }
 
-async function fetchStoredAccent(
-  admin: SupabaseClient,
-  userID: string,
-): Promise<Accent | null> {
-  const { data, error } = await admin
-    .from("kumusta_learning_preferences")
-    .select("accent")
-    .eq("user_id", userID)
-    .maybeSingle();
-  if (error) throw error;
-  return data?.accent === "northern" || data?.accent === "southern" ? data.accent : null;
-}
-
 export async function fetchCurrentLesson(
   admin: SupabaseClient,
   userID: string,
-  accent: string,
   excludingLessonID: string | null = null,
   generatedAfter: string | null = null,
 ): Promise<QueuedLesson | null> {
@@ -119,10 +95,9 @@ export async function fetchCurrentLesson(
     let selection = admin
       .from("kumusta_user_lesson_queue")
       .select(
-        "id,generated_lesson_id,status,priority,lesson:kumusta_generated_lessons!kumusta_lesson_queue_lesson_owner_fk!inner(accent)",
+        "id,generated_lesson_id,status,priority",
       )
       .eq("user_id", userID)
-      .eq("lesson.accent", accent)
       .in("status", ["ready", "started"])
       .order("priority", { ascending: false })
       .order("assigned_at", { ascending: true })
@@ -136,7 +111,7 @@ export async function fetchCurrentLesson(
 
     const { data: generated, error: lessonError } = await admin
       .from("kumusta_generated_lessons")
-      .select("id,schema_version,prompt_version,model,accent,difficulty,content")
+      .select("id,schema_version,prompt_version,model,difficulty,content")
       .eq("id", queue.generated_lesson_id)
       .eq("user_id", userID)
       .eq("status", "ready")
@@ -196,16 +171,14 @@ export function isSupportedGeneratedLessonVersion(
 export async function readyQueueDepth(
   admin: SupabaseClient,
   userID: string,
-  accent: string,
 ): Promise<number> {
   const { count, error } = await admin
     .from("kumusta_user_lesson_queue")
     .select(
-      "id,lesson:kumusta_generated_lessons!kumusta_lesson_queue_lesson_owner_fk!inner(accent,status,expires_at,schema_version,prompt_version)",
+      "id,lesson:kumusta_generated_lessons!kumusta_lesson_queue_lesson_owner_fk!inner(status,expires_at,schema_version,prompt_version)",
       { count: "exact", head: true },
     )
     .eq("user_id", userID)
-    .eq("lesson.accent", accent)
     .eq("lesson.status", "ready")
     .gt("lesson.expires_at", new Date().toISOString())
     .eq("lesson.schema_version", lessonContractVersion)
@@ -413,17 +386,17 @@ export function extractFamiliarLanguage(contents: unknown[]): FamiliarLanguageIn
 
   for (const content of contents) {
     if (!isLanguageRecord(content)) continue;
-    collectVietnameseValues(content.vocabulary, vocabulary, seenVocabulary, 24);
+    collectTagalogValues(content.vocabulary, vocabulary, seenVocabulary, 24);
     if (!Array.isArray(content.rounds)) continue;
     for (const round of content.rounds) {
       if (!isLanguageRecord(round)) continue;
-      collectVietnameseValues(round.chunks, chunks, seenChunks, 24);
+      collectTagalogValues(round.chunks, chunks, seenChunks, 24);
     }
   }
   return { vocabulary, chunks };
 }
 
-function collectVietnameseValues(
+function collectTagalogValues(
   values: unknown,
   output: string[],
   seen: Set<string>,
@@ -431,9 +404,9 @@ function collectVietnameseValues(
 ): void {
   if (!Array.isArray(values) || output.length >= limit) return;
   for (const value of values) {
-    if (!isLanguageRecord(value) || typeof value.vietnamese !== "string") continue;
-    const normalized = value.vietnamese.trim().replace(/\s+/g, " ");
-    const key = normalized.toLocaleLowerCase("vi");
+    if (!isLanguageRecord(value) || typeof value.tagalog !== "string") continue;
+    const normalized = value.tagalog.trim().replace(/\s+/g, " ");
+    const key = normalized.toLocaleLowerCase("fil");
     if (!normalized || seen.has(key)) continue;
     seen.add(key);
     output.push(normalized);
@@ -491,7 +464,6 @@ export async function persistGeneratedLessons(
   admin: SupabaseClient,
   userID: string,
   jobID: string,
-  accent: string,
   model: string,
   lessons: GeneratedLessonDraft[],
   deliveryPriority = 0,
@@ -520,7 +492,6 @@ export async function persistGeneratedLessons(
   const { data, error } = await admin.rpc("kumusta_persist_generated_lesson_batch", {
     p_user_id: userID,
     p_job_id: jobID,
-    p_accent: accent,
     p_model: model,
     p_lessons: prepared,
   });
@@ -768,7 +739,7 @@ export async function presentQueuedLesson(
   );
   const vocabulary = await Promise.all(lesson.vocabulary.map(async (item, index) => ({
     id: await deterministicUUID(`${queued.generated.id}:vocabulary:${index}`),
-    vietnamese: item.vietnamese,
+    tagalog: item.tagalog,
     english: item.english,
     example: item.example,
     example_translation: item.exampleTranslation,
@@ -797,7 +768,6 @@ export async function presentQueuedLesson(
     title: lesson.title,
     scenario: lesson.scenario,
     minutes: lesson.minutes,
-    accent: queued.generated.accent,
     difficulty: Number(queued.generated.difficulty),
     steps: await Promise.all(
       lesson.rounds.flatMap((round, roundIndex) => {
@@ -840,13 +810,13 @@ export async function presentQueuedLesson(
             : kind === "speak"
             ? round.speakingPrompt
             : "Listen to the audio, then choose the matching meaning.",
-          vietnamese: round.vietnamese,
+          tagalog: round.tagalog,
           translation: round.translation,
           chunks: await Promise.all(round.chunks.map(async (chunk, chunkIndex) => ({
             id: await deterministicUUID(
               `${queued.generated.id}:round:${roundIndex}:stage:${stageIndex}:chunk:${chunkIndex}`,
             ),
-            vietnamese: chunk.vietnamese,
+            tagalog: chunk.tagalog,
             english: chunk.english,
             note: chunk.note,
           }))),
@@ -862,7 +832,7 @@ export async function presentQueuedLesson(
           ...(response && correctOptionID
             ? {
               hear_respond: {
-                prompt_vietnamese: response.promptVietnamese,
+                prompt_tagalog: response.promptTagalog,
                 prompt_translation: response.promptTranslation,
                 options: responseOptions,
                 correct_option_id: correctOptionID,
@@ -916,7 +886,6 @@ function normalizeState(value: Record<string, unknown>): LearnerState {
       : {};
   return {
     user_id: String(value.user_id),
-    accent: String(value.accent),
     goal: String(value.goal),
     self_assessed_level: String(value.self_assessed_level),
     estimated_level: Number(value.estimated_level),
@@ -942,14 +911,12 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function initialEstimatedLevel(level: string): number {
   switch (level) {
-    case "new":
+    case "beginner":
       return 1;
-    case "familiar":
-      return 2;
-    case "conversational":
+    case "intermediate":
+      return 2.25;
+    case "advanced":
       return 3.25;
-    case "rusty":
-      return 2.75;
     default:
       return 1;
   }

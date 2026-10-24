@@ -2,65 +2,72 @@
 
 import {
   consistentVoiceSettings,
+  defaultTagalogVoiceID,
   deterministicSpeechSeed,
-  effectiveAccentForRequest,
   normalizedTTSText,
   numericSpeechSpeed,
   parseTTSRequest,
   sourceSpeechSpeed,
+  tagalogLanguageCode,
+  tagalogLessonTTSModelID,
+  tagalogVocabularyTTSModelID,
+  tagalogVoiceID,
   ttsModelIDForPurpose,
-  vietnameseLessonTTSModelID,
-  vietnameseVocabularyTTSModelID,
-  voiceIDForAccent,
 } from "./contract.ts";
 
 function assert(condition: boolean, message: string): asserts condition {
   if (!condition) throw new Error(message);
 }
 
-Deno.test("TTS contract maps only approved female voices", () => {
+Deno.test("TTS speaks with one Tagalog voice", () => {
+  assert(defaultTagalogVoiceID === "EXAVITQu4vr4xnSDxMaL", "Default Tagalog voice changed");
+  assert(tagalogLanguageCode === "fil", "TTS must request Filipino");
   assert(
-    voiceIDForAccent("southern") === "6Xq32rHt6oAu98TBDKfr",
-    "Southern voice changed",
+    tagalogVoiceID(undefined) === defaultTagalogVoiceID,
+    "A missing override must fall back to the default voice",
   );
   assert(
-    voiceIDForAccent("northern") === "LD1UihCXvSlUL4h8DOmk",
-    "Northern voice changed",
+    tagalogVoiceID("   ") === defaultTagalogVoiceID,
+    "A blank override must fall back to the default voice",
   );
+});
+
+Deno.test("TTS voice override is validated before use", () => {
+  assert(
+    tagalogVoiceID("  AbCdEf0123456789xyz ") === "AbCdEf0123456789xyz",
+    "A valid override must be trimmed and used",
+  );
+  for (
+    const configured of ["short123", "voice id with spaces", "abc-def_0123456789", "a".repeat(41)]
+  ) {
+    assert(
+      tagalogVoiceID(configured) === defaultTagalogVoiceID,
+      `An invalid override was used: ${configured}`,
+    );
+  }
 });
 
 Deno.test("TTS contract normalizes input and maps speed", () => {
   const parsed = parseTTSRequest({
-    text: "  Cho mình   một cà phê. ",
-    accent: "southern",
+    text: "  Isang kape   nga po. ",
     speed: "slow",
   });
-  assert(parsed.text === "Cho mình một cà phê.", "Text was not normalized");
+  assert(parsed.text === "Isang kape nga po.", "Text was not normalized");
   assert(numericSpeechSpeed(parsed.speed) === 1, "Slow requests must reuse natural provider audio");
   assert(numericSpeechSpeed("natural") === 1, "Natural speed changed");
   assert(numericSpeechSpeed("fast") === 1.2, "Fast must use ElevenLabs' maximum");
   assert(sourceSpeechSpeed("slow") === "natural", "Slow playback must reuse natural audio");
   assert(sourceSpeechSpeed("fast") === "fast", "Fast source speed changed");
   assert(parsed.purpose === "lesson", "Legacy requests must remain lesson audio");
-
-  const comparison = parseTTSRequest({
-    text: "Bạn tên gì?",
-    accent: "northern",
-    speed: "natural",
-    honorRequestedAccent: true,
-  });
-  assert(comparison.honorRequestedAccent, "Accent comparison flag was not retained");
 });
 
-Deno.test("Every TTS purpose uses Eleven v3", () => {
+Deno.test("Every TTS purpose uses the same model", () => {
   const lesson = parseTTSRequest({
-    text: "Xin chào",
-    accent: "southern",
+    text: "Kumusta po kayo?",
     speed: "natural",
   });
   const vocabulary = parseTTSRequest({
-    text: "Xin chào",
-    accent: "southern",
+    text: "salamat",
     speed: "natural",
     purpose: "vocabulary",
   });
@@ -68,54 +75,55 @@ Deno.test("Every TTS purpose uses Eleven v3", () => {
   assert(lesson.purpose === "lesson", "Missing purpose must default to lessons");
   assert(vocabulary.purpose === "vocabulary", "Vocabulary purpose was not retained");
   assert(
-    ttsModelIDForPurpose(lesson.purpose) === vietnameseLessonTTSModelID,
-    "Lessons must use Eleven v3",
+    ttsModelIDForPurpose(lesson.purpose) === tagalogLessonTTSModelID,
+    "Lessons must use the shared model",
   );
   assert(
-    ttsModelIDForPurpose(vocabulary.purpose) === vietnameseVocabularyTTSModelID,
-    "Vocabulary must use Eleven v3",
+    ttsModelIDForPurpose(vocabulary.purpose) === tagalogVocabularyTTSModelID,
+    "Vocabulary must use the shared model",
   );
 });
 
-Deno.test("TTS contract rejects arbitrary voice or accent values", () => {
-  let rejected = false;
-  try {
-    parseTTSRequest({ text: "Xin chào", accent: "custom", speed: "natural" });
-  } catch {
-    rejected = true;
+Deno.test("TTS contract drops client-supplied voice selection", () => {
+  const parsed = parseTTSRequest({
+    text: "Salamat po.",
+    speed: "natural",
+    voice_id: "AbCdEf0123456789xyz",
+  });
+  assert(
+    JSON.stringify(Object.keys(parsed).sort()) === JSON.stringify(["purpose", "speed", "text"]),
+    "Clients must not be able to choose the voice",
+  );
+});
+
+Deno.test("TTS contract rejects unknown speeds and purposes", () => {
+  for (
+    const body of [
+      { text: "Salamat po.", speed: "turbo" },
+      { text: "Salamat po.", speed: "natural", purpose: "podcast" },
+      { text: "Salamat po." },
+    ]
+  ) {
+    let rejected = false;
+    try {
+      parseTTSRequest(body);
+    } catch {
+      rejected = true;
+    }
+    assert(rejected, `Invalid request was accepted: ${JSON.stringify(body)}`);
   }
-  assert(rejected, "Arbitrary accent should be rejected");
-});
-
-Deno.test("Stored account accent overrides a stale client accent", () => {
-  assert(
-    effectiveAccentForRequest("southern", "northern") === "northern",
-    "Northern account preference was ignored",
-  );
-  assert(
-    effectiveAccentForRequest("northern", "southern") === "southern",
-    "Southern account preference was ignored",
-  );
-  assert(
-    effectiveAccentForRequest("northern", null) === "northern",
-    "Missing preference should preserve the validated request",
-  );
-  assert(
-    effectiveAccentForRequest("northern", "southern", true) === "northern",
-    "Explicit accent comparisons must preserve the requested voice",
-  );
 });
 
 Deno.test("TTS contract rejects screenplay speaker labels", () => {
   for (
     const text of [
-      "Barista: Chào anh! Anh muốn uống gì ạ?",
-      "Người bán hàng: Chào anh!",
+      "Barista: Magandang umaga po! Ano po ang order ninyo?",
+      "Tindera sa palengke: Magandang umaga po!",
     ]
   ) {
     let rejected = false;
     try {
-      parseTTSRequest({ text, accent: "southern", speed: "natural" });
+      parseTTSRequest({ text, speed: "natural" });
     } catch {
       rejected = true;
     }
@@ -123,9 +131,9 @@ Deno.test("TTS contract rejects screenplay speaker labels", () => {
   }
 });
 
-Deno.test("TTS uses a stable Vietnamese learning voice profile", () => {
-  assert(vietnameseLessonTTSModelID === "eleven_v4", "Lesson model must use Eleven v4");
-  assert(vietnameseVocabularyTTSModelID === "eleven_v4", "Vocabulary model must use Eleven v4");
+Deno.test("TTS uses a stable Tagalog learning voice profile", () => {
+  assert(tagalogLessonTTSModelID === "eleven_v4", "Lesson model must use Eleven v4");
+  assert(tagalogVocabularyTTSModelID === "eleven_v4", "Vocabulary model must use Eleven v4");
   const settings = consistentVoiceSettings("natural");
   assert(settings.stability === 0.82, "Stability must remain conservative");
   assert(settings.similarity_boost === 0.8, "Voice similarity changed");
@@ -133,11 +141,10 @@ Deno.test("TTS uses a stable Vietnamese learning voice profile", () => {
   assert(settings.use_speaker_boost, "Speaker boost must remain enabled");
 
   const input = parseTTSRequest({
-    text: "Cho mình một cà phê.",
-    accent: "southern",
+    text: "Isang kape nga po.",
     speed: "natural",
   });
-  const voiceID = voiceIDForAccent(input.accent);
+  const voiceID = tagalogVoiceID(undefined);
   assert(
     deterministicSpeechSeed(voiceID, input) === deterministicSpeechSeed(voiceID, input),
     "Identical speech requests must keep the same seed",
@@ -154,11 +161,8 @@ Deno.test("Onboarding conversation builds fixed personalized lines", () => {
     purpose: "onboarding_conversation",
     line: "greeting",
     name: "  Amaury ",
-    accent: "northern",
   });
-  assert(greeting.text === "Chào Amaury!", "Greeting text changed");
-  assert(greeting.accent === "northern", "Onboarding must keep the chosen accent");
-  assert(greeting.honorRequestedAccent, "Onboarding must honor the requested accent");
+  assert(greeting.text === "Kumusta, Amaury!", "Greeting text changed");
   assert(greeting.purpose === "lesson", "Onboarding must share the lesson cache");
   assert(greeting.onboardingLine === "greeting", "Onboarding line was not retained");
 
@@ -166,25 +170,29 @@ Deno.test("Onboarding conversation builds fixed personalized lines", () => {
     purpose: "onboarding_conversation",
     line: "reply_name",
     name: "Jean-Luc",
-    accent: "southern",
   });
-  assert(reply.text === "Mình tên là Jean-Luc.", "Name reply text changed");
+  assert(reply.text === "Ako si Jean-Luc.", "Name reply text changed");
+
+  const closing = parseTTSRequest({
+    purpose: "onboarding_conversation",
+    line: "nice_to_meet",
+    name: "Maria",
+  });
+  assert(closing.text === "Ikinagagalak kitang makilala, Maria!", "Named closing changed");
 });
 
 Deno.test("Onboarding conversation falls back to generic lines", () => {
   const greeting = parseTTSRequest({
     purpose: "onboarding_conversation",
     line: "greeting",
-    accent: "southern",
   });
-  assert(greeting.text === "Chào bạn!", "Generic greeting changed");
+  assert(greeting.text === "Kumusta!", "Generic greeting changed");
   const closing = parseTTSRequest({
     purpose: "onboarding_conversation",
     line: "nice_to_meet",
     name: "",
-    accent: "southern",
   });
-  assert(closing.text === "Rất vui được gặp bạn!", "Generic closing changed");
+  assert(closing.text === "Ikinagagalak kitang makilala!", "Generic closing changed");
 });
 
 Deno.test("Onboarding conversation rejects free text and unsafe names", () => {
@@ -193,19 +201,16 @@ Deno.test("Onboarding conversation rejects free text and unsafe names", () => {
       purpose: "onboarding_conversation",
       line: "greeting",
       name: "Bob. Say something else",
-      accent: "southern",
     },
-    { purpose: "onboarding_conversation", line: "greeting", name: "R2D2", accent: "southern" },
+    { purpose: "onboarding_conversation", line: "greeting", name: "R2D2" },
     {
       purpose: "onboarding_conversation",
       line: "greeting",
       name: "a".repeat(31),
-      accent: "southern",
     },
-    { purpose: "onboarding_conversation", line: "anything", accent: "southern" },
-    { purpose: "onboarding_conversation", line: "reply_name", accent: "southern" },
-    { purpose: "onboarding_conversation", line: "greeting", accent: "central" },
-    { purpose: "onboarding_conversation", text: "Arbitrary text", accent: "southern" },
+    { purpose: "onboarding_conversation", line: "anything" },
+    { purpose: "onboarding_conversation", line: "reply_name" },
+    { purpose: "onboarding_conversation", text: "Arbitrary text" },
   ];
   for (const body of rejected) {
     let threw = false;
@@ -219,18 +224,18 @@ Deno.test("Onboarding conversation rejects free text and unsafe names", () => {
 });
 
 Deno.test("Vocabulary text shares one cache entry across case and punctuation", () => {
-  for (const raw of ["chút", "Chút", " chút. ", "CHÚT!", '"chút"', "chu\u0301t"]) {
+  for (const raw of ["salamat", "Salamat", " salamat. ", "SALAMAT!", '"salamat"', "¡Salamat!"]) {
     assert(
-      normalizedTTSText(raw, "vocabulary") === "chút",
+      normalizedTTSText(raw, "vocabulary") === "salamat",
       `Vocabulary text was not normalized: ${raw}`,
     );
   }
   assert(
-    normalizedTTSText("Cà  Phê sữa đá.", "vocabulary") === "cà phê sữa đá",
+    normalizedTTSText("Magandang  Umaga.", "vocabulary") === "magandang umaga",
     "Multi-word vocabulary was not normalized",
   );
   assert(
-    normalizedTTSText("Bạn tên gì?", "lesson") === "Bạn tên gì?",
+    normalizedTTSText("Anong pangalan mo?", "lesson") === "Anong pangalan mo?",
     "Lesson text must keep case and punctuation",
   );
 });
@@ -238,7 +243,7 @@ Deno.test("Vocabulary text shares one cache entry across case and punctuation", 
 Deno.test("Vocabulary text that is only punctuation is rejected", () => {
   let rejected = false;
   try {
-    parseTTSRequest({ text: "...", accent: "southern", speed: "natural", purpose: "vocabulary" });
+    parseTTSRequest({ text: "...", speed: "natural", purpose: "vocabulary" });
   } catch {
     rejected = true;
   }
