@@ -1,13 +1,13 @@
 # Kumusta
 
-Kumusta is a native SwiftUI app for learning spoken Cantonese (Hong Kong,
-Traditional characters, Jyutping), in English only. It is a fork of VietBuddy; see
-[PLAN.md](PLAN.md) for the full port plan and its phases.
+Kumusta is a native SwiftUI app for learning spoken Tagalog (everyday Metro
+Manila Tagalog), in English only. It is a fork of VietBuddy; see
+[PLAN.md](PLAN.md) for what is done and what is next.
 
-> **Status: Phase 1 (fork, strip, rename) is done.** The app still ships
-> VietBuddy's Vietnamese content, which proves the rename end to end. The
-> Cantonese language layer and content arrive in Phases 2–4. Most files in
-> `docs/` are inherited from VietBuddy and are rewritten as each phase lands.
+> **Status:** the app, backend and content are Tagalog. The authored roadmap
+> (`supabase/catalog/tagalog-v1/`) has 10 lessons each for beginner,
+> intermediate and advanced, all awaiting native-speaker review. Most files in
+> `docs/` are still inherited from VietBuddy.
 
 ## Layout
 
@@ -18,7 +18,7 @@ Traditional characters, Jyutping), in English only. It is a fork of VietBuddy; s
 | `Config/` | xcconfigs; `Secrets.xcconfig` is local only (copy the `.example`) |
 | `supabase/migrations/` | Database schema (one squashed baseline plus later migrations) |
 | `supabase/functions/` | Edge Functions (`kumusta-*`) |
-| `supabase/catalog/` | Offline roadmap builders (still Vietnamese until Phase 4) |
+| `supabase/catalog/tagalog-v1/` | Authored Tagalog roadmap sources and builder (`build.ts`) |
 | `supabase/tests/` | SQL assertions (`baseline_security.sql`) |
 | `supabase/ops/` | One-off operational SQL (e.g. the email-worker cron) |
 | `scripts/` | Content, audio and parity scripts |
@@ -40,7 +40,8 @@ Hosted Supabase grants `anon`/`authenticated` broad default privileges on new
 objects. Every migration that creates a table, view or function must revoke
 what clients should not have; `baseline_security.sql` fails otherwise.
 
-Edge Function secrets (none are set yet): `DASHSCOPE_API_KEY`,
+Edge Function secrets (only `ELEVENLABS_TTS_API_KEY` is set so far): `KUMUSTA_TTS_VOICE_ID`
+(the Tagalog voice; defaults to ElevenLabs' premade "Sarah"), `DASHSCOPE_API_KEY`,
 `QWEN_LESSON_MODEL`, `ANTHROPIC_API_KEY`, `KUMUSTA_LIVE_LLM_MODEL`,
 `ELEVENLABS_API_KEY`, `SONIOX_API_KEY`, `REVENUECAT_WEBHOOK_AUTHORIZATION`,
 `REVENUECAT_SECRET_API_KEY`, `REVENUECAT_PROJECT_ID`, `EMAIL_WORKER_AUTHORIZATION`,
@@ -57,6 +58,15 @@ xcodebuild -workspace kumusta.xcworkspace -scheme Kumusta \
 ```
 
 Bundle ID `com.kumusta.app`, entitlement `kumusta_pro`.
+
+## Content
+
+```sh
+# Validate the authored roadmap and regenerate the catalog JSON, app seeds and seed migration
+deno run --allow-read --allow-write supabase/catalog/tagalog-v1/build.ts
+# Bundled audio for the welcome lessons (needs ELEVENLABS_API_KEY)
+deno run --allow-read --allow-write --allow-net --allow-env scripts/generate-first-lesson-audio.ts
+```
 
 ## Checks (also run in CI)
 
