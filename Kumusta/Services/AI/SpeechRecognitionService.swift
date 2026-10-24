@@ -71,9 +71,9 @@ extension TagalogSpeechRecognizing {
 }
 
 /// Uploads one bounded, ephemeral M4A take through the authenticated Supabase
-/// boundary. The ElevenLabs credential and provider response never enter the
+/// boundary. The Soniox credential and provider response never enter the
 /// application bundle.
-actor SupabaseElevenLabsSpeechRecognitionService: TagalogSpeechRecognizing {
+actor SupabaseSpeechRecognitionService: TagalogSpeechRecognizing {
     static let maximumUploadBytes = 1_500_000
     private static let logger = Logger(subsystem: "com.kumusta.app", category: "SpeechRecognition")
 
@@ -94,7 +94,7 @@ actor SupabaseElevenLabsSpeechRecognitionService: TagalogSpeechRecognizing {
     }
 
     nonisolated func makeLiveTranscription(onboarding: Bool) -> (any LiveSpeechTranscribing)? {
-        ElevenLabsRealtimeTranscription { [self] in
+        StreamingSpeechTranscription { [self] in
             try await realtimeGrant(onboarding: onboarding)
         }
     }
@@ -106,7 +106,7 @@ actor SupabaseElevenLabsSpeechRecognitionService: TagalogSpeechRecognizing {
         var headers = Self.headers(onboarding: onboarding)
         headers["Content-Type"] = "audio/mp4"
         let response: SpeechTranscription = try await invoke(
-            "kumusta-elevenlabs-stt",
+            "kumusta-lesson-stt",
             headers: headers,
             body: audio,
             timeout: 25
@@ -129,7 +129,7 @@ actor SupabaseElevenLabsSpeechRecognitionService: TagalogSpeechRecognizing {
     /// an uploaded take.
     private func realtimeGrant(onboarding: Bool) async throws -> RealtimeSpeechGrant {
         try await invoke(
-            "kumusta-elevenlabs-stt-token",
+            "kumusta-lesson-stt-token",
             headers: Self.headers(onboarding: onboarding),
             body: nil,
             timeout: 10
@@ -260,7 +260,7 @@ actor PreviewSpeechRecognitionService: TagalogSpeechRecognizing {
     }
 }
 
-/// ElevenLabs first; Apple's recognizer only when the provider is down.
+/// Soniox first; Apple's recognizer only when the provider is down.
 /// Errors about the learner or their access (silence, sign-in, Pro, rate
 /// limit) surface unchanged, so the fallback never bypasses a server gate.
 struct FallbackSpeechRecognitionService: TagalogSpeechRecognizing {
@@ -277,7 +277,7 @@ struct FallbackSpeechRecognitionService: TagalogSpeechRecognizing {
         try await run { try await $0.transcribeOnboarding(audio: audio) }
     }
 
-    /// Streaming is ElevenLabs-only; a failed stream falls back to `transcribe`,
+    /// Streaming is Soniox-only; a failed stream falls back to `transcribe`,
     /// which keeps the on-device fallback behind it.
     func makeLiveTranscription(onboarding: Bool) -> (any LiveSpeechTranscribing)? {
         primary.makeLiveTranscription(onboarding: onboarding)

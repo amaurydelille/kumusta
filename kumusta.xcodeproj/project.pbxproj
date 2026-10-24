@@ -77,7 +77,6 @@
 		87F3932280CCAEAD5217A7C1 /* linh_chi_northern_onboarding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 400F9A74ACE2683A1358659C /* linh_chi_northern_onboarding.mp3 */; };
 		887CBC72D4E1E11D02B42C0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B18D32CC3D27E4646A12436 /* Assets.xcassets */; };
 		88935344C3DCE0615A19D19D /* ReviewExerciseViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16687415BF5F90D2E8127F3 /* ReviewExerciseViews.swift */; };
-		8BAD65125E61F71AC10A6F8F /* ElevenLabsSpeechRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1286E96E21F32526016B19E5 /* ElevenLabsSpeechRecognitionService.swift */; };
 		8BB44F03020026157D826452 /* KumustaMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4A4F68A54583AE6B5D8367 /* KumustaMotion.swift */; };
 		8DDAB170A6AFE95B439C6992 /* Patriot-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F814A62D8AE9D7DB1E51F42 /* Patriot-Regular.otf */; };
 		8F9A0483376E4C25F75E9429 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB51C4BF0A2BFEA2483A196 /* ProfileEditorView.swift */; };
@@ -95,6 +94,7 @@
 		9FDC60644DA52B88EC824B91 /* typing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5491E79D0BCA98587887D471 /* typing.mp3 */; };
 		A12159ED91621574B75F0F18 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 8D4794D052EC9792A6216BCA /* RevenueCat */; };
 		A8394DBC6F7E3D88C4F0F5F5 /* pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C72D84E559FA3083737F9BD8 /* pop.mp3 */; };
+		A93CF2212DD53DADC2E5F779 /* SpeechRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F3AE774FE7C6E0FEBB9BAE /* SpeechRecognitionService.swift */; };
 		A98D93F3015E2FAE7A9101E2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E6A3E834130B70D95F93DCE6 /* Localizable.xcstrings */; };
 		AB2A7AB340E31CBD91AA328B /* LearningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845CA314021A431284E99DF0 /* LearningRepository.swift */; };
 		ABE9950C802CA9CC0A375E70 /* ConversationRigV2.json in Resources */ = {isa = PBXBuildFile; fileRef = C693111301E87AF2FAE4760F /* ConversationRigV2.json */; };
@@ -189,7 +189,6 @@
 		0EDAA904012C3C8DBE1AD66E /* NextLessonPreparationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonPreparationCard.swift; sourceTree = "<group>"; };
 		0F814A62D8AE9D7DB1E51F42 /* Patriot-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patriot-Regular.otf"; sourceTree = "<group>"; };
 		1208AED35831721293768A88 /* ProfileRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepositoryTests.swift; sourceTree = "<group>"; };
-		1286E96E21F32526016B19E5 /* ElevenLabsSpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenLabsSpeechRecognitionService.swift; sourceTree = "<group>"; };
 		12953B2AF1E6F59DB730B9A9 /* LearningActivityStreakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningActivityStreakTests.swift; sourceTree = "<group>"; };
 		12FED71427E4D6D1D576306E /* LivePracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePracticeView.swift; sourceTree = "<group>"; };
 		1654FA12AE793E42F71BE314 /* AuthSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionProvider.swift; sourceTree = "<group>"; };
@@ -313,6 +312,7 @@
 		EF675797A3C2BD42689A55C7 /* SpeakingRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingRecorder.swift; sourceTree = "<group>"; };
 		F028A0F2E9D440D98ACA0D62 /* curriculum-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "curriculum-v1.json"; sourceTree = "<group>"; };
 		F1F4A11A669324C8C6CF8F8E /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		F3F3AE774FE7C6E0FEBB9BAE /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
 		F54426F0A9122E4034B5CA2D /* AdaptiveLearningOutboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveLearningOutboxTests.swift; sourceTree = "<group>"; };
 		F5502D468377FECF199E3B14 /* MascotPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotPerformance.swift; sourceTree = "<group>"; };
 		F8B89DA0B39493DA91960DE1 /* RevenueCatHostedPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatHostedPaywallView.swift; sourceTree = "<group>"; };
@@ -458,9 +458,9 @@
 				09478AA3118EF5AB69F608D0 /* AdaptiveLearningOutbox.swift */,
 				787091558D9A3EC572E61B97 /* AdaptiveLessonService.swift */,
 				75C0E9392B5B3C25879E71C1 /* AuthenticatedElevenLabsAudioService.swift */,
-				1286E96E21F32526016B19E5 /* ElevenLabsSpeechRecognitionService.swift */,
 				FA1550A11E01705144423528 /* ElevenLabsTTSGateway.swift */,
 				630283F29174B6EE5D4A2278 /* RealtimeSpeechTranscription.swift */,
+				F3F3AE774FE7C6E0FEBB9BAE /* SpeechRecognitionService.swift */,
 			);
 			path = AI;
 			sourceTree = "<group>";
@@ -948,7 +948,6 @@
 				87D430222D9C71BB3FA6E66E /* DailyReviewSession.swift in Sources */,
 				FEFD13CAB8B92D5B48D4AC12 /* DailyReviewView.swift in Sources */,
 				C653182C952AB9F162FD3ABA /* DependencyContainer.swift in Sources */,
-				8BAD65125E61F71AC10A6F8F /* ElevenLabsSpeechRecognitionService.swift in Sources */,
 				7DC42F7D79ABC2FFD4A3D504 /* ElevenLabsTTSGateway.swift in Sources */,
 				D7C24407937ADD005EB6FD34 /* FirstLessonContent.swift in Sources */,
 				4196D41B32AA7349F494DDD8 /* FirstLessonView.swift in Sources */,
@@ -1005,6 +1004,7 @@
 				2638E364F30B53CCDCB865D1 /* SessionFeedback.swift in Sources */,
 				3AF9FEB7D606BC15C4E3A1AA /* SessionFeedbackSheet.swift in Sources */,
 				64E2BBC3BF6FD3FC790877A1 /* SpeakingRecorder.swift in Sources */,
+				A93CF2212DD53DADC2E5F779 /* SpeechRecognitionService.swift in Sources */,
 				4DF9631825218D463BCDEBBD /* SpokenUtterance.swift in Sources */,
 				AEE46480D94D73BC87F6A99D /* StreakCelebrationView.swift in Sources */,
 				E8F7AAFB3DACB33EF4081D87 /* SuccessFeedbackPlayer.swift in Sources */,

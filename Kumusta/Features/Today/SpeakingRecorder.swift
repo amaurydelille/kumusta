@@ -377,7 +377,7 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
     }
 
     private static func isValidRecordingData(_ data: Data) -> Bool {
-        (512 ... SupabaseElevenLabsSpeechRecognitionService.maximumUploadBytes)
+        (512 ... SupabaseSpeechRecognitionService.maximumUploadBytes)
             .contains(data.count)
     }
 

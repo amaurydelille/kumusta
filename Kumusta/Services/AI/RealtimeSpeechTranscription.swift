@@ -13,26 +13,34 @@ protocol LiveSpeechTranscribing: AnyObject, Sendable {
 
 struct RealtimeSpeechGrant: Decodable, Sendable {
     let version: Int
+    let provider: String
     let url: URL
+    /// A short-lived, single-use provider key.
+    let token: String
+    /// The server-owned start request, sent as the socket's first message.
+    let config: String
     let sampleRate: Int
 
     static let sampleRate = 16_000
 
-    /// The backend owns the session URL; only accept one that points at
-    /// ElevenLabs over TLS and expects the audio the recorder produces.
+    /// The backend owns the session; only accept one that points at Soniox
+    /// over TLS and expects the audio the recorder produces.
     var isValid: Bool {
         version == 1
+            && provider == "soniox"
             && sampleRate == Self.sampleRate
             && url.scheme == "wss"
-            && (url.host() == "api.elevenlabs.io" || url.host()?.hasSuffix(".elevenlabs.io") == true)
+            && url.host() == "stt-rt.soniox.com"
+            && !token.isEmpty
+            && !config.isEmpty
     }
 }
 
-/// Streams one take to ElevenLabs realtime Scribe over a single-use session.
-/// Audio is buffered until the socket is open, so capture never waits for the
-/// grant. The session commits once, when the take ends.
-final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
-    /// How long `finish()` waits for the committed transcript before giving up,
+/// Streams one take to Soniox realtime over a single-use key. Audio is
+/// buffered until the socket is open, so capture never waits for the grant.
+/// The take ends with an empty frame; the transcript is the final tokens.
+final class StreamingSpeechTranscription: LiveSpeechTranscribing {
+    /// How long `finish()` waits for the final transcript before giving up,
     /// so a slow stream falls back to the upload path instead of stalling.
     static let finishTimeout: Duration = .milliseconds(2_500)
     private static let logger = Logger(subsystem: "com.kumusta.app", category: "SpeechRecognition")
@@ -92,23 +100,26 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
         let grant = try await grant()
         guard grant.isValid else { throw SpeechRecognitionError.responseInvalid }
 
-        let socket = session.webSocketTask(with: grant.url)
+        var request = URLRequest(url: grant.url)
+        request.setValue("Bearer \(grant.token)", forHTTPHeaderField: "Authorization")
+        let socket = session.webSocketTask(with: request)
         socket.resume()
         defer { socket.cancel(with: .normalClosure, reason: nil) }
 
         return try await withThrowingTaskGroup(of: SpeechTranscription?.self) { group in
             group.addTask {
+                try await socket.send(.string(grant.config))
                 for await chunk in chunks {
-                    try await socket.send(.string(audioMessage(chunk, commit: false)))
+                    try await socket.send(.data(chunk))
                 }
-                // A short tail of silence lets the final syllable settle
-                // before the commit closes the segment.
-                let tail = Data(count: RealtimeSpeechGrant.sampleRate / 10 * 2)
-                try await socket.send(.string(audioMessage(tail, commit: true)))
+                // A short tail of silence lets the final syllable settle,
+                // then an empty text frame ends the stream.
+                try await socket.send(.data(Data(count: RealtimeSpeechGrant.sampleRate / 10 * 2)))
+                try await socket.send(.string(""))
                 return nil
             }
             group.addTask {
-                try await committedTranscript(from: socket)
+                try await finalTranscript(from: socket)
             }
             defer { group.cancelAll() }
             while let next = try await group.next() {
@@ -118,9 +129,11 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
         }
     }
 
-    private static func committedTranscript(
+    /// Final tokens arrive once each; the stream is done at `finished`.
+    private static func finalTranscript(
         from socket: URLSessionWebSocketTask
     ) async throws -> SpeechTranscription {
+        var finals = ""
         while true {
             let message = try await socket.receive()
             let data: Data
@@ -129,21 +142,18 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
             case .data(let bytes): data = bytes
             @unknown default: continue
             }
-            guard let event = try? JSONDecoder().decode(RealtimeEvent.self, from: data) else {
+            guard let response = try? JSONDecoder().decode(RealtimeResponse.self, from: data) else {
                 continue
             }
-            switch event.messageType {
-            case "session_started", "partial_transcript", "warning":
-                continue
-            case "committed_transcript":
-                return try transcription(from: event.text ?? "")
-            case "insufficient_audio_activity":
-                throw SpeechRecognitionError.speechNotDetected
-            default:
-                if event.error != nil {
-                    logger.error("Realtime transcription failed: \(event.messageType, privacy: .public)")
-                    throw SpeechRecognitionError.temporarilyUnavailable
-                }
+            if response.errorCode != nil || response.errorType != nil {
+                logger.error("Realtime transcription failed: \(response.errorType ?? "unknown", privacy: .public)")
+                throw SpeechRecognitionError.temporarilyUnavailable
+            }
+            for token in response.tokens ?? [] where token.isFinal && !token.text.hasPrefix("<") {
+                finals += token.text
+            }
+            if response.finished == true {
+                return try transcription(from: finals)
             }
         }
     }
@@ -164,19 +174,26 @@ final class ElevenLabsRealtimeTranscription: LiveSpeechTranscribing {
         )
     }
 
-    private static func audioMessage(_ pcm: Data, commit: Bool) -> String {
-        "{\"message_type\":\"input_audio_chunk\",\"audio_base_64\":\"\(pcm.base64EncodedString())\","
-            + "\"commit\":\(commit),\"sample_rate\":\(RealtimeSpeechGrant.sampleRate)}"
-    }
+    private struct RealtimeResponse: Decodable {
+        struct Token: Decodable {
+            let text: String
+            let isFinal: Bool
 
-    private struct RealtimeEvent: Decodable {
-        let messageType: String
-        let text: String?
-        let error: String?
+            enum CodingKeys: String, CodingKey {
+                case text
+                case isFinal = "is_final"
+            }
+        }
+
+        let tokens: [Token]?
+        let finished: Bool?
+        let errorCode: Int?
+        let errorType: String?
 
         enum CodingKeys: String, CodingKey {
-            case text, error
-            case messageType = "message_type"
+            case tokens, finished
+            case errorCode = "error_code"
+            case errorType = "error_type"
         }
     }
 }

@@ -10,7 +10,7 @@ const lessonRequest = {
   purpose: "lesson" as const,
 };
 
-const defaultVoiceID = "EXAVITQu4vr4xnSDxMaL";
+const defaultVoiceID = "qZLi51uuzx5jdu6q0ayz";
 const overrideVoiceID = "AbCdEf0123456789xyz";
 
 Deno.test("TTS cache separates identical text by configured voice", async () => {

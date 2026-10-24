@@ -20,7 +20,7 @@ function assert(condition: boolean, message: string): asserts condition {
 }
 
 Deno.test("TTS speaks with one Tagalog voice", () => {
-  assert(defaultTagalogVoiceID === "EXAVITQu4vr4xnSDxMaL", "Default Tagalog voice changed");
+  assert(defaultTagalogVoiceID === "qZLi51uuzx5jdu6q0ayz", "Default Tagalog voice changed");
   assert(tagalogLanguageCode === "fil", "TTS must request Filipino");
   assert(
     tagalogVoiceID(undefined) === defaultTagalogVoiceID,

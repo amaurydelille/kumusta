@@ -867,8 +867,9 @@ struct LivePipelineTranscriberGrant: Sendable {
             }
             return LivePipelineSonioxTranscriber(url: url, token: token, config: config)
         default:
-            let grant = RealtimeSpeechGrant(version: 1, url: url, sampleRate: RealtimeSpeechGrant.sampleRate)
-            guard grant.isValid else { throw URLError(.badServerResponse) }
+            guard url.host() == "api.elevenlabs.io" || url.host()?.hasSuffix(".elevenlabs.io") == true else {
+                throw URLError(.badServerResponse)
+            }
             return LivePipelineTranscriber(url: url)
         }
     }

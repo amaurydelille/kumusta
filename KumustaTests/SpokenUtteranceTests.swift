@@ -208,7 +208,7 @@ private final class StubLiveTranscription: LiveSpeechTranscribing {
     func cancel() {}
 
     func finish() async throws -> SpeechTranscription {
-        try ElevenLabsRealtimeTranscription.transcription(from: result.get())
+        try StreamingSpeechTranscription.transcription(from: result.get())
     }
 }
 
@@ -250,22 +250,32 @@ struct RealtimeSpeechTranscriptionTests {
     @Test("Streamed text is normalized like the upload path")
     func normalizesTranscript() throws {
         let decomposed = "  sala\u{0301}mat  po\n Ate "
-        let transcription = try ElevenLabsRealtimeTranscription.transcription(from: decomposed)
+        let transcription = try StreamingSpeechTranscription.transcription(from: decomposed)
         #expect(transcription.transcript == "salámat po Ate")
         #expect(transcription.transcript.unicodeScalars.count == "salámat po Ate".unicodeScalars.count)
         #expect(throws: SpeechRecognitionError.speechNotDetected) {
-            try ElevenLabsRealtimeTranscription.transcription(from: "  ")
+            try StreamingSpeechTranscription.transcription(from: "  ")
         }
     }
 
-    @Test("Only an ElevenLabs TLS session at the recorder's rate is accepted")
+    @Test("Only a Soniox TLS session at the recorder's rate is accepted")
     func validatesGrant() {
-        func grant(_ url: String, rate: Int = 16_000) -> RealtimeSpeechGrant {
-            RealtimeSpeechGrant(version: 1, url: URL(string: url)!, sampleRate: rate)
+        func grant(
+            _ url: String,
+            provider: String = "soniox",
+            token: String = "temp:key",
+            rate: Int = 16_000
+        ) -> RealtimeSpeechGrant {
+            RealtimeSpeechGrant(
+                version: 1, provider: provider, url: URL(string: url)!,
+                token: token, config: "{}", sampleRate: rate
+            )
         }
-        #expect(grant("wss://api.elevenlabs.io/v1/speech-to-text/realtime?token=x").isValid)
-        #expect(!grant("ws://api.elevenlabs.io/v1/speech-to-text/realtime").isValid)
-        #expect(!grant("wss://elevenlabs.io.example.com/realtime").isValid)
-        #expect(!grant("wss://api.elevenlabs.io/v1/speech-to-text/realtime", rate: 48_000).isValid)
+        #expect(grant("wss://stt-rt.soniox.com/transcribe-websocket").isValid)
+        #expect(!grant("ws://stt-rt.soniox.com/transcribe-websocket").isValid)
+        #expect(!grant("wss://stt-rt.soniox.com.example.com/x").isValid)
+        #expect(!grant("wss://stt-rt.soniox.com/transcribe-websocket", provider: "elevenlabs").isValid)
+        #expect(!grant("wss://stt-rt.soniox.com/transcribe-websocket", token: "").isValid)
+        #expect(!grant("wss://stt-rt.soniox.com/transcribe-websocket", rate: 48_000).isValid)
     }
 }

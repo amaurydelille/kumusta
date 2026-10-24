@@ -177,7 +177,7 @@ Deno.serve(async (req: Request) => {
         86_400,
       );
 
-      const apiKey = requiredEnv("ELEVENLABS_API_KEY");
+      const apiKey = requiredEnv("KUMUSTA_TTS_API_KEY");
       audio = await generateTTSAudio(effectiveInput, voiceID, modelID, apiKey, id);
     } catch (error) {
       await failTTSCache(admin, cacheKey, generationToken);

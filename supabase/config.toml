@@ -10,10 +10,10 @@ verify_jwt = false
 [functions.kumusta-elevenlabs-tts]
 verify_jwt = false
 
-[functions.kumusta-elevenlabs-stt]
+[functions.kumusta-lesson-stt]
 verify_jwt = false
 
-[functions.kumusta-elevenlabs-stt-token]
+[functions.kumusta-lesson-stt-token]
 verify_jwt = false
 
 [functions.kumusta-lessons]

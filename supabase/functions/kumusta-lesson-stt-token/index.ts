@@ -12,13 +12,13 @@ import {
   requiredEnv,
 } from "../_shared/http.ts";
 import { admitSpeechAttempt } from "../_shared/speech_gate.ts";
-import { realtimeSession } from "./contract.ts";
+import { realtimeSession, temporaryKeyRequest } from "./contract.ts";
 
 const maximumProviderResponseBytes = 4_096;
 
-// Issues one single-use ElevenLabs realtime Scribe session so the app can
-// stream a take while the learner is still speaking. Admission and quotas are
-// identical to the upload path; the ElevenLabs key never leaves the server.
+// Issues one single-use Soniox realtime key so the app can stream a take while
+// the learner is still speaking. Admission and quotas are identical to the
+// upload path; the Soniox key never leaves the server.
 Deno.serve(async (req: Request) => {
   const id = requestID(req);
   if (req.method === "OPTIONS") {
@@ -35,15 +35,19 @@ Deno.serve(async (req: Request) => {
     let providerResponse: Response;
     try {
       providerResponse = await fetchWithTimeout(
-        "https://api.elevenlabs.io/v1/single-use-token/realtime_scribe",
+        "https://api.soniox.com/v1/auth/temporary-api-key",
         {
           method: "POST",
-          headers: { "xi-api-key": requiredEnv("ELEVENLABS_API_KEY") },
+          headers: {
+            Authorization: `Bearer ${requiredEnv("KUMUSTA_LESSON_STT_API_KEY")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(temporaryKeyRequest(id)),
         },
         6_000,
       );
     } catch {
-      console.error("elevenlabs_stt_token_unreachable", { request_id: id });
+      console.error("soniox_stt_token_unreachable", { request_id: id });
       throw new HttpError(
         502,
         "transcription_unavailable",
@@ -52,7 +56,7 @@ Deno.serve(async (req: Request) => {
     }
 
     if (!providerResponse.ok) {
-      console.error("elevenlabs_stt_token_rejected", {
+      console.error("soniox_stt_token_rejected", {
         request_id: id,
         status: providerResponse.status,
       });

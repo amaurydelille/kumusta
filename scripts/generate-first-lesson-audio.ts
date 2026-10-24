@@ -9,7 +9,7 @@
 // 64-bit FNV-1a hash of its normalized text, the same key the app computes in
 // `FirstLessonScript.audioKey(for:)`.
 //
-// Usage (from the repo root, with ELEVENLABS_API_KEY in the environment or .env;
+// Usage (from the repo root, with KUMUSTA_TTS_API_KEY in the environment or .env;
 // set KUMUSTA_TTS_VOICE_ID to match the Edge Function secret if one is set):
 //   deno run --allow-read --allow-write --allow-net --allow-env \
 //     scripts/generate-first-lesson-audio.ts [--force] [--dry-run]
@@ -17,10 +17,10 @@ import {
   consistentVoiceSettings,
   deterministicSpeechSeed,
   normalizedTTSText,
-  type TTSRequest,
   tagalogLanguageCode,
   tagalogTTSModelID,
   tagalogVoiceID,
+  type TTSRequest,
 } from "../supabase/functions/kumusta-elevenlabs-tts/contract.ts";
 
 // deno-lint-ignore no-explicit-any
@@ -110,12 +110,13 @@ function audioKey(text: string): string {
 }
 
 async function apiKey(): Promise<string> {
-  const fromEnv = Deno.env.get("ELEVENLABS_API_KEY")?.trim();
+  const fromEnv = (Deno.env.get("KUMUSTA_TTS_API_KEY") ?? Deno.env.get("ELEVENLABS_API_KEY"))
+    ?.trim();
   if (fromEnv) return fromEnv;
   const dotenv = await Deno.readTextFile(".env").catch(() => "");
-  const match = /^\s*ELEVENLABS_API_KEY\s*=\s*(.+?)\s*$/m.exec(dotenv);
+  const match = /^\s*(?:KUMUSTA_TTS_API_KEY|ELEVENLABS_API_KEY)\s*=\s*(.+?)\s*$/m.exec(dotenv);
   if (match) return match[1].replace(/^["']|["']$/g, "");
-  throw new Error("ELEVENLABS_API_KEY is required (environment or .env)");
+  throw new Error("KUMUSTA_TTS_API_KEY is required (environment or .env)");
 }
 
 async function synthesize(text: string, key: string): Promise<Uint8Array> {
@@ -125,9 +126,11 @@ async function synthesize(text: string, key: string): Promise<Uint8Array> {
     purpose: "lesson",
   };
   const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
-  const endpoint = new URL(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceID)}`);
+  const endpoint = new URL(
+    `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceID)}`,
+  );
   endpoint.searchParams.set("output_format", outputFormat);
-  for (let attempt = 1; ; attempt += 1) {
+  for (let attempt = 1;; attempt += 1) {
     const response = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "audio/mpeg", "xi-api-key": key },

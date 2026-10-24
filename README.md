@@ -40,13 +40,19 @@ Hosted Supabase grants `anon`/`authenticated` broad default privileges on new
 objects. Every migration that creates a table, view or function must revoke
 what clients should not have; `baseline_security.sql` fails otherwise.
 
-Edge Function secrets (only `ELEVENLABS_TTS_API_KEY` is set so far): `KUMUSTA_TTS_VOICE_ID`
-(the Tagalog voice; defaults to ElevenLabs' premade "Sarah"), `DASHSCOPE_API_KEY`,
-`QWEN_LESSON_MODEL`, `ANTHROPIC_API_KEY`, `KUMUSTA_LIVE_LLM_MODEL`,
-`ELEVENLABS_API_KEY`, `SONIOX_API_KEY`, `REVENUECAT_WEBHOOK_AUTHORIZATION`,
-`REVENUECAT_SECRET_API_KEY`, `REVENUECAT_PROJECT_ID`, `EMAIL_WORKER_AUTHORIZATION`,
-`RESEND_API_KEY`, `EMAIL_FROM`, `KUMUSTA_ENTITLEMENT_ID`. See
-`supabase/.env.example`. Without them, provider functions fail closed with 503.
+Edge Function secrets:
+
+| Secret | Used for |
+|---|---|
+| `KUMUSTA_TTS_API_KEY` | ElevenLabs text-to-speech for lessons (cached in the `kumusta-tts` bucket) and live conversation |
+| `KUMUSTA_LESSON_STT_API_KEY` | Soniox speech-to-text for lesson pronunciation (`kumusta-lesson-stt`, `kumusta-lesson-stt-token`) |
+| `KUMUSTA_LESSON_AGENT_API_KEY` | Soniox speech-to-text for live conversation (`kumusta-live-pipeline`) |
+| `KUMUSTA_LLM_LIVE_CONVERSATION` | Anthropic key for live conversation (Claude Opus 5.5) |
+| `KUMUSTA_TTS_VOICE_ID` | Optional voice override (default `qZLi51uuzx5jdu6q0ayz`) |
+
+Not set yet: `DASHSCOPE_API_KEY` / `QWEN_LESSON_MODEL` (lesson generation), the RevenueCat
+secrets, `EMAIL_WORKER_AUTHORIZATION`, `RESEND_API_KEY`, `EMAIL_FROM`, `KUMUSTA_ENTITLEMENT_ID`.
+Without a provider's secret, its functions fail closed with 503.
 
 ## iOS
 

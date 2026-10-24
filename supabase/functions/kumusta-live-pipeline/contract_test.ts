@@ -108,7 +108,7 @@ Deno.test("PCM chunks always hold whole samples", () => {
 Deno.test("Soniox is used only when configured and understood by the app", () => {
   assertEquals(transcriberProvider(undefined, true, ["elevenlabs", "soniox"]), "soniox");
   assertEquals(transcriberProvider("elevenlabs", true, ["elevenlabs", "soniox"]), "elevenlabs");
-  assertEquals(transcriberProvider(undefined, false, ["elevenlabs", "soniox"]), "elevenlabs");
+  assertThrows(() => transcriberProvider(undefined, false, ["elevenlabs", "soniox"]));
   assertEquals(transcriberProvider(undefined, true, undefined), "elevenlabs");
   assertEquals(sonioxConfig("x").audio_format, "pcm_s16le");
   assertEquals(sonioxConfig("x").language_hints, ["tl", "en"]);

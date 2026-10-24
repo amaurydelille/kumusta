@@ -40,7 +40,7 @@ import {
 
 const REQUEST_BODY_LIMIT = 64_000;
 const PROVIDER_TIMEOUT_MS = 8_000;
-const REPLY_MAX_TOKENS = 400;
+const REPLY_MAX_TOKENS = 1_024;
 /** Grace after the reservation ends, so the last reply can still be spoken. */
 const SESSION_GRACE_MS = 20_000;
 
@@ -84,7 +84,7 @@ Deno.serve(async (req) => {
         ]);
         const provider = transcriberProvider(
           Deno.env.get("KUMUSTA_LIVE_STT_PROVIDER"),
-          Boolean(Deno.env.get("SONIOX_API_KEY")?.trim()),
+          Boolean(Deno.env.get("KUMUSTA_LESSON_AGENT_API_KEY")?.trim()),
           body.providers,
         );
         await labelSession(admin, session, provider);
@@ -244,7 +244,7 @@ async function sonioxTranscriber(sessionID: string) {
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${requiredEnv("SONIOX_API_KEY")}`,
+          "Authorization": `Bearer ${requiredEnv("KUMUSTA_LESSON_AGENT_API_KEY")}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -282,7 +282,7 @@ async function transcriber() {
   try {
     response = await fetchWithTimeout(
       "https://api.elevenlabs.io/v1/single-use-token/realtime_scribe",
-      { method: "POST", headers: { "xi-api-key": requiredEnv("ELEVENLABS_API_KEY") } },
+      { method: "POST", headers: { "xi-api-key": requiredEnv("KUMUSTA_TTS_API_KEY") } },
       PROVIDER_TIMEOUT_MS,
     );
   } catch (error) {
@@ -311,8 +311,8 @@ function reply(body: Record<string, unknown>, access: Promise<void>, id: string)
   } catch {
     throw new HttpError(400, "invalid_context", "Your message couldn’t be sent.");
   }
-  const anthropicKey = requiredEnv("ANTHROPIC_API_KEY");
-  const elevenLabsKey = requiredEnv("ELEVENLABS_API_KEY");
+  const anthropicKey = requiredEnv("KUMUSTA_LLM_LIVE_CONVERSATION");
+  const elevenLabsKey = requiredEnv("KUMUSTA_TTS_API_KEY");
   const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
 
   const begun = performance.now();
@@ -433,13 +433,16 @@ function startGeneration(apiKey: string, system: string, messages: ChatMessage[]
     timeout: 15_000,
     ...(workspace ? { defaultHeaders: { "anthropic-workspace-id": workspace } } : {}),
   });
-  // The request is sent as soon as the stream is created.
-  return client.messages.stream({
+  // The request is sent as soon as the stream is created. Opus 5.5 always
+  // thinks (disabling it is a 400), so a spoken turn runs at the lowest effort
+  // for a fast first token; the cap leaves room for that short thinking.
+  // A safety refusal falls back server-side to a model chosen by category.
+  return client.beta.messages.stream({
     model: Deno.env.get("KUMUSTA_LIVE_LLM_MODEL")?.trim() || PIPELINE_LLM_MODEL,
     max_tokens: REPLY_MAX_TOKENS,
-    // A spoken turn is short chat: no thinking, lowest effort, first token fast.
-    thinking: { type: "disabled" },
     output_config: { effort: "low" },
+    betas: ["server-side-fallback-2026-07-01"],
+    fallbacks: "default",
     system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
     messages,
   });

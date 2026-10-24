@@ -189,7 +189,7 @@ final class DependencyContainer {
             authSessionProvider: authSessionProvider,
             signedInRepository: signedInRepository,
             speechRecognitionService: FallbackSpeechRecognitionService(
-                primary: SupabaseElevenLabsSpeechRecognitionService(
+                primary: SupabaseSpeechRecognitionService(
                     client: supabase.client,
                     authSessionProvider: authSessionProvider
                 ),

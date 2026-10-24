@@ -105,10 +105,9 @@ export interface ConsistentVoiceSettings {
   speed: number;
 }
 
-/// Kumusta speaks with one Tagalog voice. `KUMUSTA_TTS_VOICE_ID` overrides
-/// the default so a native Filipino library voice can be swapped in without a
-/// deploy; the default is ElevenLabs' premade multilingual "Sarah".
-export const defaultTagalogVoiceID = "EXAVITQu4vr4xnSDxMaL";
+/// Kumusta speaks with one Tagalog voice, for lessons and live conversation
+/// alike. `KUMUSTA_TTS_VOICE_ID` can override it without a code change.
+export const defaultTagalogVoiceID = "qZLi51uuzx5jdu6q0ayz";
 
 /// ElevenLabs' code for Filipino. Models that don't support it ignore it.
 export const tagalogLanguageCode = "fil";

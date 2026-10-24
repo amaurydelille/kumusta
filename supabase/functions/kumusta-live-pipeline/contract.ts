@@ -1,4 +1,6 @@
-export const PIPELINE_LLM_MODEL = "claude-haiku-5-5";
+import { HttpError } from "../_shared/http.ts";
+
+export const PIPELINE_LLM_MODEL = "claude-opus-5-5";
 export const PIPELINE_TTS_MODEL = "eleven_v4_turbo";
 /** Stored in `kumusta_live_sessions.model` / `kumusta_live_rounds.model`. */
 export const PIPELINE_ENGINE_LABEL = `pipeline:${PIPELINE_LLM_MODEL}:${PIPELINE_TTS_MODEL}`;
@@ -85,8 +87,9 @@ export function sonioxConfig(clientReferenceID: string) {
 }
 
 /**
- * Soniox by default; ElevenLabs Scribe when the secret says so, when Soniox
- * is not configured, or for builds that only speak Scribe.
+ * Soniox, which Kumusta uses for Tagalog. ElevenLabs Scribe only when the
+ * secret explicitly asks for it or for a build that cannot speak Soniox; a
+ * missing Soniox key fails closed instead of switching provider.
  */
 export function transcriberProvider(
   configured: string | undefined,
@@ -94,8 +97,9 @@ export function transcriberProvider(
   clientProviders: unknown,
 ): TranscriberProvider {
   const clientSupportsSoniox = Array.isArray(clientProviders) && clientProviders.includes("soniox");
-  if (configured?.trim() === "elevenlabs" || !sonioxAvailable || !clientSupportsSoniox) {
-    return "elevenlabs";
+  if (configured?.trim() === "elevenlabs" || !clientSupportsSoniox) return "elevenlabs";
+  if (!sonioxAvailable) {
+    throw new HttpError(503, "transcription_unavailable", "Live voice is unavailable.");
   }
   return "soniox";
 }
