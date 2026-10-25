@@ -654,7 +654,7 @@ struct ProfileView: View {
     private var dataAndSupport: some View {
         ProfileSection(title: L("Your data & help"), subtitle: nil) {
             VStack(spacing: 12) {
-                Link(destination: URL(string: "https://www.vietbuddy.app/privacy")!) {
+                Link(destination: KumustaLinks.privacy) {
                     SettingsActionRow(
                         symbol: "hand.raised.fill",
                         title: L("Privacy policy"),
@@ -664,6 +664,28 @@ struct ProfileView: View {
                 }
                 .buttonStyle(.plain)
                 .simultaneousGesture(TapGesture().onEnded { trackAction("privacy_policy_opened") })
+
+                Link(destination: KumustaLinks.terms) {
+                    SettingsActionRow(
+                        symbol: "doc.text.fill",
+                        title: L("Terms of use"),
+                        detail: L("Subscriptions and using Kumusta"),
+                        showsChevron: true
+                    )
+                }
+                .buttonStyle(.plain)
+                .simultaneousGesture(TapGesture().onEnded { trackAction("terms_opened") })
+
+                Link(destination: KumustaLinks.support) {
+                    SettingsActionRow(
+                        symbol: "lifepreserver.fill",
+                        title: L("Help & support"),
+                        detail: L("Subscriptions, refunds and your account"),
+                        showsChevron: true
+                    )
+                }
+                .buttonStyle(.plain)
+                .simultaneousGesture(TapGesture().onEnded { trackAction("support_page_opened") })
 
                 Link(destination: URL(string: "mailto:amaurydelille92500@gmail.com?subject=Kumusta%20support")!) {
                     SettingsActionRow(

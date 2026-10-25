@@ -46,3 +46,11 @@ struct AppConfiguration: Sendable {
         #endif
     }
 }
+
+/// Public pages on the Kumusta website.
+enum KumustaLinks {
+    private static let base = URL(string: "https://kumusta-site.vercel.app/")!
+    static let privacy = base.appendingPathComponent("privacy")
+    static let terms = base.appendingPathComponent("terms")
+    static let support = base.appendingPathComponent("support")
+}

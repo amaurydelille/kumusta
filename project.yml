@@ -79,6 +79,8 @@ targets:
       - path: Kumusta
         excludes:
           - "Resources/FirstLessons/**"
+          # Signing and API keys must never ship in the app.
+          - "**/*.p8"
       # Folder reference keeps the audio/<hash>.mp3 paths intact.
       - path: Kumusta/Resources/FirstLessons
         type: folder

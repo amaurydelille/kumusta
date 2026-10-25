@@ -206,8 +206,8 @@ struct AccountCreationView: View {
             .foregroundStyle(KumustaColors.accentDeep)
 
             HStack(spacing: 18) {
-                Link(L("Terms"), destination: URL(string: "https://www.vietbuddy.app/terms")!)
-                Link(L("Privacy"), destination: URL(string: "https://www.vietbuddy.app/privacy")!)
+                Link(L("Terms"), destination: KumustaLinks.terms)
+                Link(L("Privacy"), destination: KumustaLinks.privacy)
             }
             .font(KumustaTypography.supporting)
             .foregroundStyle(KumustaColors.accentDeep)

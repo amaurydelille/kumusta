@@ -1318,6 +1318,9 @@
     "Hear this phrase" : {
       "extractionState" : "manual"
     },
+    "Help & support" : {
+      "extractionState" : "manual"
+    },
     "Here’s how to say it" : {
       "extractionState" : "manual"
     },
@@ -2890,7 +2893,13 @@
     "Subscription plans unavailable" : {
       "extractionState" : "manual"
     },
+    "Subscriptions and using Kumusta" : {
+      "extractionState" : "manual"
+    },
     "Subscriptions are billed through your Apple ID and renew automatically unless canceled at least 24 hours before the end of the current period." : {
+      "extractionState" : "manual"
+    },
+    "Subscriptions, refunds and your account" : {
       "extractionState" : "manual"
     },
     "Swipe rows to add or remove them from flashcards." : {
@@ -3002,6 +3011,9 @@
       "extractionState" : "manual"
     },
     "Terms" : {
+      "extractionState" : "manual"
+    },
+    "Terms of use" : {
       "extractionState" : "manual"
     },
     "That bookmark didn’t stick. Please try once more." : {
