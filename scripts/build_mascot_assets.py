@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 
 CELL = 724
@@ -91,17 +91,6 @@ def write_static(destination: Path, source: Image.Image, size: tuple[int, int]) 
     canvas.save(destination, "PNG", optimize=True)
 
 
-def write_icon(destination: Path, source: Image.Image) -> None:
-    canvas = Image.new("RGBA", (1024, 1024), (255, 107, 95, 255))
-    draw = ImageDraw.Draw(canvas)
-    draw.ellipse((92, 92, 932, 932), fill=(255, 240, 199, 255))
-    pose = fit_pose(source, 1.05)
-    pose.thumbnail((840, 840), Image.Resampling.LANCZOS)
-    canvas.alpha_composite(pose, ((1024 - pose.width) // 2, (1024 - pose.height) // 2 + 20))
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    canvas.convert("RGB").save(destination, "PNG", optimize=True)
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-dir", type=Path, required=True)
@@ -109,9 +98,7 @@ def main() -> None:
     args = parser.parse_args()
 
     output = args.output
-    project_root = output.resolve().parents[1]
     source_dir = args.source_dir
-    master = load(source_dir / "reference.png")
     launch = load(source_dir / "launch-greeting.png")
     launch_loading = load(source_dir / "launch-loading.png")
     wave = load(source_dir / "welcome-wave.png")
@@ -123,10 +110,7 @@ def main() -> None:
     streak = load(source_dir / "streak.png")
 
     assets = output / "Kumusta/Resources/Assets.xcassets"
-    static_dir = assets / "TukoBuddy.imageset"
-    write_static(static_dir / "be-trau-buddy@3x.png", master, (1024, 1150))
-    write_static(static_dir / "be-trau-buddy@2x.png", master, (342, 384))
-    write_static(static_dir / "be-trau-buddy@1x.png", master, (171, 192))
+    # TukoBuddy stays the cut-out of the owner's artwork (art/tuko-source.png).
 
     write_static(assets / "BuddyRoadmapCafe.imageset/buddy-roadmap-cafe@3x.png", speaking, (374, 420))
     write_static(assets / "BuddyRoadmapCafe.imageset/buddy-roadmap-cafe@2x.png", speaking, (249, 280))
@@ -170,8 +154,7 @@ def main() -> None:
     write_sheet(assets / "MascotMistakeSprite.imageset/mascot-mistake-sprite@3x.png", mistake_frames)
     write_sheet(assets / "MascotStreakSprite.imageset/mascot-streak-sprite@3x.png", streak_frames)
 
-    write_icon(assets / "AppIcon.appiconset/AppIcon.png", master)
-    write_static(project_root / "website/public/be-trau-buddy.png", master, (1024, 1150))
+    # The app icon is owner-supplied artwork; this script never writes it.
 
 
 if __name__ == "__main__":

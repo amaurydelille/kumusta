@@ -1,0 +1,142 @@
+[
+  {
+    "name": "rig/Head.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY Tuko's head as an isolated cut-out body part,\nat exactly the same size, angle, colors and soft painted style as in the master.\n\nThe face is BLANK: no eyes, no eyebrows, no mouth. Where the eyes and the mouth were, paint\nsmooth continuous skin as if they had never been drawn: lime-green skin around the eye areas,\ncream skin on the muzzle and lower jaw. Keep the two tiny nostril dots, the round orange-coral\ncheek blush and the darker olive-green spots on the top and back of the head.\n\nCut the head off just below the jaw, and include a short rounded stub of neck at the bottom\n(it will be hidden under the bandana). Clean smooth silhouette edge.\n\nIsolated single body part only, nothing else in the image, no body, no bandana, no arms.\nSoft digital painting, smooth gradients, no black outlines. Flat even lighting, no shadow.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/Body.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY Tuko's torso as an isolated cut-out body part,\nat exactly the same size, angle, colors and soft painted style as in the master.\n\nInclude: the lime-green back and sides with darker olive-green spots, the cream / butter-yellow\nbelly, the neck top and both shoulders painted completely, the hips where the legs attach, and\nthe area where the tail attaches. Paint the neck, shoulders, hips and tail base fully, as\nsmooth skin, because head, arms, legs and tail will be layered over them.\n\nDo NOT include: head, arms, legs, tail, bandana. No bandana anywhere: paint plain skin where it\nwas.\n\nIsolated single body part only, nothing else in the image. Soft digital painting, smooth\ngradients, no black outlines. Flat even lighting, no shadow. Perfectly flat solid magenta\n#FF00FF background. No text."
+  },
+  {
+    "name": "rig/ArmLeft.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the arm on the VIEWER'S LEFT side as an\nisolated cut-out body part, at exactly the same size, colors and soft painted style as in the\nmaster.\n\nThe whole arm hangs straight down: from a rounded shoulder end at the top (a smooth ball shape,\nfully painted, so the arm can rotate around it) down to an open relaxed hand at the bottom.\nPalm turned slightly toward the viewer, toes spread a little, round yellow-orange toe pads\nvisible, same toe count as the reference. Lime-green skin with a few darker olive-green spots,\nslightly lighter on the inside of the arm.\n\nIsolated single body part only, nothing else in the image, no body attached. Soft digital\npainting, smooth gradients, no black outlines. Flat even lighting, no shadow. Perfectly flat\nsolid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/ArmRight.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the arm on the VIEWER'S RIGHT side as an\nisolated cut-out body part, at exactly the same size, colors, perspective and soft painted\nstyle as in the master.\n\nThe whole arm hangs straight down: from a rounded shoulder end at the top (a smooth ball shape,\nfully painted, so the arm can rotate around it) down to an open relaxed hand at the bottom.\nPalm turned slightly toward the viewer, toes spread a little, round yellow-orange toe pads\nvisible, same toe count as the reference. Lime-green skin with a few darker olive-green spots,\nslightly lighter on the inside of the arm.\n\nIsolated single body part only, nothing else in the image, no body attached. Soft digital\npainting, smooth gradients, no black outlines. Flat even lighting, no shadow. Perfectly flat\nsolid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/LegLeft.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the leg on the VIEWER'S LEFT side as an\nisolated cut-out body part, at exactly the same size, colors, perspective and soft painted\nstyle as in the master.\n\nFrom a rounded, fully painted hip end at the top down to the foot standing flat at the bottom.\nToes spread, round yellow-orange toe pads, same toe count as the reference. Lime-green skin\nwith darker olive-green spots.\n\nIsolated single body part only, nothing else in the image. Soft digital painting, smooth\ngradients, no black outlines. Flat even lighting, no ground shadow. Perfectly flat solid\nmagenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/LegRight.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the leg on the VIEWER'S RIGHT side as an\nisolated cut-out body part, at exactly the same size, colors, perspective and soft painted\nstyle as in the master.\n\nFrom a rounded, fully painted hip end at the top down to the foot standing flat at the bottom.\nToes spread, round yellow-orange toe pads, same toe count as the reference. Lime-green skin\nwith darker olive-green spots.\n\nIsolated single body part only, nothing else in the image. Soft digital painting, smooth\ngradients, no black outlines. Flat even lighting, no ground shadow. Perfectly flat solid\nmagenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/Tail.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY Tuko's tail as an isolated cut-out body part,\nat exactly the same size, curl, colors and soft painted style as in the master.\n\nFrom a thick rounded base (fully painted, it will tuck behind the body) out to the tip curled\ninto a spiral. Lime-green top with darker olive-green spots, cream / butter-yellow underside\nfollowing the curl, exactly like the reference.\n\nIsolated single body part only, nothing else in the image, no body, no legs. Soft digital\npainting, smooth gradients, no black outlines. Flat even lighting, no shadow. Perfectly flat\nsolid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/Scarf.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY Tuko's red-orange bandana neckerchief as an\nisolated cut-out item, at exactly the same size, angle, colors and soft painted style as worn\nin the master.\n\nInclude the triangular front panel, the band that wraps around the neck (with the part that\ngoes around the back of the neck visible as a thin band behind), the bow with its two loops\nand two tails, and the round knot in the middle. Soft folds, gentle shading, slightly darker\nred in the folds.\n\nNo gecko, no skin, nothing else in the image. Soft digital painting, smooth gradients, no\nblack outlines. Flat even lighting, no shadow. Perfectly flat solid magenta #FF00FF\nbackground. No text."
+  },
+  {
+    "name": "rig/EyeLeft.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the eye on the VIEWER'S LEFT side as an\nisolated cut-out part, at exactly the same size, shape and painted style as in the master.\n\nThe eyeball only: white sclera, large glossy dark-brown iris and pupil looking at the viewer,\none big round white catchlight upper right and one small catchlight lower left. Fully open,\ncomplete oval. No eyelid, no eyelashes, no eyebrow, no surrounding skin.\n\nIsolated single part only, nothing else in the image. Soft digital painting, no black\noutlines. Perfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/EyeRight.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the eye on the VIEWER'S RIGHT side as an\nisolated cut-out part, at exactly the same size, shape and painted style as in the master.\n\nThe eyeball only: white sclera, large glossy dark-brown iris and pupil looking at the viewer,\none big round white catchlight upper right and one small catchlight lower left. Fully open,\ncomplete oval. No eyelid, no eyelashes, no eyebrow, no surrounding skin.\n\nIsolated single part only, nothing else in the image. Soft digital painting, no black\noutlines. Perfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "rig/BrowLeft.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the eyebrow above the eye on the VIEWER'S\nLEFT side, at exactly the same size, curve, angle and color as in the master: a single thin\ndark-green arched stroke with soft tapered ends.\n\nNothing else in the image, no eye, no skin. No black outlines. Perfectly flat solid magenta\n#FF00FF background. No text."
+  },
+  {
+    "name": "rig/BrowRight.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY the eyebrow above the eye on the VIEWER'S\nRIGHT side, at exactly the same size, curve, angle and color as in the master: a single thin\ndark-green arched stroke with soft tapered ends.\n\nNothing else in the image, no eye, no skin. No black outlines. Perfectly flat solid magenta\n#FF00FF background. No text."
+  },
+  {
+    "name": "rig/Smile.png",
+    "prompt": "Using the attached Tuko master image, paint ONLY Tuko's closed resting smile as an isolated\nmark, at exactly the same size, position angle and painted style as on the master's face:\na soft curved dark-red-brown mouth line with gently upturned corners and a faint soft crease\nat each corner.\n\nOnly the mouth marking, no skin patch, no face, nothing else in the image. No black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-00.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: closed resting smile,\na soft curved line with gently upturned corners (same as the Smile image).\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-01.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: barely parted, a thin\ndark-red slit along the smile line, corners still upturned.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-02.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: slightly open and\nrelaxed, a narrow dark-red opening, a hint of pink tongue at the bottom.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-03.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: medium open, rounded\ndark-red inside, pink tongue clearly visible at the bottom.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-04.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: wide open happy mouth,\nlike in the original reference image: big dark-red inside, large pink tongue, upturned corners.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-05.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same angle and soft painted style as\nthe attached Smile image and the master's face, centered where the smile is. Mouth shape:\nrounded \"oh\", a medium open circle, dark-red inside with a little pink tongue at the bottom.\nNarrower than the smile.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-06.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same angle and soft painted style as\nthe attached Smile image and the master's face, centered where the smile is. Mouth shape:\nsmall tight rounded \"oo\", pursed into a small dark-red circle, much narrower than the smile.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-07.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same angle and soft painted style as\nthe attached Smile image and the master's face. Mouth shape: wide flat \"ee\", corners\nstretched sideways a little wider than the smile, a thin wide dark-red opening.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-08.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: \"f / v\", mostly closed,\nthe upper edge resting on the lower edge, a tiny dark-red gap at the sides.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-09.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: \"m / b / p\", lips\npressed firmly closed, a straight line slightly puffed at the middle, no opening.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-10.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same width, angle and soft painted\nstyle as the attached Smile image and the master's face. Mouth shape: \"l / th\", medium open\nwith the pink tongue tip raised to touch the top of the mouth, dark-red inside.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "mouths/mouth-11.png",
+    "prompt": "Paint ONLY Tuko the gecko's mouth as an isolated mark, same angle and soft painted style as\nthe attached Smile image and the master's face. Mouth shape: closed big happy grin, a wide\ndeeply curved line with strongly upturned corners, slightly wider than the smile.\nOnly the mouth, no face, no skin patch, no teeth, no lips outline, no black outlines.\nPerfectly flat solid magenta #FF00FF background. No text."
+  },
+  {
+    "name": "launch-greeting.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: cheerful hello. The arm on the viewer's left raised high with the hand\nopen, palm toward the viewer; the other arm relaxed at the side. Big open happy smile with pink\ntongue, eyes bright and looking at the viewer, eyebrows lifted. Standing upright, feet flat.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "launch-loading.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: calm and content. Standing upright, both hands loosely together in front\nof the belly, closed gentle smile, eyes open and warm, looking at the viewer. Relaxed, still,\nsymmetrical-feeling pose.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "welcome-wave.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: friendly wave, as in the original reference. The arm on the viewer's left\nraised beside the head, hand open and waving, toes spread; the other hand resting on the belly.\nBig open happy smile with pink tongue, head tilted slightly, eyes looking at the viewer.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "listening.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: attentively listening. Head tilted gently to one side, eyes wide and\nfocused on the viewer, eyebrows slightly raised, closed soft smile. One hand raised near the\nside of the head as if cupping to listen, the other relaxed at the side. Leaning a tiny bit\nforward.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "curious.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: curious and thinking. Head tilted to the side, eyes glancing up and to\none side, eyebrows raised, small rounded \"oh\" mouth. One toe-tip touching the chin, the other\narm folded under it across the belly. Tail curled up a little more.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "speaking.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: talking and explaining, friendly teacher energy. Mouth medium open\nmid-word with a little pink tongue visible. One arm extended outward at chest height, hand\nopen palm up, as if presenting an idea; the other arm relaxed. Eyebrows lifted, eyes engaged\nwith the viewer.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "correct.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: delighted \"you got it!\" cheer. Both hands raised in small happy fists\nat shoulder height, eyes closed happily into upward curved arcs, big open grin with pink\ntongue, cheeks extra rosy, tail flicked up, standing on tiptoe.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "mistake.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: gentle and encouraging after a small mistake, NOT sad, NOT disappointed.\nSoft sympathetic closed smile, eyebrows tilted kindly upward in the middle, warm eyes on the\nviewer, head tilted slightly. One hand extended open toward the viewer as if saying\n\"no worries, try again\", the other hand resting on the belly.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "streak.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, proportions, colors and soft painted style.\nBright lime / yellow-green skin, darker olive-green round spots, cream belly, throat and tail\nunderside, large glossy dark-brown eyes with white catchlights, thin dark-green floating\neyebrows, orange-coral cheek blush, red-orange bandana with a bow on the chest, round\nyellow-orange toe pads (same toe count), spiral tail. Soft digital painting, smooth gradients,\nno black outlines.\n\nPose and expression: big celebration jump. Both feet off the ground, both arms thrown up high,\ntoes spread, tail swishing out in a wide curve, bandana tails fluttering, eyes sparkling with\nextra catchlights, huge open grin with pink tongue. No floor, no sparkle effects, no confetti.\n\nSame three-quarter camera as the master. Full body, centered, about 10% margin on every side,\nsame scale as the master. Flat even lighting, no cast shadow. Perfectly flat solid magenta\n#FF00FF background. No text, no logo."
+  },
+  {
+    "name": "icon.png",
+    "prompt": "Tuko, a chibi baby gecko mascot for a children's language-learning app. Match the attached\nreference images exactly: same character, colors and soft painted style. Bright lime /\nyellow-green skin, darker olive-green round spots, cream throat, large glossy dark-brown eyes\nwith white catchlights, thin dark-green floating eyebrows, orange-coral cheek blush, red-orange\nbandana with a bow. Soft digital painting, smooth gradients, no black outlines.\n\nApp icon portrait: head and shoulders only, facing the viewer straight on, head filling about\n80% of the frame width, big open happy smile with pink tongue, eyes looking at the viewer,\nbandana bow visible at the bottom. Bold simple shapes that read well at very small sizes.\nCentered, nothing cropped on the head. Flat even lighting, no shadow. Perfectly flat solid\nmagenta #FF00FF background. No text, no logo, no border, no rounded corners."
+  }
+]

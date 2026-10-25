@@ -221,11 +221,17 @@ async function fetchRevenueCatCustomer(
       encodeURIComponent(customerID)
     }`;
     try {
-      const [activeEntitlements, subscriptions] = await Promise.all([
+      const [activeEntitlements, subscriptions, projectEntitlements] = await Promise.all([
         fetchRevenueCatCollection(`${customerPath}/active_entitlements`, secret),
         fetchRevenueCatCollection(`${customerPath}/subscriptions`, secret),
+        // Optional: needs the key's entitlements read permission. Without it,
+        // only subscription-backed entitlements can be mapped.
+        fetchRevenueCatCollection(
+          `/v2/projects/${encodeURIComponent(projectID)}/entitlements`,
+          secret,
+        ).catch(() => null),
       ]);
-      return mapRevenueCatV2CustomerInfo(activeEntitlements, subscriptions);
+      return mapRevenueCatV2CustomerInfo(activeEntitlements, subscriptions, projectEntitlements);
     } catch (error) {
       if (error instanceof HttpError && error.status === 404) continue;
       throw error;

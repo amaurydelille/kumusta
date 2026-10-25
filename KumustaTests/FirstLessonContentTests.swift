@@ -3,7 +3,7 @@ import Testing
 @testable import Kumusta
 
 struct FirstLessonContentTests {
-    private static let names: [String?] = [nil, "Linh"]
+    private static let names: [String?] = [nil, "Maria"]
 
     private static func allScripts() throws -> [FirstLessonScript] {
         try FirstLessonCatalog.allFiles.flatMap { file in
@@ -107,13 +107,10 @@ struct FirstLessonContentTests {
         }
     }
 
-    @Test(
-        "Every fixed line ships as a bundled clip",
-        .disabled("Tagalog clips are not generated yet: run scripts/generate-first-lesson-audio.ts")
-    )
+    @Test("Every fixed line ships as a bundled clip")
     func fixedLinesAreBundled() throws {
         for script in try Self.allScripts() {
-            let nameLine = "Ako si Linh."
+            let nameLine = "Ako si Maria."
             for text in script.audioTexts where text != nameLine {
                 #expect(
                     FirstLessonScript.bundledAudioURL(for: text) != nil,
@@ -125,14 +122,14 @@ struct FirstLessonContentTests {
 
     @Test("The learner's name is shown and spoken, but never graded")
     func personalizesIntroduction() throws {
-        let script = try FirstLessonCatalog.load(FirstLessonCatalog.fullLessonFile, learnerName: "Linh")
+        let script = try FirstLessonCatalog.load(FirstLessonCatalog.fullLessonFile, learnerName: "Maria")
         let speak = try #require(script.steps.compactMap { step -> FirstLessonScript.Speak? in
-            if case let .speak(_, speak) = step, speak.display.contains("Linh") { return speak }
+            if case let .speak(_, speak) = step, speak.display.contains("Maria") { return speak }
             return nil
         }.first)
-        #expect(speak.display == "Ako si Linh.")
+        #expect(speak.display == "Ako si Maria.")
         #expect(speak.target == "Ako si")
-        #expect(speak.spokenText == "Ako si Linh.")
+        #expect(speak.spokenText == "Ako si Maria.")
     }
 
     @Test("A missing name falls back to a placeholder and a tip")
@@ -227,7 +224,7 @@ struct FirstLessonContentTests {
         for level in ProficiencyLevel.allCases {
             let script = try FirstLessonCatalog.load(
                 FirstLessonCatalog.onboardingFile(for: level),
-                learnerName: "Linh"
+                learnerName: "Maria"
             )
             let screens = script.steps.map { FirstLessonAnalytics.screen(for: $0, in: script, isReplay: false) }
                 + [FirstLessonAnalytics.completionScreen(in: script)]

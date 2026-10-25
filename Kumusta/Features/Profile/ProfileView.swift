@@ -10,6 +10,8 @@ struct ProfileView: View {
     @State private var isShowingAccountDeletionConfirmation = false
     @State private var isShowingSignOutConfirmation = false
     @State private var isShowingCancellationFlow = false
+    @State private var isShowingSubscriptionManagement = false
+    @State private var hasPremiumAccess = false
     @State private var isSigningOut = false
     @State private var isDeletingAccount = false
     @State private var accountDeletionMessage: ProfileAccountDeletionMessage?
@@ -64,6 +66,17 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $isShowingCancellationFlow) {
                 SubscriptionCancellationFlowView()
+            }
+            .sheet(isPresented: $isShowingSubscriptionManagement) {
+                SubscriptionManagementView { restored in
+                    if restored { hasPremiumAccess = true }
+                }
+            }
+            .task(id: isShowingSubscriptionManagement) {
+                // Re-read after Customer Center closes: a cancellation or
+                // refund made there can end premium access.
+                guard !isShowingSubscriptionManagement else { return }
+                hasPremiumAccess = await dependencies.purchaseService.hasPremiumAccess()
             }
             .alert(L("Erase app data?"), isPresented: $isShowingEraseConfirmation) {
                 Button(L("Cancel"), role: .cancel) {}
@@ -607,6 +620,22 @@ struct ProfileView: View {
                 .buttonStyle(.plain)
                 .disabled(isRestoring)
 
+                if hasPremiumAccess {
+                    Button {
+                        trackAction("customer_center_opened")
+                        isShowingSubscriptionManagement = true
+                    } label: {
+                        SettingsActionRow(
+                            symbol: "creditcard",
+                            title: L("Manage subscription"),
+                            detail: L("Change your plan, cancel or request a refund."),
+                            showsChevron: true,
+                            isBusy: false
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+
                 Button {
                     isShowingCancellationFlow = true
                 } label: {
@@ -625,7 +654,7 @@ struct ProfileView: View {
     private var dataAndSupport: some View {
         ProfileSection(title: L("Your data & help"), subtitle: nil) {
             VStack(spacing: 12) {
-                Link(destination: URL(string: "https://kumusta.app/privacy")!) {
+                Link(destination: URL(string: "https://www.vietbuddy.app/privacy")!) {
                     SettingsActionRow(
                         symbol: "hand.raised.fill",
                         title: L("Privacy policy"),
@@ -636,11 +665,11 @@ struct ProfileView: View {
                 .buttonStyle(.plain)
                 .simultaneousGesture(TapGesture().onEnded { trackAction("privacy_policy_opened") })
 
-                Link(destination: URL(string: "mailto:contact@kumusta.app?subject=Kumusta%20support")!) {
+                Link(destination: URL(string: "mailto:amaurydelille92500@gmail.com?subject=Kumusta%20support")!) {
                     SettingsActionRow(
                         symbol: "questionmark.bubble.fill",
                         title: L("Contact support"),
-                        detail: L("Email contact@kumusta.app"),
+                        detail: L("Email amaurydelille92500@gmail.com"),
                         showsChevron: true
                     )
                 }
@@ -714,7 +743,7 @@ struct ProfileView: View {
     }
 
     private var shareText: String {
-        L("I'm learning Tagalog with Kumusta — %lld day streak, %lld words. kumusta.app", activity.currentStreak(), appState.profile.totalWordsLearned)
+        L("I'm learning Tagalog with Kumusta — %lld day streak, %lld words.", activity.currentStreak(), appState.profile.totalWordsLearned)
     }
 
     private var exportText: String {
@@ -756,6 +785,7 @@ struct ProfileView: View {
             do {
                 let restored = try await dependencies.purchaseService.restore()
                 restoreMessage = restored ? L("Premium access is active.") : L("No active purchase was found for this Apple ID.")
+                if restored { hasPremiumAccess = true }
             } catch {
                 restoreMessage = L("The App Store couldn’t check right now. Please try again.")
             }
@@ -1149,7 +1179,7 @@ private struct SubscriptionCancellationFlowView: View {
                 if let submissionError {
                     Label(submissionError, systemImage: "exclamationmark.triangle.fill")
                         .font(KumustaTypography.supporting)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                 }
             }
 

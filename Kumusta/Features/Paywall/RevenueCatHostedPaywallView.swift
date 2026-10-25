@@ -2,9 +2,9 @@ import SwiftUI
 import RevenueCat
 import RevenueCatUI
 
-/// Displays a paywall authored in the RevenueCat dashboard. Purchase, restore,
-/// close, and exit-offer behavior stay owned by RevenueCatUI instead of being
-/// duplicated in the app.
+/// Displays a paywall authored in the RevenueCat dashboard. Purchase and
+/// restore stay owned by RevenueCatUI; closing it is the app's, so the learner
+/// always gets the exit screen.
 struct RevenueCatHostedPaywallView: View {
     @Environment(DependencyContainer.self) private var dependencies
     @State private var routingGate = HostedPaywallRoutingGate()
@@ -43,52 +43,48 @@ struct RevenueCatHostedPaywallView: View {
                     message: L("This build is missing the RevenueCat public SDK key.")
                 )
             } else if sdkState == .ready, offeringIdentifier == nil || offering != nil {
-                Color.clear
-                    .presentPaywallIfNeeded(
-                        requiredEntitlementIdentifier: dependencies.configuration.entitlementID,
-                        offering: offering,
-                        presentationMode: .fullScreen,
-                        purchaseStarted: { package in
-                            dependencies.analytics.track(.purchaseStarted, properties: ["package_id": package.identifier, "source": "hosted_paywall"])
-                        },
-                        purchaseCompleted: { _ in
-                            // RevenueCat dismisses its full-screen paywall as
-                            // soon as this callback returns. Claim the route
-                            // synchronously so onDismiss cannot open the next
-                            // paywall before the async account transition runs.
-                            guard routingGate.beginPremiumAccess() else { return }
-                            Task {
-                                _ = await dependencies.purchaseService
-                                    .recordHostedPurchaseForAttribution()
-                                await onPremiumAccess()
-                                await onSubscriptionPurchased()
-                            }
-                        },
-                        purchaseCancelled: {
-                            dependencies.analytics.track(.purchaseCancelled, properties: ["source": "hosted_paywall"])
-                        },
-                        restoreStarted: {
-                            dependencies.analytics.track(.restoreStarted, properties: ["source": "hosted_paywall"])
-                        },
-                        restoreCompleted: { customerInfo in
-                            let active = customerInfo.entitlements[dependencies.configuration.entitlementID]?.isActive == true
-                            dependencies.analytics.track(.restoreCompleted, properties: ["entitlement_found": String(active), "source": "hosted_paywall"])
-                            guard active else { return }
-                            guard routingGate.beginPremiumAccess() else { return }
-                            Task { await onPremiumAccess() }
-                        },
-                        purchaseFailure: { _ in
-                            dependencies.analytics.track(.purchaseFailed, properties: ["error_category": "sdk_error", "source": "hosted_paywall"])
-                        },
-                        restoreFailure: { _ in
-                            dependencies.analytics.track(.restoreFailed, properties: ["error_category": "sdk_error", "source": "hosted_paywall"])
-                        },
-                        onDismiss: {
-                            guard routingGate.shouldRouteDismissal else { return }
-                            dependencies.analytics.track(.paywallDismissed, properties: ["offering": offeringIdentifier ?? "default", "screen_name": "paywall"])
-                            onDismissed()
+                // Embedded rather than presented, so the app's own close
+                // button sits above every dashboard design.
+                hostedPaywall
+                    .onPurchaseStarted { package in
+                        dependencies.analytics.track(.purchaseStarted, properties: ["package_id": package.identifier, "source": "hosted_paywall"])
+                    }
+                    .onPurchaseCompleted { _ in
+                        // Claim the route synchronously so a dismissal request
+                        // cannot open the exit screen before the async account
+                        // transition runs.
+                        guard routingGate.beginPremiumAccess() else { return }
+                        Task {
+                            _ = await dependencies.purchaseService
+                                .recordHostedPurchaseForAttribution()
+                            await onPremiumAccess()
+                            await onSubscriptionPurchased()
                         }
-                    )
+                    }
+                    .onPurchaseCancelled {
+                        dependencies.analytics.track(.purchaseCancelled, properties: ["source": "hosted_paywall"])
+                    }
+                    .onRestoreStarted {
+                        dependencies.analytics.track(.restoreStarted, properties: ["source": "hosted_paywall"])
+                    }
+                    .onRestoreCompleted { customerInfo in
+                        let active = customerInfo.entitlements[dependencies.configuration.entitlementID]?.isActive == true
+                        dependencies.analytics.track(.restoreCompleted, properties: ["entitlement_found": String(active), "source": "hosted_paywall"])
+                        guard active else { return }
+                        guard routingGate.beginPremiumAccess() else { return }
+                        Task { await onPremiumAccess() }
+                    }
+                    .onPurchaseFailure { _ in
+                        dependencies.analytics.track(.purchaseFailed, properties: ["error_category": "sdk_error", "source": "hosted_paywall"])
+                    }
+                    .onRestoreFailure { _ in
+                        dependencies.analytics.track(.restoreFailed, properties: ["error_category": "sdk_error", "source": "hosted_paywall"])
+                    }
+                    // A close button placed in the dashboard design routes the same way.
+                    .onRequestedDismissal(dismiss)
+                    .overlay(alignment: .topTrailing) {
+                        closeButton
+                    }
             } else if sdkState == .loading {
                 ProgressView(L("Loading subscription plans…"))
                     .tint(KumustaColors.accent)
@@ -127,6 +123,38 @@ struct RevenueCatHostedPaywallView: View {
             }
 
         }
+    }
+
+    @ViewBuilder
+    private var hostedPaywall: some View {
+        if let offering {
+            PaywallView(offering: offering)
+        } else {
+            PaywallView()
+        }
+    }
+
+    private var closeButton: some View {
+        Button(action: dismiss) {
+            Image(systemName: "xmark")
+                .scaledFont(14, weight: .bold)
+                .foregroundStyle(KumustaColors.ink)
+                .frame(width: 34, height: 34)
+                .background(.ultraThinMaterial, in: Circle())
+                .frame(width: 44, height: 44)
+                .contentShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .padding(.trailing, 10)
+        .padding(.top, 2)
+        .accessibilityLabel(L("Close"))
+        .accessibilityIdentifier("paywall-close")
+    }
+
+    private func dismiss() {
+        guard routingGate.shouldRouteDismissal else { return }
+        dependencies.analytics.track(.paywallDismissed, properties: ["offering": offeringIdentifier ?? "default", "screen_name": "paywall"])
+        onDismissed()
     }
 
     private func loadOffering(identifier: String) async -> Offering? {

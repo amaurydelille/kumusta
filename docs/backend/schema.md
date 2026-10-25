@@ -47,19 +47,17 @@ The user’s generated learning-plan inputs.
 | Column | Meaning |
 | --- | --- |
 | `user_id` | Primary key and owner |
-| `accent` | `southern`, `northern`, or future-facing `both` |
-| `preferred_voice_id` | One of the two approved female voices |
-| `goal` | Family, travel, relocation, partner, work, culture, or other |
-| `self_assessed_level` | New through advanced |
+| `goal` | `family`, `lifeInThePhilippines`, `travel`, `partner`, `work`, or `culture` |
+| `self_assessed_level` | `beginner`, `intermediate`, or `advanced` |
 | `target_level` | Learner-selected adaptive destination, integer 1–5; not a test score |
 | `challenge_preference` | `gentle`, `balanced`, or `stretch` prompt preference |
-| `daily_minutes` | 5, 10, 15, 20, or 30 minutes |
+| `daily_minutes` | 3, 5, 7, or 10 minutes; the app stores its 15-minute plan as the nearest allowed value |
 | `reminder_enabled` | Notification preference |
 | `reminder_local_time` | Optional local reminder time |
 | `created_at`, `updated_at` | Audit timestamps |
 
-The voice/accent check requires the Southern ID for Southern and Northern ID
-for Northern. `both` permits either approved voice as the current preference.
+Preferences carry no voice choice: Kumusta speaks with one server-configured
+Tagalog voice.
 
 ### `kumusta_user_state`
 
@@ -77,44 +75,25 @@ owner. Authentication tokens and provider secrets are never included.
 Server-curated lesson metadata. Slugs are stable API identifiers. Content is
 visible to clients only when `is_published` is true.
 
-Important fields are `level`, `accent`, `estimated_minutes`, `sort_order`,
-`content_version`, and publish state. The published-order partial index serves
-Today and lesson-list queries.
-
-### `kumusta_lesson_steps`
-
-Ordered, structured exercises belonging to a lesson.
-
-| Column | Meaning |
-| --- | --- |
-| `lesson_id`, `position` | Unique ordered position inside a lesson |
-| `kind` | Listen, repeat, meaning choice, audio choice, word order, or recap |
-| `instruction` | English learner instruction |
-| `vietnamese_text`, `english_text` | Exercise phrase and translation |
-| `pronunciation_hint` | Optional learner-facing pronunciation help |
-| `audio_object_path` | Controlled `kumusta-audio/...` Storage path |
-| `audio_duration_ms` | 100 ms–120 s duration metadata |
-| `options` | Bounded JSON array for choices/order tokens |
-
-The table stores a controlled object path, never an ElevenLabs URL or secret.
+Important fields are `level` (`beginner`, `intermediate`, or `advanced`),
+`goal_tags`, `estimated_minutes`, `sort_order`, `content_version`, the roadmap
+position (`roadmap_version`, `unit_order`, `lesson_order`), `review_status`, and
+publish state. A row can be published only once `review_status` is `approved`;
+the authored Tagalog roadmap is seeded as `native_speaker_review_required`. The
+published-order partial index serves Today and lesson-list queries.
 
 ### `kumusta_vocabulary`
 
-Server-curated words and useful phrases, including translation, pronunciation
-hint, part of speech, accent, controlled audio path, and bilingual usage
-example. `content_version` supports cache invalidation. Only published rows are
+Server-curated Tagalog words and useful phrases (`tagalog`, unique), including
+translation, pronunciation hint, part of speech, controlled audio path, and
+bilingual usage example (`usage_example_tl`, `usage_example_en`). `content_version` supports cache invalidation. Only published rows are
 client-visible.
-
-### `kumusta_lesson_vocabulary`
-
-Many-to-many curriculum mapping with a stable lesson position and
-`is_key_term`. Its composite primary key prevents duplicate mappings.
 
 ### `kumusta_generated_lessons`
 
-Private, per-user Mistral lesson candidates that have passed the v1 structural
+Private, per-user Qwen lesson candidates that have passed the structural
 validator. Each row records its generation job, schema and prompt versions,
-provider model, accent, bounded difficulty, scenario key, content hash,
+provider model, bounded difficulty, scenario key, content hash,
 validation metadata, status, and 30-day serving expiry. `content` is capped at
 64 KiB. `(user_id, content_hash)` prevents serving duplicate content to one
 learner.
@@ -133,7 +112,7 @@ failure rolls back the complete batch.
 
 Private per-user assignment rows for generated lessons. Status moves through
 `ready`, `started`, and `completed`; invalid/expired backing lessons are marked
-`skipped`. The oldest ready/started entry is the current lesson. Three ready
+`skipped`. The oldest ready/started entry is the current lesson. Two ready
 entries is the operating target. User/lesson uniqueness prevents duplicate
 assignments.
 
@@ -146,7 +125,7 @@ count, deterministic learner snapshot, prompt/model provenance, attempt count,
 and a sanitized error code. They never store provider credentials or raw
 provider responses.
 
-Job acquisition is a 120-second database lease under the learner-state row
+Job acquisition is a 180-second database lease under the learner-state row
 lock. An exact request retry may reclaim its expired job; a new request marks
 other stale active work `superseded` before acquiring a lease.
 
@@ -154,10 +133,10 @@ other stale active work `superseded` before acquiring a lease.
 
 ### `kumusta_learner_states`
 
-Private adaptive snapshot per user. It stores accent, goal, self-assessment,
+Private adaptive snapshot per user. It stores goal, self-assessment,
 estimated and target level, challenge preference/offset, speech speed, bounded
 skill-mastery JSON, completion/feedback counts, and a monotonic state version.
-The initial estimate and all later mutations are deterministic; Mistral cannot
+The initial estimate and all later mutations are deterministic; the lesson model cannot
 write this table or choose the update values.
 
 ### `kumusta_difficulty_feedback`
@@ -237,16 +216,17 @@ and `processing_error` support safe retries and alerting.
 ### `kumusta_api_rate_limits`
 
 Service-only per-user fixed-window counters for `elevenlabs_tts`,
-`elevenlabs_tts_daily`, `mistral_evaluate`, `mistral_lessons`,
-`mistral_lessons_daily`, `mistral_lessons_mutation`,
-`mistral_lessons_mutation_daily`, and `revenuecat_sync`. Edge Functions update
+`elevenlabs_tts_daily`, `elevenlabs_stt`, `elevenlabs_stt_daily` (the Soniox
+speaking checks keep these scope names), `lessons`, `lessons_daily`,
+`lessons_mutation`, `lessons_mutation_daily`, and `revenuecat_sync`. Edge Functions update
 these rows with the service role; clients have no access.
 
 ### `kumusta_project_api_rate_limits`
 
-Service-only aggregate provider circuit breakers with no user data. The current
-scope, `elevenlabs_tts_project_daily`, caps total daily TTS provider exposure
-across otherwise valid paid identities. Clients have no access.
+Service-only aggregate provider circuit breakers with no user data. The scopes
+`elevenlabs_tts_project_daily` and `elevenlabs_stt_project_daily` cap total
+daily TTS and speech-to-text provider exposure across otherwise valid paid
+identities. Clients have no access.
 
 ### `kumusta_analytics_events`
 
@@ -267,7 +247,7 @@ The provider/adaptive Edge Functions use six `SECURITY DEFINER` RPCs with fixed
 - `kumusta_consume_api_quota` atomically enforces approved fixed-window
   scopes and fails closed;
 - `kumusta_consume_project_api_quota` atomically enforces the aggregate TTS
-  circuit breaker and fails closed;
+  and speech-to-text circuit breakers and fails closed;
 - `kumusta_begin_lesson_generation_job` acquires/reclaims a bounded generation
   lease while serializing on learner state;
 - `kumusta_persist_generated_lesson_batch` atomically persists validated

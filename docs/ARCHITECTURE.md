@@ -56,17 +56,18 @@ auth must have CAPTCHA and rate protection enabled before launch.
 
 The Supabase URL, publishable client key, and RevenueCat public SDK key are
 client configuration. Provider secrets and service-role keys are server-only.
-ElevenLabs and Mistral requests go through authenticated Supabase Edge
+ElevenLabs (TTS), Soniox (speech-to-text), Qwen (lesson generation) and
+Anthropic (live conversation) requests go through authenticated Supabase Edge
 Functions.
 
-Adaptive Mistral lessons use a private server-owned pipeline: bounded profile
+Adaptive lessons (`kumusta-lessons`, Qwen) use a private server-owned pipeline: bounded profile
 enums → deterministic learner state → per-user generation job → strict
 structured-output validation → generated lesson store → per-user queue. The app
 never reads those tables directly. It receives one validated lesson through the
 Edge Function, validates the response contract again, and falls back to bundled
 authored content when the adaptive path is unavailable.
 
-Mistral supplies candidate lesson text only. Post-session challenge, level,
+The model supplies candidate lesson text only. Post-session challenge, level,
 audio-pace, completion, and generated-vocabulary scheduling updates are
 deterministic, idempotent Postgres RPC operations. Generated content and
 authored/published curriculum remain separate trust classes.
@@ -82,5 +83,5 @@ Function.
 Today and Practice are stale-while-revalidate surfaces: bundled authored
 content renders immediately, while a single coalesced request checks the
 private generated queue. `get_next` only reads queue/state data. Empty or low
-queues schedule Mistral generation as a Supabase background task, so provider
+queues schedule lesson generation as a Supabase background task, so provider
 latency is never part of screen loading or completion acknowledgement.

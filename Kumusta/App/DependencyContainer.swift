@@ -12,7 +12,6 @@ final class DependencyContainer {
     let purchaseService: any PurchaseService
     let audioService: any AudioService
     let offlineAudioService: any AudioService
-    let onboardingDemoAudioService: any OnboardingDemoAudioService
     let onboardingConversationAudio: OnboardingConversationAudio
     let analytics: any AnalyticsTracking
     let authSessionProvider: (any AuthSessionProviding)?
@@ -37,7 +36,6 @@ final class DependencyContainer {
         purchaseService: any PurchaseService,
         audioService: any AudioService,
         offlineAudioService: (any AudioService)? = nil,
-        onboardingDemoAudioService: any OnboardingDemoAudioService,
         onboardingConversationAudio: OnboardingConversationAudio? = nil,
         analytics: any AnalyticsTracking,
         authSessionProvider: (any AuthSessionProviding)? = nil,
@@ -61,7 +59,6 @@ final class DependencyContainer {
         self.purchaseService = purchaseService
         self.audioService = audioService
         self.offlineAudioService = offlineAudioService ?? audioService
-        self.onboardingDemoAudioService = onboardingDemoAudioService
         self.onboardingConversationAudio = onboardingConversationAudio ?? OnboardingConversationAudio()
         self.analytics = analytics
         self.authSessionProvider = authSessionProvider
@@ -131,7 +128,6 @@ final class DependencyContainer {
             analytics: analytics
         )
         let fallbackAudio = SystemTagalogAudioService()
-        let bundledOnboardingAudio = BundledOnboardingAudioService(bundle: bundle)
 
         guard
             configuration.hasSupabaseConfiguration,
@@ -144,7 +140,6 @@ final class DependencyContainer {
                 purchaseService: purchaseService,
                 audioService: fallbackAudio,
                 offlineAudioService: fallbackAudio,
-                onboardingDemoAudioService: bundledOnboardingAudio,
                 analytics: analytics
             )
         }
@@ -175,12 +170,11 @@ final class DependencyContainer {
             profileRepository: LocalFirstProfileRepository(configuration: configuration),
             learningRepository: SeededLearningRepository(),
             purchaseService: purchaseService,
-            // A regional learning voice must never be silently replaced by
+            // The Tagalog learning voice must never be silently replaced by
             // Apple's generic Tagalog synthesizer. Provider failures stay
             // visible and retryable instead of teaching the wrong speaker.
             audioService: lessonAudio,
             offlineAudioService: fallbackAudio,
-            onboardingDemoAudioService: bundledOnboardingAudio,
             onboardingConversationAudio: OnboardingConversationAudio(
                 client: supabase.client,
                 authSessionProvider: authSessionProvider
@@ -210,14 +204,12 @@ final class DependencyContainer {
     }
 
     static func preview() -> DependencyContainer {
-        let bundledOnboardingAudio = PreviewOnboardingAudioService()
         let container = DependencyContainer(
             configuration: .preview,
             profileRepository: LocalFirstProfileRepository(configuration: .preview),
             learningRepository: SeededLearningRepository(),
             purchaseService: PreviewPurchaseService(),
             audioService: PreviewAudioService(),
-            onboardingDemoAudioService: bundledOnboardingAudio,
             analytics: AppAnalytics(),
             speechRecognitionService: PreviewSpeechRecognitionService(),
             accountDataService: PreviewAccountDataService()

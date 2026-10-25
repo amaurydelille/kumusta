@@ -236,7 +236,8 @@ enum MascotChoreography {
       p.leftArm = -3 * e
       p.rightArm = 3 * e
     case .chinThink:
-      p.rightArm = 102 * e
+      // Tuko's arm hangs out to the side; this brings the hand up to the chin.
+      p.rightArm = 165 * e
       p.armLift = 0.004 * e
       p.gazeX = -0.006 * e
       p.headTilt = -5 * e
@@ -260,7 +261,8 @@ enum MascotChoreography {
       p.smile = e
       p.tail = 12 * beat
     case .farewellWave, .signatureGreeting:
-      p.leftArm = (150 + 7 * sin(t * .pi * 6)) * e
+      // Raises the hand beside the head, not above it.
+      p.leftArm = (100 + 9 * sin(t * .pi * 6)) * e
       p.headTilt = -4 * e
       p.smile = e
       p.rightEar = 3 * e

@@ -1,13 +1,13 @@
 # Kumusta
 
 Kumusta is a native SwiftUI app for learning spoken Tagalog (everyday Metro
-Manila Tagalog), in English only. It is a fork of VietBuddy; see
-[PLAN.md](PLAN.md) for what is done and what is next.
+Manila Tagalog), in English only. See [PLAN.md](PLAN.md) for what is done and
+what is next.
 
 > **Status:** the app, backend and content are Tagalog. The authored roadmap
 > (`supabase/catalog/tagalog-v1/`) has 10 lessons each for beginner,
-> intermediate and advanced, all awaiting native-speaker review. Most files in
-> `docs/` are still inherited from VietBuddy.
+> intermediate and advanced, all awaiting native-speaker review. The app reads
+> them from the bundled `Kumusta/Resources/Seed/*-tagalog-v1.json`.
 
 ## Layout
 
@@ -22,13 +22,14 @@ Manila Tagalog), in English only. It is a fork of VietBuddy; see
 | `supabase/tests/` | SQL assertions (`baseline_security.sql`) |
 | `supabase/ops/` | One-off operational SQL (e.g. the email-worker cron) |
 | `scripts/` | Content, audio and parity scripts |
-| `website/`, `marketing/` | Still VietBuddy-branded; rebuilt in Phase 9 |
+| `site/` | Static website: home, privacy, terms and support (deploy on Vercel with root `site`) |
+| `art/` | Tuko artwork sources and the image-generation prompt pack |
 
 ## Supabase
 
 Dev project: **Kumusta**, ref `vpitjvtfzpqfnqgzcpla`. This repo is linked to it
 (`supabase/.temp/project-ref`). Never point any command, config or script at
-the VietBuddy project — it is production for another app.
+any other Supabase project.
 
 ```sh
 supabase db push --workdir .                     # apply new migrations
@@ -47,7 +48,7 @@ Edge Function secrets:
 | `KUMUSTA_TTS_API_KEY` | ElevenLabs text-to-speech for lessons (cached in the `kumusta-tts` bucket) and live conversation |
 | `KUMUSTA_LESSON_STT_API_KEY` | Soniox speech-to-text for lesson pronunciation (`kumusta-lesson-stt`, `kumusta-lesson-stt-token`) |
 | `KUMUSTA_LESSON_AGENT_API_KEY` | Soniox speech-to-text for live conversation (`kumusta-live-pipeline`) |
-| `KUMUSTA_LLM_LIVE_CONVERSATION` | Anthropic key for live conversation (Claude Opus 5.5) |
+| `KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY` | Anthropic key for live conversation (Claude Opus 5.5) |
 | `KUMUSTA_TTS_VOICE_ID` | Optional voice override (default `qZLi51uuzx5jdu6q0ayz`) |
 
 Not set yet: `DASHSCOPE_API_KEY` / `QWEN_LESSON_MODEL` (lesson generation), the RevenueCat

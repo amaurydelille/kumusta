@@ -4,8 +4,8 @@ Updated 2026-10-08. Every app event goes through `AnalyticsTracking` to PostHog 
 
 | Experience | Events and context |
 | --- | --- |
-| Onboarding | `onboarding_started`, `onboarding_step_viewed`, `onboarding_option_selected`, `onboarding_step_completed`, `onboarding_abandoned`, `onboarding_completed`, `onboarding_save_failed`. Steps: welcome, name, accent, goal, level, daily_plan, plan_building, first_lesson, then one step per welcome-lesson screen (see the funnel below). Each carries screen, step and position; choices use enum values, never the learner’s name. |
-| Welcome lesson | Level- and accent-specific lesson before the paywall. Every screen emits `onboarding_step_viewed` and `onboarding_step_completed` (with `active_seconds`); answers, speaking and skips are `feature_action` events. All carry `screen_name=onboarding_first_lesson`, `lesson_id`, `level`, `accent`, `mode` and `entry_point=onboarding`. In-app replays and First Steps use `screen_name=first_lesson` and `entry_point=first_steps`, and never emit onboarding events. |
+| Onboarding | `onboarding_started`, `onboarding_step_viewed`, `onboarding_option_selected`, `onboarding_step_completed`, `onboarding_abandoned`, `onboarding_completed`, `onboarding_save_failed`. Steps: welcome, name, goal, level, daily_plan, plan_building, first_lesson, then one step per welcome-lesson screen (see the funnel below). Each carries screen, step and position; choices use enum values, never the learner’s name. |
+| Welcome lesson | Level-specific lesson before the paywall. Every screen emits `onboarding_step_viewed` and `onboarding_step_completed` (with `active_seconds`); answers, speaking and skips are `feature_action` events. All carry `screen_name=onboarding_first_lesson`, `lesson_id`, `level`, `mode` and `entry_point=onboarding`. In-app replays and First Steps use `screen_name=first_lesson` and `entry_point=first_steps`, and never emit onboarding events. |
 | Account | `screen_viewed` for create, sign-in and confirm-email modes; `account_action_started/completed/failed` for credential submission. Completion means the request succeeded; account creation can still require email confirmation. |
 | Paywall | `paywall_viewed` after SDK/offering readiness, `paywall_dismissed` for user dismissal. `offering` identifies default/fallback. Hosted and custom purchases emit started, cancelled, completed and failed; actual trial entitlements emit `trial_started`. Restores emit started/completed/failed, including no-entitlement results. Filter `source=user_initiated` or `hosted_paywall` for user restore funnels; `account_recovery` is automatic access recovery. |
 | Main navigation | `screen_viewed` for the visible Today, Practice, Words or Profile tab; `tab_selected` when selection changes. These are tracked by the parent TabView to avoid hidden-tab impressions. |
@@ -50,7 +50,7 @@ The client changes require a new app build. The already uploaded TestFlight 1.2.
 
 | Position | `step` | Screen |
 | --- | --- | --- |
-| 0–6 | welcome, name, accent, goal, level, daily_plan, plan_building | Onboarding questions and plan building |
+| 0–1, 3–6 | welcome, name, goal, level, daily_plan, plan_building | Onboarding questions and plan building (position 2 is retired) |
 | 7 | first_lesson | Welcome lesson container |
 | 8 | first_lesson_intro | Lesson intro |
 | 9–14 | first_lesson_teach, _listen_pick, _meaning_pick, _natural_pick, _new_phrase, _speak, _build, _conversation | The six lesson screens; `step_id` names the exact screen, `level` tells which lesson |

@@ -846,7 +846,7 @@ private struct CheckFooter: View {
             isPositive = true; symbol = "checkmark"; tint = KumustaColors.success; deep = KumustaColors.success
             headline = title; detailLabel = nil; detail = text
         case let .incorrect(title, solution):
-            isPositive = false; symbol = "xmark"; tint = KumustaColors.accent; deep = KumustaColors.accentDeep
+            isPositive = false; symbol = "xmark"; tint = KumustaColors.error; deep = KumustaColors.errorDeep
             headline = title; detailLabel = solution == nil ? nil : L("Correct answer:"); detail = solution
         case let .neutral(title, text):
             isPositive = true; symbol = "mic.fill"; tint = KumustaColors.focus; deep = KumustaColors.focus
@@ -1199,7 +1199,7 @@ private struct FirstLessonTeachStep: View {
                 Text(sample.text)
                     .scaledFont(34, weight: .heavy, design: .rounded)
                     .foregroundStyle(KumustaColors.ink)
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(0.5)
                     .lineLimit(1)
                 Text(sample.meaning)
                     .font(KumustaTypography.supporting)
@@ -1251,6 +1251,7 @@ private struct FirstLessonListenPickStep: View {
                         optionCard(option)
                     }
                 }
+                .fixedSize(horizontal: false, vertical: true)
                 .sensoryFeedback(.selection, trigger: selection)
             }
             .padding(.horizontal, 20)
@@ -1275,7 +1276,7 @@ private struct FirstLessonListenPickStep: View {
         let isRevealedCorrect = result != nil && option.text == pick.answer
         let isWrongPick = result != nil && isSelected && option.text != pick.answer
         let tint: Color = isRevealedCorrect ? KumustaColors.success
-            : isWrongPick ? KumustaColors.accent
+            : isWrongPick ? KumustaColors.error
             : isSelected ? KumustaColors.focus
             : KumustaColors.line
 
@@ -1288,11 +1289,16 @@ private struct FirstLessonListenPickStep: View {
                 Text(option.text)
                     .scaledFont(36, weight: .heavy, design: .rounded)
                     .foregroundStyle(isSelected || isRevealedCorrect ? tint : KumustaColors.ink)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
                 Text(option.meaning)
                     .font(KumustaTypography.supporting)
                     .foregroundStyle(KumustaColors.muted)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 0)
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.vertical, 6)
         }
         .buttonStyle(ChoiceCardButtonStyle(
@@ -1486,7 +1492,7 @@ private struct FirstLessonMeaningPickStep: View {
         let isRevealedCorrect = result != nil && option == pick.answer
         let isWrongPick = result != nil && isSelected && option != pick.answer
         let tint: Color = isRevealedCorrect ? KumustaColors.success
-            : isWrongPick ? KumustaColors.accent
+            : isWrongPick ? KumustaColors.error
             : isSelected ? KumustaColors.focus
             : KumustaColors.line
 
@@ -1504,7 +1510,7 @@ private struct FirstLessonMeaningPickStep: View {
                         .transition(.scale.combined(with: .opacity))
                 } else if isWrongPick {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -1603,7 +1609,7 @@ private struct FirstLessonNaturalPickStep: View {
         let isRevealed = result != nil
         let isWrongPick = isRevealed && isSelected && !option.isBest
         let tint: Color = isRevealed && option.isBest ? KumustaColors.success
-            : isWrongPick ? KumustaColors.accent
+            : isWrongPick ? KumustaColors.error
             : isSelected ? KumustaColors.focus
             : KumustaColors.line
 
@@ -2126,7 +2132,7 @@ private struct FirstLessonSpeakStep: View {
                 if let errorMessage = speech.recorder.errorMessage {
                     Label(errorMessage, systemImage: "exclamationmark.circle.fill")
                         .font(KumustaTypography.body)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -2299,7 +2305,7 @@ private struct FirstLessonConversationStep: View {
                     if let errorMessage = speech.recorder.errorMessage {
                         Label(errorMessage, systemImage: "exclamationmark.circle.fill")
                             .font(KumustaTypography.body)
-                            .foregroundStyle(KumustaColors.accentDeep)
+                            .foregroundStyle(KumustaColors.errorDeep)
                     }
 
                     if speech.recorder.permissionState == .denied {

@@ -7,7 +7,7 @@ import Testing
 struct ResilientAudioServiceTests {
     @Test("Lesson prewarming keeps one clip per distinct phrase")
     func lessonPrewarmingDeduplicatesRepeatedRoundStages() async {
-        let phrase = "Xin chào, mình là Linh."
+        let phrase = "Kumusta po, ako si Maria."
         let lesson = Lesson(
             id: UUID(),
             scenario: "Meeting someone new",
@@ -17,8 +17,8 @@ struct ResilientAudioServiceTests {
                     id: UUID(),
                     kind: .coldListen,
                     prompt: "Listen",
-                    tagalog: "Linh: \(phrase)",
-                    translation: "Hello, I’m Linh.",
+                    tagalog: "Maria: \(phrase)",
+                    translation: "Hello, I’m Maria.",
                     chunks: []
                 ),
                 LessonStep(
@@ -26,7 +26,7 @@ struct ResilientAudioServiceTests {
                     kind: .decode,
                     prompt: "Decode",
                     tagalog: phrase,
-                    translation: "Hello, I’m Linh.",
+                    translation: "Hello, I’m Maria.",
                     chunks: []
                 ),
                 LessonStep(
@@ -34,7 +34,7 @@ struct ResilientAudioServiceTests {
                     kind: .speak,
                     prompt: "Speak",
                     tagalog: phrase,
-                    translation: "Hello, I’m Linh.",
+                    translation: "Hello, I’m Maria.",
                     chunks: []
                 )
             ]
@@ -42,11 +42,11 @@ struct ResilientAudioServiceTests {
         let responseID = UUID()
         let responseExercise = HearRespondExercise(
             promptTagalog: phrase,
-            promptTranslation: "Hello, I’m Linh.",
+            promptTranslation: "Hello, I’m Maria.",
             options: [
                 HearRespondOption(
                     id: responseID,
-                    englishTranslation: "Hello, I’m Linh."
+                    englishTranslation: "Hello, I’m Maria."
                 ),
                 HearRespondOption(
                     id: UUID(),
@@ -90,12 +90,12 @@ struct ResilientAudioServiceTests {
         let service = AuthenticatedElevenLabsAudioService(gateway: gateway)
 
         await service.prewarm(
-            texts: ["Xin chào"],
+            texts: ["Kumusta po"],
             speed: .natural
         )
 
         #expect(await gateway.prefetchCallCount == 1)
-        #expect(await gateway.lastPrefetchedTexts == ["Xin chào"])
+        #expect(await gateway.lastPrefetchedTexts == ["Kumusta po"])
     }
 
     @Test("Slow prewarming reuses the natural provider clip")
@@ -104,7 +104,7 @@ struct ResilientAudioServiceTests {
         let service = AuthenticatedElevenLabsAudioService(gateway: gateway)
 
         await service.prewarm(
-            texts: ["Xin chào"],
+            texts: ["Kumusta po"],
             speed: .slow
         )
 
@@ -117,7 +117,7 @@ struct ResilientAudioServiceTests {
         let service = AuthenticatedElevenLabsAudioService(gateway: gateway)
 
         await service.prewarm(
-            texts: ["Xin chào"],
+            texts: ["Kumusta po"],
             speed: .fast
         )
 
@@ -130,7 +130,7 @@ struct ResilientAudioServiceTests {
         let service = AuthenticatedElevenLabsAudioService(gateway: gateway)
 
         await service.prewarm(
-            texts: ["Xin chào"],
+            texts: ["Kumusta po"],
             speed: .natural,
             purpose: .vocabulary
         )
@@ -159,7 +159,7 @@ struct ResilientAudioServiceTests {
         await service.stop()
         let clock = ContinuousClock()
         let startedAt = clock.now
-        try await service.play(text: "Xin chào", speed: .natural)
+        try await service.play(text: "Kumusta po", speed: .natural)
 
         #expect(clock.now - startedAt > .milliseconds(150))
     }
@@ -171,7 +171,7 @@ struct ResilientAudioServiceTests {
         )
         let playback = Task {
             try await service.playCached(
-                text: "Xin chào",
+                text: "Kumusta po",
                 speed: .natural,
                 purpose: .vocabulary
             )
@@ -194,7 +194,7 @@ struct ResilientAudioServiceTests {
         let fallback = AudioServiceSpy(behavior: .success)
         let service = ResilientAudioService(primary: primary, fallback: fallback)
 
-        try await service.play(text: "Xin chào", speed: .natural)
+        try await service.play(text: "Kumusta po", speed: .natural)
 
         #expect(await primary.playCount == 1)
         #expect(await fallback.playCount == 1)
@@ -207,7 +207,7 @@ struct ResilientAudioServiceTests {
         let service = ResilientAudioService(primary: primary, fallback: fallback)
 
         await #expect(throws: CancellationError.self) {
-            try await service.play(text: "Xin chào", speed: .slow)
+            try await service.play(text: "Kumusta po", speed: .slow)
         }
         #expect(await primary.playCount == 1)
         #expect(await fallback.playCount == 0)

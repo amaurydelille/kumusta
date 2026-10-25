@@ -141,7 +141,7 @@ struct WordsView: View {
     private var practiceHero: some View {
         VStack(alignment: .leading, spacing: 24) {
             ZStack(alignment: .topTrailing) {
-                Text(L("Practice your\nVietnamese words"))
+                Text(L("Practice your\nTagalog words"))
                     .font(KumustaTypography.title)
                     .foregroundStyle(KumustaColors.ink)
                     .lineLimit(2)
@@ -670,12 +670,14 @@ private struct FlashcardReviewView: View {
     @State private var correctAnswers = 0
     @State private var didFinalizeTelemetry = false
 
-    private let totalCount: Int
+    /// State, not a plain property: answering retires words from the deck,
+    /// which re-creates this view with fewer words while the run goes on.
+    @State private var totalCount: Int
 
     init(words: [SavedLessonWord]) {
         let sessionCards = Array(words.shuffled().prefix(10))
         _cards = State(initialValue: sessionCards)
-        totalCount = sessionCards.count
+        _totalCount = State(initialValue: sessionCards.count)
     }
 
     var body: some View {
@@ -1351,7 +1353,7 @@ private struct FlashcardChoiceButton: View {
                         .foregroundStyle(KumustaColors.success)
                 } else if phase == .incorrect, isSelected {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                 } else if phase == .incorrect, choice.isCorrect {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(KumustaColors.success)
@@ -1382,14 +1384,14 @@ private struct FlashcardChoiceButton: View {
 
     private var backgroundColor: Color {
         if phase == .correct, isSelected { return KumustaColors.success.opacity(0.15) }
-        if phase == .incorrect, isSelected { return KumustaColors.accentSoft.opacity(0.4) }
+        if phase == .incorrect, isSelected { return KumustaColors.errorSoft.opacity(0.4) }
         if phase == .incorrect, choice.isCorrect { return KumustaColors.success.opacity(0.15) }
         return KumustaColors.surface
     }
 
     private var borderColor: Color {
         if phase == .correct, isSelected { return KumustaColors.success }
-        if phase == .incorrect, isSelected { return KumustaColors.accentDeep }
+        if phase == .incorrect, isSelected { return KumustaColors.errorDeep }
         if phase == .incorrect, choice.isCorrect { return KumustaColors.success }
         if isSelected { return KumustaColors.accent }
         return KumustaColors.line

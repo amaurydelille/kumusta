@@ -4,5 +4,7 @@
 OTHER_LDFLAGS = $(inherited) -ObjC -lc++
 SUPABASE_PROJECT_URL = https:/$()/vpitjvtfzpqfnqgzcpla.supabase.co
 SUPABASE_PUBLISHABLE_KEY = sb_publishable_roavy0TdUeTkmgRFUpvn8A_2wSoJRFT
+// The RevenueCat Test Store key never reaches Release builds.
+REVENUECAT_PUBLIC_SDK_KEY = $(REVENUECAT_TEST_STORE_SDK_KEY)
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
 OTHER_SWIFT_FLAGS = $(inherited) -D DEBUG

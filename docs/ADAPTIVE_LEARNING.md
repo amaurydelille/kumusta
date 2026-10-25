@@ -3,13 +3,10 @@
 ## Production status and scope
 
 Kumusta has an optional server-backed adaptive path in addition to the
-bundled authored curriculum. `SupabaseMistralLearningService` asks the
-`kumusta-mistral-lessons` Edge Function for a queued lesson. The stable client
-endpoint selects Qwen in production through a server-owned provider switch;
-setting that switch back to Mistral provides an immediate rollback without an
-app release. Debug builds use the isolated `kumusta-qwen-lessons` preview
-function. Both share the same lesson contract, prompt, validation, persistence,
-and queue behavior. Today, Practice,
+bundled authored curriculum. `SupabaseAdaptiveLessonService` asks the
+`kumusta-lessons` Edge Function for a queued lesson, which the server generates
+with Qwen (DashScope). The model is selected server-side
+(`QWEN_LESSON_MODEL`), so it can change without an app release. Today, Practice,
 and Words use the generated material when it is available and fall back to the
 authored seed when the service returns no lesson or a request fails.
 
@@ -17,13 +14,13 @@ The adaptive system changes lesson difficulty, scenario selection, audio pace,
 and generated-vocabulary review state. It does not change entitlements, billing,
 account state, analytics policy, or the authored-curriculum publication gate.
 
-Generated Vietnamese is model output. Passing the JSON and local validators
+Generated Tagalog is model output. Passing the JSON and local validators
 does not mean a native speaker reviewed it, and the product must not describe
 it as certified, teacher-approved, or equivalent to published authored content.
 
 ## Request and delivery flow
 
-1. The app sends a bounded learner profile: accent, goal, self-assessed level,
+1. The app sends a bounded learner profile: goal, self-assessed level,
    target level, challenge preference, and daily minutes. It never sends a
    provider model name or prompt.
 2. The Edge Function validates the refreshed Supabase JWT. Anonymous Supabase
@@ -57,7 +54,7 @@ it as certified, teacher-approved, or equivalent to published authored content.
 Every completed lesson is also written atomically to the app's protected
 Application Support directory and appears in Profile > Lesson history. The
 library stores the full lesson for offline reading and can replay each round
-through the configured accent voice. Generated queue rows remain marked
+through the server-configured Tagalog voice. Generated queue rows remain marked
 completed on the backend as the server-side learning audit; the current Profile
 library is installation-local and does not claim cross-device sync.
 
@@ -84,8 +81,8 @@ The LLM does not calculate or write learner state. The service-role-only
 | Pace too slow | unchanged | unchanged | one step toward `fast` |
 | Pace too fast | unchanged | unchanged | one step toward `slow` |
 
-The initial estimated levels are `1` for new, `2` for familiar, `3.25` for
-conversational, and `2.75` for rusty. Effective prompt difficulty is estimated
+The initial estimated levels are `1` for beginner, `2.25` for intermediate, and
+`3.25` for advanced. Effective prompt difficulty is estimated
 level plus challenge offset, clamped to `1...5`. The selected target is a
 destination, not a test result, and the stored target is never set below the
 ceiling of the current estimate.
@@ -132,30 +129,30 @@ UUIDs are rejected.
 
 ## Generation contract
 
-One generation job requests one complete lesson at a time. Both providers use strict
-JSON-schema output, the existing server-owned prompt, a fixed random seed per
+One generation job requests one complete lesson at a time. The provider uses
+strict JSON-schema output, the existing server-owned prompt, a fixed random seed per
 attempt, and at most three attempts. Each candidate must pass local validation
 before persistence:
 
-- schema version `3` and prompt version `5`;
+- schema version `3` and prompt version `14`;
 - requested batch count and distinct snake-case scenario keys;
-- one requested accent, with basic opposite-region location leakage checks;
 - 5–15 minutes and difficulty `1...5`;
 - exactly 5, 7, 10, or 12 distinct rounds for the supported daily plans;
 - one situation, utterance, translation, speaking prompt, and 2–5 ordered chunks
   per round; the server expands each round into `coldListen → decode → speak`;
 - one exact, ordered contextual English gloss for every whitespace-delimited
-  Vietnamese token, preserving source punctuation;
+  Tagalog word (two-word units only for fixed expressions such as
+  `salamat po`), preserving source punctuation;
 - one shared `topic_key` copied from the lesson scenario key across every round;
 - 8–18 unique vocabulary items, each grounded in a round utterance and in its own
-  Vietnamese example;
-- bounded text, Vietnamese diacritics in phrases/examples, and no URLs, script
+  Tagalog example;
+- bounded text, Latin-script Tagalog in phrases/examples, and no URLs, script
   markup, control characters, or prompt-injection marker;
 - prohibited-subject rejection across lesson and vocabulary copy;
 - English prompts, translations, meanings, and notes.
 
 The validator is a contract and safety boundary, not a full linguistic review.
-It does not prove tone accuracy, regional naturalness, pragmatic suitability,
+It does not prove spelling or register accuracy, naturalness, pragmatic suitability,
 or that every grounded chunk and vocabulary item is semantically ideal. The
 stored `quality_score` of `1` is a deterministic marker that every v1 contract
 gate passed; it is not a calibrated human or pedagogical quality score and must
@@ -177,7 +174,7 @@ vocabulary state, and learning-session provenance even for service-role writes.
 The queue targets two ready lessons behind the current started lesson.
 Generation creates one full lesson per job and is limited to one active job
 per user and deduplicated by client request UUID. Job acquisition is an atomic
-120-second lease under the learner-state row lock. An exact retry can reclaim
+180-second lease under the learner-state row lock. An exact retry can reclaim
 its expired job; other stale active jobs are marked `superseded` so a crashed
 runtime cannot block the learner indefinitely.
 
@@ -185,7 +182,7 @@ Generation polling first checks for a healthy active lease, so repeated
 `get_next` calls do not consume provider quota or duplicate work. New work is
 then quota-checked before an audit job is created: four jobs per rolling 60
 seconds and 30 per 24 hours. One job may contain up to three lessons;
-two provider attempts still consume one job quota unit. Non-`get_next`
+up to three provider attempts still consume one job quota unit. Non-`get_next`
 mutations are separately limited to 120 per minute and 2,000 per day per user.
 All quota RPCs fail closed.
 
@@ -195,12 +192,9 @@ the job records a sanitized failure code and no candidate is served. The mobile
 surfaces then use authored content. Completion itself succeeds before queue
 replenishment, so provider downtime does not erase completed work.
 
-The separate `kumusta-mistral-evaluate` path accepts bounded authored and
-learner text only after an explicit feedback action. It returns deterministic
-authored feedback with `fallback: true` on provider/configuration/output failure.
-It never receives audio and must not claim to assess pronunciation or accent.
-Provider response streams are byte-counted before decoding: lesson generation
-is capped at 1 MiB and text evaluation at 256 KiB.
+Provider response streams are byte-counted before decoding and capped at
+1 MiB. The model never receives audio; speaking checks are graded on-device
+from a speech-to-text transcript (see [Integrations](INTEGRATIONS.md)).
 
 ## Privacy and operations
 
@@ -214,12 +208,12 @@ payloads and secrets are not
 written to generation-job logs. Tables are service-role-only with RLS enabled
 and no client policies.
 
-Use [the Mistral runbook](backend/MISTRAL_RUNBOOK.md) for deployment, smoke
+Use [the lesson generation runbook](backend/LESSON_GENERATION_RUNBOOK.md) for deployment, smoke
 tests, monitoring, incident response, and rollback. Use
 [the content guide](CONTENT_GUIDE.md) for the separate authored-content review
 gate.
 
 Remaining production gates are native-speaker sampling for each production
-model/prompt/accent combination and an approved deletion policy for expired
+model/prompt combination and an approved deletion policy for expired
 generated rows. Empty-queue generation is asynchronous and no longer part of
 the learner-facing request latency.

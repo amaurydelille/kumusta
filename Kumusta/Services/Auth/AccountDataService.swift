@@ -33,7 +33,7 @@ enum AccountDataServiceError: LocalizedError, Sendable {
         case .invalidExport:
             L("Your account export could not be verified.")
         case .exportTooLarge:
-            L("Your account export is too large for an in-app download. Contact contact@kumusta.app.")
+            L("Your account export is too large for an in-app download. Contact amaurydelille92500@gmail.com.")
         case .invalidDeletionReceipt:
             L("Account deletion could not be verified.")
         }

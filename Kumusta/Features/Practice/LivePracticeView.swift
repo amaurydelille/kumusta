@@ -192,7 +192,7 @@ struct LivePracticeView: View {
     private var header: some View {
         ZStack {
             Text("KUMUSTA")
-                .font(.custom("Patriot-Black", size: 28, relativeTo: .title2))
+                .font(.custom("Fredoka-Bold", size: 28, relativeTo: .title2))
                 .tracking(-0.45)
                 .foregroundStyle(KumustaColors.accentDeep)
                 .accessibilityLabel("Kumusta")

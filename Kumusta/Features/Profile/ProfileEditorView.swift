@@ -30,7 +30,7 @@ struct ProfileEditorView: View {
                         if let saveError {
                             Label(saveError, systemImage: "exclamationmark.circle.fill")
                                 .font(KumustaTypography.body)
-                                .foregroundStyle(KumustaColors.accentDeep)
+                                .foregroundStyle(KumustaColors.errorDeep)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
 

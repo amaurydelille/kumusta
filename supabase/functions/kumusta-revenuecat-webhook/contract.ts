@@ -90,6 +90,7 @@ export function voluntaryCancellationSnapshot(
 export function mapRevenueCatV2CustomerInfo(
   activePayload: unknown,
   subscriptionsPayload: unknown,
+  projectEntitlementsPayload: unknown = null,
 ): RevenueCatCustomerInfo {
   if (
     !isPlainObject(activePayload) || !Array.isArray(activePayload.items) ||
@@ -104,6 +105,24 @@ export function mapRevenueCatV2CustomerInfo(
   }
 
   const entitlementLookups = new Map<string, string>();
+  // Promotional grants (e.g. a lifetime grant from the dashboard) have no
+  // subscription, so their lookup key comes from the project's entitlements.
+  if (
+    isPlainObject(projectEntitlementsPayload) &&
+    Array.isArray(projectEntitlementsPayload.items)
+  ) {
+    for (const entitlement of projectEntitlementsPayload.items) {
+      if (!isPlainObject(entitlement)) continue;
+      if (
+        typeof entitlement.id === "string" &&
+        typeof entitlement.lookup_key === "string" &&
+        entitlement.lookup_key.length >= 1 &&
+        entitlement.lookup_key.length <= 120
+      ) {
+        entitlementLookups.set(entitlement.id, entitlement.lookup_key);
+      }
+    }
+  }
   const subscriptions: Record<string, CustomerSubscription> = {};
   const productsByEntitlement = new Map<string, {
     productID: string;

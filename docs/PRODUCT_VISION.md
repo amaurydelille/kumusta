@@ -2,7 +2,8 @@
 
 ## Promise
 
-Kumusta helps a learner understand and say useful Vietnamese in situations
+Kumusta helps a learner understand and say useful everyday Tagalog, as spoken in Metro
+Manila, in situations
 that matter to them. It does not optimize for collecting abstract points or
 translating isolated sentences. It optimizes for the moment a learner hears a
 natural phrase and recognizes what is happening.
@@ -11,9 +12,9 @@ natural phrase and recognizes what is happening.
 
 The first customer-facing experience is English only. It serves:
 
-1. Vietnamese diaspora learners reconnecting with family and roots.
-2. Partners and family members who want to participate in Vietnamese life.
-3. People relocating to, living in, or frequently visiting Vietnam.
+1. Filipino heritage learners reconnecting with family and roots.
+2. Partners and family members who want to take part in Filipino family life.
+3. People relocating to, living in, or frequently visiting the Philippines.
 4. Learners frustrated by text-first courses and unnatural speech.
 
 ## MVP principles
@@ -22,7 +23,8 @@ The first customer-facing experience is English only. It serves:
 - Natural audio before explanation.
 - Useful chunks before grammar terminology.
 - Speak early, with low social risk.
-- Chosen accent is a product behavior, not decorative profile metadata.
+- One language: everyday Metro Manila Tagalog, never a dialect or another
+  Philippine language.
 - One clear daily session beats an infinite content catalog.
 - Review what wobbled; do not punish missed days.
 
@@ -36,7 +38,7 @@ first Today lesson within 24 hours of entitlement activation.
 ## Non-goals for v1
 
 - Open-ended AI conversation
-- A general Vietnamese dictionary
+- A general Tagalog dictionary
 - Social leaderboards
 - Grammar-course completeness
 - Android or web parity

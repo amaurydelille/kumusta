@@ -154,7 +154,7 @@ private enum AudioBorderPalette: Equatable {
         switch self {
         case .success: KumustaColors.success
         case .microphone: Color(red: 0.20, green: 0.42, blue: 1)
-        case .playbackLight: Color(red: 0.76, green: 0.25, blue: 0.22)
+        case .playbackLight: Color(red: 0.05, green: 0.50, blue: 0.51)
         case .playbackDark: Color(red: 0.08, green: 0.58, blue: 0.79)
         }
     }

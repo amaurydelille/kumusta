@@ -294,7 +294,7 @@ struct KumustaScreenTopBar: View {
         ZStack {
             HStack {
                 Text("KUMUSTA")
-                    .font(KumustaTypography.patriotBrand)
+                    .font(KumustaTypography.brand)
                     .tracking(-0.45)
                     .foregroundStyle(KumustaColors.accentDeep)
                     .accessibilityLabel("Kumusta")

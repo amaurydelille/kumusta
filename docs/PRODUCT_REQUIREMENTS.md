@@ -13,11 +13,14 @@ RevenueCat must not be interpreted as a confirmed inactive entitlement.
 
 ## Onboarding inputs
 
-- Preferred accent: Southern or Northern
-- Goal: family, life in Vietnam, travel, partner, work, or cultural roots
-- Listening/speaking level
 - Optional preferred first name
-- Daily commitment: 3, 5, 7, or 10 minutes
+- Goal: family, life in the Philippines, travel, partner, work, or cultural roots
+- Level: beginner, intermediate, or advanced
+- Daily commitment: 5, 7, 10, or 15 minutes
+
+Onboarding is mandatory: no learner reaches account creation, the paywall or
+the main tabs without completing it. Only an account that already completed
+onboarding may sign in and skip it.
 
 Every answer must visibly affect copy, lesson ordering, or lesson behavior.
 The name is optional and is never sent in analytics.
@@ -42,7 +45,7 @@ appear below it.
 ### Practice
 
 The primary surface is a cold-listen situation check: transcript hidden,
-female accent-matched audio, three large situation choices, then progression
+natural Tagalog audio, three large situation choices, then progression
 into authored phrase chunks. Review sessions use audio-first recall followed by
 reveal and one of three ratings:
 
@@ -55,7 +58,7 @@ Rating names are at least 17 points and scheduling labels at least 16 points.
 ### Words
 
 The primary surface is a two-minute Word Gym with Hear it and Say it modes,
-one Vietnamese chunk at a time, natural audio, tap-to-reveal meaning, and three
+one Tagalog chunk at a time, natural audio, tap-to-reveal meaning, and three
 large scheduling choices. Review timing and mastery remain repository-backed.
 The phrase-bank model and detail screens remain available for future library
 navigation rather than being discarded.

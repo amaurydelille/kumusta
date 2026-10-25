@@ -141,18 +141,11 @@ private struct RealtimePracticeMascots: View {
     let height: CGFloat
 
     var body: some View {
-        HStack(spacing: -5) {
-            Image("ConversationMascotFemale")
-                .resizable()
-                .scaledToFit()
-                .rotationEffect(.degrees(-3))
-            Image("ConversationMascotMale")
-                .resizable()
-                .scaledToFit()
-                .scaleEffect(x: -1, y: 1)
-                .rotationEffect(.degrees(3))
-        }
-        .frame(height: height)
-        .accessibilityLabel(L("Your Tagalog conversation buddies"))
+        Image("TukoBuddy")
+            .resizable()
+            .scaledToFit()
+            .rotationEffect(.degrees(-3))
+            .frame(height: height)
+            .accessibilityLabel(L("Tuko, your Tagalog conversation buddy"))
     }
 }

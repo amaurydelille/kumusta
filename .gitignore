@@ -19,8 +19,3 @@ supabase/.temp/
 supabase/.branches/
 
 # Website
-website/node_modules/
-website/.next/
-website/dist/
-website/.vinext/
-website/.wrangler/

@@ -1,92 +1,184 @@
 {
-  "ArmLeft" : {
-    "height" : 269,
-    "width" : 188,
-    "x" : 318,
-    "y" : 695
+  "ArmLeft": {
+    "height": 302,
+    "pivotX": 445,
+    "pivotY": 641,
+    "width": 238,
+    "x": 240,
+    "y": 603
   },
-  "ArmRight" : {
-    "height" : 240,
-    "width" : 220,
-    "x" : 607,
-    "y" : 729
+  "ArmRight": {
+    "height": 280,
+    "pivotX": 671,
+    "pivotY": 697,
+    "width": 229,
+    "x": 643,
+    "y": 654
   },
-  "Body" : {
-    "height" : 364,
-    "width" : 438,
-    "x" : 377,
-    "y" : 684
+  "Body": {
+    "height": 460,
+    "pivotX": 568,
+    "pivotY": 932,
+    "width": 318,
+    "x": 407,
+    "y": 533
   },
-  "BrowLeft" : {
-    "height" : 36,
-    "width" : 77,
-    "x" : 483,
-    "y" : 239
+  "BrowLeft": {
+    "height": 40,
+    "pivotX": 485,
+    "pivotY": 159,
+    "width": 84,
+    "x": 442,
+    "y": 139
   },
-  "BrowRight" : {
-    "height" : 74,
-    "width" : 74,
-    "x" : 766,
-    "y" : 303
+  "BrowRight": {
+    "height": 53,
+    "pivotX": 795,
+    "pivotY": 233,
+    "width": 82,
+    "x": 755,
+    "y": 222
   },
-  "EarLeft" : {
-    "height" : 243,
-    "width" : 359,
-    "x" : 100,
-    "y" : 179
+  "EyeLeft": {
+    "height": 184,
+    "pivotX": 456,
+    "pivotY": 295,
+    "width": 168,
+    "x": 356,
+    "y": 200
   },
-  "EarRight" : {
-    "height" : 284,
-    "width" : 298,
-    "x" : 857,
-    "y" : 365
+  "EyeRight": {
+    "height": 191,
+    "pivotX": 760,
+    "pivotY": 388,
+    "width": 179,
+    "x": 672,
+    "y": 286
   },
-  "EyeLeft" : {
-    "height" : 155,
-    "width" : 151,
-    "x" : 392,
-    "y" : 317
+  "Head": {
+    "height": 534,
+    "pivotX": 583,
+    "pivotY": 586,
+    "width": 614,
+    "x": 283,
+    "y": 99
   },
-  "EyeRight" : {
-    "height" : 156,
-    "width" : 147,
-    "x" : 663,
-    "y" : 400
+  "LegLeft": {
+    "height": 311,
+    "pivotX": 477,
+    "pivotY": 916,
+    "width": 228,
+    "x": 339,
+    "y": 840
   },
-  "Head" : {
-    "height" : 633,
-    "width" : 696,
-    "x" : 308,
-    "y" : 57
+  "LegRight": {
+    "height": 319,
+    "pivotX": 704,
+    "pivotY": 921,
+    "width": 251,
+    "x": 628,
+    "y": 846
   },
-  "LegLeft" : {
-    "height" : 307,
-    "width" : 244,
-    "x" : 363,
-    "y" : 956
+  "Mouth0": {
+    "height": 80,
+    "width": 213,
+    "x": 454,
+    "y": 403
   },
-  "LegRight" : {
-    "height" : 326,
-    "width" : 279,
-    "x" : 598,
-    "y" : 945
+  "Mouth1": {
+    "height": 66,
+    "width": 213,
+    "x": 454,
+    "y": 400
   },
-  "Scarf" : {
-    "height" : 220,
-    "width" : 539,
-    "x" : 394,
-    "y" : 610
+  "Mouth10": {
+    "height": 104,
+    "width": 213,
+    "x": 454,
+    "y": 400
   },
-  "Smile" : {
-    "height" : 42,
-    "width" : 87,
-    "x" : 506,
-    "y" : 534
+  "Mouth11": {
+    "height": 97,
+    "width": 235,
+    "x": 443,
+    "y": 399
   },
-  "Tail" : {
-    "height" : 202,
-    "width" : 221,
-    "x" : 783,
-    "y" : 855
+  "Mouth2": {
+    "height": 72,
+    "width": 213,
+    "x": 454,
+    "y": 400
+  },
+  "Mouth3": {
+    "height": 93,
+    "width": 213,
+    "x": 454,
+    "y": 400
+  },
+  "Mouth4": {
+    "height": 127,
+    "width": 213,
+    "x": 454,
+    "y": 400
+  },
+  "Mouth5": {
+    "height": 87,
+    "width": 101,
+    "x": 510,
+    "y": 427
+  },
+  "Mouth6": {
+    "height": 53,
+    "width": 53,
+    "x": 534,
+    "y": 427
+  },
+  "Mouth7": {
+    "height": 91,
+    "width": 235,
+    "x": 443,
+    "y": 397
+  },
+  "Mouth8": {
+    "height": 66,
+    "width": 212,
+    "x": 454,
+    "y": 402
+  },
+  "Mouth9": {
+    "height": 68,
+    "width": 213,
+    "x": 454,
+    "y": 400
+  },
+  "Scarf": {
+    "height": 175,
+    "pivotX": 592,
+    "pivotY": 610,
+    "width": 400,
+    "x": 445,
+    "y": 542
+  },
+  "Smile": {
+    "height": 80,
+    "pivotX": 558,
+    "pivotY": 445,
+    "width": 213,
+    "x": 454,
+    "y": 403
+  },
+  "Tail": {
+    "height": 387,
+    "pivotX": 785,
+    "pivotY": 920,
+    "width": 380,
+    "x": 749,
+    "y": 618
+  },
+  "stage": {
+    "height": 1150,
+    "width": 1030,
+    "x": 170,
+    "y": 40
   }
 }

@@ -37,6 +37,12 @@ struct AppConfiguration: Sendable {
     }
 
     var hasRevenueCatConfiguration: Bool {
+        #if DEBUG
         !revenueCatPublicKey.isEmpty
+        #else
+        // A RevenueCat Test Store key fakes every purchase; it must never
+        // configure a Release build.
+        !revenueCatPublicKey.isEmpty && !revenueCatPublicKey.hasPrefix("test_")
+        #endif
     }
 }

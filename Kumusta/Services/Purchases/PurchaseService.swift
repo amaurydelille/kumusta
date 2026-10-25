@@ -38,6 +38,9 @@ enum PurchaseServiceError: LocalizedError {
 
 protocol PurchaseService: Sendable {
     func configure(appUserID: String) async throws
+    /// Detaches the signed-out account so the next learner's purchase can't
+    /// land on it.
+    func logOut() async
     func isConfigured() async -> Bool
     func hasPremiumAccess() async -> Bool
     func loadOffering() async throws -> PaywallOffering
@@ -55,6 +58,8 @@ actor PreviewPurchaseService: PurchaseService {
     private var unlocked = false
 
     func configure(appUserID: String) async throws {}
+
+    func logOut() async { unlocked = false }
 
     func isConfigured() async -> Bool { true }
 

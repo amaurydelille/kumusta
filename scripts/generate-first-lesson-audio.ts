@@ -4,30 +4,25 @@
 // every fixed line ships with the app. Lines with the learner's name still use
 // the server's `reply_name` template at runtime.
 //
-// The clips use the exact voice, model, settings, and seed as the TTS Edge
-// Function, so they sound identical to lesson audio. Each file is named by the
-// 64-bit FNV-1a hash of its normalized text, the same key the app computes in
+// The clips come from the deployed `kumusta-elevenlabs-tts` Edge Function in
+// its operations mode, so they use the server's ElevenLabs key, voice, model,
+// settings and seed, sound identical to lesson audio, and land in the shared
+// TTS cache. No provider key is needed locally: the Supabase CLI supplies the
+// Kumusta service-role key at run time. Each file is named by the 64-bit
+// FNV-1a hash of its normalized text, the same key the app computes in
 // `FirstLessonScript.audioKey(for:)`.
 //
-// Usage (from the repo root, with KUMUSTA_TTS_API_KEY in the environment or .env;
-// set KUMUSTA_TTS_VOICE_ID to match the Edge Function secret if one is set):
-//   deno run --allow-read --allow-write --allow-net --allow-env \
+// Usage (from the repo root, logged in to the Supabase CLI):
+//   deno run --allow-read --allow-write --allow-net --allow-env --allow-run=supabase \
 //     scripts/generate-first-lesson-audio.ts [--force] [--dry-run]
-import {
-  consistentVoiceSettings,
-  deterministicSpeechSeed,
-  normalizedTTSText,
-  tagalogLanguageCode,
-  tagalogTTSModelID,
-  tagalogVoiceID,
-  type TTSRequest,
-} from "../supabase/functions/kumusta-elevenlabs-tts/contract.ts";
 
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
 const lessonsDirectory = "Kumusta/Resources/FirstLessons";
-const outputFormat = "mp3_44100_96";
+// Only ever the Kumusta project.
+const projectRef = "vpitjvtfzpqfnqgzcpla";
+const ttsEndpoint = `https://${projectRef}.supabase.co/functions/v1/kumusta-elevenlabs-tts`;
 const lessonFiles = [
   "onboarding-beginner.json",
   "onboarding-intermediate.json",
@@ -109,48 +104,44 @@ function audioKey(text: string): string {
   return hash.toString(16).padStart(16, "0");
 }
 
-async function apiKey(): Promise<string> {
-  const fromEnv = (Deno.env.get("KUMUSTA_TTS_API_KEY") ?? Deno.env.get("ELEVENLABS_API_KEY"))
-    ?.trim();
-  if (fromEnv) return fromEnv;
-  const dotenv = await Deno.readTextFile(".env").catch(() => "");
-  const match = /^\s*(?:KUMUSTA_TTS_API_KEY|ELEVENLABS_API_KEY)\s*=\s*(.+?)\s*$/m.exec(dotenv);
-  if (match) return match[1].replace(/^["']|["']$/g, "");
-  throw new Error("KUMUSTA_TTS_API_KEY is required (environment or .env)");
+async function serviceRoleKey(): Promise<string> {
+  const result = await new Deno.Command("supabase", {
+    args: ["projects", "api-keys", "--project-ref", projectRef, "--reveal", "-o", "json"],
+    stdout: "piped",
+    stderr: "piped",
+  }).output();
+  if (!result.success) {
+    throw new Error("Unable to read the Kumusta service-role key (run `supabase login`)");
+  }
+  const parsed = JSON.parse(new TextDecoder().decode(result.stdout));
+  const keys = Array.isArray(parsed) ? parsed : parsed.api_keys ?? parsed.keys;
+  const key = keys?.find((candidate: { name: string }) => candidate.name === "service_role")
+    ?.api_key;
+  if (!key) throw new Error("Missing Kumusta service-role key");
+  return key;
 }
 
 async function synthesize(text: string, key: string): Promise<Uint8Array> {
-  const request: TTSRequest = {
-    text: normalizedTTSText(text, "lesson"),
-    speed: "natural",
-    purpose: "lesson",
-  };
-  const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
-  const endpoint = new URL(
-    `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceID)}`,
-  );
-  endpoint.searchParams.set("output_format", outputFormat);
   for (let attempt = 1;; attempt += 1) {
-    const response = await fetch(endpoint, {
+    const response = await fetch(ttsEndpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "audio/mpeg", "xi-api-key": key },
-      body: JSON.stringify({
-        text: request.text,
-        model_id: tagalogTTSModelID,
-        language_code: tagalogLanguageCode,
-        seed: deterministicSpeechSeed(voiceID, request),
-        apply_text_normalization: "auto",
-        voice_settings: consistentVoiceSettings("natural"),
-      }),
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        "Content-Type": "application/json",
+        Accept: "audio/mpeg",
+        "x-kumusta-operations-prewarm": "true",
+      },
+      body: JSON.stringify({ text, speed: "natural", purpose: "lesson" }),
     });
-    if (response.ok) {
+    if (response.ok && (response.headers.get("content-type") ?? "").startsWith("audio/")) {
       const data = new Uint8Array(await response.arrayBuffer());
       if (data.byteLength < 512) throw new Error(`Suspiciously small clip for "${text}"`);
       return data;
     }
     const body = await response.text();
     if (attempt >= 3 || (response.status < 500 && response.status !== 429)) {
-      throw new Error(`ElevenLabs ${response.status} for "${text}": ${body.slice(0, 200)}`);
+      throw new Error(`TTS ${response.status} for "${text}": ${body.slice(0, 200)}`);
     }
     await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
   }
@@ -161,7 +152,7 @@ for (const file of lessonFiles) {
   lessons.push(JSON.parse(await Deno.readTextFile(`${lessonsDirectory}/${file}`)));
 }
 
-const key = dryRun ? "" : await apiKey();
+const key = dryRun ? "" : await serviceRoleKey();
 let generated = 0;
 let reused = 0;
 let characters = 0;

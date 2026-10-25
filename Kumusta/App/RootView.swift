@@ -30,18 +30,6 @@ struct RootView: View {
                     RevenueCatHostedPaywallView(
                         onPremiumAccess: appState.beginPremiumAccountSetup,
                         onSubscriptionPurchased: appState.markSubscriptionPurchased,
-                        onDismissed: appState.showPaywallFallback
-                    )
-                        .transition(
-                            reduceMotion
-                                ? .opacity
-                                : .move(edge: .bottom).combined(with: .opacity)
-                        )
-                case .paywallFallback:
-                    RevenueCatHostedPaywallView(
-                        offeringIdentifier: "Fallback",
-                        onPremiumAccess: appState.beginPremiumAccountSetup,
-                        onSubscriptionPurchased: appState.markSubscriptionPurchased,
                         onDismissed: appState.showPaywallExit
                     )
                         .transition(
@@ -141,7 +129,7 @@ private struct LaunchView: View {
             BuddyMotionView(motion: .launch, size: 184)
                 .frame(height: 184)
             Text("Kumusta")
-                .font(.custom("Patriot-Black", size: 30, relativeTo: .largeTitle))
+                .font(.custom("Fredoka-Bold", size: 30, relativeTo: .largeTitle))
                 .foregroundStyle(KumustaColors.ink)
             Text(L("Your Tagalog is warming up"))
                 .scaledFont(15, weight: .medium, design: .rounded)

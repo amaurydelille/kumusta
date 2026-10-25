@@ -75,6 +75,12 @@ actor RevenueCatPurchaseService: PurchaseService {
         }
     }
 
+    func logOut() async {
+        configuredAppUserID = nil
+        guard isConfigured, Purchases.isConfigured, !Purchases.shared.isAnonymous else { return }
+        _ = try? await Purchases.shared.logOut()
+    }
+
     /// Re-reads IDFA/IDFV/IP after the ATT prompt resolves. RevenueCat's
     /// docs ask for a second collection once tracking is granted so `$idfa`
     /// is populated for its attribution integrations.

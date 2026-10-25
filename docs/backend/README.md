@@ -3,43 +3,43 @@
 This directory documents the isolated Kumusta data model deployed to Supabase
 project `vpitjvtfzpqfnqgzcpla`.
 
-Kumusta shares that project with another application. Every Kumusta table,
-index, trigger, policy, and helper function is therefore prefixed
-`kumusta_`. Existing non-Kumusta objects must not be modified as part of a
-Kumusta deployment.
+The project is dedicated to Kumusta. Every Kumusta table, index, trigger,
+policy, and helper function is still prefixed `kumusta_`. No other Supabase
+project may be targeted by a Kumusta command, config or script.
 
 ## Documents
 
 - [Schema and data dictionary](schema.md)
 - [Row-level security matrix](rls.md)
 - [Deployment and operations runbook](runbook.md)
-- [Mistral production runbook](MISTRAL_RUNBOOK.md)
-- [Catalog parity verification](catalog-verification.md)
+- [Lesson generation runbook](LESSON_GENERATION_RUNBOOK.md)
 
 ## Source of truth
 
 Ordered migrations under `../../supabase/migrations/` are the source of truth.
-The current remote versions are:
+Schema changes go in new migrations; applied migrations are never edited. The
+history starts with one squashed baseline,
+`20261024000000_kumusta_baseline.sql`, followed by smaller migrations for the
+TTS storage bucket, XP rules, client-privilege resets, the Tagalog language
+core, and the authored Tagalog roadmap seed.
 
-1. `20260730233140_create_kumusta_core_schema_v1`
-2. `20260730233253_harden_kumusta_rls_initplans_v1`
-3. `20260731000200_add_kumusta_api_quota_rpc_v1`
-4. `20260731000500_align_kumusta_product_contract_v1`
-5. `20260731001000_harden_kumusta_event_integrity_v1`
-6. `20260731022000_index_kumusta_review_session_owner_v1`
-7. `20260731093000_add_kumusta_adaptive_learning_v1`
-8. `20260731101500_index_kumusta_adaptive_foreign_keys_v1`
-9. `20260731114500_harden_kumusta_adaptive_runtime_v1`
-
-The adaptive migrations add seven private service-role-only tables, one private
-project-quota table, bounded feedback/review/generation RPCs, user/project quota
-scopes, generation leases, transactional batch persistence, composite ownership
-foreign keys, and reverse indexes found by the database advisor.
+The baseline includes the private service-role-only adaptive tables, the
+project-quota table, bounded feedback/review/generation RPCs, user/project
+quota scopes, generation leases, transactional batch persistence, and composite
+ownership foreign keys. `20261025000000_tagalog_language_core` makes the schema
+Tagalog-only: it drops the inherited language-variant columns and checks,
+switches levels to beginner/intermediate/advanced and goals to include
+`lifeInThePhilippines`,
+renames the vocabulary columns to `tagalog`/`usage_example_tl`, and adds
+`goal_tags` to roadmap lessons. Every migration that creates tables, views or
+functions revokes client privileges explicitly; run
+`supabase/tests/baseline_security.sql` after pushing.
 
 ## Security boundaries
 
 - Mobile clients receive only the Supabase URL and a publishable key.
-- ElevenLabs, Mistral, RevenueCat webhook, and Supabase service-role secrets
+- ElevenLabs, Soniox, DashScope, Anthropic, RevenueCat webhook, and Supabase
+  service-role secrets
   remain in Edge Function secrets.
 - Anonymous Supabase Auth identities receive no private learner-table access;
   analytics permits only bounded, owner-scoped event inserts.
@@ -55,13 +55,9 @@ foreign keys, and reverse indexes found by the database advisor.
 
 ## Provider boundaries
 
-Only the following female ElevenLabs voices are valid:
-
-| Accent | Voice ID |
-| --- | --- |
-| Southern | `6Xq32rHt6oAu98TBDKfr` |
-| Northern | `LD1UihCXvSlUL4h8DOmk` |
-
-The database enforces this allowlist and accent compatibility in
-`kumusta_learning_preferences`. An Edge Function must enforce the same
-allowlist before contacting ElevenLabs.
+Kumusta speaks with one Tagalog ElevenLabs voice, `qZLi51uuzx5jdu6q0ayz`,
+configured server-side and overridable only through the `KUMUSTA_TTS_VOICE_ID`
+Edge Function secret. Clients never send a voice ID. The TTS cache accepts any
+well-formed ElevenLabs voice ID (`^[A-Za-z0-9]{16,40}$`) and includes the voice
+in its cache key, so changing the voice never serves audio from the previous
+one.

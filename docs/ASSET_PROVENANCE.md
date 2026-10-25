@@ -2,39 +2,21 @@
 
 ## Tuko mascot
 
-Source artwork supplied by the owner on 2026-10-25: `marketing/tuko-source.png`
-(1254 px square, white background). The static buddy image was cut out from it
-with an edge flood-fill matte and resized:
+Source artwork supplied by the owner on 2026-10-25: `art/tuko-source.png`
+(1254 px square, white background). Every mascot asset is derived from it:
 
-- `Kumusta/Resources/Assets.xcassets/TukoBuddy.imageset/tuko-buddy@1x.png` (and `@2x`, `@3x`)
-
-Still to redraw as Tuko: the puppet rig (`Rig*`, `RigV2*`), the state sprites
-(`Mascot*Sprite`), the conversation mascots, the roadmap illustrations and the
-app icon, which all still show the buffalo below.
-
-## Bé Trâu mascot (inherited from VietBuddy, being replaced)
-
-Generated specifically for Kumusta using OpenAI image generation on
-2026-07-31. Integrated files:
-
-- The original static buddy image (now replaced by Tuko)
-- `Kumusta/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png`
-
-Anchor prompt:
-
-> “Bé Trâu,” an extremely friendly baby water buffalo with a rounded
-> bean-shaped body, oversized floppy ears, tiny ivory horns, huge warm eyes,
-> rosy cheeks, and a rust-red neckerchief; loose hand-inked outlines, subtle
-> line wobble, flat gouache and watercolor fills, premium children’s
-> picture-book character; no text or logo.
-
-The transparent asset was extracted from the flat chroma-key output using a
-soft matte, contracted edge, and despill pass. The icon is a separate
-close-crop generation based on the same character identity, with a coral
-background and no system-applied corner mask baked into the artwork.
-
-The original bánh mì asset was removed from the catalog on 2026-08-21; it was
-never referenced at runtime. Runtime UI and the app icon use Bé Trâu.
+- The static buddy image was cut out with an edge flood-fill matte and resized:
+  `Kumusta/Resources/Assets.xcassets/TukoBuddy.imageset/tuko-buddy@1x.png`
+  (and `@2x`, `@3x`).
+- The state poses, launch art and app icon were generated with the source as
+  a character reference, using the prompt pack in `art/tuko-prompts.md`
+  (prompts recorded in `art/tuko/prompts.json`). The state sprites
+  (`Mascot*Sprite`) are assembled from those poses by
+  `scripts/build_mascot_assets.py`.
+- The puppet rig is cut from the master by `scripts/build_tuko_master_rig.swift`
+  into `art/tuko/` and installed by `scripts/import_tuko_rig.py` as
+  the `RigV2*` and `RigMouth*` image sets plus the `ConversationRigV2` manifest.
+  `art/tuko/README.md` documents the registration and validation.
 
 ## Correct-answer feedback
 

@@ -51,7 +51,8 @@ struct LivePracticeGateway: Sendable {
 
     /// A request can stall on a dead pooled connection and never reach the
     /// server; a timed-out attempt is retried once on a fresh connection when
-    /// the action is safe to repeat.
+    /// the action is safe to repeat. The retry needs its own session: the
+    /// shared one would hand it the same dead connection.
     func post(
         _ body: some Encodable, function: String = LivePracticeGateway.pipelineFunction, timeout: TimeInterval = 8,
         retryOnTimeout: Bool = true
@@ -62,7 +63,9 @@ struct LivePracticeGateway: Sendable {
         do {
             (data, response) = try await URLSession.shared.data(for: request)
         } catch let error as URLError where retryOnTimeout && error.code == .timedOut {
-            (data, response) = try await URLSession.shared.data(for: request)
+            let fresh = URLSession(configuration: .ephemeral)
+            defer { fresh.finishTasksAndInvalidate() }
+            (data, response) = try await fresh.data(for: request)
         }
         guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
         guard http.statusCode == 200 else {
@@ -76,7 +79,9 @@ struct LivePracticeGateway: Sendable {
 
     func allowance(function: String = LivePracticeGateway.pipelineFunction) async throws -> LivePracticeAllowance {
         struct Request: Encodable { let action = "allowance" }
-        let data = try await post(Request(), function: function)
+        // The server answers in well under a second; a longer wait only
+        // delays the retry on a fresh connection.
+        let data = try await post(Request(), function: function, timeout: 5)
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom { decoder in
             let text = try decoder.singleValueContainer().decode(String.self)

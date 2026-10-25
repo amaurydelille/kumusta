@@ -55,7 +55,7 @@ only if a web client is introduced. Do not use `*`.
 
 ## Verification before deployment
 
-From `mobile-app/kumusta`:
+From the repository root:
 
 ```sh
 deno fmt --check supabase/functions/kumusta-account-data

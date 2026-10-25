@@ -43,7 +43,7 @@ final class KumustaLaunchTests: XCTestCase {
         // No accent step: Kumusta teaches one Tagalog.
         XCTAssertFalse(app.buttons["Use this accent"].exists)
         tapButton(containing: "Talk with family", in: app)
-        tapButton(containing: "I know some words", in: app)
+        tapButton(containing: "I can handle basics", in: app)
         XCTAssertTrue(app.staticTexts["What can you repeat most days?"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.textFields["First name or nickname"].exists)
         XCTAssertFalse(app.staticTexts["Can you catch the meaning?"].exists)
@@ -58,7 +58,7 @@ final class KumustaLaunchTests: XCTestCase {
         XCTAssertFalse(app.alerts.firstMatch.exists)
     }
 
-    /// The level- and accent-specific welcome lesson and the comparison screen
+    /// The level-specific welcome lesson and the comparison screen
     /// run right before the paywall; skipping the lesson still reaches both.
     func testOnboardingWelcomeLessonMatchesLevelAndLeadsToPaywall() {
         let app = XCUIApplication()
@@ -72,18 +72,17 @@ final class KumustaLaunchTests: XCTestCase {
         nameField.typeText("Alex")
         // The keyboard's return key is also labelled Continue.
         app.buttons["Continue"].firstMatch.tap()
-        tapButton(containing: "Northern", in: app)
         tapButton(containing: "Talk with family", in: app)
-        tapButton(containing: "I know some words", in: app)
+        tapButton(containing: "I can handle basics", in: app)
         tapButton(containing: "7 minutes a day", in: app)
 
-        // Plan building runs for a few seconds, then the café lesson opens.
+        // Plan building runs for a few seconds, then the merienda lesson opens.
         XCTAssertTrue(app.staticTexts["From words to real replies"].waitForExistence(timeout: 20))
-        XCTAssertTrue(app.staticTexts["Cho em một cốc nâu đá"].exists, "Northern wording expected")
+        XCTAssertTrue(app.staticTexts["Pabili po ng dalawang turon"].exists, "Intermediate lesson expected")
         captureSettled("Welcome lesson intro", app: app)
 
         tapButton(containing: "LET", in: app)
-        XCTAssertTrue(app.staticTexts["At the counter, you are “em”"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["At the counter, call them Kuya or Ate"].waitForExistence(timeout: 5))
         captureSettled("Welcome lesson teach", app: app)
 
         app.buttons["Close lesson"].tap()

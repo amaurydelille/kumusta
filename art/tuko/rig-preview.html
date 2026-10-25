@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tuko — master-cut rig review</title>
+<style>
+  *{box-sizing:border-box}body{margin:24px;background:#f4f2ed;color:#26362b;font:15px system-ui;line-height:1.5}
+  h1{margin-bottom:8px}p{max-width:850px}main{display:grid;grid-template-columns:minmax(300px,650px) minmax(250px,1fr);gap:32px;align-items:start}
+  canvas{width:100%;height:auto;background:conic-gradient(#ddd 25%,#eee 0 50%,#ddd 0 75%,#eee 0) 0 0/24px 24px}
+  label{display:block;margin:16px 0}input[type=range]{width:100%}button,select{font:inherit;padding:8px}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}.gallery img{width:100%;max-height:230px;object-fit:contain}.gallery figure{margin:0;background:#e4e3dc;padding:10px}.gallery figcaption{font:12px monospace}
+  @media(max-width:760px){main{grid-template-columns:1fr}}
+</style>
+<h1>Tuko — master-cut rig</h1>
+<p>All layers share the original 1254 × 1254 master canvas. Move a joint, switch mouths, or overlay the original to inspect alignment. <a href="rig-manifest.json">Bounds and pivots</a> · <a href="README.md">Build notes</a></p>
+<main>
+  <canvas id="view" width="1254" height="1254" aria-label="Assembled Tuko rig"></canvas>
+  <section>
+    <label>Mouth <select id="mouth"></select></label>
+    <label>Joint <select id="joint"><option>Head</option><option>ArmLeft</option><option>ArmRight</option><option>Tail</option><option>LegLeft</option><option>LegRight</option></select></label>
+    <label>Rotation <output id="angleLabel">0°</output><input id="angle" type="range" min="-20" max="20" value="0"></label>
+    <label><input id="overlay" type="checkbox"> Overlay original master at 50%</label>
+    <label><input id="hideFace" type="checkbox"> Hide eyes, brows and mouth</label>
+    <label><input id="hideArms" type="checkbox"> Hide arms and scarf to inspect body</label>
+    <button id="reset">Reset pose</button>
+    <p id="status">Loading layers…</p>
+    <p>The underpaintings are edits of the full master. The cutouts preserve its visible artwork. Transparent full-canvas layers are in <code>rig-alpha/</code>; tightly cropped layers plus manifest offsets are in <code>rig-cropped/</code>.</p>
+  </section>
+</main>
+<h2>Master and reconstruction</h2><div class="gallery"><figure><a href="reference.png"><img src="reference.png" alt="Original master"></a><figcaption>Original master</figcaption></figure><figure><a href="review/assembled.png"><img src="review/assembled.png" alt="Reassembled cutouts"></a><figcaption>Reassembled cutouts</figcaption></figure><figure><a href="face-underpainting.png"><img src="face-underpainting.png" alt="Face underpainting"></a><figcaption>Face underpainting edit</figcaption></figure><figure><a href="body-underpainting.png"><img src="body-underpainting.png" alt="Body underpainting"></a><figcaption>Body underpainting edit</figcaption></figure></div>
+<h2>Speech shapes on the character</h2><div id="mouthGallery" class="gallery"></div>
+<script>
+const names=['Tail','LegLeft','LegRight','Body','ArmLeft','ArmRight','Head','Scarf','EyeLeft','EyeRight','BrowLeft','BrowRight','Smile'];
+const pivots={Head:[583,586],ArmLeft:[445,641],ArmRight:[671,697],Tail:[785,920],LegLeft:[477,916],LegRight:[704,921]};
+const labels=['00 · resting smile','01 · visibly parted','02 · slightly open','03 · medium open','04 · happy open','05 · oh','06 · oo','07 · open ee','08 · f/v','09 · m/b/p','10 · raised tongue l/th','11 · big grin'];
+const images={}, mouthImages=[];let master;
+const canvas=document.getElementById('view'),ctx=canvas.getContext('2d');
+const mouth=document.getElementById('mouth'),joint=document.getElementById('joint'),angle=document.getElementById('angle'),overlay=document.getElementById('overlay'),hideFace=document.getElementById('hideFace'),hideArms=document.getElementById('hideArms');
+for(let i=0;i<12;i++){
+ const filename=`mouth-${String(i).padStart(2,'0')}.png`;
+ const o=document.createElement('option');o.value=i;o.textContent=labels[i];mouth.append(o);
+ const f=document.createElement('figure'),a=document.createElement('a'),im=document.createElement('img'),cap=document.createElement('figcaption');
+ a.href=`review/${filename}`;im.src=a.href;im.alt=labels[i];im.loading='lazy';cap.textContent=labels[i];a.append(im);f.append(a,cap);document.getElementById('mouthGallery').append(f);
+}
+function load(src){return new Promise((resolve,reject)=>{const im=new Image;im.onload=()=>resolve(im);im.onerror=()=>reject(new Error(`Cannot load ${src}`));im.src=src})}
+function draw(){
+ ctx.clearRect(0,0,1254,1254);const selected=joint.value,degrees=Number(angle.value);document.getElementById('angleLabel').textContent=`${degrees}°`;
+ for(const name of names){
+  const facial=['EyeLeft','EyeRight','BrowLeft','BrowRight','Smile'].includes(name);
+  if(hideFace.checked&&facial)continue;if(hideArms.checked&&['ArmLeft','ArmRight','Scarf'].includes(name))continue;
+  const im=name==='Smile'?mouthImages[Number(mouth.value)]:images[name];if(!im)continue;
+  ctx.save();if(name===selected||(selected==='Head'&&facial)){const [x,y]=pivots[selected];ctx.translate(x,y);ctx.rotate(degrees*Math.PI/180);ctx.translate(-x,-y)}
+  ctx.drawImage(im,0,0);ctx.restore();
+ }
+ if(overlay.checked&&master){ctx.globalAlpha=.5;ctx.drawImage(master,0,0);ctx.globalAlpha=1}
+}
+Promise.all([...names.map(async n=>{images[n]=await load(`rig-alpha/${n}.png`)}),...labels.map(async(_,i)=>{mouthImages[i]=await load(`mouths-alpha/mouth-${String(i).padStart(2,'0')}.png`)}),load('review/master-transparent.png').then(im=>master=im)]).then(()=>{document.getElementById('status').textContent='13 rig layers and 12 registered mouths loaded.';draw()}).catch(e=>document.getElementById('status').textContent=e.message);
+for(const el of [mouth,joint,angle,overlay,hideFace,hideArms])el.addEventListener('input',draw);
+document.getElementById('reset').onclick=()=>{angle.value=0;mouth.value=0;overlay.checked=false;hideFace.checked=false;hideArms.checked=false;draw()};
+</script>
+</html>

@@ -1,0 +1,98 @@
+[
+  {
+    "articulationDepth" : 0,
+    "file" : "mouth-00.png",
+    "height" : 80,
+    "width" : 213,
+    "x" : 454,
+    "y" : 403
+  },
+  {
+    "articulationDepth" : 15,
+    "file" : "mouth-01.png",
+    "height" : 66,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 27,
+    "file" : "mouth-02.png",
+    "height" : 72,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 53,
+    "file" : "mouth-03.png",
+    "height" : 93,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 88,
+    "file" : "mouth-04.png",
+    "height" : 127,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 76,
+    "file" : "mouth-05.png",
+    "height" : 87,
+    "width" : 101,
+    "x" : 510,
+    "y" : 427
+  },
+  {
+    "articulationDepth" : 43,
+    "file" : "mouth-06.png",
+    "height" : 53,
+    "width" : 53,
+    "x" : 534,
+    "y" : 427
+  },
+  {
+    "articulationDepth" : 46,
+    "file" : "mouth-07.png",
+    "height" : 91,
+    "width" : 235,
+    "x" : 443,
+    "y" : 397
+  },
+  {
+    "articulationDepth" : 9,
+    "file" : "mouth-08.png",
+    "height" : 66,
+    "width" : 212,
+    "x" : 454,
+    "y" : 402
+  },
+  {
+    "articulationDepth" : 7,
+    "file" : "mouth-09.png",
+    "height" : 68,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 66,
+    "file" : "mouth-10.png",
+    "height" : 104,
+    "width" : 213,
+    "x" : 454,
+    "y" : 400
+  },
+  {
+    "articulationDepth" : 55,
+    "file" : "mouth-11.png",
+    "height" : 97,
+    "width" : 235,
+    "x" : 443,
+    "y" : 399
+  }
+]

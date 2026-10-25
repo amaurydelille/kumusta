@@ -5,7 +5,7 @@
 - Project ref: `vpitjvtfzpqfnqgzcpla`
 - API URL: `https://vpitjvtfzpqfnqgzcpla.supabase.co`
 - Schema: `public`
-- Migration directory: `mobile-app/kumusta/supabase/migrations`
+- Migration directory: `supabase/migrations`
 
 Use a current publishable key in the iOS configuration. Never commit the
 service-role key or third-party provider secrets. Publishable keys can rotate,
@@ -16,21 +16,24 @@ workflow instead of copying it into documentation.
 
 1. Install the Supabase CLI.
 2. Authenticate with `supabase login`.
-3. From `mobile-app/kumusta`, initialize/link only if not already configured:
+3. From the repository root, link only if not already configured
+   (`supabase/.temp/project-ref` already points at Kumusta):
 
 ```bash
-supabase link --project-ref vpitjvtfzpqfnqgzcpla
+supabase link --project-ref vpitjvtfzpqfnqgzcpla --workdir .
 ```
 
-Prefer a local stack or Supabase development branch for new migrations. The
-shared remote project contains unrelated production-like data.
+Pass `--workdir .` (or `--project-ref vpitjvtfzpqfnqgzcpla`) on every Supabase
+CLI call so no command can reach another project. Prefer a local stack or
+Supabase development branch for new migrations.
 
 ## Apply
 
-From `mobile-app/kumusta`:
+From the repository root:
 
 ```bash
-supabase db push --include-all
+supabase db push --workdir .
+supabase db query --linked --workdir . -f supabase/tests/baseline_security.sql
 ```
 
 Never paste service-role or provider secrets into a migration. Apply migrations
@@ -42,7 +45,8 @@ policies that are intentionally recreated use explicit drops where required.
 
 After deployment:
 
-1. Confirm exactly 23 `public.kumusta_%` tables exist and RLS is enabled.
+1. Confirm every `public.kumusta_%` table has RLS enabled and
+   `supabase/tests/baseline_security.sql` passes.
 2. Compare policy names/commands with `rls.md`.
 3. Confirm `anon` has no Kumusta table privileges.
 4. Confirm `authenticated` has no privileges on
@@ -70,12 +74,15 @@ is `SECURITY DEFINER` with a fixed `pg_catalog, public` search path.
 Only `service_role` has `EXECUTE`; `anon` and `authenticated` are explicitly
 revoked. After applying the base quota migration and the adaptive-learning
 migration, verify the function catalog, fixed search path, approved scopes
-(including TTS daily, Mistral generation daily, and adaptive mutation
-minute/daily scopes), and these three role privileges before deploying provider
+(`elevenlabs_tts`/`_daily`, `elevenlabs_stt`/`_daily` for Soniox speaking
+checks, `lessons`/`_daily`, `lessons_mutation`/`_daily`, and
+`revenuecat_sync`), and these three role privileges before deploying provider
 functions. Also verify `kumusta_consume_project_api_quota` is service-role-only
-and permits only `elevenlabs_tts_project_daily`.
+and permits only `elevenlabs_tts_project_daily` and
+`elevenlabs_stt_project_daily`.
 
-The final hardening migration adds a 120-second generation-lease RPC,
+The baseline includes a generation-lease RPC (the lesson function requests a
+180-second lease),
 transactional generated-lesson/queue persistence, and composite tenant
 ownership foreign keys. Verify that a stale lease recovers, a forced queue
 failure rolls back the full batch, and mismatched service-role `user_id` writes
@@ -83,25 +90,28 @@ fail before deploying the adaptive function.
 
 ## Edge Function contract
 
-Create new prefixed functions; do not reuse the existing functions belonging
-to the other application:
+Every function is prefixed `kumusta-`:
 
-- `kumusta-elevenlabs-tts`
-- `kumusta-mistral-evaluate`
-- `kumusta-mistral-lessons`
-- `kumusta-revenuecat-webhook`
+- `kumusta-elevenlabs-tts` (lesson and vocabulary audio)
+- `kumusta-lesson-stt` and `kumusta-lesson-stt-token` (Soniox speaking checks)
+- `kumusta-lessons` (adaptive Tagalog lessons, Qwen)
+- `kumusta-live-pipeline` (live practice)
+- `kumusta-account-data`, `kumusta-award-xp`, `kumusta-curriculum-admin`
+- `kumusta-revenuecat-webhook`, `kumusta-revenuecat-webhook-admin`
+- `kumusta-email-worker`
 
-The TTS and Mistral functions must require a valid user JWT, enforce bounded
+Deploy with
+`supabase functions deploy --project-ref vpitjvtfzpqfnqgzcpla --use-api`.
+
+The provider functions must require a valid user JWT, enforce bounded
 inputs, set request timeouts, and return structured errors without provider
 details. Provider-consuming paths check active entitlement and consume a
 service-side rate limit. Adaptive completion and review paths do not call the
 provider; they remain authenticated, owner-checked, bounded, and idempotent so a
 finished rep is not lost if entitlement just expired.
 
-The ElevenLabs proxy must allow only:
-
-- `6Xq32rHt6oAu98TBDKfr` for Southern
-- `LD1UihCXvSlUL4h8DOmk` for Northern
+The ElevenLabs proxy never accepts a voice ID from the client. It uses the one
+Tagalog voice, `qZLi51uuzx5jdu6q0ayz`, or the `KUMUSTA_TTS_VOICE_ID` override.
 
 The RevenueCat webhook cannot use Supabase JWT verification because RevenueCat
 is the caller. It must instead:
@@ -115,14 +125,16 @@ is the caller. It must instead:
 
 Store these only as Supabase function secrets:
 
-- `ELEVENLABS_API_KEY`
-- `MISTRAL_API_KEY`
+- `KUMUSTA_TTS_API_KEY` (ElevenLabs) and optional `KUMUSTA_TTS_VOICE_ID`
+- `KUMUSTA_LESSON_STT_API_KEY` and `KUMUSTA_LESSON_AGENT_API_KEY` (Soniox)
+- `KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY` (Anthropic)
+- `DASHSCOPE_API_KEY` and optional `QWEN_LESSON_MODEL` (Qwen)
 - `REVENUECAT_WEBHOOK_AUTH`
 - `REVENUECAT_SECRET_API_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY` when the runtime does not inject it
 
-Adaptive Mistral deployment, monitoring, fallback, and incident procedures live
-in `MISTRAL_RUNBOOK.md`.
+Adaptive lesson deployment, monitoring, fallback, and incident procedures live
+in `LESSON_GENERATION_RUNBOOK.md`.
 
 ## Rollback and incident response
 
@@ -142,7 +154,7 @@ included in the account-deletion workflow.
 
 ## Catalog parity note
 
-Use the ordered local migrations and `catalog-verification.md` to compare the
-target catalog. Never infer parity from migration filenames alone; verify table,
+Use the ordered local migrations and `supabase/tests/baseline_security.sql` to
+compare the target catalog. Never infer parity from migration filenames alone; verify table,
 index, trigger, policy, function, search-path, and grant state after every
 production push.

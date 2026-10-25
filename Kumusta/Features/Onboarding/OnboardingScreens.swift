@@ -503,41 +503,10 @@ struct OnboardingPlanBuildingScreen: View {
         let detail: String
     }
 
-    private struct PlanReview: Identifiable {
-        let title: String
-        let quote: String
-        let reviewer: String
-        let date: String
-
-        var id: String { reviewer }
-    }
-
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var statusIndex = 0
     @State private var completedComponents = 0
-    @State private var reviewIndex = 0
     @State private var hasStarted = false
-
-    private let reviews = [
-        PlanReview(
-            title: "Can’t recommend enough",
-            quote: "The app skyrocketed my Tagalog from A2 to C1 in a few weeks.",
-            reviewer: "baddiewithchronicillness",
-            date: "Aug 26, 2026"
-        ),
-        PlanReview(
-            title: "Life changing",
-            quote: "The voices just sound so natural, it recreates real life Tagalog situations.",
-            reviewer: "AliceChenGM",
-            date: "Aug 20, 2026"
-        ),
-        PlanReview(
-            title: "its a no brainer",
-            quote: "the before and after is incredible. the best part is the app focusing on hearing and speaking.",
-            reviewer: "timdll",
-            date: "Aug 24, 2026"
-        )
-    ]
 
     let draft: OnboardingDraft
     let onFinished: () async -> Void
@@ -598,8 +567,6 @@ struct OnboardingPlanBuildingScreen: View {
                 statusRoller
             }
 
-            reviewCarousel
-
             VStack(spacing: 10) {
                 ForEach(components) { component in
                     planComponentRow(component)
@@ -634,99 +601,6 @@ struct OnboardingPlanBuildingScreen: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(statuses[statusIndex])
         .accessibilityAddTraits(.updatesFrequently)
-    }
-
-    private var reviewCarousel: some View {
-        VStack(spacing: 9) {
-            TabView(selection: $reviewIndex) {
-                ForEach(reviews.indices, id: \.self) { index in
-                    appStoreReviewCard(reviews[index])
-                        .tag(index)
-                }
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .frame(height: 184)
-            .accessibilityLabel(L("App Store reviews"))
-
-            HStack(spacing: 6) {
-                ForEach(reviews.indices, id: \.self) { index in
-                    Circle()
-                        .fill(index == reviewIndex ? KumustaColors.accent : KumustaColors.line)
-                        .frame(width: 6, height: 6)
-                }
-            }
-            .accessibilityHidden(true)
-
-            HStack(spacing: 8) {
-                Image(systemName: "person.3.fill")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(KumustaColors.accentDeep)
-                Text(L("Join a community of"))
-                    .foregroundStyle(KumustaColors.muted)
-                Text(L("1,000+ students"))
-                    .foregroundStyle(KumustaColors.ink)
-                    .fontWeight(.bold)
-            }
-            .font(.subheadline)
-            .padding(.horizontal, 13)
-            .padding(.vertical, 8)
-            .background(KumustaColors.accentSoft.opacity(0.22), in: Capsule())
-            .accessibilityElement(children: .combine)
-            .frame(maxWidth: .infinity)
-        }
-        .frame(maxWidth: .infinity)
-    }
-
-    private func appStoreReviewCard(_ review: PlanReview) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            HStack(alignment: .center) {
-                HStack(spacing: 3) {
-                    ForEach(0..<5, id: \.self) { _ in
-                        Image(systemName: "star.fill")
-                    }
-                }
-                .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(Color(hex: 0xE5A42D))
-                .accessibilityLabel(L("5 out of 5 stars"))
-
-                Spacer()
-
-                Label("App Store", systemImage: "apple.logo")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(KumustaColors.muted)
-            }
-
-            Text(review.title)
-                .font(.headline.weight(.bold))
-                .foregroundStyle(KumustaColors.ink)
-
-            Text("“\(review.quote)”")
-                .font(.subheadline)
-                .foregroundStyle(KumustaColors.ink)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(3)
-
-            HStack(spacing: 8) {
-                Text(review.reviewer)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                Spacer(minLength: 4)
-                Text(review.date)
-                    .fixedSize()
-            }
-            .font(.caption.weight(.medium))
-            .foregroundStyle(KumustaColors.muted)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(KumustaColors.surface, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .stroke(KumustaColors.line.opacity(0.9), lineWidth: 1)
-        }
-        .shadow(color: KumustaColors.ink.opacity(0.06), radius: 10, x: 0, y: 5)
-        .accessibilityElement(children: .combine)
     }
 
     private func planComponentRow(_ component: PlanComponent) -> some View {
@@ -809,7 +683,6 @@ struct OnboardingPlanBuildingScreen: View {
             withAnimation(reduceMotion ? nil : KumustaMotion.celebrate) {
                 completedComponents = nextComponent
                 statusIndex = min(nextComponent, statuses.count - 1)
-                reviewIndex = min(nextComponent, reviews.count - 1)
             }
             if nextComponent == components.count {
                 SuccessFeedbackPlayer.shared.play()

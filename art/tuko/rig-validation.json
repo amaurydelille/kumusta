@@ -1,0 +1,28 @@
+{
+  "exactMasterOpaquePixelsByPart" : {
+    "ArmLeft" : 28337,
+    "ArmRight" : 22488,
+    "BrowLeft" : 1113,
+    "BrowRight" : 1186,
+    "EyeLeft" : 22527,
+    "EyeRight" : 25042,
+    "LegLeft" : 41248,
+    "LegRight" : 42315,
+    "Scarf" : 31966,
+    "Smile" : 1931
+  },
+  "headSilhouetteMismatchPixelsAboveJaw" : 0,
+  "masterCanvasUnscaled" : true,
+  "opaqueEdgeRoundingDifferencesByPart" : {
+    "ArmLeft" : 0,
+    "ArmRight" : 0,
+    "BrowLeft" : 0,
+    "BrowRight" : 0,
+    "EyeLeft" : 0,
+    "EyeRight" : 0,
+    "LegLeft" : 0,
+    "LegRight" : 0,
+    "Scarf" : 0,
+    "Smile" : 0
+  }
+}

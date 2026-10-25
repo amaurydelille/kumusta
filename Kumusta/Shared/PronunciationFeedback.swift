@@ -574,7 +574,7 @@ private struct SyllableChip: View {
     private var foreground: Color {
         switch mark {
         case .wrong: .white
-        case .missing: KumustaColors.accentDeep
+        case .missing: KumustaColors.errorDeep
         case .extra: KumustaColors.muted
         case .correct, .spelling: KumustaColors.ink
         }
@@ -586,7 +586,7 @@ private struct SyllableChip: View {
         // they stay neutral so the mistakes stand out.
         case .correct: isTarget ? KumustaColors.success.opacity(0.18) : KumustaColors.surface
         case .spelling: KumustaColors.caution.opacity(0.26)
-        case .wrong: KumustaColors.accent
+        case .wrong: KumustaColors.error
         case .missing: .clear
         case .extra: KumustaColors.surfaceMuted
         }
@@ -596,7 +596,7 @@ private struct SyllableChip: View {
         switch mark {
         case .correct: isTarget ? KumustaColors.success.opacity(0.55) : KumustaColors.line
         case .spelling: KumustaColors.caution
-        case .wrong, .missing: KumustaColors.accent
+        case .wrong, .missing: KumustaColors.error
         case .extra: KumustaColors.line
         }
     }
@@ -607,7 +607,7 @@ private extension PronunciationReview.Mark {
         switch self {
         case .correct: KumustaColors.success
         case .spelling: KumustaColors.caution
-        case .wrong, .missing: KumustaColors.accent
+        case .wrong, .missing: KumustaColors.error
         case .extra: KumustaColors.line
         }
     }

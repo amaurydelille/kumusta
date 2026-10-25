@@ -4,7 +4,8 @@ Status: accepted
 
 ## Context
 
-ElevenLabs and Mistral require secret credentials, usage controls, and a stable
+ElevenLabs (TTS), Soniox (speech-to-text), Qwen (lesson generation) and
+Anthropic (live conversation) require secret credentials, usage controls, and a stable
 product policy independent of mobile release cadence.
 
 ## Decision
@@ -13,7 +14,7 @@ All provider traffic passes through authenticated Supabase Edge Functions.
 Clients send enums and bounded content, not provider-specific model or voice
 identifiers. The server owns allowlists, prompts, quotas, and logging.
 
-Mistral may produce bounded lesson candidates and text feedback only. Generated
+The lesson model may produce bounded lesson candidates only. Generated
 lessons pass a strict provider JSON schema, a local server validator, and a
 second app-side contract check before presentation. Adaptation mathematics,
 queue ownership, review scheduling, IDs, entitlements, and billing remain

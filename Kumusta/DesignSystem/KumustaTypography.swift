@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum KumustaTypography {
-    static let patriotBrand = Font.custom("Patriot-Black", size: 22, relativeTo: .headline)
+    static let brand = Font.custom("Fredoka-Bold", size: 22, relativeTo: .headline)
     static let hero = Font.system(.largeTitle, design: .rounded, weight: .bold)
     static let title = Font.system(.title, design: .rounded, weight: .bold)
     static let title2 = Font.system(.title2, design: .rounded, weight: .bold)

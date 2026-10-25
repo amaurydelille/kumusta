@@ -126,7 +126,7 @@ export async function requireActiveEntitlement(
   }
   const { data, error } = await admin
     .from("kumusta_entitlements")
-    .select("is_active,expires_at")
+    .select("is_active,expires_at,will_renew")
     .eq("user_id", userID)
     .eq("entitlement_id", entitlementID)
     .maybeSingle();
@@ -139,9 +139,13 @@ export async function requireActiveEntitlement(
     );
   }
   const expiry = typeof data?.expires_at === "string" ? new Date(data.expires_at).getTime() : null;
+  // RevenueCat's renewal webhook can land shortly after the old period ends.
+  // A subscription that is still set to renew keeps access for that gap; a
+  // cancelled one ends exactly at its expiry.
+  const renewalGraceMs = data?.will_renew === true ? 10 * 60_000 : 0;
   if (
     data?.is_active !== true ||
-    (expiry !== null && (!Number.isFinite(expiry) || expiry <= Date.now()))
+    (expiry !== null && (!Number.isFinite(expiry) || expiry + renewalGraceMs <= Date.now()))
   ) {
     throw new HttpError(403, "premium_required", "Kumusta Pro is required.");
   }

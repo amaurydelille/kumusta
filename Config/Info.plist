@@ -49,6 +49,8 @@
 	<string>https://appsflyer-skadnetwork.com/</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Kumusta uses your microphone when you practice speaking Tagalog.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>If Kumusta’s speech service is unavailable, Apple speech recognition checks your Tagalog pronunciation instead.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Kumusta uses your activity to measure ad performance and improve the relevance of our promotions.</string>
 	<key>POSTHOG_HOST</key>
@@ -69,8 +71,7 @@
 	<string>$(TIKTOK_BUSINESS_APP_ID)</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Patriot-Black.otf</string>
-		<string>Patriot-Regular.otf</string>
+		<string>Fredoka-Bold.ttf</string>
 	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04041061F39F80E32BA3B040 /* Fredoka-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE5490AC59B090573BA44600 /* Fredoka-OFL.txt */; };
 		09375EEE4D961C3D1F45B134 /* AppStrings.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 943AD63676F7A6FFA53AFC96 /* AppStrings.xcstrings */; };
 		095F9097AA639CA5B5ECFFC2 /* LessonProgressStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4007E8208A4A6EE821F20DB8 /* LessonProgressStoreTests.swift */; };
 		0D11C6D8F0594C74ABC8BC84 /* LivePracticeGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1073F72B1638EE7D0E78A2 /* LivePracticeGateway.swift */; };
@@ -14,17 +15,17 @@
 		0F5EADADC61983E65D1B6F4F /* OfflineVocabularyCandidateBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60209C6741D6B4AAABA4381A /* OfflineVocabularyCandidateBank.swift */; };
 		11989419F1C0FD8DDB5D657F /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B50AC8C05C395D56AE88D228 /* InfoPlist.xcstrings */; };
 		1405E9F32C4A728FCA697C97 /* RevenueCatPurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED5FA3FE1776341CCEAA7C6 /* RevenueCatPurchaseService.swift */; };
-		14574FEAFAB326C97EC52D2E /* rusty-vietnamese-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = A5F7F4543DD4F6BBFA8253A7 /* rusty-vietnamese-v1.json */; };
 		194EDF08211C5FF3A130CF0A /* FirstLessons in Resources */ = {isa = PBXBuildFile; fileRef = 6105AAB17A111C178D979619 /* FirstLessons */; };
 		199CF376DAE4CCD6938D4218 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB20C1DBEC94E880574E65A6 /* ProfileView.swift */; };
 		1BBF3908A32AC22676505BBA /* AppleSignInNonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3953763EDAD86AF2BCBE4245 /* AppleSignInNonce.swift */; };
 		1E5245F3A719C4DA7BADF1E8 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CC616FB8B87AC8139A2E8 /* AppAnalytics.swift */; };
 		1FAEF74EBB825702FF8D9337 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AE6CDD9869B7BF9FB8028D /* UserProfile.swift */; };
-		22ACA0E642870712D2BB2973 /* tuyet_southern_onboarding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E53CFFC78DE4F2C0F2E3 /* tuyet_southern_onboarding.mp3 */; };
 		24FB334893623BFFCA663398 /* FirstLessonContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE301E65E69CB153F260E6C /* FirstLessonContentTests.swift */; };
 		2592DF907CA11D600840E458 /* LessonHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4C485BEFBB3B5B5C51D101 /* LessonHistoryView.swift */; };
 		2638E364F30B53CCDCB865D1 /* SessionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D4B132D20014DF8BDCA3DB /* SessionFeedback.swift */; };
 		272EC54C27B5B0F785A98299 /* LessonCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F66DF5B2408E70CC5ED9DD /* LessonCompleteView.swift */; };
+		29EB63CBFCAE3CE822E84E57 /* SubscriptionManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B423ECB49CDD5D771D9FC7D /* SubscriptionManagementView.swift */; };
+		2D55924AA823CCAC468BA889 /* Fredoka-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E513BA5E4EAE1171234281DB /* Fredoka-Bold.ttf */; };
 		2DC6C41F6F25BAA28DA27C0C /* OnboardingComparisonScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31FC97B323B535779ED90EA /* OnboardingComparisonScreen.swift */; };
 		30352D915D437BCD5078FAAF /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2A1F2F8A85F1C7B3B4A1F /* ProfileRepository.swift */; };
 		30BCEB9E4A258BB73A93FAFD /* OnboardingFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DC443837955709B0F725E1 /* OnboardingFlowView.swift */; };
@@ -45,7 +46,6 @@
 		57BF7595FDF895BC9044BDC8 /* mixkit-correct-answer-tone-2870.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92E6616120A510F03EF60F6E /* mixkit-correct-answer-tone-2870.wav */; };
 		580EF2A404238D36A9E7070D /* AudioReactiveBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F0F6F4CE73A8D41B071804 /* AudioReactiveBorder.swift */; };
 		5BDC1C1053D5C82550D7B9E9 /* AccountDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3334B7A8087973BC70AE7A5A /* AccountDataService.swift */; };
-		616AEE00CDFE69FA45DF2977 /* conversational-vietnamese-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = 50CF0134F252416C62F55599 /* conversational-vietnamese-v1.json */; };
 		62AEEEFBE62B0621E5453C81 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44FB05759C3BFA07E4EF68E /* RootView.swift */; };
 		64071E3713CF403931741F20 /* MemoryScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF0A1797D768DB0E1624D9 /* MemoryScheduler.swift */; };
 		642953AD195CFC5D50DDE212 /* ReviewExercisePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AAD5AF3C065E013796C55D /* ReviewExercisePlannerTests.swift */; };
@@ -57,7 +57,6 @@
 		68EF5AA58EFDC9467BA96B1B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65D53FA108442D36F32B2CC /* MainTabView.swift */; };
 		6AB77FBC52DAC30040E98BBF /* PracticeScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEADF74BADEE0F66B369E990 /* PracticeScheduling.swift */; };
 		6CEC1F37F70DDF5949041DBD /* SupabaseClientProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4C73B82A92CB9A3CFA2361 /* SupabaseClientProvider.swift */; };
-		6D5CF7E7FE10FB61FE030FC6 /* new-vietnamese-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = 174C94A396D873EAD2A8460A /* new-vietnamese-v1.json */; };
 		6D764754789DEBE4709B3BFB /* badge.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FB41AE840D5339EE40341C2D /* badge.mp3 */; };
 		6E11BBA14A54479A99574054 /* AuthSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1654FA12AE793E42F71BE314 /* AuthSessionProvider.swift */; };
 		6EEC183521FDCA65472B6F70 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = CB08EC85DD5BB79766EE2818 /* PrivacyInfo.xcprivacy */; };
@@ -69,16 +68,14 @@
 		7AB665E44380AA76795BE0DC /* LearningModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36D5C50EE6B1C6B42BEEFB1 /* LearningModels.swift */; };
 		7D8D8D5D1893923CE0032BFB /* KumustaTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE4B2C9C804EADBFC13D0A2 /* KumustaTypography.swift */; };
 		7DC42F7D79ABC2FFD4A3D504 /* ElevenLabsTTSGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1550A11E01705144423528 /* ElevenLabsTTSGateway.swift */; };
-		7E38403399D554ADA16071A6 /* southern.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C486EDD3CCAB18961215949F /* southern.mp3 */; };
 		7F8088DEFDFBED9B1592371D /* MascotPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7329B4D226ED474BD44792A4 /* MascotPerformanceTests.swift */; };
 		82FA9516DFD78514A8D07A6D /* LearningJourneyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D3C8D1242F0393C90DBF8B /* LearningJourneyStore.swift */; };
 		84C96B06B375716C8044245C /* LivePracticePipelineSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4160F172F1475CC8F1720F9F /* LivePracticePipelineSession.swift */; };
 		87D430222D9C71BB3FA6E66E /* DailyReviewSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE12067A79EFE3E732C19FC9 /* DailyReviewSession.swift */; };
-		87F3932280CCAEAD5217A7C1 /* linh_chi_northern_onboarding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 400F9A74ACE2683A1358659C /* linh_chi_northern_onboarding.mp3 */; };
 		887CBC72D4E1E11D02B42C0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B18D32CC3D27E4646A12436 /* Assets.xcassets */; };
 		88935344C3DCE0615A19D19D /* ReviewExerciseViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16687415BF5F90D2E8127F3 /* ReviewExerciseViews.swift */; };
 		8BB44F03020026157D826452 /* KumustaMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4A4F68A54583AE6B5D8367 /* KumustaMotion.swift */; };
-		8DDAB170A6AFE95B439C6992 /* Patriot-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F814A62D8AE9D7DB1E51F42 /* Patriot-Regular.otf */; };
+		8DA708FAF6E7CC18E889EE58 /* libPods-Kumusta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 226CD071F07B00A5549C3DDD /* libPods-Kumusta.a */; };
 		8F9A0483376E4C25F75E9429 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB51C4BF0A2BFEA2483A196 /* ProfileEditorView.swift */; };
 		91DBD269474735E15225D216 /* FirstStepsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068481A62630CADD906A1C6C /* FirstStepsViews.swift */; };
 		944AD689FBE50F0C322B3140 /* ListenTileBankTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5FD97C41E1DA735636685B /* ListenTileBankTests.swift */; };
@@ -102,10 +99,8 @@
 		AEE46480D94D73BC87F6A99D /* StreakCelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0DA71C0B765A5DCAF90114 /* StreakCelebrationView.swift */; };
 		B11021A377008CA8690AF6A2 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37F1418F2143B91E5232E4F /* AppLanguage.swift */; };
 		B38A620FADC41A0E245034FB /* intermediate-tagalog-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */; };
-		B7C17367F8BC9045D1150D09 /* familiar-vietnamese-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */; };
 		BBC1A597098A0396578725AE /* AccountCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B437538A11088DFFFBC6CE9 /* AccountCreationView.swift */; };
 		BC339D27445D0CF96B9EFA80 /* FirstStepsCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0413D31DA95D6BDC907FF01 /* FirstStepsCourse.swift */; };
-		BD671E949A6618FD162969FE /* demo-before-paywall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 815C4649BC999846256A0AF3 /* demo-before-paywall.mp3 */; };
 		BF074CF20373C273F684CB2D /* ListenTileBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DF69E4B9742AFA5DF2C8A /* ListenTileBank.swift */; };
 		C3BEC0A450F38551BE02289A /* RatingPromptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7621ADEDA7DA50DE59C18F /* RatingPromptManager.swift */; };
 		C46F86E58EE5396209DBEE55 /* wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34C6168B1D0B9D5AA0AAF54C /* wrong.mp3 */; };
@@ -122,7 +117,6 @@
 		D01D9FDA994370358A4B1FA7 /* LessonProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6561224AC63FDDE10FCF6B8 /* LessonProgressStore.swift */; };
 		D4612E35CA92413A55617C38 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D01B00C2BBCC488F11BFC /* AppState.swift */; };
 		D58132A31B638564DBE5B0D5 /* AppsFlyerAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D222537254828E60BFDBF02 /* AppsFlyerAppEvents.swift */; };
-		D6ADD5EACC809B162621888E /* northern.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 091C99A417ADD6BD1C3ACBF3 /* northern.mp3 */; };
 		D6E07955664106D17E8A387C /* PracticeSessionChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D982AA063931A57F9F4AD6 /* PracticeSessionChooser.swift */; };
 		D7C24407937ADD005EB6FD34 /* FirstLessonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1B83EE70649ED299FE556 /* FirstLessonContent.swift */; };
 		D9E770DEFCE7E31F01F1FE77 /* SpeakingRecorderSecurityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7B5CB916C6BD2C0AB8409 /* SpeakingRecorderSecurityTests.swift */; };
@@ -133,7 +127,6 @@
 		DB4011E1B062874F719BF1B2 /* BadgeCelebrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D40F67489DCC2F57462EF4 /* BadgeCelebrationView.swift */; };
 		DBB6F7C16B9D8C4BDC561960 /* BuddyMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866A3F87A74D1AC0322EED51 /* BuddyMark.swift */; };
 		DC51D5E9395132C3E858D60D /* MemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56449DA480349E6138250DD9 /* MemoryStore.swift */; };
-		DE2ACA6117545E2B8FCC1F64 /* Patriot-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B28A86DAA787A237F92BC878 /* Patriot-Black.otf */; };
 		E247CC579FF10CEA9B2C0705 /* LearningJourneyStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E217419185A71B675B6F4 /* LearningJourneyStoreTests.swift */; };
 		E2E263B6B60EBF08397BFA05 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CEA234A4E04EA7DDD44E79 /* TodayView.swift */; };
 		E2FD0AAEF5F1331E5E6236CE /* MemorySchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AE9FDEFC91B68DCE53BBC4 /* MemorySchedulerTests.swift */; };
@@ -147,7 +140,6 @@
 		EE501CBFA4164A94B187F0ED /* MetaAppEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83530CAFA1E82B59ED713B48 /* MetaAppEvents.swift */; };
 		F0694656122DE2FD7AC243FD /* PronunciationFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EA82E0F2928160F3C2DCBE /* PronunciationFeedback.swift */; };
 		F290D8B189593EF268D775F1 /* AuthenticatedElevenLabsAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C0E9392B5B3C25879E71C1 /* AuthenticatedElevenLabsAudioService.swift */; };
-		F407605EEE210EE913B5CF0A /* curriculum-v1.json in Resources */ = {isa = PBXBuildFile; fileRef = F028A0F2E9D440D98ACA0D62 /* curriculum-v1.json */; };
 		F52495C22E06DD1556B809FD /* finished_lesson.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A16D9201E70CE8A20A380F6 /* finished_lesson.mp3 */; };
 		F6DF706C3A0468077369CC12 /* KumustaLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD7F8137BCAE8EBCACAE468 /* KumustaLaunchTests.swift */; };
 		FBD82823EAFE69D1B9690ECA /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758C1F7A959A39F65B09AA64 /* AppNavigation.swift */; };
@@ -180,26 +172,25 @@
 		068481A62630CADD906A1C6C /* FirstStepsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStepsViews.swift; sourceTree = "<group>"; };
 		07F66DF5B2408E70CC5ED9DD /* LessonCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCompleteView.swift; sourceTree = "<group>"; };
 		08EDA7ADC009CCECE576AE67 /* SessionFeedbackSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFeedbackSheet.swift; sourceTree = "<group>"; };
-		091C99A417ADD6BD1C3ACBF3 /* northern.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = northern.mp3; sourceTree = "<group>"; };
 		09478AA3118EF5AB69F608D0 /* AdaptiveLearningOutbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveLearningOutbox.swift; sourceTree = "<group>"; };
 		09DD68C71DE91CE3AEBC4626 /* Kumusta.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Kumusta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A16D9201E70CE8A20A380F6 /* finished_lesson.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = finished_lesson.mp3; sourceTree = "<group>"; };
 		0D222537254828E60BFDBF02 /* AppsFlyerAppEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerAppEvents.swift; sourceTree = "<group>"; };
 		0E4C485BEFBB3B5B5C51D101 /* LessonHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonHistoryView.swift; sourceTree = "<group>"; };
 		0EDAA904012C3C8DBE1AD66E /* NextLessonPreparationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLessonPreparationCard.swift; sourceTree = "<group>"; };
-		0F814A62D8AE9D7DB1E51F42 /* Patriot-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patriot-Regular.otf"; sourceTree = "<group>"; };
 		1208AED35831721293768A88 /* ProfileRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepositoryTests.swift; sourceTree = "<group>"; };
 		12953B2AF1E6F59DB730B9A9 /* LearningActivityStreakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningActivityStreakTests.swift; sourceTree = "<group>"; };
 		12FED71427E4D6D1D576306E /* LivePracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePracticeView.swift; sourceTree = "<group>"; };
 		1654FA12AE793E42F71BE314 /* AuthSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionProvider.swift; sourceTree = "<group>"; };
 		172693E13EE3E9E82C4A76DA /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		174C94A396D873EAD2A8460A /* new-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "new-vietnamese-v1.json"; sourceTree = "<group>"; };
 		1EE83F7F7E1C185A5D1EDBE3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		206E3B9B6A2424F34F2619A3 /* OnboardingScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreens.swift; sourceTree = "<group>"; };
+		226CD071F07B00A5549C3DDD /* libPods-Kumusta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kumusta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25CEA234A4E04EA7DDD44E79 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		296CC616FB8B87AC8139A2E8 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 		29EAF6C35264725688796E34 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		2AE4B2C9C804EADBFC13D0A2 /* KumustaTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumustaTypography.swift; sourceTree = "<group>"; };
+		2B423ECB49CDD5D771D9FC7D /* SubscriptionManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManagementView.swift; sourceTree = "<group>"; };
 		2B437538A11088DFFFBC6CE9 /* AccountCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreationView.swift; sourceTree = "<group>"; };
 		2D8419689CB602743AF08369 /* KumustaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumustaApp.swift; sourceTree = "<group>"; };
 		31D88FD11D550A2F03872F51 /* LearningRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRepositoryTests.swift; sourceTree = "<group>"; };
@@ -212,7 +203,6 @@
 		3ED220307DD62F02465DA678 /* DailyReviewSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReviewSessionTests.swift; sourceTree = "<group>"; };
 		3F6424617C418F56E5A35A7C /* KumustaRemoteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumustaRemoteModels.swift; sourceTree = "<group>"; };
 		4007E8208A4A6EE821F20DB8 /* LessonProgressStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonProgressStoreTests.swift; sourceTree = "<group>"; };
-		400F9A74ACE2683A1358659C /* linh_chi_northern_onboarding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = linh_chi_northern_onboarding.mp3; sourceTree = "<group>"; };
 		40611594596DA97C712D56FB /* PaywallExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallExitView.swift; sourceTree = "<group>"; };
 		4160F172F1475CC8F1720F9F /* LivePracticePipelineSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePracticePipelineSession.swift; sourceTree = "<group>"; };
 		425DF69E4B9742AFA5DF2C8A /* ListenTileBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenTileBank.swift; sourceTree = "<group>"; };
@@ -223,7 +213,6 @@
 		4D05C548628BB5D4E159C83E /* KumustaTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KumustaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4C73B82A92CB9A3CFA2361 /* SupabaseClientProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClientProvider.swift; sourceTree = "<group>"; };
 		4FF72911B298ED0E64F2F5B8 /* TikTokAppEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTokAppEvents.swift; sourceTree = "<group>"; };
-		50CF0134F252416C62F55599 /* conversational-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "conversational-vietnamese-v1.json"; sourceTree = "<group>"; };
 		5491E79D0BCA98587887D471 /* typing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = typing.mp3; sourceTree = "<group>"; };
 		56449DA480349E6138250DD9 /* MemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStore.swift; sourceTree = "<group>"; };
 		56DC443837955709B0F725E1 /* OnboardingFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowView.swift; sourceTree = "<group>"; };
@@ -231,6 +220,7 @@
 		6105AAB17A111C178D979619 /* FirstLessons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FirstLessons; path = Kumusta/Resources/FirstLessons; sourceTree = SOURCE_ROOT; };
 		630283F29174B6EE5D4A2278 /* RealtimeSpeechTranscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeSpeechTranscription.swift; sourceTree = "<group>"; };
 		63166726E977213148F05DED /* SupabaseSignedInRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSignedInRepository.swift; sourceTree = "<group>"; };
+		67AB2200B756B0CE3864917C /* Pods-Kumusta.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kumusta.release.xcconfig"; path = "Target Support Files/Pods-Kumusta/Pods-Kumusta.release.xcconfig"; sourceTree = "<group>"; };
 		69F1B83EE70649ED299FE556 /* FirstLessonContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLessonContent.swift; sourceTree = "<group>"; };
 		6EB39E133C0B552037A2E0CE /* valid.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = valid.mp3; sourceTree = "<group>"; };
 		70B4202DE94614D46D2E2B98 /* SpokenUtteranceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpokenUtteranceTests.swift; sourceTree = "<group>"; };
@@ -242,7 +232,6 @@
 		787091558D9A3EC572E61B97 /* AdaptiveLessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveLessonService.swift; sourceTree = "<group>"; };
 		7C5FD97C41E1DA735636685B /* ListenTileBankTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenTileBankTests.swift; sourceTree = "<group>"; };
 		7C809A389EC33761017AEB43 /* MemoryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStoreTests.swift; sourceTree = "<group>"; };
-		815C4649BC999846256A0AF3 /* demo-before-paywall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "demo-before-paywall.mp3"; sourceTree = "<group>"; };
 		83530CAFA1E82B59ED713B48 /* MetaAppEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaAppEvents.swift; sourceTree = "<group>"; };
 		83D3C8D1242F0393C90DBF8B /* LearningJourneyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningJourneyStore.swift; sourceTree = "<group>"; };
 		845CA314021A431284E99DF0 /* LearningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningRepository.swift; sourceTree = "<group>"; };
@@ -259,7 +248,6 @@
 		987A21B9B60A3E707ED125E5 /* Tests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Tests-Release.xcconfig"; sourceTree = "<group>"; };
 		9DC2A1F2F8A85F1C7B3B4A1F /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		A2AAD5AF3C065E013796C55D /* ReviewExercisePlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewExercisePlannerTests.swift; sourceTree = "<group>"; };
-		A5F7F4543DD4F6BBFA8253A7 /* rusty-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "rusty-vietnamese-v1.json"; sourceTree = "<group>"; };
 		A65D53FA108442D36F32B2CC /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		A9CDEC5EE06BF9BCC228179D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		A9D4B132D20014DF8BDCA3DB /* SessionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFeedback.swift; sourceTree = "<group>"; };
@@ -268,8 +256,6 @@
 		AE12067A79EFE3E732C19FC9 /* DailyReviewSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReviewSession.swift; sourceTree = "<group>"; };
 		AF4D0AD8B6D0CE75F1DC163F /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		B16687415BF5F90D2E8127F3 /* ReviewExerciseViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewExerciseViews.swift; sourceTree = "<group>"; };
-		B28A86DAA787A237F92BC878 /* Patriot-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Patriot-Black.otf"; sourceTree = "<group>"; };
-		B3E6E53CFFC78DE4F2C0F2E3 /* tuyet_southern_onboarding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tuyet_southern_onboarding.mp3; sourceTree = "<group>"; };
 		B44FB05759C3BFA07E4EF68E /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B50AC8C05C395D56AE88D228 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B942B4F303C77118809A1CB3 /* KumustaUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = KumustaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,7 +268,6 @@
 		C2D5F0464A6E9ADEE317AC85 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		C31FC97B323B535779ED90EA /* OnboardingComparisonScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingComparisonScreen.swift; sourceTree = "<group>"; };
 		C36D5C50EE6B1C6B42BEEFB1 /* LearningModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModels.swift; sourceTree = "<group>"; };
-		C486EDD3CCAB18961215949F /* southern.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = southern.mp3; sourceTree = "<group>"; };
 		C693111301E87AF2FAE4760F /* ConversationRigV2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ConversationRigV2.json; sourceTree = "<group>"; };
 		C72D84E559FA3083737F9BD8 /* pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pop.mp3; sourceTree = "<group>"; };
 		C79A2938FC487EEB363848E8 /* LocalLearningActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLearningActivityStore.swift; sourceTree = "<group>"; };
@@ -290,6 +275,7 @@
 		C9FDBC424CE2E123A4070C56 /* SuccessFeedbackPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessFeedbackPlayer.swift; sourceTree = "<group>"; };
 		CB08EC85DD5BB79766EE2818 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		CC0DA71C0B765A5DCAF90114 /* StreakCelebrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCelebrationView.swift; sourceTree = "<group>"; };
+		CE5490AC59B090573BA44600 /* Fredoka-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Fredoka-OFL.txt"; sourceTree = "<group>"; };
 		CEADF74BADEE0F66B369E990 /* PracticeScheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeScheduling.swift; sourceTree = "<group>"; };
 		CF1073F72B1638EE7D0E78A2 /* LivePracticeGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePracticeGateway.swift; sourceTree = "<group>"; };
 		D2B7B5CB916C6BD2C0AB8409 /* SpeakingRecorderSecurityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingRecorderSecurityTests.swift; sourceTree = "<group>"; };
@@ -297,12 +283,13 @@
 		D5AE6CDD9869B7BF9FB8028D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "intermediate-tagalog-v1.json"; sourceTree = "<group>"; };
 		D740DF2000BDD3C7010B2EBF /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
-		DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "familiar-vietnamese-v1.json"; sourceTree = "<group>"; };
 		DCC112DDC135C8B766120882 /* Tests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Tests-Debug.xcconfig"; sourceTree = "<group>"; };
 		DD9633BC7C4D35F30D6192E3 /* AccountDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataServiceTests.swift; sourceTree = "<group>"; };
 		DED5FA3FE1776341CCEAA7C6 /* RevenueCatPurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatPurchaseService.swift; sourceTree = "<group>"; };
 		E1601C7EDF574D3DC6C9EA60 /* LiveAudioMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveAudioMeter.swift; sourceTree = "<group>"; };
 		E3D982AA063931A57F9F4AD6 /* PracticeSessionChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionChooser.swift; sourceTree = "<group>"; };
+		E3E580F10215BF3644DBD17F /* Pods-Kumusta.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kumusta.debug.xcconfig"; path = "Target Support Files/Pods-Kumusta/Pods-Kumusta.debug.xcconfig"; sourceTree = "<group>"; };
+		E513BA5E4EAE1171234281DB /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
 		E5D245AF8D5F70CD88B89EC9 /* beginner-tagalog-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "beginner-tagalog-v1.json"; sourceTree = "<group>"; };
 		E64E217419185A71B675B6F4 /* LearningJourneyStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningJourneyStoreTests.swift; sourceTree = "<group>"; };
 		E6561224AC63FDDE10FCF6B8 /* LessonProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonProgressStore.swift; sourceTree = "<group>"; };
@@ -310,7 +297,6 @@
 		EA4A4F68A54583AE6B5D8367 /* KumustaMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumustaMotion.swift; sourceTree = "<group>"; };
 		EDD7F8137BCAE8EBCACAE468 /* KumustaLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumustaLaunchTests.swift; sourceTree = "<group>"; };
 		EF675797A3C2BD42689A55C7 /* SpeakingRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingRecorder.swift; sourceTree = "<group>"; };
-		F028A0F2E9D440D98ACA0D62 /* curriculum-v1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "curriculum-v1.json"; sourceTree = "<group>"; };
 		F1F4A11A669324C8C6CF8F8E /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		F3F3AE774FE7C6E0FEBB9BAE /* SpeechRecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionService.swift; sourceTree = "<group>"; };
 		F54426F0A9122E4034B5CA2D /* AdaptiveLearningOutboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveLearningOutboxTests.swift; sourceTree = "<group>"; };
@@ -333,6 +319,7 @@
 				E7883A0DBF23F8F3981F8C06 /* RevenueCatUI in Frameworks */,
 				4CD4B4421F3420155A4546E7 /* PostHog in Frameworks */,
 				CF1754BB604B77A27F8CDE1F /* FacebookCore in Frameworks */,
+				8DA708FAF6E7CC18E889EE58 /* libPods-Kumusta.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +329,6 @@
 		01AEF2053A0055E571F567A1 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				43DEA647C5726392BD296161 /* AccentSamples */,
 				034B4E377581D1990DF1118F /* Feedback */,
 				AAFA4A6D17D5E33843984FCB /* Onboarding */,
 			);
@@ -432,8 +418,8 @@
 		359FD2F783E2437416EA51E2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				B28A86DAA787A237F92BC878 /* Patriot-Black.otf */,
-				0F814A62D8AE9D7DB1E51F42 /* Patriot-Regular.otf */,
+				E513BA5E4EAE1171234281DB /* Fredoka-Bold.ttf */,
+				CE5490AC59B090573BA44600 /* Fredoka-OFL.txt */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -483,15 +469,6 @@
 				206E3B9B6A2424F34F2619A3 /* OnboardingScreens.swift */,
 			);
 			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		43DEA647C5726392BD296161 /* AccentSamples */ = {
-			isa = PBXGroup;
-			children = (
-				091C99A417ADD6BD1C3ACBF3 /* northern.mp3 */,
-				C486EDD3CCAB18961215949F /* southern.mp3 */,
-			);
-			path = AccentSamples;
 			sourceTree = "<group>";
 		};
 		4C1004754C43893D7C53C2E5 /* Profile */ = {
@@ -578,6 +555,7 @@
 			children = (
 				40611594596DA97C712D56FB /* PaywallExitView.swift */,
 				F8B89DA0B39493DA91960DE1 /* RevenueCatHostedPaywallView.swift */,
+				2B423ECB49CDD5D771D9FC7D /* SubscriptionManagementView.swift */,
 			);
 			path = Paywall;
 			sourceTree = "<group>";
@@ -610,6 +588,14 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		9550B34A92C3D6EDA24E2028 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				226CD071F07B00A5549C3DDD /* libPods-Kumusta.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9A1828FC643C2EC6834707EE /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +605,16 @@
 				987A21B9B60A3E707ED125E5 /* Tests-Release.xcconfig */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		9CF375B9051318BFAFDCBD38 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E3E580F10215BF3644DBD17F /* Pods-Kumusta.debug.xcconfig */,
+				67AB2200B756B0CE3864917C /* Pods-Kumusta.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		A546CEE749A783829B423304 /* App */ = {
@@ -638,9 +634,6 @@
 		AAFA4A6D17D5E33843984FCB /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				815C4649BC999846256A0AF3 /* demo-before-paywall.mp3 */,
-				400F9A74ACE2683A1358659C /* linh_chi_northern_onboarding.mp3 */,
-				B3E6E53CFFC78DE4F2C0F2E3 /* tuyet_southern_onboarding.mp3 */,
 				5491E79D0BCA98587887D471 /* typing.mp3 */,
 			);
 			path = Onboarding;
@@ -672,6 +665,8 @@
 				30A87E425411EF12DE5899BF /* KumustaTests */,
 				BF5C3D66068EFD187EBC07AA /* KumustaUITests */,
 				3E272B1CB6D8C3955836B93C /* Products */,
+				9CF375B9051318BFAFDCBD38 /* Pods */,
+				9550B34A92C3D6EDA24E2028 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -688,12 +683,7 @@
 			children = (
 				FA16253587D5EECEE36BF4E5 /* advanced-tagalog-v1.json */,
 				E5D245AF8D5F70CD88B89EC9 /* beginner-tagalog-v1.json */,
-				50CF0134F252416C62F55599 /* conversational-vietnamese-v1.json */,
-				F028A0F2E9D440D98ACA0D62 /* curriculum-v1.json */,
-				DBE72A36744E9F74DE5462BA /* familiar-vietnamese-v1.json */,
 				D68292B451CB1D07C62BAF04 /* intermediate-tagalog-v1.json */,
-				174C94A396D873EAD2A8460A /* new-vietnamese-v1.json */,
-				A5F7F4543DD4F6BBFA8253A7 /* rusty-vietnamese-v1.json */,
 			);
 			path = Seed;
 			sourceTree = "<group>";
@@ -764,9 +754,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FBF38850482207472E491566 /* Build configuration list for PBXNativeTarget "Kumusta" */;
 			buildPhases = (
+				C04FB6E0B6FB14AB75D13B68 /* [CP] Check Pods Manifest.lock */,
 				8592CFCE2A2F58BFBEDB223E /* Sources */,
 				AD5FCD3CAA003557A8AFA994 /* Resources */,
 				4335F2434157C780D7DDFC9E /* Frameworks */,
+				0E6FBAF514FF490259F559B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -796,8 +788,6 @@
 				3F7814371D3844F1A1CCD88A /* PBXTargetDependency */,
 			);
 			name = KumustaTests;
-			packageProductDependencies = (
-			);
 			productName = KumustaTests;
 			productReference = 4D05C548628BB5D4E159C83E /* KumustaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -814,8 +804,6 @@
 				9FBC6222F6E4635D04982B07 /* PBXTargetDependency */,
 			);
 			name = KumustaUITests;
-			packageProductDependencies = (
-			);
 			productName = KumustaUITests;
 			productReference = B942B4F303C77118809A1CB3 /* KumustaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -856,7 +844,7 @@
 			packageReferences = (
 				3036C3AA6290811ECCE50BE2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				51EEEBACE0DEBDA3654F9D16 /* XCRemoteSwiftPackageReference "posthog-ios" */,
-				CE0B599783D5159BB5C1C5D7 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				9E185405178970E0154238F7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 				368C3634D8719D836E4ECF60 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -880,29 +868,19 @@
 				887CBC72D4E1E11D02B42C0E /* Assets.xcassets in Resources */,
 				ABE9950C802CA9CC0A375E70 /* ConversationRigV2.json in Resources */,
 				194EDF08211C5FF3A130CF0A /* FirstLessons in Resources */,
+				2D55924AA823CCAC468BA889 /* Fredoka-Bold.ttf in Resources */,
+				04041061F39F80E32BA3B040 /* Fredoka-OFL.txt in Resources */,
 				11989419F1C0FD8DDB5D657F /* InfoPlist.xcstrings in Resources */,
 				A98D93F3015E2FAE7A9101E2 /* Localizable.xcstrings in Resources */,
-				DE2ACA6117545E2B8FCC1F64 /* Patriot-Black.otf in Resources */,
-				8DDAB170A6AFE95B439C6992 /* Patriot-Regular.otf in Resources */,
 				6EEC183521FDCA65472B6F70 /* PrivacyInfo.xcprivacy in Resources */,
 				0D383E8084CB77143C27D633 /* advanced-tagalog-v1.json in Resources */,
 				6D764754789DEBE4709B3BFB /* badge.mp3 in Resources */,
 				34A14B6B20C184B48EE229CC /* beginner-tagalog-v1.json in Resources */,
-				616AEE00CDFE69FA45DF2977 /* conversational-vietnamese-v1.json in Resources */,
-				F407605EEE210EE913B5CF0A /* curriculum-v1.json in Resources */,
-				BD671E949A6618FD162969FE /* demo-before-paywall.mp3 in Resources */,
-				B7C17367F8BC9045D1150D09 /* familiar-vietnamese-v1.json in Resources */,
 				F52495C22E06DD1556B809FD /* finished_lesson.mp3 in Resources */,
 				B38A620FADC41A0E245034FB /* intermediate-tagalog-v1.json in Resources */,
-				87F3932280CCAEAD5217A7C1 /* linh_chi_northern_onboarding.mp3 in Resources */,
 				57BF7595FDF895BC9044BDC8 /* mixkit-correct-answer-tone-2870.wav in Resources */,
-				6D5CF7E7FE10FB61FE030FC6 /* new-vietnamese-v1.json in Resources */,
-				D6ADD5EACC809B162621888E /* northern.mp3 in Resources */,
 				A8394DBC6F7E3D88C4F0F5F5 /* pop.mp3 in Resources */,
 				DAB557EED27FA01ED208B659 /* pop_word_select.mp3 in Resources */,
-				14574FEAFAB326C97EC52D2E /* rusty-vietnamese-v1.json in Resources */,
-				7E38403399D554ADA16071A6 /* southern.mp3 in Resources */,
-				22ACA0E642870712D2BB2973 /* tuyet_southern_onboarding.mp3 in Resources */,
 				9FDC60644DA52B88EC824B91 /* typing.mp3 in Resources */,
 				EA66D01A05FA7249609D788A /* valid.mp3 in Resources */,
 				C46F86E58EE5396209DBEE55 /* wrong.mp3 in Resources */,
@@ -910,6 +888,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E6FBAF514FF490259F559B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kumusta/Pods-Kumusta-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C04FB6E0B6FB14AB75D13B68 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kumusta-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0DAABD589064643C41F6CA86 /* Sources */ = {
@@ -1007,6 +1027,7 @@
 				A93CF2212DD53DADC2E5F779 /* SpeechRecognitionService.swift in Sources */,
 				4DF9631825218D463BCDEBBD /* SpokenUtterance.swift in Sources */,
 				AEE46480D94D73BC87F6A99D /* StreakCelebrationView.swift in Sources */,
+				29EB63CBFCAE3CE822E84E57 /* SubscriptionManagementView.swift in Sources */,
 				E8F7AAFB3DACB33EF4081D87 /* SuccessFeedbackPlayer.swift in Sources */,
 				6CEC1F37F70DDF5949041DBD /* SupabaseClientProvider.swift in Sources */,
 				99FB04C77A3791F157095BE2 /* SupabaseSignedInRepository.swift in Sources */,
@@ -1207,7 +1228,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.3;
-				OTHER_LDFLAGS = "$(inherited) -ObjC -lc++";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumusta.app;
 				PRODUCT_NAME = Kumusta;
 				SDKROOT = iphoneos;
@@ -1297,7 +1322,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.3;
-				OTHER_LDFLAGS = "$(inherited) -ObjC -lc++";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumusta.app;
 				PRODUCT_NAME = Kumusta;
 				SDKROOT = iphoneos;
@@ -1371,9 +1400,9 @@
 				version = 3.59.3;
 			};
 		};
-		CE0B599783D5159BB5C1C5D7 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+		9E185405178970E0154238F7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
 			requirement = {
 				kind = exactVersion;
 				version = 5.82.0;
@@ -1394,7 +1423,7 @@
 		};
 		8D4794D052EC9792A6216BCA /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE0B599783D5159BB5C1C5D7 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			package = 9E185405178970E0154238F7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
 			productName = RevenueCat;
 		};
 		A1A140106508EB4B9238C5A6 /* FacebookCore */ = {
@@ -1404,7 +1433,7 @@
 		};
 		BB13EC3AB1B4F40E29A227CC /* RevenueCatUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE0B599783D5159BB5C1C5D7 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			package = 9E185405178970E0154238F7 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
 			productName = RevenueCatUI;
 		};
 /* End XCSwiftPackageProductDependency section */

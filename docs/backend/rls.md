@@ -16,9 +16,7 @@ Functions or controlled administrative jobs.
 | `kumusta_learning_preferences` | None | Own row | Manage own | Full |
 | `kumusta_user_state` | None | Own row | Manage own | Full |
 | `kumusta_lessons` | None | Published rows | None | Full |
-| `kumusta_lesson_steps` | None | Steps of published lessons | None | Full |
 | `kumusta_vocabulary` | None | Published rows | None | Full |
-| `kumusta_lesson_vocabulary` | None | Published lesson + word mappings | None | Full |
 | `kumusta_user_vocabulary` | None | Own rows | Manage own | Full |
 | `kumusta_learning_sessions` | None | Own rows | Manage own | Full |
 | `kumusta_review_events` | None | Own rows | Insert own only | Full |

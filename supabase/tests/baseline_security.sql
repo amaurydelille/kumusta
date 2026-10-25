@@ -42,7 +42,7 @@ begin
     raise exception 'Reporting views are readable by clients';
   end if;
 
-  -- Removed VietBuddy features must not come back.
+  -- Removed features must not come back.
   if to_regclass('public.kumusta_conversation_exercises') is not null
      or to_regprocedure('public.kumusta_live_reserve(uuid,text,text)') is not null then
     raise exception 'Removed dialogue/agent objects are present';

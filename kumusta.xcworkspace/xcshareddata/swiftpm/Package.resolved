@@ -1,5 +1,5 @@
 {
-  "originHash" : "2445d71d0ac4e6fe0d690053756c196d3731f57f48e085635cffda04e396ca73",
+  "originHash" : "cf6a49b252626dff71b3dac8d956233e830f1f0cdd30931351bb2b4b1c632bbc",
   "pins" : [
     {
       "identity" : "facebook-ios-sdk",
@@ -20,9 +20,9 @@
       }
     },
     {
-      "identity" : "purchases-ios",
+      "identity" : "purchases-ios-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/RevenueCat/purchases-ios.git",
+      "location" : "https://github.com/RevenueCat/purchases-ios-spm.git",
       "state" : {
         "revision" : "e2524b647f9b7dd81297cf7e2e51516f46f62b26",
         "version" : "5.82.0"

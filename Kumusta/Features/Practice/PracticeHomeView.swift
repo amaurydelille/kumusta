@@ -431,7 +431,7 @@ struct PracticeHomeView: View {
                         } else if incorrectChoiceID == choice.id {
                             Image(systemName: "arrow.counterclockwise")
                                 .scaledFont(14, weight: .bold)
-                                .foregroundStyle(KumustaColors.accentDeep)
+                                .foregroundStyle(KumustaColors.errorDeep)
                         }
                     }
                     .padding(.horizontal, 13)
@@ -455,7 +455,7 @@ struct PracticeHomeView: View {
                 if incorrectChoiceID != nil {
                     Label(L("Not that one, replay the scene and follow the context."), systemImage: "ear.badge.waveform")
                         .scaledFont(12, weight: .semibold, design: .rounded)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
@@ -541,13 +541,13 @@ struct PracticeHomeView: View {
 
     private func choiceBackground(_ choice: SituationChoice) -> Color {
         if selectedChoiceID == choice.id { return KumustaColors.accentSoft.opacity(0.28) }
-        if incorrectChoiceID == choice.id { return KumustaColors.accentSoft.opacity(0.12) }
+        if incorrectChoiceID == choice.id { return KumustaColors.errorSoft.opacity(0.12) }
         return KumustaColors.surface
     }
 
     private func choiceBadgeBackground(_ choice: SituationChoice) -> Color {
         if selectedChoiceID == choice.id { return KumustaColors.accent }
-        if incorrectChoiceID == choice.id { return KumustaColors.accentSoft.opacity(0.55) }
+        if incorrectChoiceID == choice.id { return KumustaColors.errorSoft.opacity(0.55) }
         return KumustaColors.surfaceStrong
     }
 

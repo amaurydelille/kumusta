@@ -136,16 +136,10 @@ actor SupabaseSpeechRecognitionService: TagalogSpeechRecognizing {
         )
     }
 
+    /// Only the onboarding lesson asks for the small pre-paywall allowance;
+    /// every later lesson is checked against the learner's Kumusta Pro.
     private static func headers(onboarding: Bool) -> [String: String] {
-        #if DEBUG
-        // Simulator builds can unlock the lesson UI with the local development
-        // paywall bypass. Use the bounded pre-paywall speech allowance there
-        // so that local-only access does not create a misleading auth failure.
-        let usesPrePaywallAllowance = true
-        #else
-        let usesPrePaywallAllowance = onboarding
-        #endif
-        return usesPrePaywallAllowance ? ["X-Kumusta-Onboarding": "first-lesson"] : [:]
+        onboarding ? ["X-Kumusta-Onboarding": "first-lesson"] : [:]
     }
 
     private func invoke<Response: Decodable>(

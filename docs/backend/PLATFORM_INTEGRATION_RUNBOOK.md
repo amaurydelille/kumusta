@@ -50,11 +50,14 @@ let ttsGateway = SupabaseElevenLabsTTSGateway(
     authSessionProvider: auth
 )
 let audio = AuthenticatedElevenLabsAudioService(gateway: ttsGateway)
-let ai = SupabaseMistralEvaluationService(
-    client: supabaseProvider.client,
-    authSessionProvider: auth
+let speech = FallbackSpeechRecognitionService(
+    primary: SupabaseSpeechRecognitionService(
+        client: supabaseProvider.client,
+        authSessionProvider: auth
+    ),
+    fallback: AppleSpeechRecognitionService()
 )
-let personalizedLearning = SupabaseMistralLearningService(
+let personalizedLearning = SupabaseAdaptiveLessonService(
     client: supabaseProvider.client,
     authSessionProvider: auth
 )
@@ -70,20 +73,29 @@ session, review, and analytics sync only after
 `currentAuthenticatedUser()` succeeds. That method deliberately rejects
 anonymous sessions. Provider audio/AI use `currentBackendIdentity()` because
 their Edge Functions enforce entitlement and quota server-side.
+The Tagalog learning voice is never silently replaced by Apple's synthesizer in
+Release builds; provider failures stay visible and retryable.
 
 ## Edge Function gateway configuration
 
-Add the following to `supabase/config.toml`. Each handler performs its own
-server-validated authentication; RevenueCat uses external webhook credentials.
+`supabase/config.toml` disables gateway JWT verification for the functions
+whose handlers perform their own server-validated authentication; RevenueCat
+uses external webhook credentials. For example:
 
 ```toml
 [functions.kumusta-elevenlabs-tts]
 verify_jwt = false
 
-[functions.kumusta-mistral-evaluate]
+[functions.kumusta-lesson-stt]
 verify_jwt = false
 
-[functions.kumusta-mistral-lessons]
+[functions.kumusta-lesson-stt-token]
+verify_jwt = false
+
+[functions.kumusta-lessons]
+verify_jwt = false
+
+[functions.kumusta-live-pipeline]
 verify_jwt = false
 
 [functions.kumusta-revenuecat-webhook]
@@ -98,8 +110,11 @@ RevenueCat HMAC verification over the exact raw body.
 Required secrets:
 
 ```text
-ELEVENLABS_API_KEY
-MISTRAL_API_KEY
+KUMUSTA_TTS_API_KEY
+KUMUSTA_LESSON_STT_API_KEY
+KUMUSTA_LESSON_AGENT_API_KEY
+KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY
+DASHSCOPE_API_KEY
 REVENUECAT_SECRET_API_KEY
 REVENUECAT_WEBHOOK_AUTHORIZATION
 ```
@@ -108,66 +123,68 @@ Recommended or configurable values:
 
 ```text
 REVENUECAT_WEBHOOK_SIGNING_SECRET
-MISTRAL_MODEL=mistral-small-latest
-MISTRAL_LESSON_MODEL=mistral-medium-latest
+KUMUSTA_TTS_VOICE_ID=qZLi51uuzx5jdu6q0ayz
+QWEN_LESSON_MODEL=qwen3.8-max-0902
 KUMUSTA_ENTITLEMENT_ID=kumusta_pro
 ```
 
 Supabase supplies its URL, publishable/anon key, and service-role key to deployed
-Functions. Never add service-role, ElevenLabs, Mistral, RevenueCat secret, or
+Functions. Never add service-role, provider, RevenueCat secret, or
 webhook credentials to the iOS target.
 
 Before deployment, use `supabase secrets list` and confirm that every required
 name exists. Do not print secret values. The function sources are safe to deploy
-only after migrations through
-`20260731114500_harden_kumusta_adaptive_runtime_v1.sql` have been applied.
+only after every migration in `supabase/migrations/` has been applied.
 
 ## Function contracts
 
 ### ElevenLabs
 
-`kumusta-elevenlabs-tts` accepts `text`, `accent`, `speed`, and the optional
-purpose `lesson` or `vocabulary` (defaulting to `lesson` for older clients).
-Accent is mapped in source to one of these female voices:
+`kumusta-elevenlabs-tts` accepts `text`, `speed`, and the optional purpose
+`lesson` or `vocabulary` (defaulting to `lesson` for older clients), or the
+fixed `onboarding_conversation` lines. The client never sends a voice: the
+server uses the one Tagalog voice `qZLi51uuzx5jdu6q0ayz` unless
+`KUMUSTA_TTS_VOICE_ID` overrides it.
 
-- Southern: `6Xq32rHt6oAu98TBDKfr`
-- Northern: `LD1UihCXvSlUL4h8DOmk`
+The handler verifies the Supabase session, active `kumusta_pro` entitlement
+(except for the fixed onboarding lines before onboarding is complete), text
+bounds, enum values, 60/minute user quota, configurable user-daily quota, and
+configurable project-daily quota before calling ElevenLabs. All Tagalog TTS
+audio uses `eleven_v4` with language code `fil`, including lessons and
+vocabulary. Provider errors are redacted. The returned stream is capped at
+3,000,000 bytes and successful audio is cached in the private `kumusta-tts`
+Storage bucket, keyed by text, speed, purpose, voice and provider model.
 
-The handler verifies the Supabase session, active `kumusta_pro` entitlement,
-text bounds, enum values, 60/minute user quota, configurable user-daily quota,
-and configurable project-daily quota before calling ElevenLabs. All Vietnamese
-TTS audio uses Eleven v3, including lessons and vocabulary. Provider errors are
-redacted. The
-returned stream is capped at 3,000,000 bytes and successful audio is cached in
-the private Supabase Storage-backed cache by purpose and provider model.
+### Soniox
 
-### Mistral
+`kumusta-lesson-stt-token` returns a single-use Soniox realtime key for a
+speaking take; `kumusta-lesson-stt` transcribes an uploaded M4A take when
+streaming failed and deletes it at the provider afterwards. Both share one
+admission gate (entitlement, 20/minute and daily user quotas, project-daily
+quota). The app grades the transcript on-device; no language model is called.
 
-`kumusta-mistral-evaluate` accepts an authored phrase, a text learner attempt,
-and `explanation` or `hint`. It does not accept audio. Output is constrained to
-the v1 JSON schema with at most two corrections. Malformed, unavailable, or
-misconfigured provider responses return authored deterministic feedback with
-`fallback: true`; authentication, entitlement, validation, and quota failures
-do not fall back.
+### Lesson generation
 
-`kumusta-mistral-lessons` accepts exact-key `get_next`, `complete`, `feedback`,
-and `review_word` actions with bounded profile enums and client-generated UUIDs.
-It maintains deterministic private learner state and a target queue of two
-ready lessons. Only an entitled user can fetch/generate lessons; authenticated
-completion and review writes remain recordable when replenishment is deferred.
+`kumusta-lessons` accepts exact-key `get_next`, `retry_generation`,
+`request_generation`, `complete`, `feedback`, and `review_word` actions with
+bounded profile enums (goal, level, target level, challenge preference, daily
+minutes) and client-generated UUIDs. It maintains deterministic private learner
+state and a target queue of two ready lessons. Only an entitled user can
+fetch/generate lessons; authenticated completion and review writes remain
+recordable when replenishment is deferred.
 
-Generation requests one full lesson at a time through strict JSON-schema output
-and at most two provider attempts. Local validation enforces requested accent
-metadata plus basic opposite-region location checks, exact duration and round
-count, distinct utterances, normalized chunk order/containment, vocabulary and
-usage-example grounding, deterministic presented-word membership, prohibited
-subjects, Vietnamese text, response size, and content limits before a row can
-become ready. Generation uses a 120-second recoverable lease; the validated
+Generation requests one full lesson at a time from Qwen through strict
+JSON-schema output and at most three provider attempts. Local validation
+enforces exact duration and round count, distinct utterances, normalized chunk
+order/containment, word-gloss coverage, vocabulary and usage-example
+grounding, deterministic presented-word membership, prohibited subjects,
+Latin-script Tagalog text, response size, and content limits before a row can
+become ready. Generation uses a 180-second recoverable lease; the validated
 lesson batch and queue entries persist transactionally with composite tenant
-ownership foreign keys. The app performs a second
-contract check and uses bundled authored content when no valid generated lesson
-is available. Contract validation is not native-speaker certification. See
-`docs/ADAPTIVE_LEARNING.md` and `docs/backend/MISTRAL_RUNBOOK.md`.
+ownership foreign keys. The app performs a second contract check and uses
+bundled authored content when no valid generated lesson is available. Contract
+validation is not native-speaker certification. See
+`docs/ADAPTIVE_LEARNING.md` and `docs/backend/LESSON_GENERATION_RUNBOOK.md`.
 
 Completion and word-review calls enter a capped durable iOS outbox before
 delivery. Retries preserve the client event UUID across app termination; the
@@ -196,13 +213,7 @@ Provider/storage failures remain unprocessed and return a retryable response.
 Pure contract tests:
 
 ```sh
-npx -y deno test \
-  supabase/functions/_shared/http_test.ts \
-  supabase/functions/kumusta-elevenlabs-tts/contract_test.ts \
-  supabase/functions/kumusta-mistral-evaluate/contract_test.ts \
-  supabase/functions/kumusta-mistral-lessons/contract_test.ts \
-  supabase/functions/kumusta-mistral-lessons/repository_test.ts \
-  supabase/functions/kumusta-revenuecat-webhook/contract_test.ts
+deno test --allow-env --allow-read supabase/functions
 ```
 
 Type-check all entry points with a Deno environment that supports npm imports.
@@ -210,7 +221,7 @@ Before TestFlight, test:
 
 - new install → Supabase anonymous UUID → same RevenueCat App User ID;
 - purchase webhook → active mirror row → authenticated TTS succeeds;
-- expired mirror → TTS, text evaluation, and adaptive `get_next` provider access
+- expired mirror → TTS, speech-to-text, and adaptive `get_next` provider access
   fail with `premium_required`;
 - generated lesson completion remains accepted if later queue replenishment is
   unavailable or entitlement has just expired;
@@ -220,7 +231,7 @@ Before TestFlight, test:
 - forced queue failure → no partial generated lesson batch;
 - arbitrary generated-word UUID and cross-tenant composite relationship →
   rejected;
-- oversized streamed lesson/evaluation/audio response → bounded failure;
+- oversized streamed lesson/transcript/audio response → bounded failure;
 - replayed webhook → no duplicate entitlement mutation;
 - Apple link → unchanged Supabase UUID and RevenueCat customer;
 - offline lesson completion → local success and later signed-in sync;
@@ -234,8 +245,8 @@ Before TestFlight, test:
   useful for UX, not provider authorization.
 - Review scheduling remains local-first. Remote review event and vocabulary
   state writes are idempotent but not a substitute for the on-device queue.
-- Free-form learner text is sent to Mistral only on an explicit feedback action.
-  It is not persisted by Kumusta or included in analytics.
+- Speaking takes go to Soniox only for a check the learner records; graded
+  results are not persisted by Kumusta or included in analytics.
 - Adaptive lesson generation sends only bounded profile/state fields and stores
   validated generated content privately with model/prompt/schema provenance.
 - RevenueCat audit payloads discard subscriber attributes.

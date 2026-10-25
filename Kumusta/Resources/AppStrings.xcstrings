@@ -37,12 +37,6 @@
     "%@ speed" : {
       "extractionState" : "manual"
     },
-    "%@ · %lld min · Northern" : {
-      "extractionState" : "manual"
-    },
-    "%@ · %lld min · Southern" : {
-      "extractionState" : "manual"
-    },
     "%@ · Lesson %lld of %lld" : {
       "extractionState" : "manual"
     },
@@ -271,27 +265,6 @@
     "%lld-day streak" : {
       "extractionState" : "manual"
     },
-    "**%@** has no tone mark: keep it flat and steady. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@** takes the huyền tone: start low and let it fall gently. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@** takes the hỏi tone: dip down, then come back up. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@** takes the ngã tone: rise with a little catch in the throat. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@** takes the nặng tone: drop low and cut it short. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@** takes the sắc tone: start mid, then rise sharply. It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
-    "**%@**: đ is a firm “d”, while d sounds like “z” (north) or “y” (south). It sounded like **%@**." : {
-      "extractionState" : "manual"
-    },
     "+%lld XP" : {
       "extractionState" : "manual"
     },
@@ -299,9 +272,6 @@
       "extractionState" : "manual"
     },
     "1 phrase" : {
-      "extractionState" : "manual"
-    },
-    "1,000+ students" : {
       "extractionState" : "manual"
     },
     "10 words" : {
@@ -337,9 +307,6 @@
     "5 lessons" : {
       "extractionState" : "manual"
     },
-    "5 out of 5 stars" : {
-      "extractionState" : "manual"
-    },
     "50 words" : {
       "extractionState" : "manual"
     },
@@ -350,9 +317,6 @@
       "extractionState" : "manual"
     },
     "A 6-minute first lesson: say hello, your name, and thank you." : {
-      "extractionState" : "manual"
-    },
-    "A Southern pronunciation example." : {
       "extractionState" : "manual"
     },
     "A bottle of water, please." : {
@@ -416,9 +380,6 @@
       "extractionState" : "manual"
     },
     "About 6 minutes · 3 phrases · 1 real conversation" : {
-      "extractionState" : "manual"
-    },
-    "Accent" : {
       "extractionState" : "manual"
     },
     "Account deletion could not be verified." : {
@@ -509,9 +470,6 @@
       "extractionState" : "manual"
     },
     "Answer, not just understand" : {
-      "extractionState" : "manual"
-    },
-    "App Store reviews" : {
       "extractionState" : "manual"
     },
     "Appearance" : {
@@ -670,66 +628,6 @@
     "Building your plan…" : {
       "extractionState" : "manual"
     },
-    "Tuko celebrates the correct answer" : {
-      "extractionState" : "manual"
-    },
-    "Tuko celebrates your learning streak" : {
-      "extractionState" : "manual"
-    },
-    "Tuko couldn’t answer. Try saying that again." : {
-      "extractionState" : "manual"
-    },
-    "Tuko encourages another try" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is building the next lesson" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is curious" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is listening" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is listening back…" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is reviewing your recording" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is talking" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is thinking…" : {
-      "extractionState" : "manual"
-    },
-    "Tuko is typing" : {
-      "extractionState" : "manual"
-    },
-    "Tuko understood every word." : {
-      "extractionState" : "manual"
-    },
-    "Tuko waves hello" : {
-      "extractionState" : "manual"
-    },
-    "Tuko welcomes you to Kumusta" : {
-      "extractionState" : "manual"
-    },
-    "Tuko will check every word once your plan starts." : {
-      "extractionState" : "manual"
-    },
-    "Tuko's mood" : {
-      "extractionState" : "manual"
-    },
-    "Tuko, the Kumusta mascot" : {
-      "extractionState" : "manual"
-    },
-    "Tuko, your conversation buddy" : {
-      "extractionState" : "manual"
-    },
-    "Tuko: %@" : {
-      "extractionState" : "manual"
-    },
     "CAN’T SPEAK NOW" : {
       "extractionState" : "manual"
     },
@@ -833,9 +731,6 @@
       "extractionState" : "manual"
     },
     "Choose the voice pace to save your feedback." : {
-      "extractionState" : "manual"
-    },
-    "Real everyday Tagalog" : {
       "extractionState" : "manual"
     },
     "Choose your move" : {
@@ -1135,7 +1030,7 @@
     "Email address" : {
       "extractionState" : "manual"
     },
-    "Email contact@kumusta.app" : {
+    "Email amaurydelille92500@gmail.com" : {
       "extractionState" : "manual"
     },
     "End" : {
@@ -1199,9 +1094,6 @@
       "extractionState" : "manual"
     },
     "Feeling solid" : {
-      "extractionState" : "manual"
-    },
-    "Female Northern and Southern voices" : {
       "extractionState" : "manual"
     },
     "Fifty words in your sound map. Your ear is getting stronger." : {
@@ -1372,12 +1264,6 @@
     "Handle the market and the landlord" : {
       "extractionState" : "manual"
     },
-    "Hanoi and the North" : {
-      "extractionState" : "manual"
-    },
-    "He Lô %@!" : {
-      "extractionState" : "manual"
-    },
     "Headphones on. Main-character mode." : {
       "extractionState" : "manual"
     },
@@ -1525,7 +1411,7 @@
     "I'm good, thank you!" : {
       "extractionState" : "manual"
     },
-    "I'm learning Tagalog with Kumusta — %lld day streak, %lld words. kumusta.app" : {
+    "I'm learning Tagalog with Kumusta — %lld day streak, %lld words." : {
       "extractionState" : "manual"
     },
     "IN REAL LIFE" : {
@@ -1577,9 +1463,6 @@
       "extractionState" : "manual"
     },
     "JUMP BACK IN" : {
-      "extractionState" : "manual"
-    },
-    "Join a community of" : {
       "extractionState" : "manual"
     },
     "Join the conversation at dinner" : {
@@ -1646,6 +1529,12 @@
       "extractionState" : "manual"
     },
     "Know your neighbors by name" : {
+      "extractionState" : "manual"
+    },
+    "Kumusta could not initialize the App Store subscription service. Please try again later." : {
+      "extractionState" : "manual"
+    },
+    "Kumusta is loading" : {
       "extractionState" : "manual"
     },
     "LEARN" : {
@@ -1775,9 +1664,6 @@
       "extractionState" : "manual"
     },
     "Listen for “%@”" : {
-      "extractionState" : "manual"
-    },
-    "Listen for “một” and “%@”" : {
       "extractionState" : "manual"
     },
     "Listen naturally first. Slow it down only when your ear needs another clue." : {
@@ -2062,25 +1948,10 @@
     "No translation first. Listen the way you would at a real café." : {
       "extractionState" : "manual"
     },
-    "Northern" : {
-      "extractionState" : "manual"
-    },
-    "Northern + Southern accents" : {
-      "extractionState" : "manual"
-    },
-    "Northern Tagalog" : {
-      "extractionState" : "manual"
-    },
-    "Northern voice" : {
-      "extractionState" : "manual"
-    },
     "Not now" : {
       "extractionState" : "manual"
     },
     "Not quite" : {
-      "extractionState" : "manual"
-    },
-    "Not quite. Replay it and listen for “cà phê sữa đá.”" : {
       "extractionState" : "manual"
     },
     "Not selected" : {
@@ -2192,9 +2063,6 @@
       "extractionState" : "manual"
     },
     "One week strong" : {
-      "extractionState" : "manual"
-    },
-    "One year. Chúc mừng." : {
       "extractionState" : "manual"
     },
     "One-minute rep" : {
@@ -2422,7 +2290,7 @@
     "Practice with one consistent, natural Tagalog voice." : {
       "extractionState" : "manual"
     },
-    "Practice your\nVietnamese words" : {
+    "Practice your\nTagalog words" : {
       "extractionState" : "manual"
     },
     "Premium access is active." : {
@@ -2497,13 +2365,10 @@
     "Ready when you are" : {
       "extractionState" : "manual"
     },
-    "Real northern Tagalog" : {
+    "Real everyday Tagalog" : {
       "extractionState" : "manual"
     },
     "Real pace" : {
-      "extractionState" : "manual"
-    },
-    "Real southern Tagalog" : {
       "extractionState" : "manual"
     },
     "Recall" : {
@@ -2848,9 +2713,6 @@
     "Silver medal" : {
       "extractionState" : "manual"
     },
-    "Six tone paths. Start by hearing the movement before naming it." : {
-      "extractionState" : "manual"
-    },
     "Skip for now" : {
       "extractionState" : "manual"
     },
@@ -2861,9 +2723,6 @@
       "extractionState" : "manual"
     },
     "Slower" : {
-      "extractionState" : "manual"
-    },
-    "Small talk ends after “xin chào”" : {
       "extractionState" : "manual"
     },
     "Small, consistent listening beats a heroic weekend." : {
@@ -2899,15 +2758,6 @@
     "Sounds, respect words, people words, and a replay of your welcome lesson." : {
       "extractionState" : "manual"
     },
-    "Southern" : {
-      "extractionState" : "manual"
-    },
-    "Southern Tagalog" : {
-      "extractionState" : "manual"
-    },
-    "Southern voice" : {
-      "extractionState" : "manual"
-    },
     "Speak" : {
       "extractionState" : "manual"
     },
@@ -2921,9 +2771,6 @@
       "extractionState" : "manual"
     },
     "Speak with cultural confidence" : {
-      "extractionState" : "manual"
-    },
-    "Speak with your family’s accent" : {
       "extractionState" : "manual"
     },
     "Speaker 1" : {
@@ -3074,6 +2921,18 @@
       "extractionState" : "manual"
     },
     "TRY AGAIN" : {
+      "extractionState" : "manual"
+    },
+    "Tagalog basics, at a glance" : {
+      "extractionState" : "manual"
+    },
+    "Tagalog endings can be short, but they still carry meaning." : {
+      "extractionState" : "manual"
+    },
+    "Tagalog learner" : {
+      "extractionState" : "manual"
+    },
+    "Tagalog pronouns describe the relationship between people." : {
       "extractionState" : "manual"
     },
     "Take a quick breather" : {
@@ -3238,9 +3097,6 @@
     "The board is unavailable" : {
       "extractionState" : "manual"
     },
-    "The bundled audio could not be played." : {
-      "extractionState" : "manual"
-    },
     "The bundled example could not be played." : {
       "extractionState" : "manual"
     },
@@ -3274,9 +3130,6 @@
     "The marks change the vowel. They are part of the pronunciation." : {
       "extractionState" : "manual"
     },
-    "The melody stays active when tones meet other words." : {
-      "extractionState" : "manual"
-    },
     "The microphone couldn’t be changed, so the conversation ended." : {
       "extractionState" : "manual"
     },
@@ -3292,9 +3145,6 @@
     "The plot thickens." : {
       "extractionState" : "manual"
     },
-    "The pre-paywall demo audio is missing from this build." : {
-      "extractionState" : "manual"
-    },
     "The purchase finished, but access could not be verified." : {
       "extractionState" : "manual"
     },
@@ -3308,9 +3158,6 @@
       "extractionState" : "manual"
     },
     "The same letters can become different words when the melody changes." : {
-      "extractionState" : "manual"
-    },
-    "The same sentence in a Northern pronunciation." : {
       "extractionState" : "manual"
     },
     "The scene made sense" : {
@@ -3400,15 +3247,6 @@
     "Tomorrow" : {
       "extractionState" : "manual"
     },
-    "Tone" : {
-      "extractionState" : "manual"
-    },
-    "Tone inside a sentence" : {
-      "extractionState" : "manual"
-    },
-    "Tone marks" : {
-      "extractionState" : "manual"
-    },
     "Too easy" : {
       "extractionState" : "manual"
     },
@@ -3460,6 +3298,69 @@
     "Try speaking again" : {
       "extractionState" : "manual"
     },
+    "Tuko celebrates the correct answer" : {
+      "extractionState" : "manual"
+    },
+    "Tuko celebrates your learning streak" : {
+      "extractionState" : "manual"
+    },
+    "Tuko couldn’t answer. Try saying that again." : {
+      "extractionState" : "manual"
+    },
+    "Tuko encourages another try" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is building the next lesson" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is curious" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is listening" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is listening back…" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is reviewing your recording" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is talking" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is thinking…" : {
+      "extractionState" : "manual"
+    },
+    "Tuko is typing" : {
+      "extractionState" : "manual"
+    },
+    "Tuko understood every word." : {
+      "extractionState" : "manual"
+    },
+    "Tuko waves hello" : {
+      "extractionState" : "manual"
+    },
+    "Tuko welcomes you to Kumusta" : {
+      "extractionState" : "manual"
+    },
+    "Tuko will check every word once your plan starts." : {
+      "extractionState" : "manual"
+    },
+    "Tuko's mood" : {
+      "extractionState" : "manual"
+    },
+    "Tuko, the Kumusta mascot" : {
+      "extractionState" : "manual"
+    },
+    "Tuko, your Tagalog conversation buddy" : {
+      "extractionState" : "manual"
+    },
+    "Tuko, your conversation buddy" : {
+      "extractionState" : "manual"
+    },
+    "Tuko: %@" : {
+      "extractionState" : "manual"
+    },
     "Tune in. What’s the story?" : {
       "extractionState" : "manual"
     },
@@ -3499,9 +3400,6 @@
     "Understand real situations" : {
       "extractionState" : "manual"
     },
-    "Unlock every listening lesson, unlimited word reviews, and both Tagalog accents." : {
-      "extractionState" : "manual"
-    },
     "Unmute" : {
       "extractionState" : "manual"
     },
@@ -3526,9 +3424,6 @@
     "Use the transcript only if you get stuck" : {
       "extractionState" : "manual"
     },
-    "Use this accent" : {
-      "extractionState" : "manual"
-    },
     "Use this when the phrase comes to mind quickly in a real sentence." : {
       "extractionState" : "manual"
     },
@@ -3536,24 +3431,6 @@
       "extractionState" : "manual"
     },
     "Victory lap? Your ears are warmed up." : {
-      "extractionState" : "manual"
-    },
-    "Kumusta could not initialize the App Store subscription service. Please try again later." : {
-      "extractionState" : "manual"
-    },
-    "Kumusta is loading" : {
-      "extractionState" : "manual"
-    },
-    "Tagalog basics, at a glance" : {
-      "extractionState" : "manual"
-    },
-    "Tagalog endings can be short, but they still carry meaning." : {
-      "extractionState" : "manual"
-    },
-    "Tagalog learner" : {
-      "extractionState" : "manual"
-    },
-    "Tagalog pronouns describe the relationship between people." : {
       "extractionState" : "manual"
     },
     "Vocabulary reviews return when your memory needs them." : {
@@ -3704,12 +3581,6 @@
       "extractionState" : "manual"
     },
     "Where is your Tagalog today?" : {
-      "extractionState" : "manual"
-    },
-    "Which accent do you want to learn?" : {
-      "extractionState" : "manual"
-    },
-    "Which accent?" : {
       "extractionState" : "manual"
     },
     "Why do you want to learn Tagalog ?" : {
@@ -3871,9 +3742,6 @@
     "Your Kumusta Pro subscription will stop renewing. You will keep premium access until the end of your current billing period." : {
       "extractionState" : "manual"
     },
-    "Your Tagalog conversation buddies" : {
-      "extractionState" : "manual"
-    },
     "Your Tagalog is warming up" : {
       "extractionState" : "manual"
     },
@@ -3889,7 +3757,7 @@
     "Your account export could not be verified." : {
       "extractionState" : "manual"
     },
-    "Your account export is too large for an in-app download. Contact contact@kumusta.app." : {
+    "Your account export is too large for an in-app download. Contact amaurydelille92500@gmail.com." : {
       "extractionState" : "manual"
     },
     "Your account is almost ready." : {

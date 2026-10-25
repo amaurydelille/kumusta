@@ -1,8 +1,9 @@
 import SwiftUI
 
 /// The account entry point shown after sign-out and after an anonymous learner
-/// starts a trial or completes a purchase. The optional name is collected here,
-/// after the value demo, while returning learners can resume their course.
+/// starts a trial or completes a purchase. The optional name is asked only when
+/// onboarding didn't already give one, while returning learners can resume
+/// their course.
 struct AccountCreationView: View {
     private enum Mode {
         case create
@@ -21,6 +22,8 @@ struct AccountCreationView: View {
     @State private var confirmation = ""
     @State private var errorMessage: String?
     @State private var isSubmitting = false
+    /// Read once, so the field doesn't vanish when the account saves the name.
+    @State private var asksForName = false
 
     private enum Field: Hashable {
         case email
@@ -50,6 +53,7 @@ struct AccountCreationView: View {
             if appState.prefersExistingAccountSignIn, case .create = mode {
                 mode = .signIn
             }
+            asksForName = appState.profile.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             trackScreen()
         }
         .onChange(of: modeLabel) { _, _ in trackScreen() }
@@ -71,7 +75,7 @@ struct AccountCreationView: View {
             }
 
             Text("KUMUSTA")
-                .font(KumustaTypography.patriotBrand)
+                .font(KumustaTypography.brand)
                 .tracking(-0.45)
                 .foregroundStyle(KumustaColors.accentDeep)
         }
@@ -116,7 +120,7 @@ struct AccountCreationView: View {
             ScreenHeader(eyebrow: eyebrow, title: title, subtitle: subtitle)
 
             VStack(spacing: 14) {
-                if requiresConfirmation {
+                if requiresConfirmation, asksForName {
                     TextField(L("First name (optional)"), text: $name)
                         .textContentType(.givenName)
                         .textInputAutocapitalization(.words)
@@ -162,7 +166,7 @@ struct AccountCreationView: View {
             if let errorMessage {
                 Label(errorMessage, systemImage: "exclamationmark.circle.fill")
                     .font(KumustaTypography.supporting)
-                    .foregroundStyle(KumustaColors.accentDeep)
+                    .foregroundStyle(KumustaColors.errorDeep)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityElement(children: .combine)
             }
@@ -202,8 +206,8 @@ struct AccountCreationView: View {
             .foregroundStyle(KumustaColors.accentDeep)
 
             HStack(spacing: 18) {
-                Link(L("Terms"), destination: URL(string: "https://kumusta.app/terms")!)
-                Link(L("Privacy"), destination: URL(string: "https://kumusta.app/privacy")!)
+                Link(L("Terms"), destination: URL(string: "https://www.vietbuddy.app/terms")!)
+                Link(L("Privacy"), destination: URL(string: "https://www.vietbuddy.app/privacy")!)
             }
             .font(KumustaTypography.supporting)
             .foregroundStyle(KumustaColors.accentDeep)

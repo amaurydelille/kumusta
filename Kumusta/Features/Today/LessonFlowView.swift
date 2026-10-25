@@ -534,6 +534,12 @@ private struct ColdListenStep: View {
     /// One entry per slot; removing a word leaves its slot empty (nil).
     @State private var pickedTileIDs: [Int?] = []
     @State private var wrongTilePositions: Set<Int> = []
+    /// Frames of the sentence slots, used to find where a dragged word lands.
+    @State private var slotFrames: [Int: CGRect] = [:]
+    @State private var draggedPosition: Int?
+    @State private var dragTranslation: CGSize = .zero
+    @State private var dropTargetPosition: Int?
+    @State private var reorderCount = 0
     @State private var buildAttemptCount = 0
     @State private var builtSentenceCorrectly = false
 
@@ -801,6 +807,7 @@ private struct ColdListenStep: View {
                     if pickedTileIDs.indices.contains(position),
                        let pickedID = pickedTileIDs[position],
                        let tile = tileBank.tile(id: pickedID) {
+                        let isDragged = draggedPosition == position
                         Button {
                             unpickTile(at: position)
                         } label: {
@@ -808,8 +815,30 @@ private struct ColdListenStep: View {
                                 .scaledFont(24, weight: .bold, design: .rounded)
                         }
                         .buttonStyle(ListenTileButtonStyle(isWrong: wrongTilePositions.contains(position)))
+                        .overlay {
+                            if dropTargetPosition == position {
+                                dropTargetOutline
+                            }
+                        }
+                        .scaleEffect(isDragged && !reduceMotion ? 1.08 : 1)
+                        .offset(isDragged ? dragTranslation : .zero)
+                        .zIndex(isDragged ? 1 : 0)
+                        .highPriorityGesture(slotDragGesture(from: position))
                         .accessibilityLabel(tile.text)
-                        .accessibilityHint(L("Removes this word"))
+                        .accessibilityHint(L("Removes this word. Drag to move it."))
+                        .accessibilityActions {
+                            if position > 0 {
+                                Button(L("Move earlier")) { moveTile(from: position, to: position - 1) }
+                            }
+                            if position < tileBank.answer.count - 1 {
+                                Button(L("Move later")) { moveTile(from: position, to: position + 1) }
+                            }
+                        }
+                        .onGeometryChange(for: CGRect.self) { proxy in
+                            proxy.frame(in: .named(Self.sentenceSlotSpace))
+                        } action: { frame in
+                            slotFrames[position] = frame
+                        }
                     } else {
                         Text(tileBank.answer[position])
                             .scaledFont(24, weight: .bold, design: .rounded)
@@ -821,10 +850,23 @@ private struct ColdListenStep: View {
                                     .fill(Color.dynamic(light: 0x74604D, dark: 0x3A4B54))
                             }
                             .padding(.bottom, 3)
+                            .overlay {
+                                if dropTargetPosition == position {
+                                    dropTargetOutline
+                                        .padding(.bottom, 3)
+                                }
+                            }
                             .accessibilityHidden(true)
+                            .onGeometryChange(for: CGRect.self) { proxy in
+                                proxy.frame(in: .named(Self.sentenceSlotSpace))
+                            } action: { frame in
+                                slotFrames[position] = frame
+                            }
                     }
                 }
             }
+            .coordinateSpace(.named(Self.sentenceSlotSpace))
+            .sensoryFeedback(.impact(weight: .light), trigger: reorderCount)
             .keyframeAnimator(
                 initialValue: CGFloat.zero,
                 trigger: reduceMotion ? 0 : buildAttemptCount
@@ -845,7 +887,7 @@ private struct ColdListenStep: View {
             if !wrongTilePositions.isEmpty {
                 Text(L("Listen again. The red words don't match, often a look-alike word."))
                     .font(KumustaTypography.body)
-                    .foregroundStyle(KumustaColors.accentDeep)
+                    .foregroundStyle(KumustaColors.errorDeep)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
                     .transition(.opacity)
@@ -882,6 +924,54 @@ private struct ColdListenStep: View {
             .buttonStyle(.plain)
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private static let sentenceSlotSpace = "sentenceSlots"
+
+    private var dropTargetOutline: some View {
+        RoundedRectangle(cornerRadius: 10, style: .continuous)
+            .stroke(KumustaColors.accent, lineWidth: 3)
+    }
+
+    /// Dragging a placed word onto another slot swaps the two (or moves it
+    /// into an empty slot). A plain tap still removes the word.
+    private func slotDragGesture(from position: Int) -> some Gesture {
+        DragGesture(minimumDistance: 6, coordinateSpace: .named(Self.sentenceSlotSpace))
+            .onChanged { value in
+                draggedPosition = position
+                dragTranslation = value.translation
+                let target = slotPosition(at: value.location)
+                dropTargetPosition = target == position ? nil : target
+            }
+            .onEnded { value in
+                if let target = slotPosition(at: value.location), target != position {
+                    moveTile(from: position, to: target)
+                }
+                withAnimation(reduceMotion ? nil : KumustaMotion.press) {
+                    draggedPosition = nil
+                    dragTranslation = .zero
+                    dropTargetPosition = nil
+                }
+            }
+    }
+
+    private func slotPosition(at location: CGPoint) -> Int? {
+        slotFrames.first { $0.value.insetBy(dx: -4, dy: -6).contains(location) }?.key
+    }
+
+    private func moveTile(from source: Int, to destination: Int) {
+        guard pickedTileIDs.indices.contains(source),
+              pickedTileIDs.indices.contains(destination),
+              source != destination
+        else { return }
+        withAnimation(reduceMotion ? nil : KumustaMotion.press) {
+            pickedTileIDs.swapAt(source, destination)
+            // Both slots hold a different word now, so their red marks no
+            // longer describe what is there.
+            wrongTilePositions.remove(source)
+            wrongTilePositions.remove(destination)
+        }
+        reorderCount += 1
     }
 
     private func pickTile(_ tile: ListenTile) {
@@ -958,12 +1048,12 @@ struct ListenTileButtonStyle: ButtonStyle {
         let depth: CGFloat = isGhost ? 0 : 3
         let pressed = configuration.isPressed && !reduceMotion
         let shape = RoundedRectangle(cornerRadius: 10, style: .continuous)
-        let border = isWrong ? KumustaColors.accent : KumustaColors.line
+        let border = isWrong ? KumustaColors.error : KumustaColors.line
         configuration.label
-            .foregroundStyle(isWrong ? KumustaColors.accentDeep : KumustaColors.ink)
+            .foregroundStyle(isWrong ? KumustaColors.errorDeep : KumustaColors.ink)
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
-            .background(shape.fill(isGhost ? KumustaColors.surfaceMuted : isWrong ? KumustaColors.accent.opacity(0.16) : KumustaColors.surface))
+            .background(shape.fill(isGhost ? KumustaColors.surfaceMuted : isWrong ? KumustaColors.error.opacity(0.16) : KumustaColors.surface))
             .background(shape.fill(KumustaColors.canvas))
             .overlay(shape.stroke(isGhost ? Color.clear : border, lineWidth: 2))
             .background(shape.fill(border).offset(y: pressed ? 0 : depth))
@@ -1136,7 +1226,7 @@ private struct HearRespondStep: View {
     private var answerFooter: some View {
         if hasSubmitted {
             let isCorrect = selectedOptionIsCorrect
-            let tint = isCorrect ? KumustaColors.success : KumustaColors.accent
+            let tint = isCorrect ? KumustaColors.success : KumustaColors.error
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 10) {
                     Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
@@ -1144,7 +1234,7 @@ private struct HearRespondStep: View {
                     Text(isCorrect ? L("Nice work!") : L("Not quite"))
                         .scaledFont(22, weight: .heavy, design: .rounded)
                 }
-                .foregroundStyle(isCorrect ? KumustaColors.success : KumustaColors.accentDeep)
+                .foregroundStyle(isCorrect ? KumustaColors.success : KumustaColors.errorDeep)
 
                 if isCorrect {
                     VStack(alignment: .leading, spacing: 4) {
@@ -1256,7 +1346,7 @@ private struct HearRespondOptionRow: View {
                 } else if wrongAnswer {
                     Image(systemName: "xmark.circle.fill")
                         .scaledFont(22, weight: .bold)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -1289,21 +1379,21 @@ private struct HearRespondOptionRow: View {
 
     private var faceColor: Color {
         if correctAnswer { return KumustaColors.success.opacity(0.18) }
-        if wrongAnswer { return KumustaColors.accent.opacity(0.16) }
+        if wrongAnswer { return KumustaColors.error.opacity(0.16) }
         if isSelected { return KumustaColors.focus.opacity(0.16) }
         return KumustaColors.surface
     }
 
     private var borderColor: Color {
         if correctAnswer { return KumustaColors.success }
-        if wrongAnswer { return KumustaColors.accent }
+        if wrongAnswer { return KumustaColors.error }
         if isSelected { return KumustaColors.focus }
         return KumustaColors.line
     }
 
     private var textColor: Color {
         if correctAnswer { return KumustaColors.success }
-        if wrongAnswer { return KumustaColors.accentDeep }
+        if wrongAnswer { return KumustaColors.errorDeep }
         if isSelected { return KumustaColors.focus }
         return KumustaColors.ink
     }
@@ -1693,7 +1783,7 @@ private struct SpeakStep: View {
                 if let errorMessage = recorder.errorMessage {
                     Label(errorMessage, systemImage: "exclamationmark.circle.fill")
                         .font(KumustaTypography.body)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -1709,7 +1799,7 @@ private struct SpeakStep: View {
                         systemImage: matchedTarget ? "checkmark.seal.fill" : "arrow.counterclockwise"
                     )
                         .font(KumustaTypography.bodyStrong)
-                        .foregroundStyle(matchedTarget ? KumustaColors.success : KumustaColors.accentDeep)
+                        .foregroundStyle(matchedTarget ? KumustaColors.success : KumustaColors.errorDeep)
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -2197,7 +2287,7 @@ struct AudioSpeedControls: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Label(errorMessage, systemImage: "speaker.slash.fill")
                         .scaledFont(16, weight: .medium, design: .rounded)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .fixedSize(horizontal: false, vertical: true)
 
                     Button(L("Try audio again")) {

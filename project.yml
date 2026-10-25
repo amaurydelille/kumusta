@@ -25,7 +25,7 @@ packages:
     url: https://github.com/supabase/supabase-swift.git
     exactVersion: 2.54.1
   RevenueCat:
-    url: https://github.com/RevenueCat/purchases-ios.git
+    url: https://github.com/RevenueCat/purchases-ios-spm.git
     exactVersion: 5.82.0
   PostHog:
     url: https://github.com/PostHog/posthog-ios.git
@@ -42,12 +42,12 @@ targets:
       properties:
         CFBundleDisplayName: Kumusta
         UIAppFonts:
-          - Patriot-Black.otf
-          - Patriot-Regular.otf
+          - Fredoka-Bold.ttf
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.education
         NSMicrophoneUsageDescription: Kumusta uses your microphone when you practice speaking Tagalog.
+        NSSpeechRecognitionUsageDescription: If Kumusta’s speech service is unavailable, Apple speech recognition checks your Tagalog pronunciation instead.
         NSUserTrackingUsageDescription: Kumusta uses your activity to measure ad performance and improve the relevance of our promotions.
         SUPABASE_PROJECT_URL: $(SUPABASE_PROJECT_URL)
         SUPABASE_PUBLISHABLE_KEY: $(SUPABASE_PUBLISHABLE_KEY)
@@ -79,7 +79,7 @@ targets:
       - path: Kumusta
         excludes:
           - "Resources/FirstLessons/**"
-      # Folder reference keeps audio/{southern,northern}/<hash>.mp3 paths intact.
+      # Folder reference keeps the audio/<hash>.mp3 paths intact.
       - path: Kumusta/Resources/FirstLessons
         type: folder
         buildPhase: resources

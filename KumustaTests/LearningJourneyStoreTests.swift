@@ -196,7 +196,7 @@ struct LearningJourneyStoreTests {
         let store = LearningJourneyStore(defaults: defaults, historyFileURL: historyURL)
         store.beginPreparingNextLesson(
             after: UUID(),
-            requestedTopic: "History of Vietnam",
+            requestedTopic: "History of Manila",
             requestedAt: .now.addingTimeInterval(-LearningJourneyStore.maximumPreparationAge - 1)
         )
 
@@ -218,7 +218,7 @@ struct LearningJourneyStoreTests {
         defer { try? FileManager.default.removeItem(at: historyURL) }
         let service = JourneyLearningServiceStub(contents: [])
         let store = LearningJourneyStore(defaults: defaults, historyFileURL: historyURL)
-        store.beginPreparingNextLesson(after: UUID(), requestedTopic: "History of Vietnam")
+        store.beginPreparingNextLesson(after: UUID(), requestedTopic: "History of Manila")
 
         await store.pollForPreparedLesson(
             using: service,

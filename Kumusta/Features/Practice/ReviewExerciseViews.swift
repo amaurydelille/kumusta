@@ -98,7 +98,7 @@ struct ReviewFeedbackPanel: View {
         switch verdict {
         case .correct: KumustaColors.success
         case .close: KumustaColors.caution
-        case .wrong: KumustaColors.accent
+        case .wrong: KumustaColors.error
         }
     }
 
@@ -106,7 +106,7 @@ struct ReviewFeedbackPanel: View {
         switch verdict {
         case .correct: KumustaColors.success
         case .close: KumustaColors.cautionDeep
-        case .wrong: KumustaColors.accentDeep
+        case .wrong: KumustaColors.errorDeep
         }
     }
 
@@ -216,7 +216,7 @@ private struct ReviewChoiceRow: View {
                 } else if showsWrong {
                     Image(systemName: "xmark.circle.fill")
                         .scaledFont(22, weight: .bold)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -246,21 +246,21 @@ private struct ReviewChoiceRow: View {
 
     private var faceColor: Color {
         if showsCorrect { return KumustaColors.success.opacity(0.18) }
-        if showsWrong { return KumustaColors.accent.opacity(0.16) }
+        if showsWrong { return KumustaColors.error.opacity(0.16) }
         if isSelected { return KumustaColors.focus.opacity(0.16) }
         return KumustaColors.surface
     }
 
     private var borderColor: Color {
         if showsCorrect { return KumustaColors.success }
-        if showsWrong { return KumustaColors.accent }
+        if showsWrong { return KumustaColors.error }
         if isSelected { return KumustaColors.focus }
         return KumustaColors.line
     }
 
     private var textColor: Color {
         if showsCorrect { return KumustaColors.success }
-        if showsWrong { return KumustaColors.accentDeep }
+        if showsWrong { return KumustaColors.errorDeep }
         if isSelected { return KumustaColors.focus }
         return KumustaColors.ink
     }
@@ -579,7 +579,7 @@ private struct ReviewBuildExercise: View {
             if !wrongPositions.isEmpty, outcome == nil {
                 Text(L("The red words don't match, often a look-alike word. Fix them and check again."))
                     .font(KumustaTypography.body)
-                    .foregroundStyle(KumustaColors.accentDeep)
+                    .foregroundStyle(KumustaColors.errorDeep)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
                     .transition(.opacity)
@@ -698,7 +698,7 @@ private struct ReviewSpeakExercise: View {
                 if let errorMessage = recorder.errorMessage {
                     Label(errorMessage, systemImage: "exclamationmark.circle.fill")
                         .font(KumustaTypography.body)
-                        .foregroundStyle(KumustaColors.accentDeep)
+                        .foregroundStyle(KumustaColors.errorDeep)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if recorder.permissionState == .denied {

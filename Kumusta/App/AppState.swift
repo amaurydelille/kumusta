@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import OSLog
 import PostHog
 
 @MainActor
@@ -13,7 +14,6 @@ final class AppState {
         case loading
         case onboarding
         case paywall
-        case paywallFallback
         case paywallExit
         case accountCreation
         case firstStepsOffer
@@ -555,6 +555,7 @@ final class AppState {
         if let remoteState {
             await applyCloudState(remoteState, userID: user.id)
             try? await dependencies.profileRepository.saveProfile(profile)
+            await repairMissingRemoteProfile()
             scheduleCloudStateSync()
             if profile.hasCompletedOnboarding {
                 if await hasAppAccess(restoreStorePurchase: true) {
@@ -614,10 +615,7 @@ final class AppState {
             // Supabase user ID, so a later device can restore it.
             profile = profileWithID(user.id)
             try? await dependencies.profileRepository.saveProfile(profile)
-            if let remote = dependencies.signedInRepository {
-                try? await remote.syncProfile(profile, onboardingCompletedAt: .now)
-                try? await remote.syncLearningPreferences(from: profile)
-            }
+            await repairMissingRemoteProfile()
             await syncCloudState()
             if await hasAppAccess(restoreStorePurchase: true) {
                 enterMainExperience()
@@ -689,14 +687,8 @@ final class AppState {
         launchPhase = .main
     }
 
-    /// Presents the published second-chance promotion after the primary
-    /// RevenueCat paywall is dismissed.
-    func showPaywallFallback() {
-        launchPhase = .paywallFallback
-    }
-
-    /// Presents the intentional exit path after the learner closes both
-    /// subscription paywalls.
+    /// Presents the intentional exit path after the learner closes the
+    /// subscription paywall.
     func showPaywallExit() {
         launchPhase = .paywallExit
     }
@@ -713,6 +705,15 @@ final class AppState {
         TikTokAppEvents.logout()
         MetaAppEvents.logout()
         try? await dependencies.authSessionProvider?.signOut()
+        // RevenueCat keeps its own login. Without this, a purchase made by the
+        // next learner on this device lands on the account that just left.
+        await dependencies.purchaseService.logOut()
+        if let authSessionProvider = dependencies.authSessionProvider,
+           let identity = try? await authSessionProvider.bootstrapAnonymousSession() {
+            try? await dependencies.purchaseService.configure(
+                appUserID: identity.id.uuidString.lowercased()
+            )
+        }
         // The device cache is wiped, so the next learner starts with the
         // mandatory onboarding; an existing account can sign in after it.
         await clearLocalLearnerState(nextPhase: .onboarding)
@@ -778,8 +779,36 @@ final class AppState {
         try? await dependencies.purchaseService.configure(
             appUserID: identity.id.uuidString.lowercased()
         )
+        await repairMissingRemoteProfile()
         scheduleCloudStateSync()
     }
+
+    /// A profile save can fail silently (offline, or a token issued before the
+    /// account upgrade). Without the row the server treats the learner as
+    /// still onboarding and leaves them off the leaderboard, so restore it
+    /// from this device's completed profile.
+    private func repairMissingRemoteProfile() async {
+        guard profile.hasCompletedOnboarding,
+              let remote = dependencies.signedInRepository
+        else { return }
+        // A failed fetch proves nothing; only a confirmed missing or
+        // unfinished row is repaired.
+        let remoteProfile: RemoteProfile?
+        do {
+            remoteProfile = try await remote.fetchProfile()
+        } catch {
+            return
+        }
+        guard remoteProfile?.onboardingCompletedAt == nil else { return }
+        do {
+            try await remote.syncProfile(profile, onboardingCompletedAt: .now)
+            try await remote.syncLearningPreferences(from: profile)
+        } catch {
+            Self.syncLogger.error("Profile repair failed: \(String(describing: error), privacy: .public)")
+        }
+    }
+
+    private static let syncLogger = Logger(subsystem: "com.kumusta.app", category: "ProfileSync")
 
     func requireAuthentication() {
         #if DEBUG

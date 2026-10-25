@@ -112,6 +112,19 @@ Deno.test("RevenueCat v2 customer mapping fails closed on unknown entitlements",
   assert(rejected, "An unmapped active entitlement must not be mirrored");
 });
 
+Deno.test("RevenueCat v2 promotional grants map through the project entitlements", () => {
+  const customer = mapRevenueCatV2CustomerInfo(
+    { items: [{ entitlement_id: "entl-premium", expires_at: null }] },
+    { items: [] },
+    { items: [{ id: "entl-premium", lookup_key: "kumusta_pro" }] },
+  );
+  assert(
+    "kumusta_pro" in customer.entitlements &&
+      customer.entitlements.kumusta_pro?.expires_date === null,
+    "A lifetime promotional grant was not mirrored as lifetime",
+  );
+});
+
 Deno.test("Transactional email types only trigger for production lifecycle events", () => {
   const baseEvent = {
     id: "event-email",

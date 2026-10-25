@@ -116,7 +116,7 @@ struct CompletedLessonDetailView: View {
                     if let audioError {
                         Label(audioError, systemImage: "speaker.slash.fill")
                             .font(KumustaTypography.body)
-                            .foregroundStyle(KumustaColors.accentDeep)
+                            .foregroundStyle(KumustaColors.errorDeep)
                     }
 
                     if isUsingOfflineAudio {

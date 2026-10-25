@@ -217,9 +217,14 @@ actor SupabaseAuthSessionProvider: AuthSessionProviding {
             return .signedIn(try await currentAuthenticatedUser())
         }
 
-        let updatedUser = try await client.auth.update(
-            user: UserAttributes(email: normalizedEmail, password: password)
-        )
+        let attributes = UserAttributes(email: normalizedEmail, password: password)
+        let updatedUser: User
+        do {
+            updatedUser = try await client.auth.update(user: attributes)
+        } catch where Self.isDeletedUser(error) {
+            try await replaceDeletedAnonymousSession()
+            updatedUser = try await client.auth.update(user: attributes)
+        }
 
         // Supabase projects with confirm-email enabled keep this identity in a
         // verification state until the user taps the email link. The screen
@@ -228,6 +233,11 @@ actor SupabaseAuthSessionProvider: AuthSessionProviding {
             return .awaitingEmailConfirmation(email: normalizedEmail)
         }
 
+        // The upgrade does not reissue the access token, which still claims
+        // `is_anonymous: true` until it expires. RLS rejects registered-only
+        // writes (profile, preferences, analytics) with that token, so refresh
+        // before the account's first sync.
+        _ = try await client.auth.refreshSession()
         return .signedIn(try await currentAuthenticatedUser())
     }
 
@@ -242,12 +252,33 @@ actor SupabaseAuthSessionProvider: AuthSessionProviding {
         )
         // Linking upgrades the anonymous user in place. Its UUID therefore
         // remains the RevenueCat App User ID and entitlement mirror key.
-        let session = if client.auth.currentSession?.user.isAnonymous == true {
-            try await client.auth.linkIdentityWithIdToken(credentials: credentials)
+        let session: Session
+        if client.auth.currentSession?.user.isAnonymous == true {
+            do {
+                session = try await client.auth.linkIdentityWithIdToken(credentials: credentials)
+            } catch where Self.isDeletedUser(error) {
+                try await replaceDeletedAnonymousSession()
+                session = try await client.auth.linkIdentityWithIdToken(credentials: credentials)
+            }
         } else {
-            try await client.auth.signInWithIdToken(credentials: credentials)
+            session = try await client.auth.signInWithIdToken(credentials: credentials)
         }
         return try Self.authenticatedUser(from: session)
+    }
+
+    /// A cached session can outlive its user (deleted from the dashboard or by
+    /// account deletion elsewhere). Its access token still looks valid locally,
+    /// but Supabase answers `user_not_found` to every authenticated call.
+    private static func isDeletedUser(_ error: any Error) -> Bool {
+        (error as? AuthError)?.errorCode == .userNotFound
+    }
+
+    /// Only an anonymous learner is replaced: it has nothing to recover, and
+    /// onboarding answers live on the device until the account is created.
+    private func replaceDeletedAnonymousSession() async throws {
+        Self.logger.error("Cached anonymous Supabase user no longer exists; starting a new anonymous session")
+        try? await client.auth.signOut(scope: .local)
+        _ = try await client.auth.signInAnonymously()
     }
 
     func signOut() async throws {

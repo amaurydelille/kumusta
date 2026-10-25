@@ -52,23 +52,28 @@ struct ConversationMascot: View {
 }
 
 enum ConversationMascotRenderer {
-  static let stage = CGSize(width: 1183, height: 1329)
   private struct PartBounds: Decodable {
     let x: Double, y: Double, width: Double, height: Double
+    var pivotX: Double?, pivotY: Double?
     var rect: CGRect { CGRect(x: x, y: y, width: width, height: height) }
+    var pivot: CGPoint? { pivotX.flatMap { x in pivotY.map { CGPoint(x: x, y: $0) } } }
   }
+  /// Parts, pivots and mouths share the master artwork's pixel coordinates.
   private static let bounds: [String: PartBounds] = {
     guard let data = NSDataAsset(name: "ConversationRigV2")?.data,
       let manifest = try? JSONDecoder().decode([String: PartBounds].self, from: data)
     else { return [:] }
     return manifest
   }()
+  private static let stageRect = bounds["stage"]?.rect ?? CGRect(x: 0, y: 0, width: 1254, height: 1254)
+  static var stage: CGSize { stageRect.size }
 
   static var hasCompleteRig: Bool {
-    let names = ["Head", "Body", "EarLeft", "EarRight", "ArmLeft", "ArmRight", "LegLeft",
-                 "LegRight", "Tail", "Scarf", "EyeLeft", "EyeRight", "BrowLeft", "BrowRight", "Smile"]
-    return names.allSatisfy { bounds[$0] != nil && UIImage(named: "RigV2\($0)") != nil }
-      && (0..<12).allSatisfy { UIImage(named: "RigMouth\($0)") != nil }
+    let names = ["Head", "Body", "ArmLeft", "ArmRight", "LegLeft", "LegRight", "Tail", "Scarf",
+                 "EyeLeft", "EyeRight", "BrowLeft", "BrowRight", "Smile"]
+    return bounds["stage"] != nil
+      && names.allSatisfy { bounds[$0] != nil && UIImage(named: "RigV2\($0)") != nil }
+      && (0..<12).allSatisfy { bounds["Mouth\($0)"] != nil && UIImage(named: "RigMouth\($0)") != nil }
   }
 
   static func draw(
@@ -79,32 +84,35 @@ enum ConversationMascotRenderer {
     context.translateBy(
       x: (size.width - stage.width * scale) / 2, y: (size.height - stage.height * scale) / 2)
     context.scaleBy(x: scale, y: scale)
+    context.translateBy(x: -stageRect.minX, y: -stageRect.minY)
+
+    var body = context
+    body.translateBy(x: p.bodyX * stage.width, y: p.bodyY * stage.height)
+    let hips = anchor("Body")
+    pivot(&body, at: hips, degrees: p.bodyTurn)
+    body.translateBy(x: hips.x, y: hips.y)
+    body.scaleBy(x: 1, y: p.bodyScaleY)
+    body.translateBy(x: -hips.x, y: -hips.y)
+    // The tail root tucks behind the thighs.
+    part("Tail", in: body, angle: p.tail)
 
     var feet = context
     feet.translateBy(x: 0, y: -p.footLift * stage.height)
     part("LegLeft", in: feet)
     part("LegRight", in: feet)
 
-    var body = context
-    body.translateBy(x: p.bodyX * stage.width, y: p.bodyY * stage.height)
-    pivot(&body, at: CGPoint(x: 604, y: 1030), degrees: p.bodyTurn)
-    body.translateBy(x: 604, y: 1030)
-    body.scaleBy(x: 1, y: p.bodyScaleY)
-    body.translateBy(x: -604, y: -1030)
-    part("Tail", in: body, angle: p.tail, anchor: CGPoint(x: 807, y: 977))
     part("Body", in: body)
     let armsInFront = p.rightArm > 55 || p.leftArm < -45
     if !armsInFront { arms(in: body, pose: p) }
-    part("Scarf", in: body, angle: p.scarf * 0.22, anchor: CGPoint(x: 590, y: 672))
 
     var head = body
     head.translateBy(x: p.headX * stage.width, y: p.headY * stage.height)
-    pivot(&head, at: CGPoint(x: 600, y: 648), degrees: p.headTilt)
+    pivot(&head, at: anchor("Head"), degrees: p.headTilt)
     // A very small perspective shift, without squashing the painted face.
     head.translateBy(x: p.headTurn * 0.7, y: 0)
-    part("EarLeft", in: head, angle: p.leftEar, anchor: CGPoint(x: 421, y: 276))
-    part("EarRight", in: head, angle: p.rightEar, anchor: CGPoint(x: 885, y: 436))
     part("Head", in: head)
+    // The bandana is tied over the chin, so it follows the body, not the head.
+    part("Scarf", in: body, angle: p.scarf * 0.22)
     eye("Left", in: head, pose: p)
     eye("Right", in: head, pose: p)
     part("BrowLeft", in: head, offset: CGSize(width: 0, height: -p.brow * 7), angle: -p.brow * 2)
@@ -114,11 +122,14 @@ enum ConversationMascotRenderer {
     if armsInFront { arms(in: body, pose: p) }
   }
 
+  private static func anchor(_ name: String) -> CGPoint {
+    guard let part = bounds[name] else { return .zero }
+    return part.pivot ?? CGPoint(x: part.rect.midX, y: part.rect.midY)
+  }
   private static func arms(in context: GraphicsContext, pose: MascotPose) {
     let lift = CGSize(width: 0, height: -pose.armLift * stage.height)
-    part("ArmLeft", in: context, offset: lift, angle: pose.leftArm, anchor: CGPoint(x: 416, y: 736))
-    part(
-      "ArmRight", in: context, offset: lift, angle: pose.rightArm, anchor: CGPoint(x: 760, y: 769))
+    part("ArmLeft", in: context, offset: lift, angle: pose.leftArm)
+    part("ArmRight", in: context, offset: lift, angle: pose.rightArm)
   }
   private static func eye(_ side: String, in context: GraphicsContext, pose: MascotPose) {
     guard let rect = bounds["Eye\(side)"]?.rect else { return }
@@ -133,13 +144,14 @@ enum ConversationMascotRenderer {
     var lid = context
     lid.opacity = MascotChoreography.smooth((closure - 0.64) / 0.25)
     var path = Path()
-    let left = CGPoint(x: shifted.minX + 8, y: shifted.midY - 9)
-    let right = CGPoint(x: shifted.maxX - 8, y: shifted.midY + 14)
+    let left = CGPoint(x: shifted.minX + 12, y: shifted.midY - 4)
+    let right = CGPoint(x: shifted.maxX - 12, y: shifted.midY + 6)
     path.move(to: left)
-    path.addQuadCurve(to: right, control: CGPoint(x: shifted.midX, y: shifted.midY + 29))
+    path.addQuadCurve(to: right, control: CGPoint(x: shifted.midX, y: shifted.midY + 30))
+    // Same dark green as the painted eyebrows.
     lid.stroke(
-      path, with: .color(Color(red: 0.22, green: 0.22, blue: 0.24)),
-      style: StrokeStyle(lineWidth: 6, lineCap: .round))
+      path, with: .color(Color(red: 0.2, green: 0.33, blue: 0.04)),
+      style: StrokeStyle(lineWidth: 7, lineCap: .round))
   }
   private static func drawMouth(
     in context: GraphicsContext, pose: MascotPose, speech: MascotSpeechFrame,
@@ -150,14 +162,11 @@ enum ConversationMascotRenderer {
       part("Smile", in: context)
       return
     }
-    var mouthContext = context
-    pivot(&mouthContext, at: CGPoint(x: 554, y: 558), degrees: 13)
-    let rect = CGRect(x: 448, y: 535 + opening * 2, width: 212, height: 106)
     if let override {
-      if override == 0 || override == 11 {
+      if override == 0 {
         part("Smile", in: context)
       } else {
-        mouth(override, weight: 1, in: mouthContext, rect: rect)
+        mouth(override, weight: 1, in: context)
       }
       return
     }
@@ -180,18 +189,16 @@ enum ConversationMascotRenderer {
         ? 0
         : MascotChoreography.smooth(
           (opening - anchors[index]) / (anchors[index + 1] - anchors[index]))
-      mouth(
-        index + 1, weight: openWeight * (1 - rounded - broad) * lower * (1 - upper),
-        in: mouthContext, rect: rect)
+      mouth(index + 1, weight: openWeight * (1 - rounded - broad) * lower * (1 - upper), in: context)
     }
     let roundOpen = MascotChoreography.smooth((opening - 0.25) / 0.45)
-    mouth(6, weight: openWeight * rounded * (1 - roundOpen), in: mouthContext, rect: rect)
-    mouth(5, weight: openWeight * rounded * roundOpen, in: mouthContext, rect: rect)
-    mouth(7, weight: openWeight * broad, in: mouthContext, rect: rect)
+    mouth(6, weight: openWeight * rounded * (1 - roundOpen), in: context)
+    mouth(5, weight: openWeight * rounded * roundOpen, in: context)
+    mouth(7, weight: openWeight * broad, in: context)
   }
-  private static func mouth(_ index: Int, weight: Double, in context: GraphicsContext, rect: CGRect)
-  {
-    guard weight > 0.005 else { return }
+  /// Every mouth is registered on the master face at its own size and position.
+  private static func mouth(_ index: Int, weight: Double, in context: GraphicsContext) {
+    guard weight > 0.005, let rect = bounds["Mouth\(index)"]?.rect else { return }
     var layer = context
     layer.opacity = max(0, min(1, weight))
     layer.draw(Image("RigMouth\(index)"), in: rect)
@@ -204,7 +211,7 @@ enum ConversationMascotRenderer {
     var local = context
     local.translateBy(x: offset.width, y: offset.height)
     if angle != 0 {
-      pivot(&local, at: anchor ?? CGPoint(x: rect.midX, y: rect.midY), degrees: angle)
+      pivot(&local, at: anchor ?? self.anchor(name), degrees: angle)
     }
     local.draw(Image("RigV2\(name)"), in: rect)
   }

@@ -31,8 +31,8 @@ onboarding_abandoned         (app_backgrounded or flow_disappeared)
 
 Every onboarding screen emits `onboarding_step_viewed`; forward movement emits
 `onboarding_step_completed`. Screen names are `onboarding_<step>`. The current
-positions are welcome (0), name (1), accent (2), goal (3), level (4),
-daily_plan (5), plan_building (6), and first_lesson (7). The first lesson also emits
+positions are welcome (0), name (1), goal (3), level (4), daily_plan (5),
+plan_building (6), and first_lesson (7); position 2 is retired and unused. The first lesson also emits
 `lesson_pronunciation_evaluated` with `matched_target`,
 `lesson_speaking_skipped` with a reason, and `lesson_answer_submitted` with a
 stable answer ID and correctness. These action events carry
@@ -49,7 +49,7 @@ PostHog events include `app_version`, `app_build`, and
 onboarding flows. In PostHog, build the onboarding funnel from
 `onboarding_step_viewed` for every step, filter to
 `onboarding_flow_version=mini_lesson_v2`, and add steps in `position` order:
-welcome (0), name (1), accent (2), goal (3), level (4), daily_plan (5),
+welcome (0), name (1), goal (3), level (4), daily_plan (5),
 plan_building (6), first_lesson (7). Each funnel step uses the same event with
 the matching `step` property value.
 These events also fire on back-navigation, so use unique users rather than raw

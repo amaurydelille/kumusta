@@ -29,48 +29,45 @@ supabase secrets set --project-ref vpitjvtfzpqfnqgzcpla \
   --env-file .env
 ```
 
-The two approved female voice identifiers are compiled into the server
-allowlist; clients send only `southern` or `northern`, so arbitrary voice
-selection is impossible.
+The client never sends a voice ID. Kumusta speaks with one Tagalog voice,
+`qZLi51uuzx5jdu6q0ayz` by default, which `KUMUSTA_TTS_VOICE_ID` overrides
+server-side, so arbitrary voice selection by a client is impossible.
 
-`supabase/config.toml` sets `verify_jwt = false` at the gateway for the three
-provider Functions (`kumusta-elevenlabs-tts`,
-`kumusta-mistral-evaluate`, and `kumusta-mistral-lessons`) and the RevenueCat
-webhook because their handlers perform stricter authentication themselves.
-Provider handlers validate a refreshed Supabase session and enforce entitlement
-and quota before provider access; completion/review writes remain authenticated
-and owner-checked even when replenishment is not allowed. The RevenueCat webhook
-validates its own authorization and optional signature. The account-data
-function keeps gateway JWT verification enabled and repeats registered-user
-validation inside the handler. Do not remove those checks.
+`supabase/config.toml` sets `verify_jwt = false` at the gateway for the
+provider Functions (`kumusta-elevenlabs-tts`, `kumusta-lesson-stt`,
+`kumusta-lesson-stt-token`, `kumusta-lessons`, and `kumusta-live-pipeline`),
+`kumusta-award-xp`, the RevenueCat webhook and its admin function, and the
+email worker, because their handlers perform stricter authentication
+themselves. Provider handlers validate a refreshed Supabase session and enforce
+entitlement and quota before provider access; completion/review writes remain
+authenticated and owner-checked even when replenishment is not allowed. The
+RevenueCat webhook validates its own authorization and optional signature. The
+account-data and curriculum-admin functions keep gateway JWT verification
+enabled and repeat validation inside the handler. Do not remove those checks.
 
-LLM provider configuration belongs only in Edge Function secrets:
+Provider configuration belongs only in Edge Function secrets:
 
 ```text
-MISTRAL_API_KEY=required
-MISTRAL_MODEL=mistral-small-latest
-DASHSCOPE_API_KEY=required
+KUMUSTA_TTS_API_KEY=required-for-provider-audio
+KUMUSTA_TTS_VOICE_ID=optional-override
+KUMUSTA_LESSON_STT_API_KEY=required-for-speaking-checks
+KUMUSTA_LESSON_AGENT_API_KEY=required-for-live-practice-stt
+KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY=required-for-live-practice
+DASHSCOPE_API_KEY=required-for-lesson-generation
 QWEN_LESSON_MODEL=qwen3.8-max-0902
-KUMUSTA_LESSON_PROVIDER=qwen
-ELEVENLABS_API_KEY=required-for-provider-audio
 KUMUSTA_ENTITLEMENT_ID=kumusta_pro
 ```
 
-`MISTRAL_MODEL` is used by frequent, bounded text evaluation.
-`QWEN_LESSON_MODEL` controls adaptive lesson generation and defaults to the
-pinned `qwen3.8-max-0902` snapshot when absent. `DASHSCOPE_API_KEY` is the
-server-only QwenCloud credential. `KUMUSTA_LESSON_PROVIDER=qwen` promotes Qwen
-behind the stable `kumusta-mistral-lessons` client endpoint, so existing app
-versions switch without an App Store update. Set it to `mistral` to roll back;
-the Mistral implementation and secret remain installed. The separate
-`kumusta-qwen-lessons` preview function always selects Qwen regardless of the
-project-wide rollback setting.
-Changing either model requires the contract and regional-language gates in
-`docs/backend/MISTRAL_RUNBOOK.md`; no model identifier belongs in iOS config.
-Without `ELEVENLABS_API_KEY`, voice functions fail closed with a sanitized
-`503`. The key must grant both Text to Speech and Speech to Text. A TTS-only key
-plays lessons but Scribe returns `missing_permissions`; update or rotate it in
-the ElevenLabs dashboard and reinstall the Edge Function secret.
+`KUMUSTA_TTS_API_KEY` is the ElevenLabs key for lesson and live-conversation
+audio. `KUMUSTA_LESSON_STT_API_KEY` and `KUMUSTA_LESSON_AGENT_API_KEY` are
+Soniox keys for lesson speaking checks and live conversation respectively.
+`KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY` is the Anthropic key for live
+conversation. `QWEN_LESSON_MODEL` controls adaptive lesson generation in
+`kumusta-lessons` and defaults to the pinned `qwen3.8-max-0902` snapshot when
+absent; `DASHSCOPE_API_KEY` is the server-only Qwen credential. Changing a
+model requires the contract and native-speaker sample gates in
+`docs/backend/LESSON_GENERATION_RUNBOOK.md`; no model identifier belongs in iOS config.
+Without a provider's secret, its functions fail closed with a sanitized `503`.
 
 Optional bounded TTS budgets are also Edge Function configuration:
 

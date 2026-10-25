@@ -118,7 +118,7 @@ Deno.serve(async (req) => {
 });
 
 function providersConfigured(): boolean {
-  return ["ANTHROPIC_API_KEY", "ELEVENLABS_API_KEY"].every((name) =>
+  return ["KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY", "KUMUSTA_TTS_API_KEY"].every((name) =>
     Boolean(Deno.env.get(name)?.trim())
   );
 }
@@ -311,7 +311,7 @@ function reply(body: Record<string, unknown>, access: Promise<void>, id: string)
   } catch {
     throw new HttpError(400, "invalid_context", "Your message couldn’t be sent.");
   }
-  const anthropicKey = requiredEnv("KUMUSTA_LLM_LIVE_CONVERSATION");
+  const anthropicKey = requiredEnv("KUMUSTA_LLM_LIVE_CONVERSATION_API_KEY");
   const elevenLabsKey = requiredEnv("KUMUSTA_TTS_API_KEY");
   const voiceID = tagalogVoiceID(Deno.env.get("KUMUSTA_TTS_VOICE_ID"));
 
