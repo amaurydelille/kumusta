@@ -603,7 +603,7 @@ actor SupabaseSignedInRepository: SignedInKumustaSyncing {
     }
 
     private static func supportedDailyMinutes(closestTo minutes: Int) -> Int {
-        [3, 5, 7, 10].min {
+        [3, 5, 7, 10, 15].min {
             abs($0 - minutes) < abs($1 - minutes)
         } ?? 10
     }

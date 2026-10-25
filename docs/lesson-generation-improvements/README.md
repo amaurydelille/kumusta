@@ -172,9 +172,7 @@ Start beginners with one to three new reusable chunks inside mostly understood l
 
 ### Daily-duration settings contradict one another
 
-The UI offers 5, 7, 10, and 15 minutes, but the backend repository supports 3, 5, 7, and 10. A selected 15-minute preference can therefore become 10 minutes. Compare `Kumusta/Features/Onboarding/OnboardingScreens.swift` with `Kumusta/Data/Supabase/SupabaseSignedInRepository.swift`.
-
-That can directly distort generated lesson length.
+Fixed on 2026-10-25: the UI offers 5, 7, 10, and 15 minutes, and migration `20261025000300_daily_minutes_allow_15.sql` lets the preferences row store 15 instead of rounding it to 10.
 
 ## What “agentic” should mean here
 

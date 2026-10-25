@@ -51,7 +51,7 @@ The user’s generated learning-plan inputs.
 | `self_assessed_level` | `beginner`, `intermediate`, or `advanced` |
 | `target_level` | Learner-selected adaptive destination, integer 1–5; not a test score |
 | `challenge_preference` | `gentle`, `balanced`, or `stretch` prompt preference |
-| `daily_minutes` | 3, 5, 7, or 10 minutes; the app stores its 15-minute plan as the nearest allowed value |
+| `daily_minutes` | 3, 5, 7, 10, or 15 minutes (3 is kept for older rows; the app offers 5–15) |
 | `reminder_enabled` | Notification preference |
 | `reminder_local_time` | Optional local reminder time |
 | `created_at`, `updated_at` | Audit timestamps |
