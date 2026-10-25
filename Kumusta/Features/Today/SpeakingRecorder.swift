@@ -125,7 +125,6 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
         AudioReactiveBorderState.shared.end(glowToken)
         glowToken = nil
         isPlayingBack = false
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
 
     /// Ends playback/recording and securely discards the local practice take.
@@ -147,7 +146,9 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
         isPlayingBack = false
         meterLevel = 0
         discardRecording()
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        // Leave the shared session active: deactivating it here stopped the
+        // answer cue and the next line that start as this screen goes away.
+        // The next player selects its own category.
     }
 
     func recordingData() throws -> Data {
@@ -171,7 +172,6 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
         AudioReactiveBorderState.shared.end(glowToken)
         glowToken = nil
         isPlayingBack = false
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
 
     private func startRecording(live: (any LiveSpeechTranscribing)?) {
@@ -313,7 +313,6 @@ final class SpeakingRecorder: NSObject, @preconcurrency AVAudioPlayerDelegate {
                 errorMessage = L("The recording stopped unexpectedly. Please try again.")
             }
         }
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
 
     private func beginMetering() {

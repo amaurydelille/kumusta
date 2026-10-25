@@ -124,10 +124,9 @@ actor AuthenticatedElevenLabsAudioService: AudioService {
         }
 
         let audioSession = AVAudioSession.sharedInstance()
-        // A speaking round leaves the shared session in record mode. Fully
-        // release that route before selecting playback so lesson audio cannot
-        // remain attached to the input/receiver route on the next round.
-        try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
+        // A speaking round leaves the shared session in record mode. Switching
+        // to playback moves the route off the input/receiver; deactivating
+        // first would also stop the answer cue still playing.
         try audioSession.setCategory(.playback, mode: .spokenAudio)
         try audioSession.setActive(true)
 

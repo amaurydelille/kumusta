@@ -64,9 +64,8 @@ targets:
         FacebookSKAdNetworkReportEnabled: false
         # Apple sends a copy of every SKAN postback to AppsFlyer.
         NSAdvertisingAttributionReportEndpoint: https://appsflyer-skadnetwork.com/
-        CFBundleURLTypes:
-          - CFBundleURLSchemes:
-              - fb$(FACEBOOK_APP_ID)
+        # Add CFBundleURLTypes with fb$(FACEBOOK_APP_ID) once Meta has an app ID:
+        # App Store Connect rejects a bare "fb" scheme.
         KUMUSTA_ENTITLEMENT_ID: $(KUMUSTA_ENTITLEMENT_ID)
         POSTHOG_PROJECT_TOKEN: $(POSTHOG_PROJECT_TOKEN)
         POSTHOG_HOST: $(POSTHOG_HOST)
@@ -92,8 +91,8 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.kumusta.app
         PRODUCT_NAME: Kumusta
-        CURRENT_PROJECT_VERSION: 50
-        MARKETING_VERSION: 1.2.3
+        CURRENT_PROJECT_VERSION: 2
+        MARKETING_VERSION: 1.0.0
         OTHER_LDFLAGS: $(inherited) -ObjC -lc++
         TARGETED_DEVICE_FAMILY: "1,2"
     dependencies:
